@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import com.lynden.gmapsfx.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="750" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CMainController">
+    <children>
+      <TabPane layoutX="241.0" layoutY="14.0" prefHeight="500.0" prefWidth="509.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <tabs>
+          <Tab text="Где сейчас">
+               <content>
+                  <GoogleMapView fx:id="mapView" prefHeight="472.0" prefWidth="489.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+               </content></Tab>
+          <Tab text="Карта перемещений">
+		   <content>
+		  
+               </content></Tab>
+		  <Tab text="История перемещений" />
+		  <Tab text="Сотрудники" />
+		  <Tab text="Объекты" />
+		  <Tab text="Гео-зоны" />
+		  <Tab text="Отчеты" />
+        </tabs>
+      </TabPane>
+      <Accordion prefWidth="224.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <panes>
+          <TitledPane animated="false" prefHeight="556.0" prefWidth="224.0" text="Общее">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="434.0" prefWidth="222.0">
+                     <children>
+                          <Button layoutX="21.0" layoutY="14.0" onAction="#btnShowAllMarkers" prefHeight="30.0" prefWidth="150.0" text="Показать все маркеры" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button fx:id="btnRestart" layoutX="9.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnRefreshMap" prefHeight="30.0" prefWidth="150.0" text="Обновить карту" textFill="#0d0dee" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                          <Button layoutX="9.0" layoutY="97.0" onAction="#btnRefreshAllMarkers" prefHeight="30.0" prefWidth="150.0" text="Обновить все маркеры" textFill="#f50a0a" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+                          <Button layoutX="35.0" layoutY="47.0" onAction="#handleDeleteAllMarkers" prefHeight="30.0" prefWidth="150.0" text="Удалить все маркеры" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
+                        <Label alignment="CENTER" contentDisplay="TOP" layoutX="25.0" layoutY="145.0" prefHeight="28.0" prefWidth="130.0" text="Входящее сообщение" textAlignment="CENTER" textFill="#f51212" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <TextArea fx:id="mymsg" layoutX="17.8" layoutY="173.0" prefHeight="68.0" prefWidth="204.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <TextArea fx:id="taOutMsg" layoutX="18.0" layoutY="315.0" prefHeight="38.0" prefWidth="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Button layoutX="9.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleSendMsg" prefHeight="30.0" prefWidth="150.0" text="Отправить" textAlignment="CENTER" textFill="#e10c0c" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="fxBtnCkearMessages" layoutX="87.0" layoutY="245.0" mnemonicParsing="false" onAction="#btnClearMessages" text="Очистить сообщения" textFill="#4e26c6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Флот">
+            <content>
+              <AnchorPane prefWidth="200.0">
+                     <children>
+                        <Button layoutX="17.8" layoutY="17.8" mnemonicParsing="false" onAction="#btnAddShip" prefHeight="30.0" prefWidth="150.0" text="Добавить судно" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="fxListView" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Настройки">
+            <content>
+              <AnchorPane prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Button" />
+                        <Button layoutX="62.0" layoutY="51.0" mnemonicParsing="false" text="Button" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+      <AnchorPane fx:id="fxMessageWait" maxHeight="212.0" maxWidth="200.0" minHeight="150.0" minWidth="200.0" prefHeight="212.0" prefWidth="200.0" style="-fx-background-color: #1ac61f; visibility: false;">
+         <children>
+            <Label fx:id="fxLbMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="1.0" prefHeight="150.0" prefWidth="200.0" text="ОЖИДАНИЕ ЗАГРУЗКИ..." textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnRestartMod" layoutX="14.0" layoutY="176.0" mnemonicParsing="false" onAction="#btnRefreshMapMod" prefHeight="26.0" prefWidth="177.0" text="Обновить карту" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+         </children>
+      </AnchorPane>
+    </children>
+</AnchorPane>
