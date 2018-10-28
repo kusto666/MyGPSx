@@ -27,7 +27,9 @@ import com.lynden.gmapsfx.service.geocoding.GeocoderStatus;
 import com.lynden.gmapsfx.service.geocoding.GeocodingResult;
 import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 
+import java.awt.Desktop;
 import java.awt.EventQueue;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -39,6 +41,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
@@ -65,6 +69,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -76,6 +81,9 @@ import netscape.javascript.JSObject;
  * @author Dmitry
  */
 public class CMainController implements Initializable, MapComponentInitializedListener {
+	
+	private Desktop desktop = Desktop.getDesktop();
+	
 	
 	@FXML
 	ListView<CUser> fxListView;
@@ -241,6 +249,38 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     			alert.close();
     		}*/
      }
+    @FXML
+    private void btnLoadFileToMsg(ActionEvent event) 
+    {
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle("Open Resource File");
+    	//fileChooser.showOpenDialog(CLPSMain.stage);
+    	File file = fileChooser.showOpenDialog(CLPSMain.stage);
+        if (file != null) {
+            openFile(file);
+        }
+    	/*mDatabaseRefSendMsg = FirebaseDatabase.getInstance().getReference().child("message_to_android");
+    	 try 
+    	 {
+    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValue(taOutMsg.getText().toString());
+             taOutMsg.clear();
+             System.out.println("Типа послали сообщение!!!");
+         } 
+    	 catch (Exception e) 
+    	 {
+             e.printStackTrace();
+         }*/
+    }
+    private void openFile(File file) {
+        try {
+            desktop.open(file);
+        } catch (IOException ex) {
+            Logger.getLogger(
+            		CMainController.class.getName()).log(
+                    Level.SEVERE, null, ex
+                );
+        }
+    }
     @FXML
     private void handleSendMsg(ActionEvent event) {
     	mDatabaseRefSendMsg = FirebaseDatabase.getInstance().getReference().child("message_to_android");
