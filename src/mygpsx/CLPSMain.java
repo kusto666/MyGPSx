@@ -86,9 +86,9 @@ public class CLPSMain extends Application
 	public static DatabaseReference mDatabaseRef;
 	public static DatabaseReference mDatabaseRefUsers;
 	 //Firebase - потом обобщим  здесь не оставим!!!
-	StorageReference storageReference;
-	FirebaseStorage firebasestorage;
-	Storage storage;
+/*	StorageReference storageReference;
+	FirebaseStorage firebasestorage;*/
+	public static Storage MyGoogleStorage;
 	
 	public static ArrayList<CUser> m_localAllMarkersUsersTempMain = null;
 	
@@ -396,20 +396,9 @@ public class CLPSMain extends Application
 
 				FirebaseAuth.getInstance();
 				FirebaseDatabase.getInstance();
-				
-				/*
-				FirebaseOptions options2 = new FirebaseOptions.Builder().setCredential(FirebaseCredential)(GoogleCredentials.fromStream(serviceAccount))
-		    		    .setStorageBucket("<BUCKET_NAME>.appspot.com")
-		    		    .build();
-		    		FirebaseApp.initializeApp(options);
-
-		    		Bucket bucket = StorageClient.getInstance().bucket();*/
-				//defaultApp.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				System.out.println("START FirebaseStorage>>>");
-				//Storage storage = StorageOptions.getDefaultInstance().getService();
-				
-				
-				BigQuery bigquery = BigQueryOptions.newBuilder().setProjectId("mygpsone-kusto1")
+				/*BigQuery bigquery = BigQueryOptions.newBuilder().setProjectId("mygpsone-kusto1")
 			            .setCredentials(
 			                    ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\555.json"))
 			            ).build().getService();
@@ -417,88 +406,53 @@ public class CLPSMain extends Application
 			            .setCredentials(
 			                    ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\555.json"))
 			            ).build().getService();
+				System.out.println("datastore.toString() == " + datastore.toString());*/
 				
-				Storage storage = StorageOptions.newBuilder().setProjectId("mygpsone-kusto1")
-						.setCredentials(
-						ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\555.json"))
-						).build().getService();
-				
-				
-				System.out.println("datastore.toString() == " + datastore.toString());
-				//bigquery.c
-				
-				System.out.println("StorageOptions.getDefaultInstance().getApplicationName() = " 
-				+ StorageOptions.getDefaultInstance().getApplicationName());
-				
-				System.out.println("StorageOptions.getDefaultInstance().getHost() = " 
-						+ StorageOptions.getDefaultInstance().getHost());
-				
-				System.out.println("StorageOptions.getDefaultInstance().getLibraryVersion() = " 
-						+ StorageOptions.getDefaultInstance().getLibraryVersion());
-				
-				//System.out.println("StorageOptions.getDefaultInstance().getProjectId() = " 
-				//		+ StorageOptions.getDefaultInstance().getProjectId());
-				//Bucket bucket = storage.create(BucketInfo.of("777555"));
-				
-				
-				// Include a prefix of bucket-name to reduce search space.
-				// For more information read https://cloud.google.com/storage/docs/json_api/v1/buckets/list\
-				try {
-					com.google.api.gax.paging.Page<Bucket> buckets =
-						    storage.list(BucketListOption.pageSize(100), BucketListOption.prefix("/"));
-						for (Bucket bucket : buckets.iterateAll()) {
-							System.out.println("StorageOptions.getDefaultInstance().getLibraryVersion() = ");
-							System.out.println(storage.getServiceAccount("mygpsone-kusto1"));
-						}
-				} catch (Exception e) {
-					//System.out.println(e.getLocalizedMessage());
-					//System.out.println("7777777777777777777777");
+				/*System.out.println("StorageOptions.getDefaultInstance().getApplicationName() = " 
+						+ StorageOptions.getDefaultInstance().getApplicationName());
+						
+						System.out.println("StorageOptions.getDefaultInstance().getHost() = " 
+								+ StorageOptions.getDefaultInstance().getHost());
+						
+						System.out.println("StorageOptions.getDefaultInstance().getLibraryVersion() = " 
+								+ StorageOptions.getDefaultInstance().getLibraryVersion());*/
+				try 
+				{
+					MyGoogleStorage = StorageOptions.newBuilder().setProjectId("mygpsone-kusto1")
+							.setCredentials(
+							ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\555.json"))
+							).build().getService();
+				} 
+				catch (Exception ex) 
+				{
+					System.out.println(ex.getMessage());
+					bRet = false;
 				}
 				
-				ServiceAccount saccount = storage.getServiceAccount("mygpsone-kusto1");
-				System.out.println(saccount.getEmail());
-				
-				/*Bucket bucket =
-					    storage.create(
-					        BucketInfo.newBuilder("TestBucket")
-					            // See here for possible values: http://g.co/cloud/storage/docs/storage-classes
-					            .setStorageClass(StorageClass.COLDLINE)
-					            // Possible values: http://g.co/cloud/storage/docs/bucket-locations#location-mr
-					            .setLocation("asia")
-					            .build());*/
-				
-
-				BlobId blobId = BlobId.of("mygpsone-kusto1.appspot.com", "uploads/test");
+				//ServiceAccount saccount = MyGoogleStorage.getServiceAccount("mygpsone-kusto1");
+				//System.out.println(saccount.getEmail());// Так для теста!!!
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// Это типа была проверка записи в базу!!!
+				////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				/*BlobId blobId = BlobId.of("mygpsone-kusto1.appspot.com", "uploads/test");
 				BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("text/plain").build();
-				com.google.cloud.storage.Blob blob = storage.create(blobInfo, "Hello, Cloud Storage!Hello, Cloud Storage!".getBytes());
+				com.google.cloud.storage.Blob blob = MyGoogleStorage.create(blobInfo, "Hello, Cloud Storage!Hello, Cloud Storage!".getBytes());
 				
 				
 				File f1 = new File("k:\\jjjpppggg.jpg");
 				InputStream targetStream = new FileInputStream(f1);
 				
-				Bucket bucket=storage.get(("mygpsone-kusto1.appspot.com"));
-				//BlobId blobId2 = BlobId.of("mygpsone-kusto1.appspot.com", "uploads/test");
-				//BlobInfo blobInfo2 = BlobInfo.newBuilder(blobId2).setContentType("application/pdf").build();
-//				com.google.cloud.storage.Blob blob2 = bucket.create("uploads/jjjpppggg.jpg", targetStream,"application/jpg");
-				com.google.cloud.storage.Blob blob2 = bucket.create("uploads/jjjpppggg.jpg", targetStream,"image/jpg");
-				
-				
-				//storageReference = storage.getIamPolicy(bucket, options)
-				//StorageOptions.getDefaultInstance().getApplicationName()
-				//System.out.println(StorageOptions.getDefaultInstance().getApplicationName());
-				/*try {
-					System.out.println("START FirebaseStorage>>>");
-					firebasestorage = FirebaseStorage.getInstance("gs://mygpsone-kusto1.appspot.com");
-	    	       // storageReference = firebasestorage.getReference();
-				} catch (Exception ex) {
-					System.out.println(ex.getMessage());
-				}*/
-					
+				Bucket bucket = MyGoogleStorage.get(("mygpsone-kusto1.appspot.com"));
+				com.google.cloud.storage.Blob blob2 = bucket.create("uploads/jjjpppggg.jpg", targetStream,"image/jpg");*/
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// Это типа была проверка записи в базу!!! - конец проверки!!!
+				////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 			}
 			else
 			{
 				System.out.println("ОШИБКА СОЗДАНИЯ defaultApp.getName() !!!");
-				bRet = false;
+				//bRet = false;
 			}
 		} 
     	catch (Exception ex) 

@@ -5,6 +5,7 @@
  */
 package mygpsx;
 
+import com.google.cloud.storage.Bucket;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +42,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -274,9 +276,17 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	m_FileSelectedOne = fileChooser.showOpenDialog(CLPSMain.stage);
         if (m_FileSelectedOne != null)
         {
-        	fxLbNameFileSelect.setText(m_FileSelectedOne.getName());
-        	uploadImage(m_FileSelectedOne);
-            //openFile(file); - for display on ext programms!!!
+        	try 
+        	{
+            	fxLbNameFileSelect.setText(m_FileSelectedOne.getName());
+            	uploadImage(m_FileSelectedOne);
+                //openFile(file); - for display on ext programms!!!
+			} 
+        	catch (Exception e)
+        	{
+				// TODO: handle exception
+			}
+        	
         }
 
     }
@@ -603,64 +613,42 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     } 
     private void uploadImage(File fFile)
     {
-        if(m_FileSelectedOne != null)// File is chooser!!!
+        if(fFile != null)// File is chooser!!!
         {
-        	InputStream stream = null;
         	try 
         	{
-        		String stPathFile = m_FileSelectedOne.getPath();
-        		
-        		/*stream = new FileInputStream(new File("path/to/images/rivers.jpg"));*/
-        		stream = new FileInputStream(new File(stPathFile + m_FileSelectedOne.getName()));
-        		//final StorageReference ref = CLPSMain.storageReference.child(PATH_NAME_UPLOADS_MAIN + fxLbNameFileSelect.getText());
-            	//UploadTask uploadTask =  ref.putStream(stream);
+        		//String ext = Files.getFileExtension(fFile.getName());
+        		// Пишем прямо здесь в базу сразу!!!
+            	InputStream targetStream = new FileInputStream(fFile);
+        		Bucket bucket = CLPSMain.MyGoogleStorage.get(("mygpsone-kusto1.appspot.com"));
+				com.google.cloud.storage.Blob blob2 = bucket.create(PATH_NAME_UPLOADS_MAIN + fFile.getName(), targetStream,"image/jpg");
+				
+				System.out.println(blob2.getSelfLink());
+				System.out.println(blob2.getMediaLink());
+				
+				Upload upload;// Объект для загрузки в realbase!!!
+               // Uri downloadUri = task.getResult();
+                upload = new Upload(fFile.getName(),
+                		blob2.getSelfLink(),
+                		blob2.getMediaLink());
+                           //* taskSnapshot.getUploadSessionUri().toString());*//*
+
+                //adding an upload to firebase database
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                String uploadId = mDatabase.push().getKey();
+                mDatabase.child("my_files").child(uploadId).setValue(upload);
+                //progressDialog.dismiss();
+                //Toast.makeText(getActivity().getApplicationContext(), "Файл отправлен!", Toast.LENGTH_SHORT).show();
+				//System.out.println(blob2.);
 			}
-        	catch (Exception e)
+        	catch (Exception ex)
         	{
-				e.getMessage();
+				ex.getMessage();
 			}
-        	//stream = new FileInputStream(new File("path/to/images/rivers.jpg"));
-        	
-        
-          /*  Task<URI> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<URI>>() {
-                public Task<URI> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-
-                    // Continue with the task to get the download URL
-                    return ref.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>()
-            {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task)
-                {
-                    if (task.isSuccessful())
-                    {
-                        Upload upload;// Объект для загрузки в realbase!!!
-                        Uri downloadUri = task.getResult();
-                        upload = new Upload(editTextName.getText().toString(),
-                                downloadUri.toString(),
-                                downloadUri.toString());
-                                   //* taskSnapshot.getUploadSessionUri().toString());*//*
-
-                        //adding an upload to firebase database
-                        String uploadId = MainActivity.mDatabase.push().getKey();
-                        MainActivity.mDatabase.child("my_files").child(uploadId).setValue(upload);
-                        progressDialog.dismiss();
-                        Toast.makeText(getActivity().getApplicationContext(), "Файл отправлен!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Handle failures
-                        // ...
-                    }
-                }
-            });
-*/
         }
         else
         {
-           // Toast.makeText(getActivity().getApplicationContext(), "Документ не выбран!", Toast.LENGTH_SHORT).show();
+           System.out.println("No selected file!!!");
         }
 
     }
