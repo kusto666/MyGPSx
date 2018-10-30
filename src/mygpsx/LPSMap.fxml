@@ -43,6 +43,7 @@
                         <Button layoutX="19.6" layoutY="361.0" mnemonicParsing="false" onAction="#handleSendMsg" prefHeight="30.0" prefWidth="97.0" text="Отправить" textAlignment="CENTER" textFill="#e10c0c" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="115.0" />
                         <Button fx:id="fxBtnCkearMessages" layoutX="87.0" layoutY="245.0" mnemonicParsing="false" onAction="#btnClearMessages" text="Очистить сообщения" textFill="#4e26c6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                         <Button layoutX="97.0" layoutY="361.0" mnemonicParsing="false" onAction="#btnLoadFileToMsg" prefHeight="30.0" prefWidth="83.0" text="Файл" AnchorPane.rightAnchor="0.0" />
+                        <Label fx:id="fxLbNameFileSelect" alignment="CENTER" layoutX="10.0" layoutY="400.0" prefHeight="20.0" prefWidth="200.0" style="-fx-border-color: blue;" text="Выберите файл..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                      </children>
                   </AnchorPane>
             </content>

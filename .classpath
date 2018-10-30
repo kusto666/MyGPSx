@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="com.google.cloud.tools.eclipse.appengine.libraries/master-container">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/firebase-admin-5.0.0.jar"/>
 	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/GMapsFX-2.10.0.jar"/>
@@ -16,5 +21,14 @@
 	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/json-20160810.jar"/>
 	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/slf4j-api-1.7.25.jar"/>
 	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/slf4j-simple-1.7.25.jar"/>
+	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/google-cloud-storage-1.43.0.jar"/>
+	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/google-cloud-core-1.43.0.jar"/>
+	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/google-cloud-core-grpc-1.43.0.jar"/>
+	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/google-cloud-core-http-1.43.0.jar"/>
+	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/google-cloud-firestore-0.61.0-beta.jar"/>
+	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/firebase-storage-11.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/firebase-storage-common-11.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/gax-1.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/my_projects/eclipse_projects/MyGPSx/libs/google-auth-library-credentials-0.7.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

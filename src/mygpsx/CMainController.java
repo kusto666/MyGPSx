@@ -10,6 +10,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.internal.NonNull;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.google.firebase.tasks.OnFailureListener;
+import com.google.firebase.tasks.Task;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventHandler;
@@ -30,8 +36,10 @@ import com.lynden.gmapsfx.service.geocoding.GeocodingService;
 import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,7 +91,13 @@ import netscape.javascript.JSObject;
 public class CMainController implements Initializable, MapComponentInitializedListener {
 	
 	private Desktop desktop = Desktop.getDesktop();
+	private File m_FileSelectedOne; // 
+	@FXML
+    private Label fxLbNameFileSelect;
 	
+    
+	
+	private String PATH_NAME_UPLOADS_MAIN = "uploads/";
 	
 	@FXML
 	ListView<CUser> fxListView;
@@ -111,6 +125,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	//public static DatabaseReference mDatabaseRefUSers;
 	//public static FirebaseApp defaultApp;
 	/*private static ArrayList<CUser> localMarkersUsersTemp = null;*/
+	
+	
 	
 	
 	// Это для тестовой проверки(temp) координат на карте!!!
@@ -253,23 +269,16 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void btnLoadFileToMsg(ActionEvent event) 
     {
     	FileChooser fileChooser = new FileChooser();
-    	fileChooser.setTitle("Open Resource File");
+    	fileChooser.setTitle("Выберите документ");
     	//fileChooser.showOpenDialog(CLPSMain.stage);
-    	File file = fileChooser.showOpenDialog(CLPSMain.stage);
-        if (file != null) {
-            openFile(file);
+    	m_FileSelectedOne = fileChooser.showOpenDialog(CLPSMain.stage);
+        if (m_FileSelectedOne != null)
+        {
+        	fxLbNameFileSelect.setText(m_FileSelectedOne.getName());
+        	uploadImage(m_FileSelectedOne);
+            //openFile(file); - for display on ext programms!!!
         }
-    	/*mDatabaseRefSendMsg = FirebaseDatabase.getInstance().getReference().child("message_to_android");
-    	 try 
-    	 {
-    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValue(taOutMsg.getText().toString());
-             taOutMsg.clear();
-             System.out.println("Типа послали сообщение!!!");
-         } 
-    	 catch (Exception e) 
-    	 {
-             e.printStackTrace();
-         }*/
+
     }
     private void openFile(File file) {
         try {
@@ -562,7 +571,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @Override
     public synchronized void initialize(URL url, ResourceBundle rb)
     {
-
+    	fxLbNameFileSelect.setText("");
     	//CLPSMain.MyEventListnerFireUsers();
     	/*fxListView.setCellFactory(new Callback<ListView<CUser>, ListCell<CUser>>() {
 			
@@ -592,7 +601,69 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		}
 
     } 
+    private void uploadImage(File fFile)
+    {
+        if(m_FileSelectedOne != null)// File is chooser!!!
+        {
+        	InputStream stream = null;
+        	try 
+        	{
+        		String stPathFile = m_FileSelectedOne.getPath();
+        		
+        		/*stream = new FileInputStream(new File("path/to/images/rivers.jpg"));*/
+        		stream = new FileInputStream(new File(stPathFile + m_FileSelectedOne.getName()));
+        		//final StorageReference ref = CLPSMain.storageReference.child(PATH_NAME_UPLOADS_MAIN + fxLbNameFileSelect.getText());
+            	//UploadTask uploadTask =  ref.putStream(stream);
+			}
+        	catch (Exception e)
+        	{
+				e.getMessage();
+			}
+        	//stream = new FileInputStream(new File("path/to/images/rivers.jpg"));
+        	
+        
+          /*  Task<URI> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<URI>>() {
+                public Task<URI> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+
+                    // Continue with the task to get the download URL
+                    return ref.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>()
+            {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task)
+                {
+                    if (task.isSuccessful())
+                    {
+                        Upload upload;// Объект для загрузки в realbase!!!
+                        Uri downloadUri = task.getResult();
+                        upload = new Upload(editTextName.getText().toString(),
+                                downloadUri.toString(),
+                                downloadUri.toString());
+                                   //* taskSnapshot.getUploadSessionUri().toString());*//*
+
+                        //adding an upload to firebase database
+                        String uploadId = MainActivity.mDatabase.push().getKey();
+                        MainActivity.mDatabase.child("my_files").child(uploadId).setValue(upload);
+                        progressDialog.dismiss();
+                        Toast.makeText(getActivity().getApplicationContext(), "Файл отправлен!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Handle failures
+                        // ...
+                    }
+                }
+            });
+*/
+        }
+        else
+        {
+           // Toast.makeText(getActivity().getApplicationContext(), "Документ не выбран!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
     
-    
-  
 }
+
