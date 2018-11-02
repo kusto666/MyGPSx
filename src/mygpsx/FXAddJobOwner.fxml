@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane layoutX="7.0" layoutY="67.0" prefHeight="333.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+        <content>
+          <AnchorPane prefHeight="480.0" prefWidth="585.0">
+               <children>
+                  <Label layoutY="6.0" text="Краткое описание:" AnchorPane.leftAnchor="5.0" />
+                  <Label layoutX="5.0" layoutY="93.0" text="Развернутое описание:" AnchorPane.leftAnchor="5.0" />
+                  <TextArea layoutY="23.0" prefHeight="70.0" prefWidth="300.0" AnchorPane.leftAnchor="5.0" />
+                  <TextArea layoutX="5.0" layoutY="110.0" prefHeight="150.0" prefWidth="300.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Label prefHeight="20.0" prefWidth="300.0" text="Название задачи:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <TextField layoutY="32.0" prefHeight="25.0" prefWidth="300.0" promptText="Введите название" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="32.0" />
+      <Button layoutX="526.0" layoutY="3.0" mnemonicParsing="false" text="Сохранить" />
+      <Label layoutX="317.0" layoutY="7.0" text="ПРИОРИТЕТ ЗАДАЧИ:" />
+      <ComboBox layoutX="317.0" layoutY="32.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
