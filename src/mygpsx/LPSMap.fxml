@@ -52,7 +52,7 @@
             <content>
               <AnchorPane prefWidth="200.0">
                      <children>
-                        <Button layoutX="17.8" layoutY="17.8" mnemonicParsing="false" onAction="#btnAddShip" prefHeight="30.0" prefWidth="150.0" text="Добавить судно" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button fx:id="btnAddShip" layoutX="17.8" layoutY="17.8" mnemonicParsing="false" onAction="#FrameAddShip" prefHeight="30.0" prefWidth="150.0" text="Добавить судно" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                         <ListView fx:id="fxListView" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
                      </children>
                   </AnchorPane>
@@ -62,8 +62,11 @@
             <content>
               <AnchorPane prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Button" />
-                        <Button layoutX="62.0" layoutY="51.0" mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Ред. статусов задач" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button fx:id="btnSettingsPriorityEdit" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" onAction="#FrameSettingsPrioritetsEdit" prefHeight="25.0" prefWidth="200.0" text="Ред. приоритетов задач" textFill="RED" />
+                        <Button layoutX="10.0" layoutY="79.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Ред. типов задач" />
+                        <Button layoutX="10.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Ред. атрибутов задач" />
+                        <Button layoutX="10.0" layoutY="148.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Ред. типовых описаний" />
                      </children>
                   </AnchorPane>
             </content>

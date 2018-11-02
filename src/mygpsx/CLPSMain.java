@@ -86,8 +86,8 @@ public class CLPSMain extends Application
 	public static DatabaseReference mDatabaseRef;
 	public static DatabaseReference mDatabaseRefUsers;
 	 //Firebase - потом обобщим  здесь не оставим!!!
-/*	StorageReference storageReference;
-	FirebaseStorage firebasestorage;*/
+	StorageReference storageReference;
+	FirebaseStorage firebasestorage;
 	public static Storage MyGoogleStorage;
 	
 	public static ArrayList<CUser> m_localAllMarkersUsersTempMain = null;
@@ -96,6 +96,12 @@ public class CLPSMain extends Application
 	public static Parent m_rootAddShip = null;
 	@FXML
 	public static Stage m_stageAddShip = null;
+	
+	@FXML
+	public static Parent m_rootPriorityEdit = null;
+	@FXML
+	public static Stage m_stagePriorityEdit = null;
+	
 	
 	
 	
@@ -120,6 +126,7 @@ public class CLPSMain extends Application
 	
 	public static String m_PathMainFxml = "LPSMap.fxml";
 	public static String m_PathFXAddShipFxml = "FXAddShip.fxml";
+	public static String m_PathFXPriorityEdit = "FXPriorityEdit.fxml";
 	public static String m_PathFXListCellFxml = "ListCell.fxml";
 	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";
 
@@ -420,8 +427,13 @@ public class CLPSMain extends Application
 				{
 					MyGoogleStorage = StorageOptions.newBuilder().setProjectId("mygpsone-kusto1")
 							.setCredentials(
-							ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\555.json"))
+							/*ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\555.json"))*/
+							ServiceAccountCredentials.fromStream(new FileInputStream("src/555.json"))
 							).build().getService();
+					/*firebaseStorage = StorageOptions.newBuilder().setProjectId("mygpsone-kusto1")
+							.setCredentials(
+							ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\555.json"))
+							).build().getService();*/
 				} 
 				catch (Exception ex) 
 				{

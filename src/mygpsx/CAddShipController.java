@@ -34,7 +34,8 @@ import javafx.stage.WindowEvent;
 import netscape.javascript.JSObject;
 
 public class CAddShipController implements Initializable{
-	 DatabaseReference mDatabaseRef;
+	 
+	DatabaseReference mDatabaseRef;
 	
 	 @FXML
 	 TextField fxLbNameShip;
@@ -64,13 +65,13 @@ public class CAddShipController implements Initializable{
 	 @FXML
 	 private void btnAddShip(ActionEvent event) 
 	 {
-		 // Текущая дата для создания судна(объекта - пока не знаю для чего))))
+		 // РўРµРєСѓС‰Р°СЏ РґР°С‚Р° РґР»СЏ СЃРѕР·РґР°РЅРёСЏ СЃСѓРґРЅР°(РѕР±СЉРµРєС‚Р° - РїРѕРєР° РЅРµ Р·РЅР°СЋ РґР»СЏ С‡РµРіРѕ))))
 		Date date = new Date();
 		long lUnixTimeCreate = date.getTime();
 		System.out.println("lUnixTimeCreate = " + Long.toString(lUnixTimeCreate));
 		System.out.println("btnAddShip!!!");
 		
-		// Случайный уникальный ID устройства - к примуру!!!
+		// РЎР»СѓС‡Р°Р№РЅС‹Р№ СѓРЅРёРєР°Р»СЊРЅС‹Р№ ID СѓСЃС‚СЂРѕР№СЃС‚РІР° - Рє РїСЂРёРјСѓСЂСѓ!!!
 		String symbols = "abcdefghijklmnopqrstuvwxyz";
 		String randomIDPhoneTest= new Random().ints(11, 0, symbols.length())
 		    .mapToObj(symbols::charAt)
@@ -79,33 +80,33 @@ public class CAddShipController implements Initializable{
 		System.out.println("String random = " + randomIDPhoneTest);
 		try 
    	 	{
-			// Работаем с firebase - записываем!!!
+			// Р Р°Р±РѕС‚Р°РµРј СЃ firebase - Р·Р°РїРёСЃС‹РІР°РµРј!!!
 			mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("users");
 		
 
-			// Потом добавим проверку на пустоту полей!!!
+			// РџРѕС‚РѕРј РґРѕР±Р°РІРёРј РїСЂРѕРІРµСЂРєСѓ РЅР° РїСѓСЃС‚РѕС‚Сѓ РїРѕР»РµР№!!!
 			if(fxLbNameShip.getText().replaceAll("\\s","").length() == 0)
 			{
-				flLbInfoSaveErrors.setText("ЗАПОЛНИТЕ ВСЕ ПОЛЯ!");
+				flLbInfoSaveErrors.setText("Р—РђРџРћР›РќР�РўР• Р’РЎР• РџРћР›РЇ!");
 				return;
 			}
 			if(fxLbDirectorShip.getText().replaceAll("\\s","").length() == 0)
 			{
-				flLbInfoSaveErrors.setText("ЗАПОЛНИТЕ ВСЕ ПОЛЯ!");
+				flLbInfoSaveErrors.setText("Р—РђРџРћР›РќР�РўР• Р’РЎР• РџРћР›РЇ!");
 				return;
 			}
 			if(fxTaShortDescriptionShip.getText().replaceAll("\\s","").length() == 0)
 			{
-				flLbInfoSaveErrors.setText("ЗАПОЛНИТЕ ВСЕ ПОЛЯ!");
+				flLbInfoSaveErrors.setText("Р—РђРџРћР›РќР�РўР• Р’РЎР• РџРћР›РЇ!");
 				return;
 			}
 			//if(fxLbNameShip.getText() == "" || fxLbDirectorShip == "" || )
 			
 			
-			// Проверка на координаты для создоваемого объекта!!!
+			// РџСЂРѕРІРµСЂРєР° РЅР° РєРѕРѕСЂРґРёРЅР°С‚С‹ РґР»СЏ СЃРѕР·РґРѕРІР°РµРјРѕРіРѕ РѕР±СЉРµРєС‚Р°!!!
 			if(CMainController.m_LocationTempForCAddShipController == null)
 			{
-				flLbInfoSaveErrors.setText("ОТСУТСТВУЮТ КООРДИНАТЫ! ВЫБЕРЕТЕ НА КАРТЕ ТОЧКУ ПОЗИЦИИ.");
+				flLbInfoSaveErrors.setText("РћРўРЎРЈРўРЎРўР’РЈР®Рў РљРћРћР Р”Р�РќРђРўР«! Р’Р«Р‘Р•Р Р•РўР• РќРђ РљРђР РўР• РўРћР§РљРЈ РџРћР—Р�Р¦Р�Р�.");
 				return;
 			}
 			mDatabaseRef.child("phoneID_" + randomIDPhoneTest).child("phoneID").
@@ -123,7 +124,7 @@ public class CAddShipController implements Initializable{
 			
 			flLbInfoSaveErrors.setText("");
 			CMainController.m_LocationTempForCAddShipController = null;
-            System.out.println("Типа создали кораблик!!!");
+            System.out.println("РўРёРїР° СЃРѕР·РґР°Р»Рё РєРѕСЂР°Р±Р»РёРє!!!");
             CLPSMain.m_stageAddShip.close();
         } 
    	 	catch (Exception e) 

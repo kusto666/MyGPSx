@@ -44,6 +44,7 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -90,7 +91,13 @@ import netscape.javascript.JSObject;
  *
  * @author Dmitry
  */
-public class CMainController implements Initializable, MapComponentInitializedListener {
+public class CMainController implements Initializable, MapComponentInitializedListener
+{
+	// Для вкладки настроек!!! START
+	 @FXML
+	 Button btnSettingsPriorityEdit;
+	//////////////////////Для вкладки настроек!!! END///////////////////////////////////////////
+	
 	
 	private Desktop desktop = Desktop.getDesktop();
 	private File m_FileSelectedOne; // 
@@ -177,17 +184,44 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     {
         return fxLbLatitudeText;
     }*/
-    
+    // Открытие окна редактирования приоритетов!!!
+    @FXML
+    private void FrameSettingsPrioritetsEdit(ActionEvent event) {
+    	System.out.println("btnSettingsPrioritetsEdit!!!");
+    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	try {
+	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CLPSMain.m_PathFXPriorityEdit));
+	            CLPSMain.m_rootPriorityEdit = (Parent)fxmlLoader.load();
+	            CLPSMain.m_stagePriorityEdit = new Stage();
+	            CLPSMain.m_stagePriorityEdit.setTitle(CStrings.m_APP_NAME + "Редактирование приоритетов задач");
+	            CLPSMain.m_stagePriorityEdit.setScene(new Scene(CLPSMain.m_rootPriorityEdit));  
+	            CLPSMain.m_stagePriorityEdit.setResizable(false);
+	            CLPSMain.m_stagePriorityEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+	            //CLPSMain.m_stageAddShip.setAlwaysOnTop(true); // А так ВЫБРАТЬ!!!
+	            CLPSMain.m_stagePriorityEdit.initOwner(CLPSMain.stage);
+	            CLPSMain.m_stagePriorityEdit.show();
+	            
+	           /* fxLbLatitudeText = (Label)fxmlLoader.getNamespace().get("fxLbLatitudeText");
+	            fxLbLongitudeText = (Label)fxmlLoader.getNamespace().get("fxLbLongitudeText");
+	            System.out.println("fxLbLatitudeText = " + fxLbLatitudeText.getText());
+	            System.out.println("fxLbLongitudeText = " + fxLbLongitudeText.getText());*/
+            
+            }
+    		catch(Exception e) 
+    		{
+               e.printStackTrace();
+            }
+    }
     // Добавить новый объект(типа пока судно!!!)
     @FXML
-    private void btnAddShip(ActionEvent event) {
+    private void FrameAddShip(ActionEvent event) {
     	System.out.println("btnAddShip!!!");
     	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
     	try {
 	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CLPSMain.m_PathFXAddShipFxml));
 	            CLPSMain.m_rootAddShip = (Parent)fxmlLoader.load();
 	            CLPSMain.m_stageAddShip = new Stage();
-	            CLPSMain.m_stageAddShip.setTitle(CStrings.m_APP_NAME + " <<< Добавление судна... >>>");
+	            CLPSMain.m_stageAddShip.setTitle(CStrings.m_APP_NAME + "Добавление судна");
 	            CLPSMain.m_stageAddShip.setScene(new Scene(CLPSMain.m_rootAddShip));  
 	            CLPSMain.m_stageAddShip.setResizable(false);
 	           // CLPSMain.m_stageAddShip.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
@@ -621,16 +655,70 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         		// Пишем прямо здесь в базу сразу!!!
             	InputStream targetStream = new FileInputStream(fFile);
         		Bucket bucket = CLPSMain.MyGoogleStorage.get(("mygpsone-kusto1.appspot.com"));
-				com.google.cloud.storage.Blob blob2 = bucket.create(PATH_NAME_UPLOADS_MAIN + fFile.getName(), targetStream,"image/jpg");
+				com.google.cloud.storage.Blob blob = bucket.create(PATH_NAME_UPLOADS_MAIN + fFile.getName(), targetStream,"image/jpg");
 				
-				System.out.println(blob2.getSelfLink());
-				System.out.println(blob2.getMediaLink());
+				System.out.println(blob.getSelfLink());
+				System.out.println(blob.getMediaLink());
+				System.out.println(blob.getEtag());
+				
+				
+				// Print blob metadata
+				System.out.println("Bucket: " + blob.getBucket());
+				System.out.println("CacheControl: " + blob.getCacheControl());
+				System.out.println("ComponentCount: " + blob.getComponentCount());
+				System.out.println("ContentDisposition: " + blob.getContentDisposition());
+				System.out.println("ContentEncoding: " + blob.getContentEncoding());
+				System.out.println("ContentLanguage: " + blob.getContentLanguage());
+				System.out.println("ContentType: " + blob.getContentType());
+				System.out.println("Crc32c: " + blob.getCrc32c());
+				System.out.println("ETag: " + blob.getEtag());
+				System.out.println("Generation: " + blob.getGeneration());
+				System.out.println("Id: " + blob.getBlobId());
+				System.out.println("KmsKeyName: " + blob.getKmsKeyName());
+				System.out.println("Md5Hash: " + blob.getMd5());
+				System.out.println("MediaLink: " + blob.getMediaLink());
+				System.out.println("Metageneration: " + blob.getMetageneration());
+				System.out.println("Name: " + blob.getName());
+				System.out.println("Size: " + blob.getSize());
+				System.out.println("StorageClass: " + blob.getStorageClass());
+				System.out.println("TimeCreated: " + new Date(blob.getCreateTime()));
+				System.out.println("Last Metadata Update: " + new Date(blob.getUpdateTime()));
+				Boolean temporaryHoldIsEnabled = (blob.getTemporaryHold() != null && blob.getTemporaryHold());
+				System.out.println("temporaryHold: " + (temporaryHoldIsEnabled ? "enabled" : "disabled"));
+				Boolean eventBasedHoldIsEnabled = (blob.getEventBasedHold() != null && blob.getEventBasedHold());
+				System.out.println("eventBasedHold: " + (eventBasedHoldIsEnabled ? "enabled" : "disabled"));
+				if (blob.getRetentionExpirationTime() != null) {
+				  System.out.println("retentionExpirationTime: " + new Date(blob.getRetentionExpirationTime()));
+				}
+				if (blob.getMetadata() != null) {
+				  System.out.println("\n\n\nUser metadata:");
+				  for (Map.Entry<String, String> userMetadata : blob.getMetadata().entrySet()) {
+				    System.out.println(userMetadata.getKey() + "=" + userMetadata.getValue());
+				  }
+				}
+				//System.out.println(blob2.to);
+				
+				// Доделаем ссылку URL 1 завтра!!!
+				String img_url = "https://firebasestorage.googleapis.com/v0/b/" + blob.getBucket() + "/o/"
+						+ blob.getName()
+						+ "?alt=media&token=";
+						//+ blob.getMetadata().get("");
+
+				System.out.println("URL = " + img_url);
+				
+				
+				
+				// Create a reference with an initial file path and name
+				//var storage = firebase.storage();
+				//var pathReference = storage.ref('images/stars.jpg');
+				//CLPSMain.MyGoogleStorage.
+				
 				
 				Upload upload;// Объект для загрузки в realbase!!!
                // Uri downloadUri = task.getResult();
                 upload = new Upload(fFile.getName(),
-                		blob2.getSelfLink(),
-                		blob2.getMediaLink());
+                		blob.getSelfLink(),
+                		blob.getMediaLink());
                            //* taskSnapshot.getUploadSessionUri().toString());*//*
 
                 //adding an upload to firebase database
