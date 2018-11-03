@@ -37,7 +37,7 @@ public class CUserCell  extends ListCell<CUser>
             //if (mLLoader == null) 
             //{
             	System.out.println("mLLoader = new FXMLLoader(getClass().getResource(CLPSMain.m_PathFXListCellFxml));");
-                mLLoader = new FXMLLoader(getClass().getResource(CLPSMain.m_PathFXListCellFxml));
+                mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListCellFxml));
                // mLLoader.setController(this);
 
                 try 

@@ -98,7 +98,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	 Button btnSettingsPriorityEdit;
 	//////////////////////Для вкладки настроек!!! END///////////////////////////////////////////
 	
-	
+	// Смотри btnLoadFileToMsg(ActionEvent event), там есть фан openFile(File file)
 	private Desktop desktop = Desktop.getDesktop();
 	private File m_FileSelectedOne; // 
 	@FXML
@@ -106,7 +106,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	
     
 	
-	private String PATH_NAME_UPLOADS_MAIN = "uploads/";
+	/*private String PATH_NAME_UPLOADS_MAIN = "uploads/";*/
 	
 	@FXML
 	ListView<CUser> fxListView;
@@ -190,10 +190,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	System.out.println("btnSettingsPrioritetsEdit!!!");
     	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
     	try {
-	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CLPSMain.m_PathFXPriorityEdit));
+	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPriorityEdit));
 	            CLPSMain.m_rootPriorityEdit = (Parent)fxmlLoader.load();
 	            CLPSMain.m_stagePriorityEdit = new Stage();
-	            CLPSMain.m_stagePriorityEdit.setTitle(CStrings.m_APP_NAME + "Редактирование приоритетов задач");
+	            CLPSMain.m_stagePriorityEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование приоритетов задач");
 	            CLPSMain.m_stagePriorityEdit.setScene(new Scene(CLPSMain.m_rootPriorityEdit));  
 	            CLPSMain.m_stagePriorityEdit.setResizable(false);
 	            CLPSMain.m_stagePriorityEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
@@ -212,16 +212,16 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                e.printStackTrace();
             }
     }
-    // Добавить новый объект(типа пока судно!!!)
+    // Открытие окна типа Добавить новый объект(типа пока судно!!!)
     @FXML
     private void FrameAddShip(ActionEvent event) {
     	System.out.println("btnAddShip!!!");
     	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
     	try {
-	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CLPSMain.m_PathFXAddShipFxml));
+	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAddShipFxml));
 	            CLPSMain.m_rootAddShip = (Parent)fxmlLoader.load();
 	            CLPSMain.m_stageAddShip = new Stage();
-	            CLPSMain.m_stageAddShip.setTitle(CStrings.m_APP_NAME + "Добавление судна");
+	            CLPSMain.m_stageAddShip.setTitle(CStrings.m_APP_NAME + "->Добавление судна");
 	            CLPSMain.m_stageAddShip.setScene(new Scene(CLPSMain.m_rootAddShip));  
 	            CLPSMain.m_stageAddShip.setResizable(false);
 	           // CLPSMain.m_stageAddShip.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
@@ -314,7 +314,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         	{
             	fxLbNameFileSelect.setText(m_FileSelectedOne.getName());
             	uploadImage(m_FileSelectedOne);
-                //openFile(file); - for display on ext programms!!!
+                //openFile(file); - Эта фан нужна если мы хотим файл открыть для просмотра на компе программой просмотра!!!
 			} 
         	catch (Exception e)
         	{
@@ -324,6 +324,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         }
 
     }
+    //openFile(file); - Эта фан нужна если мы хотим файл открыть для просмотра на компе программой просмотра!!!
     private void openFile(File file) {
         try {
             desktop.open(file);
@@ -655,7 +656,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         		// Пишем прямо здесь в базу сразу!!!
             	InputStream targetStream = new FileInputStream(fFile);
         		Bucket bucket = CLPSMain.MyGoogleStorage.get(("mygpsone-kusto1.appspot.com"));
-				com.google.cloud.storage.Blob blob = bucket.create(PATH_NAME_UPLOADS_MAIN + fFile.getName(), targetStream,"image/jpg");
+				com.google.cloud.storage.Blob blob = bucket.create(CMAINCONSTANTS.PATH_NAME_UPLOADS_MAIN + fFile.getName(), targetStream,"image/jpg");
 				
 				System.out.println(blob.getSelfLink());
 				System.out.println(blob.getMediaLink());
@@ -725,6 +726,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                 mDatabase = FirebaseDatabase.getInstance().getReference();
                 String uploadId = mDatabase.push().getKey();
                 mDatabase.child("my_files").child(uploadId).setValue(upload);
+                
                 //progressDialog.dismiss();
                 //Toast.makeText(getActivity().getApplicationContext(), "Файл отправлен!", Toast.LENGTH_SHORT).show();
 				//System.out.println(blob2.);

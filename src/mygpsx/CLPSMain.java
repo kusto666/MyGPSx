@@ -92,11 +92,13 @@ public class CLPSMain extends Application
 	
 	public static ArrayList<CUser> m_localAllMarkersUsersTempMain = null;
 	
+	// Это окно добавления кораблей!!!
 	@FXML
 	public static Parent m_rootAddShip = null;
 	@FXML
 	public static Stage m_stageAddShip = null;
 	
+	// This is a window edit, add priority!!!
 	@FXML
 	public static Parent m_rootPriorityEdit = null;
 	@FXML
@@ -124,11 +126,11 @@ public class CLPSMain extends Application
 	@FXML
 	public static Stage stage;
 	
-	public static String m_PathMainFxml = "LPSMap.fxml";
+	/*public static String m_PathMainFxml = "LPSMap.fxml";
 	public static String m_PathFXAddShipFxml = "FXAddShip.fxml";
 	public static String m_PathFXPriorityEdit = "FXPriorityEdit.fxml";
 	public static String m_PathFXListCellFxml = "ListCell.fxml";
-	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";
+	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";*/
 
 	public static ObservableList<CUser> m_ObservableListUsers;
 	@FXML
@@ -160,7 +162,7 @@ public class CLPSMain extends Application
         	stage = st;
         	try 
         	{
-        		m_Loader = new FXMLLoader(getClass().getResource(m_PathMainFxml));
+        		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
         		root = m_Loader.load();
         		
         		/*m_LoaderCell = new FXMLLoader(getClass().getResource(m_PathFXListCellFxml));
@@ -242,7 +244,7 @@ public class CLPSMain extends Application
         	//stage = st;
         	try 
         	{
-        		m_Loader = new FXMLLoader(getClass().getResource(m_PathMainFxml));
+        		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
         		root = m_Loader.load();
         		
         		/*m_LoaderCell = new FXMLLoader(getClass().getResource(m_PathFXListCellFxml));

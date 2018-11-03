@@ -65,13 +65,13 @@ public class CAddShipController implements Initializable{
 	 @FXML
 	 private void btnAddShip(ActionEvent event) 
 	 {
-		 // РўРµРєСѓС‰Р°СЏ РґР°С‚Р° РґР»СЏ СЃРѕР·РґР°РЅРёСЏ СЃСѓРґРЅР°(РѕР±СЉРµРєС‚Р° - РїРѕРєР° РЅРµ Р·РЅР°СЋ РґР»СЏ С‡РµРіРѕ))))
+		// Текущая дата для создания судна(объекта - пока не знаю для чего))))
 		Date date = new Date();
 		long lUnixTimeCreate = date.getTime();
 		System.out.println("lUnixTimeCreate = " + Long.toString(lUnixTimeCreate));
 		System.out.println("btnAddShip!!!");
 		
-		// РЎР»СѓС‡Р°Р№РЅС‹Р№ СѓРЅРёРєР°Р»СЊРЅС‹Р№ ID СѓСЃС‚СЂРѕР№СЃС‚РІР° - Рє РїСЂРёРјСѓСЂСѓ!!!
+		// Случайный уникальный ID устройства - к примуру!!!
 		String symbols = "abcdefghijklmnopqrstuvwxyz";
 		String randomIDPhoneTest= new Random().ints(11, 0, symbols.length())
 		    .mapToObj(symbols::charAt)
@@ -80,33 +80,24 @@ public class CAddShipController implements Initializable{
 		System.out.println("String random = " + randomIDPhoneTest);
 		try 
    	 	{
-			// Р Р°Р±РѕС‚Р°РµРј СЃ firebase - Р·Р°РїРёСЃС‹РІР°РµРј!!!
+			// Работаем с firebase - записываем!!!
 			mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("users");
 		
 
-			// РџРѕС‚РѕРј РґРѕР±Р°РІРёРј РїСЂРѕРІРµСЂРєСѓ РЅР° РїСѓСЃС‚РѕС‚Сѓ РїРѕР»РµР№!!!
-			if(fxLbNameShip.getText().replaceAll("\\s","").length() == 0)
+			// Потом добавим проверку на пустоту полей!!!
+			if(fxLbNameShip.getText().replaceAll("\\s","").length() == 0 ||
+			   fxLbDirectorShip.getText().replaceAll("\\s","").length() == 0 ||
+			   fxTaShortDescriptionShip.getText().replaceAll("\\s","").length() == 0)
 			{
-				flLbInfoSaveErrors.setText("Р—РђРџРћР›РќР�РўР• Р’РЎР• РџРћР›РЇ!");
+				flLbInfoSaveErrors.setText("ЗАПОЛНИТЕ ВСЕ ПОЛЯ!");
 				return;
 			}
-			if(fxLbDirectorShip.getText().replaceAll("\\s","").length() == 0)
-			{
-				flLbInfoSaveErrors.setText("Р—РђРџРћР›РќР�РўР• Р’РЎР• РџРћР›РЇ!");
-				return;
-			}
-			if(fxTaShortDescriptionShip.getText().replaceAll("\\s","").length() == 0)
-			{
-				flLbInfoSaveErrors.setText("Р—РђРџРћР›РќР�РўР• Р’РЎР• РџРћР›РЇ!");
-				return;
-			}
-			//if(fxLbNameShip.getText() == "" || fxLbDirectorShip == "" || )
+		
 			
-			
-			// РџСЂРѕРІРµСЂРєР° РЅР° РєРѕРѕСЂРґРёРЅР°С‚С‹ РґР»СЏ СЃРѕР·РґРѕРІР°РµРјРѕРіРѕ РѕР±СЉРµРєС‚Р°!!!
+			// Проверка на координаты для создоваемого объекта!!!
 			if(CMainController.m_LocationTempForCAddShipController == null)
 			{
-				flLbInfoSaveErrors.setText("РћРўРЎРЈРўРЎРўР’РЈР®Рў РљРћРћР Р”Р�РќРђРўР«! Р’Р«Р‘Р•Р Р•РўР• РќРђ РљРђР РўР• РўРћР§РљРЈ РџРћР—Р�Р¦Р�Р�.");
+				flLbInfoSaveErrors.setText("ОТСУТСТВУЮТ КООРДИНАТЫ! ВЫБЕРЕТЕ НА КАРТЕ ТОЧКУ ПОЗИЦИИ.");
 				return;
 			}
 			mDatabaseRef.child("phoneID_" + randomIDPhoneTest).child("phoneID").
@@ -124,15 +115,13 @@ public class CAddShipController implements Initializable{
 			
 			flLbInfoSaveErrors.setText("");
 			CMainController.m_LocationTempForCAddShipController = null;
-            System.out.println("РўРёРїР° СЃРѕР·РґР°Р»Рё РєРѕСЂР°Р±Р»РёРє!!!");
+			System.out.println("Типа создали кораблик!!!");
             CLPSMain.m_stageAddShip.close();
         } 
    	 	catch (Exception e) 
    	 	{
             e.printStackTrace();
         }
-		
-		
 	 }
 	 
 	 @FXML
