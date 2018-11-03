@@ -4,10 +4,10 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CPriorityEditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="357.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CPriorityEditController">
    <children>
       <Label layoutX="8.0" layoutY="6.0" text="Список приоритетов:" />
-      <ListView fx:id="fxListViewPriority" layoutX="8.0" layoutY="34.0" prefHeight="189.0" prefWidth="310.0" />
-      <Button fx:id="fxBtnAddPriority" layoutX="143.0" layoutY="2.0" mnemonicParsing="false" onAction="#FrameAddPriority" text="Добавить приоритет задачи" />
+      <ListView fx:id="fxListViewPriority" layoutX="8.0" layoutY="34.0" prefHeight="189.0" prefWidth="343.0" />
+      <Button fx:id="fxBtnAddPriority" layoutX="179.0" layoutY="2.0" mnemonicParsing="false" onAction="#FrameAddPriority" text="Добавить приоритет задачи" />
    </children>
 </AnchorPane>

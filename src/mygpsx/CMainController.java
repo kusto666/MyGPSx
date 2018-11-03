@@ -131,13 +131,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	private static DatabaseReference mDatabase;
 	
 	private static DatabaseReference mDatabaseRefSendMsg;
-	//public static DatabaseReference mDatabaseRefUSers;
-	//public static FirebaseApp defaultApp;
-	/*private static ArrayList<CUser> localMarkersUsersTemp = null;*/
-	
-	
-	
-	
+
 	// Это для тестовой проверки(temp) координат на карте!!!
 	static LatLong LocationTemp = null;
 	MarkerOptions markerOptionsTemp = null;
@@ -186,31 +180,49 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     }*/
     // Открытие окна редактирования приоритетов!!!
     @FXML
-    private void FrameSettingsPrioritetsEdit(ActionEvent event) {
+    private void FrameSettingsStatusEdit(ActionEvent event) 
+    {
     	System.out.println("btnSettingsPrioritetsEdit!!!");
     	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
-    	try {
-	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPriorityEdit));
-	            CLPSMain.m_rootPriorityEdit = (Parent)fxmlLoader.load();
-	            CLPSMain.m_stagePriorityEdit = new Stage();
-	            CLPSMain.m_stagePriorityEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование приоритетов задач");
-	            CLPSMain.m_stagePriorityEdit.setScene(new Scene(CLPSMain.m_rootPriorityEdit));  
-	            CLPSMain.m_stagePriorityEdit.setResizable(false);
-	            CLPSMain.m_stagePriorityEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
-	            //CLPSMain.m_stageAddShip.setAlwaysOnTop(true); // А так ВЫБРАТЬ!!!
-	            CLPSMain.m_stagePriorityEdit.initOwner(CLPSMain.stage);
-	            CLPSMain.m_stagePriorityEdit.show();
-	            
-	           /* fxLbLatitudeText = (Label)fxmlLoader.getNamespace().get("fxLbLatitudeText");
-	            fxLbLongitudeText = (Label)fxmlLoader.getNamespace().get("fxLbLongitudeText");
-	            System.out.println("fxLbLatitudeText = " + fxLbLatitudeText.getText());
-	            System.out.println("fxLbLongitudeText = " + fxLbLongitudeText.getText());*/
-            
-            }
-    		catch(Exception e) 
-    		{
-               e.printStackTrace();
-            }
+    	try 
+    	{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXStatusEdit));
+            CLPSMain.m_rootStatusEdit = (Parent)fxmlLoader.load();
+            CLPSMain.m_stageStatusEdit = new Stage();
+            CLPSMain.m_stageStatusEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование статусов задач");
+            CLPSMain.m_stageStatusEdit.setScene(new Scene(CLPSMain.m_rootStatusEdit));  
+            CLPSMain.m_stageStatusEdit.setResizable(false);
+            CLPSMain.m_stageStatusEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageStatusEdit.initOwner(CLPSMain.stage);
+            CLPSMain.m_stageStatusEdit.show();
+        }
+		catch(Exception e) 
+		{
+           e.printStackTrace();
+        }
+    }
+    // Открытие окна редактирования приоритетов!!!
+    @FXML
+    private void FrameSettingsPrioritetsEdit(ActionEvent event) 
+    {
+    	System.out.println("btnSettingsPrioritetsEdit!!!");
+    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	try 
+    	{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPriorityEdit));
+            CLPSMain.m_rootPriorityEdit = (Parent)fxmlLoader.load();
+            CLPSMain.m_stagePriorityEdit = new Stage();
+            CLPSMain.m_stagePriorityEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование приоритетов задач");
+            CLPSMain.m_stagePriorityEdit.setScene(new Scene(CLPSMain.m_rootPriorityEdit));  
+            CLPSMain.m_stagePriorityEdit.setResizable(false);
+            CLPSMain.m_stagePriorityEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stagePriorityEdit.initOwner(CLPSMain.stage);
+            CLPSMain.m_stagePriorityEdit.show();
+        }
+		catch(Exception e) 
+		{
+           e.printStackTrace();
+        }
     }
     // Открытие окна типа Добавить новый объект(типа пока судно!!!)
     @FXML

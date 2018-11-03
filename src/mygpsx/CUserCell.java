@@ -20,8 +20,6 @@ public class CUserCell  extends ListCell<CUser>
 	@FXML
 	AnchorPane m_Pane;
 	
-	//ObservableList<CUser> m_ObservableListUsers;
-	
 	@Override
 	public void updateItem(CUser item, boolean empty) 
 	{
@@ -34,57 +32,37 @@ public class CUserCell  extends ListCell<CUser>
         } 
         else
         {
-            //if (mLLoader == null) 
-            //{
-            	System.out.println("mLLoader = new FXMLLoader(getClass().getResource(CLPSMain.m_PathFXListCellFxml));");
-                mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListCellFxml));
-               // mLLoader.setController(this);
+        	System.out.println("mLLoader = new FXMLLoader(getClass().getResource(CLPSMain.m_PathFXListCellFxml));");
+            mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListCellFxml));
+            try 
+            {
+                mLLoader.load();
+                lbMyNameShip = (Label)mLLoader.getNamespace().get("lbMyNameShip");
+                lbMyDirectorShip = (Label)mLLoader.getNamespace().get("lbMyDirectorShip");
+        		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
+        		if(lbMyNameShip == null)
+        		{
+        			System.out.println("lbMyNameShip == null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        		}
+        		if(lbMyDirectorShip == null)
+        		{
+        			System.out.println("label2 == null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        		}
+        		if(m_Pane == null)
+        		{
+        			System.out.println("m_Pane == null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        		}
+        		lbMyNameShip.setText(String.valueOf(item.getMyNameShip()));
+        		lbMyDirectorShip.setText(String.valueOf(item.getMyDirectorShip()));
+            } 
+            catch (IOException e) 
+            {
+                e.printStackTrace();
+            }
 
-                try 
-                {
-                    mLLoader.load();
-                    lbMyNameShip = (Label)mLLoader.getNamespace().get("lbMyNameShip");
-                    lbMyDirectorShip = (Label)mLLoader.getNamespace().get("lbMyDirectorShip");
-            		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
-            		if(lbMyNameShip == null)
-            		{
-            			System.out.println("lbMyNameShip == null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            		}
-            		if(lbMyDirectorShip == null)
-            		{
-            			System.out.println("label2 == null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            		}
-            		if(m_Pane == null)
-            		{
-            			System.out.println("m_Pane == null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            		}
-            		lbMyNameShip.setText(String.valueOf(item.getMyNameShip()));
-            		lbMyDirectorShip.setText(String.valueOf(item.getMyDirectorShip()));
-                     
-                     /*System.out.println("<<<<<<<<<<<<<<<  " + label1.getText() + "  >>>>>>>>>>>>>");
-                     setText(null);
-                     setGraphic(m_Pane);*/
-                } 
-                catch (IOException e) 
-                {
-                    e.printStackTrace();
-                }
-
-           // }
             System.out.println("<<<<<<<<<<<<<<<  " + lbMyNameShip.getText() + "  >>>>>>>>>>>>>");
             setText(null);
             setGraphic(m_Pane);
-            //CMainController.map = null;
-            /*if(CMainController.map == null)
-            {
-            	System.out.println("Ошибка инициализации map!!!");
-            	CLPSMain.fxLbMessage.setText("Ошибка инициализации\nкарты!\nПерегрузите карту,\nнажимте кнопку:\n\"Обновить карту\"");
-            	CLPSMain.btnRestartMod.setVisible(true);
-            }
-            else
-            {
-            	CLPSMain.fxMessageWait.setVisible(false);
-            }*/
         }
 	}
 }

@@ -104,10 +104,11 @@ public class CLPSMain extends Application
 	@FXML
 	public static Stage m_stagePriorityEdit = null;
 	
-	
-	
-	
-	
+	// This is a window edit, add Status!!!
+	@FXML
+	public static Parent m_rootStatusEdit = null;
+	@FXML
+	public static Stage m_stageStatusEdit = null;
 
 	@FXML
 	TextArea mymsg;
@@ -126,12 +127,6 @@ public class CLPSMain extends Application
 	@FXML
 	public static Stage stage;
 	
-	/*public static String m_PathMainFxml = "LPSMap.fxml";
-	public static String m_PathFXAddShipFxml = "FXAddShip.fxml";
-	public static String m_PathFXPriorityEdit = "FXPriorityEdit.fxml";
-	public static String m_PathFXListCellFxml = "ListCell.fxml";
-	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";*/
-
 	public static ObservableList<CUser> m_ObservableListUsers;
 	@FXML
 	static ArrayList<CUser> m_alUsersAll = null;
@@ -146,9 +141,10 @@ public class CLPSMain extends Application
 	@FXML
 	public static FXMLLoader m_LoaderCell;
 
+	// Самый главный старт!!!!
     @SuppressWarnings("unchecked")
 	@Override
-    public void start(Stage st) throws Exception 
+    public void start(Stage st) throws Exception
     {
     	if(!InitFireBase())
     	{
@@ -162,16 +158,10 @@ public class CLPSMain extends Application
         	stage = st;
         	try 
         	{
+        		// Инициализация всех внутренних контролов!!!
         		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
         		root = m_Loader.load();
-        		
-        		/*m_LoaderCell = new FXMLLoader(getClass().getResource(m_PathFXListCellFxml));
-        		m_LoaderCell.setController(this);
-        		m_LoaderCell.load();*/
-        		
-        		
         		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
-        		//fxvBoxUsersAll = (VBox)loader.getNamespace().get("fxvBoxUsersAll");
         		fxListView = (ListView<CUser>)m_Loader.getNamespace().get("fxListView");
         		fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
         		fxLbMessage = (Label)m_Loader.getNamespace().get("fxLbMessage");
@@ -218,9 +208,6 @@ public class CLPSMain extends Application
             });
             stage.show();
             fxMessageWait.setVisible(true);
-            
-            /*InitFireBase();
-            MyEventListnerFireUsers();*/
             MyEventListnerFireMessage();
     	}
 
@@ -229,8 +216,6 @@ public class CLPSMain extends Application
     
 	public void reload() throws IOException
     {
-		
-		
     	if(!InitFireBase())
     	{
     		System.out.println("InitFireBase() - ошибка инициализации!!!");
@@ -241,19 +226,12 @@ public class CLPSMain extends Application
     		btnRefreshAllMarkers();
             MyEventListnerFireUsers();
         	root = null;
-        	//stage = st;
+
         	try 
         	{
         		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
         		root = m_Loader.load();
-        		
-        		/*m_LoaderCell = new FXMLLoader(getClass().getResource(m_PathFXListCellFxml));
-        		m_LoaderCell.setController(this);
-        		m_LoaderCell.load();*/
-        		
-        		
         		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
-        		//fxvBoxUsersAll = (VBox)loader.getNamespace().get("fxvBoxUsersAll");
         		fxListView = (ListView<CUser>)m_Loader.getNamespace().get("fxListView");
         		fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
         		fxLbMessage = (Label)m_Loader.getNamespace().get("fxLbMessage");
@@ -300,33 +278,9 @@ public class CLPSMain extends Application
             });
             stage.show();
             fxMessageWait.setVisible(true);
-            
-            /*InitFireBase();
-            MyEventListnerFireUsers();*/
             MyEventListnerFireMessage();
     	}
-		
-		/*m_Loader = new FXMLLoader(getClass().getResource(m_PathMainFxml));
-    	root = m_Loader.load();
-    	
-    	mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
-    	//fxvBoxUsersAll = (VBox)loader.getNamespace().get("fxvBoxUsersAll");
-    	
-    	fxListView = (ListView<CUser>)m_Loader.getNamespace().get("fxListView");
-
-    	
-        scene = new Scene(root);
-        stage.setTitle("GUI");
-        stage.setTitle(CStrings.m_APP_NAME);
-        //stage.getIcons().add(icone);
-        stage.setScene(scene);
-        stage.show();
-        fxMessageWait.setVisible(false);
-        InitFireBase();
-        MyEventListnerFireUsers();
-        MyEventListnerFireMessage();
-        //fxMessageWait.setVisible(false);
-*/    }
+    }
     /**
      * @param args the command line arguments
      */
@@ -335,27 +289,13 @@ public class CLPSMain extends Application
         launch(args);
     }
     
+    // Здесь инициализируем подключение к базе данных!!!
     @FXML
     private boolean InitFireBase()
     {
-    	
     	boolean bRet = true;
     	try 
     	{
-    		///////////////////////////////////////////////////////////////////////////////////
-    		// Enable Storage
-    	   /* Storage storage = StorageOptions.newBuilder()
-    	      .authCredentials(AuthCredentials.createForJson(new FileInputStream("/555.json"))
-    	      .build()
-    	      .service();*/
-    		
-    		
-    		//FileInputStream serviceAccount2 = new FileInputStream("path/to/serviceAccountKey.json");
-
-    		
-    		///////////////////////////////////////////////////////////////////////////////////
-    		
-    		//fxMessageWait.setVisible(true);
     		InputStream serviceAccount = this.getClass().getResourceAsStream("/555.json");
 			 
 			if(serviceAccount == null)
@@ -367,34 +307,7 @@ public class CLPSMain extends Application
 			  .setCredential(FirebaseCredentials.fromCertificate(serviceAccount))
 			  .setDatabaseUrl("https://mygpsone-kusto1.firebaseio.com/")
 			  .build();
-			
-			
 
-			
-			// Authenticate using a service account
-			/*Storage storage = StorageOptions.Builder().
-			
-			    .authCredentials(AuthCredentials.createForJson(new FileInputStream("/path/to/my/key.json"))
-			    .build()
-			    .service();*/
-			
-			/*FileInputStream serviceAccount2 = new FileInputStream("google-services.json");
-
-			FirebaseOptions options2 = new FirebaseOptions.Builder()
-			    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-			    .setStorageBucket("<BUCKET_NAME>.appspot.com")
-			    .build();
-			FirebaseApp.initializeApp(options);
-
-			Bucket bucket = StorageClient.getInstance().bucket();*/
-			
-			
-			
-			/*storage = StorageOptions.Builder
-		    	      .authCredentials(AuthCredentials.createForJson(new FileInputStream("/555.json"))
-		    	      .build()
-		    	      .service());*/
-			
 			if(defaultApp == null)
 			{
 				defaultApp = FirebaseApp.initializeApp(options);
@@ -405,7 +318,7 @@ public class CLPSMain extends Application
 
 				FirebaseAuth.getInstance();
 				FirebaseDatabase.getInstance();
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////Что-то интересное - пока просто написасал)))//////////////////////////////////////////
 				System.out.println("START FirebaseStorage>>>");
 				/*BigQuery bigquery = BigQueryOptions.newBuilder().setProjectId("mygpsone-kusto1")
 			            .setCredentials(
@@ -425,6 +338,7 @@ public class CLPSMain extends Application
 						
 						System.out.println("StorageOptions.getDefaultInstance().getLibraryVersion() = " 
 								+ StorageOptions.getDefaultInstance().getLibraryVersion());*/
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				try 
 				{
 					MyGoogleStorage = StorageOptions.newBuilder().setProjectId("mygpsone-kusto1")
@@ -466,7 +380,6 @@ public class CLPSMain extends Application
 			else
 			{
 				System.out.println("ОШИБКА СОЗДАНИЯ defaultApp.getName() !!!");
-				//bRet = false;
 			}
 		} 
     	catch (Exception ex) 
@@ -489,7 +402,6 @@ public class CLPSMain extends Application
 			//{
 				try
 				{
-					//Platform.setImplicitExit(false);
 					 mDatabaseRefUsers = FirebaseDatabase.getInstance().getReference().child("users");
 					 mDatabaseRefUsers.addValueEventListener(new ValueEventListener()
 					 {
@@ -523,42 +435,19 @@ public class CLPSMain extends Application
 					            {
 					            	Platform.runLater(
 			            			  () -> {
-			            				 
-			            				 /* try 
-			            				  {
-			            					  m_LoaderCell = new FXMLLoader(getClass().getResource(m_PathFXListCellFxml));
-			            			    		m_LoaderCell.setController(this);
-			            			    		m_LoaderCell.load();
-			            				  } 
-			            				  catch (Exception e)
-			            				  {
-			            					  System.out.println( e.getMessage() );
-										  }*/
-			            				  
-			            				  //fxvBoxUsersAll.getChildren().addAll(fxListView);
 			            				  fxListView.setItems(m_ObservableListUsers);
 			            				 fxListView.setPrefSize(200, 500);
-			            				//fxListView.setMaxSize(200, 1000);
-			            				//  fxListView.setMaxHeight(1000);
-			            				 //fxListView.setCellFactory(new CUserCellFactory());
 			            				 fxListView.setCellFactory(new Callback<ListView<CUser>, ListCell<CUser>>() 
 			            				 {
 											
 											@Override
 											public ListCell<CUser> call(ListView<CUser> param) 
 											{
-												//fxListView.setPrefSize(200, 150);
-												/*@Override
-												public void updateItem(CUser item, boolean empty) 
-												{
-													super.updateItem(item, empty);
-												};*/
 												System.out.println("return new CUserCell();");
 												return new CUserCell();
 											}
 										});
 			            				 
-			            				 //fxListView.setPrefSize(200, 150);
 			            				  fxListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			            		    			@Override
 			            		    			public void handle(MouseEvent click)
@@ -669,7 +558,7 @@ public class CLPSMain extends Application
 				                {
 					            	System.out.println( "message!!!" );
 				                    CMessages MyMsg = message.getValue(CMessages.class);
-				                    //mymsg = (TextArea)fxmlLoader2.getNamespace().get("mymsg");
+
 				                	if(mymsg != null)
 				                	{
 				                		System.out.println( ">>>>>>>>>User MyMsg msg_title : " + MyMsg.msg_title );
@@ -721,14 +610,10 @@ public class CLPSMain extends Application
             		{
             			 System.out.println("mDatabase.addValueEventListener");
             			 m_localAllMarkersUsersTempMain = new ArrayList<>();
-        				 //MarkerOptions mo = null;
-        			    // LatLong ll = null;
         			     CUser tempTransport = null;
         				DataSnapshot usersSnapshot = arg0;
-        				//System.out.println("arg0 = " + arg0.getChildrenCount());
                         Iterable<DataSnapshot> contactChildren = usersSnapshot.getChildren();
-                        
-                        //System.out.println("usersSnapshot.getChildrenCount() = " + usersSnapshot.getChildrenCount());
+
                      // Здесь перебераем все устройства, свое по phoneID игнорируем, а по другим
                         // выставляем маркеры!!! Как то так))))
                         for (DataSnapshot arg : contactChildren)
@@ -746,7 +631,6 @@ public class CLPSMain extends Application
                             		user.getMyNameShip(), user.getMyDirectorShip(), user.MyShortDescriptionShip);
                             m_localAllMarkersUsersTempMain.add(tempTransport);
                             System.out.println( "----------Конец маркера!!!-------------" );
-                            //break;
                         }
     				}
             		catch (Exception ex)
