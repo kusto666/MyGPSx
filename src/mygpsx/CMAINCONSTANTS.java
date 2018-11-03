@@ -17,13 +17,16 @@ public class CMAINCONSTANTS {
 	public static String m_PathFXListCellStatus = "ListCellStatus.fxml";
 	
 	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";
-	
-	
+
 	// Основной-корневой путь у файлам в firebase storage cloud!!!
 	public static String PATH_NAME_UPLOADS_MAIN = "uploads/";
 	
 	// Название таблиц(веток JSON) в realtime database:
-	public static String FB_my_owner_settings = "my_owner_settings";
-	public static String FB_my_priority = "my_priority";
 	public static String FB_users = "users";
+	
+	public static String FB_my_owner_settings = "my_owner_settings";
+	
+	public static String FB_my_priority = "my_priority";
+	public static String FB_my_status = "my_status";
+
 }

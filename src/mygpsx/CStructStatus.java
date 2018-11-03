@@ -22,12 +22,12 @@ public class CStructStatus
         return MyIDUnique;
     }
 
-    public String getMyCLassPriority()
+    public String getMyCLassStatus()
     {
         return MyCLassStatus;
     }
 
-    public String getMyNamePriority()
+    public String getMyNameStatus()
     {
         return MyNameStatus;
     }
@@ -36,11 +36,11 @@ public class CStructStatus
     {
         this.MyIDUnique = MyIDUnique;
     }
-    public void setMyCLassPriority(String MyCLassStatus)
+    public void setMyCLassStatus(String MyCLassStatus)
     {
         this.MyCLassStatus = MyCLassStatus;
     }
-    public void setMyNamePriority(String MyNameStatus)
+    public void setMyNameStatus(String MyNameStatus)
     {
         this.MyNameStatus = MyNameStatus;
     }

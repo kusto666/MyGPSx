@@ -182,7 +182,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private void FrameSettingsStatusEdit(ActionEvent event) 
     {
-    	System.out.println("btnSettingsPrioritetsEdit!!!");
+    	System.out.println("FrameSettingsStatusEdit!!!");
     	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{

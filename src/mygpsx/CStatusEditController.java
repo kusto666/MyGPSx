@@ -34,11 +34,11 @@ import javafx.util.Callback;
 
 public class CStatusEditController implements Initializable
 {
-	private ObservableList<CStructPriority> m_ObservableList;
+	private ObservableList<CStructStatus> m_ObservableList;
 	@FXML
-	private ListView<CStructPriority> fxListViewStatus;
+	private ListView<CStructStatus> fxListViewStatus;
 
-	private ArrayList<CStructPriority> m_alStatus = null;
+	private ArrayList<CStructStatus> m_alStatus = null;
 	
 	@FXML
 	private Parent m_rootStatusAdd = null;
@@ -47,19 +47,19 @@ public class CStatusEditController implements Initializable
 
 	 // Открытие окна добавление статуса задачи!!! 
     @FXML
-    private void FrameAddPriority(ActionEvent event) 
+    private void FrameAddStatus(ActionEvent event) 
     {
-    	System.out.println("FrameAddPriority - OPEN!!!");
+    	System.out.println("FrameAddStatus - OPEN!!!");
     	try 
     	{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPriorityAdd));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXStatusAdd));
             m_rootStatusAdd = (Parent)fxmlLoader.load();
             m_stageStatusAdd = new Stage();
-            m_stageStatusAdd.setTitle(CStrings.m_APP_NAME + "->Добавление приоритета");
+            m_stageStatusAdd.setTitle(CStrings.m_APP_NAME + "->Добавление статуса");
             m_stageStatusAdd.setScene(new Scene(m_rootStatusAdd));  
             m_stageStatusAdd.setResizable(false);
             m_stageStatusAdd.initModality(Modality.WINDOW_MODAL);
-            m_stageStatusAdd.initOwner(CLPSMain.m_stagePriorityEdit);
+            m_stageStatusAdd.initOwner(CLPSMain.m_stageStatusEdit);
             m_stageStatusAdd.show();
         }
 		catch(Exception e) 
@@ -72,12 +72,12 @@ public class CStatusEditController implements Initializable
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
-		System.out.println("CPriorityEditController - initialize!!!");
+		System.out.println("CStatusEditController - initialize!!!");
 		try
 		{
 			CLPSMain.mDatabase = FirebaseDatabase.getInstance().getReference()
 					.child(CMAINCONSTANTS.FB_my_owner_settings)
-					.child(CMAINCONSTANTS.FB_my_priority);
+					.child(CMAINCONSTANTS.FB_my_status);
 			CLPSMain.mDatabase.addValueEventListener(new ValueEventListener()
 			 {
 				@Override
@@ -87,11 +87,11 @@ public class CStatusEditController implements Initializable
 					{
 			            Iterable<DataSnapshot> contactChildren = arg0.getChildren();
 			        	
-			            m_alStatus = new ArrayList<CStructPriority>();
-			            for (DataSnapshot structPriority : contactChildren)
+			            m_alStatus = new ArrayList<CStructStatus>();
+			            for (DataSnapshot structStatus : contactChildren)
 		                {
-			            	CStructPriority TempSP = structPriority.getValue(CStructPriority.class);
-                        	System.out.println( "CStructPriority = "  + TempSP.getMyNamePriority());
+			            	CStructStatus TempSP = structStatus.getValue(CStructStatus.class);
+                        	System.out.println( "CStructStatus = "  + TempSP.getMyNameStatus());
                         	m_alStatus.add(TempSP);// Заполнили массив!!!
 	                	}
 			            m_ObservableList = FXCollections.observableArrayList (m_alStatus);
@@ -103,23 +103,23 @@ public class CStatusEditController implements Initializable
 	            			  () -> {
 	            				  fxListViewStatus.setItems(m_ObservableList);
 	            				// fxListViewPriority.setPrefSize(200, 500);
-	            				  fxListViewStatus.setCellFactory(new Callback<ListView<CStructPriority>, ListCell<CStructPriority>>() {
-
+	            				  fxListViewStatus.setCellFactory(new Callback<ListView<CStructStatus>, ListCell<CStructStatus>>() {
+									
 									@Override
-									public ListCell<CStructPriority> call(ListView<CStructPriority> param) {
+									public ListCell<CStructStatus> call(ListView<CStructStatus> param)
+									{
 										// TODO Auto-generated method stub
-										return new CUserCellPriority();
+										return new CUserCellStatus();
 									}
 								});
-	            				 
 	            				  fxListViewStatus.setOnMouseClicked(new EventHandler<MouseEvent>() {
 	            		    			@Override
 	            		    			public void handle(MouseEvent click)
 	            		    			{
 	            		    				if (click.getClickCount() == 1) 
 	            		    		        {
-	            		    					CStructPriority StrPrior = fxListViewStatus.getSelectionModel().getSelectedItem();
-	            		    					System.out.println("StrPrior = " + StrPrior.getMyIDUnique());
+	            		    					CStructStatus StrStatus = fxListViewStatus.getSelectionModel().getSelectedItem();
+	            		    					System.out.println("StrPrior = " + StrStatus.getMyIDUnique());
 	            		    		        }
 	            		    		        if (click.getClickCount() == 2) 
 	            		    		        {

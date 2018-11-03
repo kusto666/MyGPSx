@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
-public class CUserCellStatus  extends ListCell<CStructPriority>
+public class CUserCellStatus  extends ListCell<CStructStatus>
 {
 	
 	@FXML
@@ -32,7 +32,7 @@ public class CUserCellStatus  extends ListCell<CStructPriority>
 	AnchorPane m_Pane;
 	
 	@Override
-	public void updateItem(CStructPriority item, boolean empty) 
+	public void updateItem(CStructStatus item, boolean empty) 
 	{
 		super.updateItem(item, empty);
 		
@@ -43,20 +43,20 @@ public class CUserCellStatus  extends ListCell<CStructPriority>
         } 
         else
         {
-            mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListCellPriority));
+            mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListCellStatus));
             try 
             {
                 mLLoader.load();
                 fxLbUniqueID = (Label)mLLoader.getNamespace().get("fxLbUniqueID");
-                fxTxtNumberStatus = (TextField)mLLoader.getNamespace().get("fxTxtNumberPriority");
+                fxTxtNumberStatus = (TextField)mLLoader.getNamespace().get("fxTxtNumberStatus");
                 fxTxtNumberStatus.setEditable(false);
-                fxTxtNameStatus = (TextField)mLLoader.getNamespace().get("fxTxtNamePriority");
-                fxBtnDeleteStatus = (Button)mLLoader.getNamespace().get("fxBtnDeletePriority");
+                fxTxtNameStatus = (TextField)mLLoader.getNamespace().get("fxTxtNameStatus");
+                fxBtnDeleteStatus = (Button)mLLoader.getNamespace().get("fxBtnDeleteStatus");
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
         		
         		fxLbUniqueID.setText(String.valueOf(item.getMyIDUnique()));
-        		fxTxtNumberStatus.setText(String.valueOf(item.getMyCLassPriority()));
-        		fxTxtNameStatus.setText(String.valueOf(item.getMyNamePriority()));
+        		fxTxtNumberStatus.setText(String.valueOf(item.getMyCLassStatus()));
+        		fxTxtNameStatus.setText(String.valueOf(item.getMyNameStatus()));
             } 
             catch (IOException e) 
             {
