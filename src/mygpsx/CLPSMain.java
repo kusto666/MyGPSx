@@ -127,6 +127,12 @@ public class CLPSMain extends Application
 	public static Parent m_rootTypedescjobEdit = null;
 	@FXML
 	public static Stage m_stageTypedescjobEdit = null;
+	
+	// // This is a window edit, add Attrobj!!!
+	@FXML
+	public static Parent m_rootAttrobjEdit = null;
+	@FXML
+	public static Stage m_stageAttrobjEdit = null;
 
 	@FXML
 	TextArea mymsg;
@@ -232,6 +238,7 @@ public class CLPSMain extends Application
     }
     // вызываем в контроллере!!! - btnRefreshMap
     
+	@SuppressWarnings("unchecked")
 	public void reload() throws IOException
     {
     	if(!InitFireBase())

@@ -30,6 +30,11 @@ public class CMAINCONSTANTS {
 	public static String m_PathFXTypedescjobEdit = "FXTypedescjobEdit.fxml";
 	public static String m_PathFXTypedescjobAdd = "FXTypedescjobAdd.fxml";
 	public static String m_PathFXListCellTypedescjob = "ListCellTypedescjob.fxml";
+	
+	// Тут атрибуты объектов!!!
+	public static String m_PathFXAttrobjEdit = "FXAttrobjEdit.fxml";
+	public static String m_PathFXAttrobjAdd = "FXAttrobjAdd.fxml";
+	public static String m_PathFXListCellAttrobj = "ListCellAttrobj.fxml";
 		
 	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";
 
@@ -46,5 +51,6 @@ public class CMAINCONSTANTS {
 	public static String FB_my_typejob = "my_typejob";
 	public static String FB_my_attrjob = "my_attrjob";
 	public static String FB_my_typedescjob = "my_typedescjob";
+	public static String FB_my_attrobj = "my_attrobj";
 
 }

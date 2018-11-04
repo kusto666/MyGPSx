@@ -173,6 +173,29 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private GeocodingService geocodingService;
     
+    // Открытие окна редактирования атрибутов объектов!!!
+    @FXML
+    private void FrameSettingsAttrobjEdit(ActionEvent event) 
+    {
+    	System.out.println("FrameSettingsAttrobjEdit!!!");
+    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	try 
+    	{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAttrobjEdit));
+            CLPSMain.m_rootAttrobjEdit = (Parent)fxmlLoader.load();
+            CLPSMain.m_stageAttrobjEdit = new Stage();
+            CLPSMain.m_stageAttrobjEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование атрибутов объектов");
+            CLPSMain.m_stageAttrobjEdit.setScene(new Scene(CLPSMain.m_rootAttrobjEdit));  
+            CLPSMain.m_stageAttrobjEdit.setResizable(false);
+            CLPSMain.m_stageAttrobjEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageAttrobjEdit.initOwner(CLPSMain.stage);
+            CLPSMain.m_stageAttrobjEdit.show();
+        }
+		catch(Exception e) 
+		{
+           e.printStackTrace();
+        }
+    }
     
     // Открытие окна редактирования типовых описаний работ!!!
     @FXML
