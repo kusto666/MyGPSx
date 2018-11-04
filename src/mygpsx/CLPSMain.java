@@ -109,6 +109,24 @@ public class CLPSMain extends Application
 	public static Parent m_rootStatusEdit = null;
 	@FXML
 	public static Stage m_stageStatusEdit = null;
+	
+	// This is a window edit, add Typejob!!!
+	@FXML
+	public static Parent m_rootTypejobEdit = null;
+	@FXML
+	public static Stage m_stageTypejobEdit = null;
+	
+	// This is a window edit, add Attrjob!!!
+	@FXML
+	public static Parent m_rootAttrjobEdit = null;
+	@FXML
+	public static Stage m_stageAttrjobEdit = null;
+	
+	// This is a window edit, add Typedescjob!!!
+	@FXML
+	public static Parent m_rootTypedescjobEdit = null;
+	@FXML
+	public static Stage m_stageTypedescjobEdit = null;
 
 	@FXML
 	TextArea mymsg;

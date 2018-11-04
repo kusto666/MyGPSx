@@ -173,11 +173,79 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private GeocodingService geocodingService;
     
-   /* @FXML
-    public Label getMyLabelLatitude()
+    
+    // Открытие окна редактирования типовых описаний работ!!!
+    @FXML
+    private void FrameSettingsTypedescjobEdit(ActionEvent event) 
     {
-        return fxLbLatitudeText;
-    }*/
+    	System.out.println("FrameSettingsTypedescjobEdit!!!");
+    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	try 
+    	{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXTypedescjobEdit));
+            CLPSMain.m_rootTypedescjobEdit = (Parent)fxmlLoader.load();
+            CLPSMain.m_stageTypedescjobEdit = new Stage();
+            CLPSMain.m_stageTypedescjobEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование типовых описаний задач");
+            CLPSMain.m_stageTypedescjobEdit.setScene(new Scene(CLPSMain.m_rootTypedescjobEdit));  
+            CLPSMain.m_stageTypedescjobEdit.setResizable(false);
+            CLPSMain.m_stageTypedescjobEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageTypedescjobEdit.initOwner(CLPSMain.stage);
+            CLPSMain.m_stageTypedescjobEdit.show();
+        }
+		catch(Exception e) 
+		{
+           e.printStackTrace();
+        }
+    }
+    
+    // Открытие окна редактирования атрибутов работ!!!
+    @FXML
+    private void FrameSettingsAttrjobEdit(ActionEvent event) 
+    {
+    	System.out.println("FrameSettingsAttrjobEdit!!!");
+    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	try 
+    	{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAttrjobEdit));
+            CLPSMain.m_rootAttrjobEdit = (Parent)fxmlLoader.load();
+            CLPSMain.m_stageAttrjobEdit = new Stage();
+            CLPSMain.m_stageAttrjobEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование атрибутов задач");
+            CLPSMain.m_stageAttrjobEdit.setScene(new Scene(CLPSMain.m_rootAttrjobEdit));  
+            CLPSMain.m_stageAttrjobEdit.setResizable(false);
+            CLPSMain.m_stageAttrjobEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageAttrjobEdit.initOwner(CLPSMain.stage);
+            CLPSMain.m_stageAttrjobEdit.show();
+        }
+		catch(Exception e) 
+		{
+           e.printStackTrace();
+        }
+    }
+    
+    // Открытие окна редактирования типов работ!!!
+    @FXML
+    private void FrameSettingsTypejobEdit(ActionEvent event) 
+    {
+    	System.out.println("FrameSettingsTypejobEdit!!!");
+    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	try 
+    	{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXTypejobEdit));
+            CLPSMain.m_rootTypejobEdit = (Parent)fxmlLoader.load();
+            CLPSMain.m_stageTypejobEdit = new Stage();
+            CLPSMain.m_stageTypejobEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование типов задач");
+            CLPSMain.m_stageTypejobEdit.setScene(new Scene(CLPSMain.m_rootTypejobEdit));  
+            CLPSMain.m_stageTypejobEdit.setResizable(false);
+            CLPSMain.m_stageTypejobEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageTypejobEdit.initOwner(CLPSMain.stage);
+            CLPSMain.m_stageTypejobEdit.show();
+        }
+		catch(Exception e) 
+		{
+           e.printStackTrace();
+        }
+    }
+
     // Открытие окна редактирования приоритетов!!!
     @FXML
     private void FrameSettingsStatusEdit(ActionEvent event) 

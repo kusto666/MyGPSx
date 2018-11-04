@@ -1,6 +1,6 @@
 package mygpsx;
 
-// Структура приоритетов задач!!!
+// Структура статусов задач!!!
 public class CStructStatus 
 {
 	private String MyIDUnique;

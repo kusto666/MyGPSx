@@ -16,6 +16,21 @@ public class CMAINCONSTANTS {
 	public static String m_PathFXStatusAdd = "FXStatusAdd.fxml";
 	public static String m_PathFXListCellStatus = "ListCellStatus.fxml";
 	
+	// Тут типы работ!!!
+	public static String m_PathFXTypejobEdit = "FXTypejobEdit.fxml";
+	public static String m_PathFXTypejobAdd = "FXTypejobAdd.fxml";
+	public static String m_PathFXListCellTypejob = "ListCellTypejob.fxml";
+	
+	// Тут атрибуты работ!!!
+	public static String m_PathFXAttrjobEdit = "FXAttrjobEdit.fxml";
+	public static String m_PathFXAttrjobAdd = "FXAttrjobAdd.fxml";
+	public static String m_PathFXListCellAttrjob = "ListCellAttrjob.fxml";
+	
+	// Тут типовые описания работ!!!
+	public static String m_PathFXTypedescjobEdit = "FXTypedescjobEdit.fxml";
+	public static String m_PathFXTypedescjobAdd = "FXTypedescjobAdd.fxml";
+	public static String m_PathFXListCellTypedescjob = "ListCellTypedescjob.fxml";
+		
 	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";
 
 	// Основной-корневой путь у файлам в firebase storage cloud!!!
@@ -28,5 +43,8 @@ public class CMAINCONSTANTS {
 	
 	public static String FB_my_priority = "my_priority";
 	public static String FB_my_status = "my_status";
+	public static String FB_my_typejob = "my_typejob";
+	public static String FB_my_attrjob = "my_attrjob";
+	public static String FB_my_typedescjob = "my_typedescjob";
 
 }
