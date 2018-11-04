@@ -35,7 +35,12 @@ public class CMAINCONSTANTS {
 	public static String m_PathFXAttrobjEdit = "FXAttrobjEdit.fxml";
 	public static String m_PathFXAttrobjAdd = "FXAttrobjAdd.fxml";
 	public static String m_PathFXListCellAttrobj = "ListCellAttrobj.fxml";
-		
+	
+	// Тут типы объектов!!!
+	public static String m_PathFXTypeobjEdit = "FXTypeobjEdit.fxml";
+	public static String m_PathFXTypeobjAdd = "FXTypeobjAdd.fxml";
+	public static String m_PathFXListCellTypeobj = "ListCellTypeobj.fxml";
+	
 	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";
 
 	// Основной-корневой путь у файлам в firebase storage cloud!!!
@@ -52,5 +57,6 @@ public class CMAINCONSTANTS {
 	public static String FB_my_attrjob = "my_attrjob";
 	public static String FB_my_typedescjob = "my_typedescjob";
 	public static String FB_my_attrobj = "my_attrobj";
+	public static String FB_my_typeobj = "my_typeobj";
 
 }

@@ -133,6 +133,12 @@ public class CLPSMain extends Application
 	public static Parent m_rootAttrobjEdit = null;
 	@FXML
 	public static Stage m_stageAttrobjEdit = null;
+	
+	// This is a window edit, add Typejob!!!
+	@FXML
+	public static Parent m_rootTypeobjEdit = null;
+	@FXML
+	public static Stage m_stageTypeobjEdit = null;
 
 	@FXML
 	TextArea mymsg;
