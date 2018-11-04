@@ -173,6 +173,54 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private GeocodingService geocodingService;
     
+    // Открытие окна для создания нового шаблона задачи!!!
+    @FXML
+    private void FrameSettingsFXCreateTemplate(ActionEvent event) 
+    {
+    	System.out.println("FrameSettingsFXCreateTemplate!!!");
+    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	try 
+    	{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXCreateTemplate));
+            CLPSMain.m_rootFXCreateTemplate = (Parent)fxmlLoader.load();
+            CLPSMain.m_stageFXCreateTemplate = new Stage();
+            CLPSMain.m_stageFXCreateTemplate.setTitle(CStrings.m_APP_NAME + "->Создание нового шаблона задачи");
+            CLPSMain.m_stageFXCreateTemplate.setScene(new Scene(CLPSMain.m_rootFXCreateTemplate));  
+            CLPSMain.m_stageFXCreateTemplate.setResizable(false);
+            CLPSMain.m_stageFXCreateTemplate.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageFXCreateTemplate.initOwner(CLPSMain.stage);
+            CLPSMain.m_stageFXCreateTemplate.show();
+        }
+		catch(Exception e) 
+		{
+           e.printStackTrace();
+        }
+    }
+    
+    // Открытие окна со списком готовых шаблонов для редактирования!!!
+    @FXML
+    private void FrameSettingsFXListTemplates(ActionEvent event) 
+    {
+    	System.out.println("FrameSettingsFXListTemplates!!!");
+    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	try 
+    	{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListTemplates));
+            CLPSMain.m_rootFXListTemplates = (Parent)fxmlLoader.load();
+            CLPSMain.m_stageFXListTemplates = new Stage();
+            CLPSMain.m_stageFXListTemplates.setTitle(CStrings.m_APP_NAME + "->Список шаблонов");
+            CLPSMain.m_stageFXListTemplates.setScene(new Scene(CLPSMain.m_rootFXListTemplates));  
+            CLPSMain.m_stageFXListTemplates.setResizable(false);
+            CLPSMain.m_stageFXListTemplates.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageFXListTemplates.initOwner(CLPSMain.stage);
+            CLPSMain.m_stageFXListTemplates.show();
+        }
+		catch(Exception e) 
+		{
+           e.printStackTrace();
+        }
+    }
+    
     // Открытие окна редактирования типов объектов!!!
     @FXML
     private void FrameSettingsTypeobjEdit(ActionEvent event) 

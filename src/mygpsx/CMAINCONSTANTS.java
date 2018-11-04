@@ -41,6 +41,12 @@ public class CMAINCONSTANTS {
 	public static String m_PathFXTypeobjAdd = "FXTypeobjAdd.fxml";
 	public static String m_PathFXListCellTypeobj = "ListCellTypeobj.fxml";
 	
+	// Тут все для списка шаблонов!!!
+	public static String m_PathFXListTemplates = "FXListTemplates.fxml";
+	
+	// Тут все для создания шаблона!!!
+	public static String m_PathFXCreateTemplate = "FXCreateTemplate.fxml";
+	
 	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";
 
 	// Основной-корневой путь у файлам в firebase storage cloud!!!

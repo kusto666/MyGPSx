@@ -139,6 +139,18 @@ public class CLPSMain extends Application
 	public static Parent m_rootTypeobjEdit = null;
 	@FXML
 	public static Stage m_stageTypeobjEdit = null;
+	
+	// This is a window edit, add FXListTemplates!!!
+	@FXML
+	public static Parent m_rootFXListTemplates = null;
+	@FXML
+	public static Stage m_stageFXListTemplates = null;
+	
+	// This is a window edit, add FXCreateTemplate!!!
+	@FXML
+	public static Parent m_rootFXCreateTemplate = null;
+	@FXML
+	public static Stage m_stageFXCreateTemplate = null;
 
 	@FXML
 	TextArea mymsg;
