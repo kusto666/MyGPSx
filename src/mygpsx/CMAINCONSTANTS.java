@@ -1,6 +1,8 @@
 package mygpsx;
 
 public class CMAINCONSTANTS {
+	
+	public static String m_UniqueTempIDTempate = "";
 	// Всекие пути к файлам окошек программы!!!
 	public static String m_PathMainFxml = "LPSMap.fxml";// Самое главное окно!!!
 	
@@ -43,6 +45,8 @@ public class CMAINCONSTANTS {
 	
 	// Тут все для списка шаблонов!!!
 	public static String m_PathFXListTemplates = "FXListTemplates.fxml";
+	//public static String m_PathFXAttrobjAdd = "FXAttrobjAdd.fxml";
+	public static String m_PathFXLCIntoTmpl = "LCIntoTmpl.fxml";
 	
 	// Тут все для создания шаблона!!!
 	public static String m_PathFXCreateTemplate = "FXCreateTemplate.fxml";
@@ -55,8 +59,10 @@ public class CMAINCONSTANTS {
 	// Название таблиц(веток JSON) в realtime database:
 	public static String FB_users = "users";
 	
+	// Основной узел настроек для всего и шаблонов и всяких там объктов и вообще настроек!!!
 	public static String FB_my_owner_settings = "my_owner_settings";
 	
+	// Это все сущности-атрибуты!!!
 	public static String FB_my_priority = "my_priority";
 	public static String FB_my_status = "my_status";
 	public static String FB_my_typejob = "my_typejob";
@@ -64,5 +70,10 @@ public class CMAINCONSTANTS {
 	public static String FB_my_typedescjob = "my_typedescjob";
 	public static String FB_my_attrobj = "my_attrobj";
 	public static String FB_my_typeobj = "my_typeobj";
+	
+	public static String FB_my_templates = "my_templates";
+	public static String FB_my_adding_attr = "my_adding_attr";
+	
+	
 
 }

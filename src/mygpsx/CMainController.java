@@ -63,9 +63,11 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -84,6 +86,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import netscape.javascript.JSObject;
 
@@ -178,7 +181,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsFXCreateTemplate(ActionEvent event) 
     {
     	System.out.println("FrameSettingsFXCreateTemplate!!!");
-    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXCreateTemplate));
@@ -190,6 +193,72 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             CLPSMain.m_stageFXCreateTemplate.initModality(Modality.WINDOW_MODAL);// Ѕыло , кода думал, что так лучше))) Ќо так не выбрать координаты!!!
             CLPSMain.m_stageFXCreateTemplate.initOwner(CLPSMain.stage);
             CLPSMain.m_stageFXCreateTemplate.show();
+            
+            CLPSMain.m_stageFXCreateTemplate.setOnCloseRequest(new EventHandler<WindowEvent>() 
+    		{
+              
+            	// «десь перед закрытием окна по крестику проверим изменилось ли название шаблона!!!
+    			@Override
+    			public void handle(WindowEvent arg0) 
+    			{
+            		// «десь перед выходом смотрим мен€ли ли что-то в темповом, открытом шаблоне,
+            		// типа название или что-то уже в шаблон добавл€ли!!!
+            		// ѕока проверим только изменение названи€!!! потом добавим отслеживание
+            		// других изменений!!!
+    				for (Node node : CLPSMain.m_rootFXCreateTemplate.getChildrenUnmodifiable()) 
+    				{
+    					
+						String stTempID = node.getId();
+						//TextField txtFldTemp
+						System.out.println("node.getId() = " + stTempID);
+						
+						try {
+							if(stTempID.equals("fxTxtNameTmplJob"))// ѕолучили нужный нод с названием задачи и провер€ем на изменение онной!!!
+							{
+								TextField txtFldTemp = (TextField)node;
+								if(txtFldTemp.getText().equals(FXCreateTemplateCtrl.m_stTempNameJob))
+								{
+									System.out.println("«начит изменений не было и мы просто закрываем окно создани€ шаблона задачи!!!");
+									CLPSMain.mDatabase = FirebaseDatabase.getInstance()
+											.getReference()
+											.child(CMAINCONSTANTS.FB_my_owner_settings)
+											.child(CMAINCONSTANTS.FB_my_templates);
+									CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();
+								}
+								else// ќднако они были, тогда предлагаем выбор!!!
+								{
+									Alert alert = new Alert(AlertType.CONFIRMATION);
+				            		alert.setTitle("«акрыть шаблон без сохранени€!");
+				            		alert.setHeaderText("¬ы действительно хотите закрыть шаблон без сохранени€?");
+				            		alert.setContentText(CStrings.m_APP_NAME_CHOOSE);
+				            		ButtonType buttonTypeYes = new ButtonType(CStrings.m_APP_NAME_CHOOSE_YES);
+				            		ButtonType buttonTypeNo = new ButtonType(CStrings.m_APP_NAME_CHOOSE_NO);
+				            		
+				            		alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+				            		
+				            		java.util.Optional<ButtonType> result = alert.showAndWait();
+				            		if (result.get() == buttonTypeYes)
+				            		{
+				            			CLPSMain.mDatabase = FirebaseDatabase.getInstance()
+		    									.getReference()
+		    									.child(CMAINCONSTANTS.FB_my_owner_settings)
+		    									.child(CMAINCONSTANTS.FB_my_templates);
+		    							CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();
+		    							break;
+				            		} 
+				            		else
+				            		{
+				            			arg0.consume();// ќтмена выхода из программы!!!
+				            			break;
+				            		}
+								}
+							}
+						} catch (Exception e) {
+							e.getMessage();
+						}
+    			    }
+    			}
+    		});
         }
 		catch(Exception e) 
 		{
@@ -202,7 +271,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsFXListTemplates(ActionEvent event) 
     {
     	System.out.println("FrameSettingsFXListTemplates!!!");
-    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListTemplates));
@@ -226,7 +295,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsTypeobjEdit(ActionEvent event) 
     {
     	System.out.println("FrameSettingsTypeobjEdit!!!");
-    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXTypeobjEdit));
@@ -250,7 +319,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsAttrobjEdit(ActionEvent event) 
     {
     	System.out.println("FrameSettingsAttrobjEdit!!!");
-    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAttrobjEdit));
@@ -274,7 +343,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsTypedescjobEdit(ActionEvent event) 
     {
     	System.out.println("FrameSettingsTypedescjobEdit!!!");
-    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXTypedescjobEdit));
@@ -298,9 +367,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsAttrjobEdit(ActionEvent event) 
     {
     	System.out.println("FrameSettingsAttrjobEdit!!!");
-    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{
+    		CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY = "DEL";
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAttrjobEdit));
             CLPSMain.m_rootAttrjobEdit = (Parent)fxmlLoader.load();
             CLPSMain.m_stageAttrjobEdit = new Stage();
@@ -322,7 +392,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsTypejobEdit(ActionEvent event) 
     {
     	System.out.println("FrameSettingsTypejobEdit!!!");
-    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXTypejobEdit));
@@ -346,7 +416,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsStatusEdit(ActionEvent event) 
     {
     	System.out.println("FrameSettingsStatusEdit!!!");
-    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXStatusEdit));
@@ -369,7 +439,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsPrioritetsEdit(ActionEvent event) 
     {
     	System.out.println("btnSettingsPrioritetsEdit!!!");
-    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPriorityEdit));
@@ -391,7 +461,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private void FrameAddShip(ActionEvent event) {
     	System.out.println("btnAddShip!!!");
-    	CConstantsEventsClicksJob.SAMPLE_JOBING = "ADD_SHIP";
+    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try {
 	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAddShipFxml));
 	            CLPSMain.m_rootAddShip = (Parent)fxmlLoader.load();
@@ -728,7 +798,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				}
                 
                 
-                if(CConstantsEventsClicksJob.SAMPLE_JOBING == "ADD_SHIP")
+                if(CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING == "ADD_SHIP")
                 {
                 	m_LocationTempForCAddShipController = ll;
                 }

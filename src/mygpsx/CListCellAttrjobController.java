@@ -24,6 +24,12 @@ public class CListCellAttrjobController implements Initializable{
 
 	private String stUniqueIDAttrjob = null;
 	@FXML
+	private Label fxLbUniqueID;
+	@FXML
+	private Button fxBtnDeleteAttrjob;
+	@FXML
+	private Button fxBtnAddAttrjobIntoTmpl;
+	@FXML
 	private TextField fxTxtNameAttrjob;
 	@FXML
     private void BtnDeleteAttrjob(ActionEvent event) 
@@ -58,10 +64,31 @@ public class CListCellAttrjobController implements Initializable{
            e.printStackTrace();
         }
     }
-	
+	@FXML
+    private void BtnAddAttrjobIntoTmpl(ActionEvent event) 
+    {
+		String stTempUniqueID = CLPSMain.mDatabase.push().getKey();
+		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
+				.getReference()
+				.child(CMAINCONSTANTS.FB_my_owner_settings)
+				.child(CMAINCONSTANTS.FB_my_templates)
+				.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child(CMAINCONSTANTS.FB_my_adding_attr);
+		CLPSMain.mDatabase.child(stTempUniqueID).child("attr_id").setValue(fxLbUniqueID.getText());
+		CLPSMain.mDatabase.child(stTempUniqueID).child("attr_name").setValue(fxTxtNameAttrjob.getText());
+    }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
+		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("DEL")) 
+		{
+			fxBtnDeleteAttrjob.setVisible(true);
+			fxBtnAddAttrjobIntoTmpl.setVisible(false);
+		}
+		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD")) 
+		{
+			fxBtnDeleteAttrjob.setVisible(false);
+			fxBtnAddAttrjobIntoTmpl.setVisible(true);
+		}
 		fxTxtNameAttrjob.setOnKeyPressed(new EventHandler<KeyEvent>() 
 		{
 			@Override

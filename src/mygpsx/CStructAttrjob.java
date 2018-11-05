@@ -2,9 +2,11 @@ package mygpsx;
 
 //Структура типов задач!!!
 public class CStructAttrjob {
+	private String MyIDPrevNode;// ID узда в котором находимся!!!(это или корень или группа в корне)!!!
 	private String MyIDUnique;
 	private String MyCLassAttrjob;
 	private String MyNameAttrjob;
+	private String MyTypeAttrjob; // Тип атрибута(его сущность на экране и в логике программы сущность)
 	
 	public CStructAttrjob() {// ОБЯЗАТЕЛЬНО УКАЗЫВАЕМ, А ТО БУДЕТ ОШИБКА ТИПА КАК ЗДЕСЬ БЫЛО:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
@@ -30,7 +32,10 @@ public class CStructAttrjob {
     {
         return MyNameAttrjob;
     }
-    
+    public String getMyTypeAttrjob()
+    {
+        return MyTypeAttrjob;
+    }
     public void setMyIDUnique(String MyIDUnique)
     {
         this.MyIDUnique = MyIDUnique;
@@ -42,5 +47,9 @@ public class CStructAttrjob {
     public void setMyNameAttrjob(String MyNameAttrjob)
     {
         this.MyNameAttrjob = MyNameAttrjob;
+    }
+    public void setMyTypeAttrjob(String MyTypeAttrjob)
+    {
+        this.MyTypeAttrjob = MyTypeAttrjob;
     }
 }
