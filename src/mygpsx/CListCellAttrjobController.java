@@ -73,8 +73,8 @@ public class CListCellAttrjobController implements Initializable{
 				.child(CMAINCONSTANTS.FB_my_owner_settings)
 				.child(CMAINCONSTANTS.FB_my_templates)
 				.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child(CMAINCONSTANTS.FB_my_adding_attr);
-		CLPSMain.mDatabase.child(stTempUniqueID).child("attr_id").setValue(fxLbUniqueID.getText());
-		CLPSMain.mDatabase.child(stTempUniqueID).child("attr_name").setValue(fxTxtNameAttrjob.getText());
+		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrID").setValue(fxLbUniqueID.getText());
+		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrName").setValue(fxTxtNameAttrjob.getText());
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 

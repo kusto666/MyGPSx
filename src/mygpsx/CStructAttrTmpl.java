@@ -3,17 +3,17 @@ package mygpsx;
 //—ÚÛÍÚÛ‡ ÚËÔÓ‚ Á‡‰‡˜!!!
 public class CStructAttrTmpl {
 	private String MyIDUnique;
-	private String attr_id;
-	private String attr_name;
+	private String MyAttrID;// ID ‡ÚË·ÛÚ‡ ËÁ ÛÁÎ‡ "my_owner_settings"->"my_attrjob"
+	private String MyAttrName;
 	
 	public CStructAttrTmpl() {// Œ¡ﬂ«¿“≈À‹ÕŒ ” ¿«€¬¿≈Ã, ¿ “Œ ¡”ƒ≈“ Œÿ»¡ ¿ “»œ¿  ¿  «ƒ≈—‹ ¡€ÀŒ:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
 	
-	public CStructAttrTmpl(String MyIDUnique, String attr_id, String attr_name) 
+	public CStructAttrTmpl(String MyIDUnique, String MyAttrID, String MyAttrName) 
 	{
 		this.MyIDUnique = MyIDUnique;
-		this.attr_id = attr_id;
-		this.attr_name = attr_name;
+		this.MyAttrID = MyAttrID;
+		this.MyAttrName = MyAttrName;
 	}
 	
 	public String getMyIDUnique()
@@ -21,27 +21,27 @@ public class CStructAttrTmpl {
         return MyIDUnique;
     }
 
-    public String getattr_id()
+    public String getMyAttrID()
     {
-        return attr_id;
+        return MyAttrID;
     }
 
-    public String getattr_name()
+    public String getMyAttrName()
     {
-        return attr_name;
+        return MyAttrName;
     }
    
     public void setMyIDUnique(String MyIDUnique)
     {
         this.MyIDUnique = MyIDUnique;
     }
-    public void setattr_id(String attr_id)
+    public void setMyAttrID(String MyAttrID)
     {
-        this.attr_id = attr_id;
+        this.MyAttrID = MyAttrID;
     }
-    public void setattr_name(String attr_name)
+    public void setMyAttrName(String MyAttrName)
     {
-        this.attr_name = attr_name;
+        this.MyAttrName = MyAttrName;
     }
 
 }

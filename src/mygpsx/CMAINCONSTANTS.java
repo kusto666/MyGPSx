@@ -46,10 +46,14 @@ public class CMAINCONSTANTS {
 	// Тут все для списка шаблонов!!!
 	public static String m_PathFXListTemplates = "FXListTemplates.fxml";
 	//public static String m_PathFXAttrobjAdd = "FXAttrobjAdd.fxml";
-	public static String m_PathFXLCIntoTmpl = "LCIntoTmpl.fxml";
+	
 	
 	// Тут все для создания шаблона!!!
 	public static String m_PathFXCreateTemplate = "FXCreateTemplate.fxml";
+	public static String m_PathFXCellIntoTmpl = "FXCellIntoTmpl.fxml";
+	
+	// Здесь пути к файлам для окна просмотра шаблона!!!
+	public static String m_PathFXPreviewTemplate = "FXPreviewTemplate.fxml";// Основное окно просмотра!!! 
 	
 	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";
 

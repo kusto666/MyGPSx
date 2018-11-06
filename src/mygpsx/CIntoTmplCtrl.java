@@ -20,5 +20,6 @@ public class CIntoTmplCtrl implements Initializable{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

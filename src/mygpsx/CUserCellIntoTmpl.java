@@ -21,11 +21,11 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 	@FXML
 	Label fxLbUniqueID;
 	@FXML
-	TextField fxTxtNumberAttrobj;
+	TextField fxTxtNumberAttrjob;
 	@FXML
-	public TextField fxTxtNameAttrobj;
+	public TextField fxTxtNameAttrjob;
 	@FXML
-	Button fxBtnDeleteAttrobj;
+	Button fxBtnDeleteAttrjob;
 	@FXML
 	FXMLLoader mLLoader;
 	@FXML
@@ -43,20 +43,20 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
         } 
         else
         {
-            mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXLCIntoTmpl));
+            mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXCellIntoTmpl));
             try 
             {
                 mLLoader.load();
                 fxLbUniqueID = (Label)mLLoader.getNamespace().get("fxLbUniqueID");
-                fxTxtNumberAttrobj = (TextField)mLLoader.getNamespace().get("fxTxtNumberAttrobj");
-                fxTxtNumberAttrobj.setEditable(false);
-                fxTxtNameAttrobj = (TextField)mLLoader.getNamespace().get("fxTxtNameAttrobj");
-                fxBtnDeleteAttrobj = (Button)mLLoader.getNamespace().get("fxBtnDeleteAttrobj");
+                fxTxtNumberAttrjob = (TextField)mLLoader.getNamespace().get("fxTxtNumberAttrjob");
+                fxTxtNumberAttrjob.setEditable(false);
+                fxTxtNameAttrjob = (TextField)mLLoader.getNamespace().get("fxTxtNameAttrjob");
+                fxBtnDeleteAttrjob = (Button)mLLoader.getNamespace().get("fxBtnDeleteAttrjob");
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
         		
         		fxLbUniqueID.setText(String.valueOf(item.getMyIDUnique()));
-        		fxTxtNumberAttrobj.setText(String.valueOf(item.getattr_id()));
-        		fxTxtNameAttrobj.setText(String.valueOf(item.getattr_name()));
+        		fxTxtNumberAttrjob.setText(String.valueOf(item.getMyAttrID()));
+        		fxTxtNameAttrjob.setText(String.valueOf(item.getMyAttrName()));
             } 
             catch (IOException e) 
             {

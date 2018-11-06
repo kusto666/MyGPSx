@@ -12,5 +12,6 @@
       <Button fx:id="fxBtnCloseFrame" layoutX="452.0" layoutY="361.0" mnemonicParsing="false" onAction="#btnCloseFrame" text="Сохранить шаблон" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
       <TextField fx:id="fxTxtNameTmplJob" layoutX="120.0" layoutY="14.0" />
       <Label fx:id="fxLbErrorSaveTmplJob" layoutX="279.0" layoutY="18.0" prefHeight="17.0" prefWidth="226.0" text="Label" textFill="RED" />
+      <Button fx:id="fxBtnPreview" layoutX="443.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnPreview" text="Пред. просмотр" AnchorPane.rightAnchor="100.0" />
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package mygpsx;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -44,10 +45,26 @@ public class FXCreateTemplateCtrl implements Initializable{
 	@FXML
 	private Button fxBtnCloseFrame;
 	@FXML
+	private Button fxBtnPreview;
+	@FXML
 	private Label fxLbErrorSaveTmplJob;
 	@FXML
 	private TextField fxTxtNameTmplJob;
 	
+	@FXML
+    private void btnPreview(ActionEvent event) throws IOException 
+    {
+		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPreviewTemplate));
+         CLPSMain.m_rootFXPreviewTemplate = (Parent)fxmlLoader.load();
+         CLPSMain.m_stageFXPreviewTemplate = new Stage();
+         CLPSMain.m_stageFXPreviewTemplate.setTitle(CStrings.m_APP_NAME + "->Предварительный просмотр шаблона...");
+         CLPSMain.m_stageFXPreviewTemplate.setScene(new Scene(CLPSMain.m_rootFXPreviewTemplate));  
+         CLPSMain.m_stageFXPreviewTemplate.setResizable(false);
+         CLPSMain.m_stageFXPreviewTemplate.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+         CLPSMain.m_stageFXPreviewTemplate.initOwner(CLPSMain.m_stageFXCreateTemplate);
+         CLPSMain.m_stageFXPreviewTemplate.show();
+		 System.out.println("btnPreview(ActionEvent event)!!!");
+    }
 	
 	@FXML
     private void btnCloseFrame(ActionEvent event) 
@@ -87,7 +104,7 @@ public class FXCreateTemplateCtrl implements Initializable{
             CLPSMain.m_stageAttrjobEdit.setScene(new Scene(CLPSMain.m_rootAttrjobEdit));  
             CLPSMain.m_stageAttrjobEdit.setResizable(false);
             CLPSMain.m_stageAttrjobEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
-            CLPSMain.m_stageAttrjobEdit.initOwner(CLPSMain.stage);
+            CLPSMain.m_stageAttrjobEdit.initOwner(CLPSMain.m_stageFXCreateTemplate);
             CLPSMain.m_stageAttrjobEdit.show();
         }
 		catch(Exception e) 

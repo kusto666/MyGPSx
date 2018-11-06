@@ -151,6 +151,12 @@ public class CLPSMain extends Application
 	public static Parent m_rootFXCreateTemplate = null;
 	@FXML
 	public static Stage m_stageFXCreateTemplate = null;
+	
+	// This is a window edit, add FXPreviewTemplate!!!
+	@FXML
+	public static Parent m_rootFXPreviewTemplate = null;
+	@FXML
+	public static Stage m_stageFXPreviewTemplate = null;
 
 	@FXML
 	TextArea mymsg;
