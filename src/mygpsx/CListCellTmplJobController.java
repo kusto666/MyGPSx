@@ -18,68 +18,43 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 
 @SuppressWarnings("unused")
-public class CListCellAttrjobController implements Initializable{
+public class CListCellTmplJobController implements Initializable{
 
 	private String stUniqueIDAttrjob = null;
 	@FXML
 	private Label fxLbUniqueID;
 	@FXML
-	private Button fxBtnDeleteAttrjob;
+	private Button fxBtnDeleteTmplJob;
 	@FXML
-	private Button fxBtnAddAttrjobIntoTmpl;
+	private Button fxBtnEditTmplJob;
 	@FXML
 	private TextField fxTxtNameAttrjob;
 	@FXML
-	private TextField fxTxtHeight;
-	@FXML
-    private void BtnDeleteAttrjob(ActionEvent event) 
+    private void BtnDeleteTmplJob(ActionEvent event) 
     {
     	try 
     	{
     		
-    		System.out.println("BtnDeleteAttrjob");
-    		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
+    		System.out.println("BtnDeleteTmplJob");
+    		FirebaseDatabase.getInstance()
     				.getReference()
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
-    				.child(CMAINCONSTANTS.FB_my_attrjob);
+    				.child(CMAINCONSTANTS.FB_my_templates)
+    				.child(fxLbUniqueID.getText()).setValue(null);
     		
-    		Button btn = (Button)event.getSource();// Здесь получили кнопку!!!
-    		System.out.println("btn = " + btn.toString());
-    		AnchorPane ap = (AnchorPane)btn.getParent();// Здесь получили родительскую панель!!!
-    		System.out.println("ap = " + ap.toString());
     		
-    		ObservableList<Node> listNode = ap.getChildren();// Здесь получаем массив всех дочерних объектов родителя!!! 
-    		Label nodeOne = (Label)listNode.get(5);// Выбераем по ID(ID - это от 0 и т.д. выше!) объект(контролл)
-    		stUniqueIDAttrjob = nodeOne.getText();// Порядок можно посмотреть в Scene Biulder
-    		System.out.println("stUniqueIDAttrjob = " + stUniqueIDAttrjob);
-    		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
-    				.getReference()
-    				.child(CMAINCONSTANTS.FB_my_owner_settings)
-    				.child(CMAINCONSTANTS.FB_my_attrjob)
-    				.child(stUniqueIDAttrjob);
-    		CLPSMain.mDatabase.setValue(null);// Удаляем значение(объект) из базы!!!
+    		//CLPSMain.mDatabase.setValue(null);// Удаляем значение(объект) из базы!!!
         }
 		catch(Exception e) 
 		{
            e.printStackTrace();
         }
     }
-	@FXML
+	/*@FXML
     private void BtnAddAttrjobIntoTmpl(ActionEvent event) 
     {
-		// Это добавление в AnchorPane FXCreateTemplateJobs.fxml 
-		/*		//Button b = new Button(button.getText());
-		Button b = new Button("button.getText()");
-		//fxAPaneMain.add(b);
-		AnchorPane.setTopAnchor(b, 100.0);
-		AnchorPane.setLeftAnchor(b, 10.0);
-		fxAPaneMain.getChildren().add(b);*/
-		//Border brd = CFXCreateTemplateJobCtrl.fxAPaneEditTmpl.getBorder();
-		
-		// Это добавление в firebase real!!!
 		String stTempUniqueID = CLPSMain.mDatabase.push().getKey();
 		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
 				.getReference()
@@ -88,12 +63,11 @@ public class CListCellAttrjobController implements Initializable{
 				.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child(CMAINCONSTANTS.FB_my_adding_attr);
 		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrID").setValue(fxLbUniqueID.getText());
 		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrName").setValue(fxTxtNameAttrjob.getText());
-		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrHeight").setValue(fxTxtHeight.getText());
-    }
+    }*/
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
-		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("DEL")) 
+/*		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("DEL")) 
 		{
 			fxBtnDeleteAttrjob.setVisible(true);
 			fxBtnAddAttrjobIntoTmpl.setVisible(false);
@@ -102,8 +76,8 @@ public class CListCellAttrjobController implements Initializable{
 		{
 			fxBtnDeleteAttrjob.setVisible(false);
 			fxBtnAddAttrjobIntoTmpl.setVisible(true);
-		}
-		fxTxtNameAttrjob.setOnKeyPressed(new EventHandler<KeyEvent>() 
+		}*/
+/*		fxTxtNameAttrjob.setOnKeyPressed(new EventHandler<KeyEvent>() 
 		{
 			@Override
 			public void handle(KeyEvent event) 
@@ -124,7 +98,7 @@ public class CListCellAttrjobController implements Initializable{
 		    		CLPSMain.mDatabase.child("MyNameAttrjob").setValue(fxTxtNameAttrjob.getText());
 	            }
 			}
-		});
+		});*/
 		
 	}
 

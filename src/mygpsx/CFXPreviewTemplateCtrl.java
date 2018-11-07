@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-public class СFXPreviewTemplateCtrl implements Initializable{
+public class CFXPreviewTemplateCtrl implements Initializable{
 
 	@FXML
 	private AnchorPane fxAPaneTmplMain;// Она главная - на ней все и крепится(рисуется)!!!

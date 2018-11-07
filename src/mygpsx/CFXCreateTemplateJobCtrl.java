@@ -27,12 +27,13 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
-public class FXCreateTemplateCtrl implements Initializable{
+public class CFXCreateTemplateJobCtrl implements Initializable{
 
 	DatabaseReference mDatabaseCurrentTmpl;
 	private ArrayList<CStructAttrTmpl> m_alAttrjob = null;
@@ -40,8 +41,13 @@ public class FXCreateTemplateCtrl implements Initializable{
 	@FXML
 	private ListView<CStructAttrTmpl> fxListTmplJob;
 	
-	public static String m_stTempNameJob = "Временное название"; // Это чтобы пото меняли на нормальное название!!
-	//fxBtnCloseFrame
+	public static String m_stTempNameJob = "Временное название"; // Это чтобы потом меняли на нормальное название!!
+
+	@FXML
+	private AnchorPane fxAPaneMain;
+	@FXML
+	private AnchorPane fxAPaneEditTmpl;
+	
 	@FXML
 	private Button fxBtnCloseFrame;
 	@FXML
@@ -55,14 +61,14 @@ public class FXCreateTemplateCtrl implements Initializable{
     private void btnPreview(ActionEvent event) throws IOException 
     {
 		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPreviewTemplate));
-         CLPSMain.m_rootFXPreviewTemplate = (Parent)fxmlLoader.load();
-         CLPSMain.m_stageFXPreviewTemplate = new Stage();
-         CLPSMain.m_stageFXPreviewTemplate.setTitle(CStrings.m_APP_NAME + "->Предварительный просмотр шаблона...");
-         CLPSMain.m_stageFXPreviewTemplate.setScene(new Scene(CLPSMain.m_rootFXPreviewTemplate));  
-         CLPSMain.m_stageFXPreviewTemplate.setResizable(false);
-         CLPSMain.m_stageFXPreviewTemplate.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
-         CLPSMain.m_stageFXPreviewTemplate.initOwner(CLPSMain.m_stageFXCreateTemplate);
-         CLPSMain.m_stageFXPreviewTemplate.show();
+         CLPSMain.m_rootFXPreviewTemplateJobs = (Parent)fxmlLoader.load();
+         CLPSMain.m_stageFXPreviewTemplateJobs = new Stage();
+         CLPSMain.m_stageFXPreviewTemplateJobs.setTitle(CStrings.m_APP_NAME + "->Предварительный просмотр шаблона...");
+         CLPSMain.m_stageFXPreviewTemplateJobs.setScene(new Scene(CLPSMain.m_rootFXPreviewTemplateJobs));  
+         CLPSMain.m_stageFXPreviewTemplateJobs.setResizable(false);
+         CLPSMain.m_stageFXPreviewTemplateJobs.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+         CLPSMain.m_stageFXPreviewTemplateJobs.initOwner(CLPSMain.m_stageFXCreateTemplateJobs);
+         CLPSMain.m_stageFXPreviewTemplateJobs.show();
 		 System.out.println("btnPreview(ActionEvent event)!!!");
     }
 	
@@ -92,6 +98,13 @@ public class FXCreateTemplateCtrl implements Initializable{
 	@FXML
     private void btnOpenFrameWithAttributes(ActionEvent event)// Открываем окно для добавления атрибутов!!!
     {
+/*		//Button b = new Button(button.getText());
+		Button b = new Button("button.getText()");
+		//fxAPaneMain.add(b);
+		AnchorPane.setTopAnchor(b, 100.0);
+		AnchorPane.setLeftAnchor(b, 10.0);
+		fxAPaneMain.getChildren().add(b);*/
+
 		System.out.println("FrameSettingsAttrjobEdit!!!");
     	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
@@ -104,7 +117,7 @@ public class FXCreateTemplateCtrl implements Initializable{
             CLPSMain.m_stageAttrjobEdit.setScene(new Scene(CLPSMain.m_rootAttrjobEdit));  
             CLPSMain.m_stageAttrjobEdit.setResizable(false);
             CLPSMain.m_stageAttrjobEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
-            CLPSMain.m_stageAttrjobEdit.initOwner(CLPSMain.m_stageFXCreateTemplate);
+            CLPSMain.m_stageAttrjobEdit.initOwner(CLPSMain.m_stageFXCreateTemplateJobs);
             CLPSMain.m_stageAttrjobEdit.show();
         }
 		catch(Exception e) 
@@ -140,7 +153,9 @@ public class FXCreateTemplateCtrl implements Initializable{
 				{
 					try 
 					{
+						
 			            Iterable<DataSnapshot> contactChildren = arg0.getChildren();
+			            long lCountChildren = arg0.getChildrenCount();
 			        	
 			            m_alAttrjob = new ArrayList<CStructAttrTmpl>();
 			            for (DataSnapshot structAttrjob : contactChildren)
@@ -156,6 +171,19 @@ public class FXCreateTemplateCtrl implements Initializable{
 			            {
 			            	Platform.runLater(
 	            			  () -> {
+	            				  System.out.println("Попали в создание шаблона!!!");
+	            				  if(lCountChildren > 0)
+	            				  {
+	            					  System.out.println("Раз lCountChildren  > 0 == тогда показываем из базы все прелести интерфейса!!!");
+	            					  Button b = new Button("button.getText()!!!");
+	  	      						//fxAPaneMain.add(b);
+	  	      						AnchorPane.setTopAnchor(b, 10.0);
+	  	      						AnchorPane.setLeftAnchor(b, 10.0);
+	  	      						fxAPaneEditTmpl.getChildren().add(b);
+	  	      						//Border brd = CFXCreateTemplateJobCtrl.fxAPaneEditTmpl.getBorder();
+	            				  }
+	            				
+	            				  
 	            				  fxListTmplJob.setItems(m_ObservableList);
 	            				// fxListViewPriority.setPrefSize(200, 500);
 	            				  fxListTmplJob.setCellFactory(new Callback<ListView<CStructAttrTmpl>, ListCell<CStructAttrTmpl>>() {
@@ -163,19 +191,11 @@ public class FXCreateTemplateCtrl implements Initializable{
 	            					  @Override
 										public ListCell<CStructAttrTmpl> call(ListView<CStructAttrTmpl> param)
 										{
+	            						 // param.setM(200);
 										// TODO Auto-generated method stub
 										return new CUserCellIntoTmpl();
 									}
 								});
-	            				  /*setCellFactory(new Callback<ListView<CStructAttrTmpl>, ListCell<CStructAttrTmpl>>() {
-									
-									@Override
-									public ListCell<CStructAttrTmpl> call(ListView<CStructAttrTmpl> param)
-									{
-										// TODO Auto-generated method stub
-										return new CStructAttrTmpl();
-									}
-								});*/
 	            				  fxListTmplJob.setOnMouseClicked(new EventHandler<MouseEvent>() {
 	            		    			@Override
 	            		    			public void handle(MouseEvent click)

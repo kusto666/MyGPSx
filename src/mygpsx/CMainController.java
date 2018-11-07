@@ -175,7 +175,21 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     public static GoogleMap map;
     @FXML
     private GeocodingService geocodingService;
+    //FrameSettingsFXCreateTmplOrders
     
+    // Открытие окна для создания нового шаблона ОТЧЕТА!!!
+    @FXML
+    private void FrameSettingsFXCreateTmplOrders(ActionEvent event) 
+    {
+    	System.out.println("FrameSettingsFXCreateTmplOrders!!!");
+    }
+    
+    // Открытие окна со списком готовых шаблонов ОТЧЕТОВ для редактирования!!!
+    @FXML
+    private void FrameSettingsFXListOrders(ActionEvent event) 
+    {
+    	System.out.println("FrameSettingsFXListOrders!!!");
+    }
     // Открытие окна для создания нового шаблона задачи!!!
     @FXML
     private void FrameSettingsFXCreateTemplate(ActionEvent event) 
@@ -185,16 +199,16 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	try 
     	{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXCreateTemplate));
-            CLPSMain.m_rootFXCreateTemplate = (Parent)fxmlLoader.load();
-            CLPSMain.m_stageFXCreateTemplate = new Stage();
-            CLPSMain.m_stageFXCreateTemplate.setTitle(CStrings.m_APP_NAME + "->Создание нового шаблона задачи");
-            CLPSMain.m_stageFXCreateTemplate.setScene(new Scene(CLPSMain.m_rootFXCreateTemplate));  
-            CLPSMain.m_stageFXCreateTemplate.setResizable(false);
-            CLPSMain.m_stageFXCreateTemplate.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
-            CLPSMain.m_stageFXCreateTemplate.initOwner(CLPSMain.stage);
-            CLPSMain.m_stageFXCreateTemplate.show();
+            CLPSMain.m_rootFXCreateTemplateJobs = (Parent)fxmlLoader.load();
+            CLPSMain.m_stageFXCreateTemplateJobs = new Stage();
+            CLPSMain.m_stageFXCreateTemplateJobs.setTitle(CStrings.m_APP_NAME + "->Создание нового шаблона задачи");
+            CLPSMain.m_stageFXCreateTemplateJobs.setScene(new Scene(CLPSMain.m_rootFXCreateTemplateJobs));  
+            CLPSMain.m_stageFXCreateTemplateJobs.setResizable(false);
+            CLPSMain.m_stageFXCreateTemplateJobs.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageFXCreateTemplateJobs.initOwner(CLPSMain.stage);
+            CLPSMain.m_stageFXCreateTemplateJobs.show();
             
-            CLPSMain.m_stageFXCreateTemplate.setOnCloseRequest(new EventHandler<WindowEvent>() 
+            CLPSMain.m_stageFXCreateTemplateJobs.setOnCloseRequest(new EventHandler<WindowEvent>() 
     		{
               
             	// Здесь перед закрытием окна по крестику проверим изменилось ли название шаблона!!!
@@ -205,7 +219,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             		// типа название или что-то уже в шаблон добавляли!!!
             		// Пока проверим только изменение названия!!! потом добавим отслеживание
             		// других изменений!!!
-    				for (Node node : CLPSMain.m_rootFXCreateTemplate.getChildrenUnmodifiable()) 
+    				for (Node node : CLPSMain.m_rootFXCreateTemplateJobs.getChildrenUnmodifiable()) 
     				{
     					
 						String stTempID = node.getId();
@@ -216,7 +230,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 							if(stTempID.equals("fxTxtNameTmplJob"))// Получили нужный нод с названием задачи и проверяем на изменение онной!!!
 							{
 								TextField txtFldTemp = (TextField)node;
-								if(txtFldTemp.getText().equals(FXCreateTemplateCtrl.m_stTempNameJob))
+								if(txtFldTemp.getText().equals(CFXCreateTemplateJobCtrl.m_stTempNameJob))
 								{
 									System.out.println("Значит изменений не было и мы просто закрываем окно создания шаблона задачи!!!");
 									CLPSMain.mDatabase = FirebaseDatabase.getInstance()
@@ -266,7 +280,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         }
     }
     
-    // Открытие окна со списком готовых шаблонов для редактирования!!!
+    // Открытие окна со списком готовых шаблонов ЗАДАЧ для редактирования!!!
     @FXML
     private void FrameSettingsFXListTemplates(ActionEvent event) 
     {
@@ -274,7 +288,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListTemplates));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListTemplatesJobs));
             CLPSMain.m_rootFXListTemplates = (Parent)fxmlLoader.load();
             CLPSMain.m_stageFXListTemplates = new Stage();
             CLPSMain.m_stageFXListTemplates.setTitle(CStrings.m_APP_NAME + "->Список шаблонов");

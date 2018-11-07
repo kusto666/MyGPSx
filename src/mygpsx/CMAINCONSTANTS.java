@@ -44,16 +44,17 @@ public class CMAINCONSTANTS {
 	public static String m_PathFXListCellTypeobj = "ListCellTypeobj.fxml";
 	
 	// Тут все для списка шаблонов!!!
-	public static String m_PathFXListTemplates = "FXListTemplates.fxml";
+	public static String m_PathFXListTemplatesJobs = "FXListTemplatesJobs.fxml";
 	//public static String m_PathFXAttrobjAdd = "FXAttrobjAdd.fxml";
 	
 	
 	// Тут все для создания шаблона!!!
-	public static String m_PathFXCreateTemplate = "FXCreateTemplate.fxml";
-	public static String m_PathFXCellIntoTmpl = "FXCellIntoTmpl.fxml";
+	public static String m_PathFXCreateTemplate = "FXCreateTemplateJobs.fxml";
+	public static String m_PathFXCellIntoTmpl = "FXCellIntoTmplJobs.fxml";
 	
 	// Здесь пути к файлам для окна просмотра шаблона!!!
-	public static String m_PathFXPreviewTemplate = "FXPreviewTemplate.fxml";// Основное окно просмотра!!! 
+	public static String m_PathFXPreviewTemplate = "FXPreviewTemplateJob.fxml";// Основное окно просмотра!!! 
+	public static String m_PathFXListCellTmplJob = "ListCellTmplJob.fxml";
 	
 	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";
 

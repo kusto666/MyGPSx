@@ -3,7 +3,11 @@ package mygpsx;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import io.grpc.netty.shaded.io.netty.util.internal.shaded.org.jctools.queues.MessagePassingQueue.ExitCondition;
 import javafx.beans.value.ChangeListener;
@@ -28,6 +32,7 @@ import javafx.stage.Stage;
 
 public class CAttrjobAddController implements Initializable{
 
+	long m_lChildrenCount = 0;
 	@FXML
 	private AnchorPane fxAPaneMain;
 	@FXML
@@ -126,16 +131,41 @@ public class CAttrjobAddController implements Initializable{
 				.getReference()
 				.child(CMAINCONSTANTS.FB_my_owner_settings)
 				.child(CMAINCONSTANTS.FB_my_attrjob);*/
+		// Здесь проверим количество записей для генерации MyAutoIncrement:
+		
+		DatabaseReference rootRef = FirebaseDatabase.getInstance()
+				.getReference()
+				.child(CMAINCONSTANTS.FB_my_owner_settings)
+				.child(CMAINCONSTANTS.FB_my_attrjob);
+		rootRef.addValueEventListener(new ValueEventListener() {
+			
+			@Override
+			public void onDataChange(DataSnapshot arg0) {
+				m_lChildrenCount = arg0.getChildrenCount();
+				
+			}
+			
+			@Override
+			public void onCancelled(DatabaseError arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		
 		String uploadId = CLPSMain.mDatabase.push().getKey();
-		CLPSMain.mDatabase.child(uploadId).child("MyIDUnique").
-		setValue(uploadId);
-		CLPSMain.mDatabase.child(uploadId).child("MyCLassAttrjob").
-		setValue(fxTxtNumberAttrjob.getText());
+		CLPSMain.mDatabase.child(uploadId).child("MyIDUnique").setValue(uploadId);
+		
+		CLPSMain.mDatabase.child(uploadId).child("MyAutoIncrement")
+		.setValue(Long.toString(m_lChildrenCount));// Здесь пишем MyAutoIncrement
+
+		CLPSMain.mDatabase.child(uploadId).child("MyCLassAttrjob").setValue(fxTxtNumberAttrjob.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyNameAttrjob").
 		setValue(fxTxtNameAttrjob.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyTypeAttrjob").
 		setValue(stAttributeCode);
+		CLPSMain.mDatabase.child(uploadId).child("MyHeight").
+		setValue("55");
 		
 		CAttrjobEditController.m_stageAttrjobAdd.close();
 	}

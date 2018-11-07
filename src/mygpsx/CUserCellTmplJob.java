@@ -15,26 +15,24 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
-public class CUserCellAttrjob  extends ListCell<CStructAttrjob>
+public class CUserCellTmplJob  extends ListCell<CStructTmplJob>
 {
 	
 	@FXML
 	Label fxLbUniqueID;
 	@FXML
-	TextField fxTxtNumberAttrjob;
+	TextField fxTxtNameTmplJob;
 	@FXML
-	public TextField fxTxtNameAttrjob;
+	Button fxBtnDeleteTmplJob;
 	@FXML
-	Button fxBtnDeleteAttrjob;
-	@FXML
-	TextField fxTxtHeight;
+	Button fxBtnEditTmplJob;
 	@FXML
 	FXMLLoader mLLoader;
 	@FXML
 	AnchorPane m_Pane;
 	
 	@Override
-	public void updateItem(CStructAttrjob  item, boolean empty) 
+	public void updateItem(CStructTmplJob  item, boolean empty) 
 	{
 		super.updateItem(item, empty);
 		
@@ -45,28 +43,26 @@ public class CUserCellAttrjob  extends ListCell<CStructAttrjob>
         } 
         else
         {
-            mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListCellAttrjob));
+            mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListCellTmplJob));
             try 
             {
                 mLLoader.load();
                 fxLbUniqueID = (Label)mLLoader.getNamespace().get("fxLbUniqueID");
-                fxTxtNumberAttrjob = (TextField)mLLoader.getNamespace().get("fxTxtNumberAttrjob");
-                fxTxtNumberAttrjob.setEditable(false);
-                fxTxtNameAttrjob = (TextField)mLLoader.getNamespace().get("fxTxtNameAttrjob");
-                fxBtnDeleteAttrjob = (Button)mLLoader.getNamespace().get("fxBtnDeleteAttrjob");
-                fxTxtHeight = (TextField)mLLoader.getNamespace().get("fxTxtHeight");
+                fxTxtNameTmplJob = (TextField)mLLoader.getNamespace().get("fxTxtNameTmplJob");
+                fxBtnDeleteTmplJob = (Button)mLLoader.getNamespace().get("fxBtnDeleteTmplJob");
+                fxBtnEditTmplJob = (Button)mLLoader.getNamespace().get("fxBtnEditTmplJob");
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
         		
         		fxLbUniqueID.setText(String.valueOf(item.getMyIDUnique()));
-        		fxTxtNumberAttrjob.setText(String.valueOf(item.getMyCLassAttrjob()));
-        		fxTxtNameAttrjob.setText(String.valueOf(item.getMyNameAttrjob()));
+        		fxTxtNameTmplJob.setText(String.valueOf(item.getMyNameTemplate()));
             } 
             catch (IOException e) 
             {
+            	System.out.println(e.getMessage());
+            	//System.out.println(e.printStackTrace());
                 e.printStackTrace();
             }
 
-            System.out.println(fxTxtNameAttrjob.getText());
             setText(null);
             setGraphic(m_Pane);
         }

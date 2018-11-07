@@ -18,17 +18,18 @@ public class CAttributeTypeDAO
 	//public String m_stTimeOfRange = "Диапазон(промежуток) времени"; // Диапазон(промежуток) времени.
 
 	public static ObservableList<CAttribute> getPlanetList() {
-		CAttribute Group = new CAttribute("Group", "Группа");
-		CAttribute Number = new CAttribute("Number", "Целое число");
-		CAttribute NumFraction = new CAttribute("NumFraction", "Дробное число");
-		CAttribute ShortDesc = new CAttribute("ShortDesc", "Строка для заголовков");
-		CAttribute FullDesc = new CAttribute("FullDesc", "Поле для описания");
-		CAttribute Position = new CAttribute("Position", "Позиция на карте(координаты)");
-		CAttribute TimeOfPlace = new CAttribute("TimeOfPlace", "Время в определенном месте");
-		CAttribute TimeOfRange = new CAttribute("TimeOfRange", "Диапазон(промежуток) времени");
+		//CAttribute Group = new CAttribute("Group", "Группа");
+		CAttribute MyInteger = new CAttribute("MyInteger", "Целое число");
+		CAttribute MyNumDouble = new CAttribute("MyNumDouble", "Дробное число");
+		CAttribute MyTextField = new CAttribute("TextField", "Одинарная строка");
+		CAttribute MyTextArea = new CAttribute("TextArea", "Многострочное описание");
+		CAttribute MyPosition = new CAttribute("MyPosition", "Позиция на карте(координаты)");
+		CAttribute MyTimeOfPlace = new CAttribute("MyTimeOfPlace", "Время в определенном месте");
+		CAttribute MyTimeOfRange = new CAttribute("MyTimeOfRange", "Диапазон(промежуток) времени");
  
         ObservableList<CAttribute> list //
-                = FXCollections.observableArrayList(Number, NumFraction, ShortDesc, FullDesc, Position, TimeOfPlace, TimeOfRange);
+                = FXCollections.observableArrayList(MyInteger, MyNumDouble, MyTextField, MyTextArea,
+                		MyPosition, MyTimeOfPlace, MyTimeOfRange);
  
         return list;
     }

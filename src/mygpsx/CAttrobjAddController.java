@@ -89,6 +89,8 @@ public class CAttrobjAddController implements Initializable{
 		setValue(fxTxtNumberAttrobj.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyNameAttrobj").
 		setValue(fxTxtNameAttrobj.getText());
+		CLPSMain.mDatabase.child(uploadId).child("MyHeight").
+		setValue("55");
 		
 		CAttrobjEditController.m_stageAttrobjAdd.close();
 	}

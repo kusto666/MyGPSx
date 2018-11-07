@@ -8,7 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class CIntoTmplCtrl implements Initializable{
+public class CIntoTmplCtrl implements Initializable
+{
 
 	@FXML
 	private TextField fxTxtNumberAttrjob;
@@ -16,7 +17,8 @@ public class CIntoTmplCtrl implements Initializable{
 	private TextField fxTxtName;
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL location, ResourceBundle resources) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
