@@ -19,8 +19,9 @@ public class CAttributeTypeDAO
 
 	public static ObservableList<CAttribute> getPlanetList() {
 		//CAttribute Group = new CAttribute("Group", "Группа");
-		CAttribute MyInteger = new CAttribute("MyInteger", "Целое число");
-		CAttribute MyNumDouble = new CAttribute("MyNumDouble", "Дробное число");
+		CAttribute MyLabel = new CAttribute("Label", "Надпись");
+		CAttribute MyInteger = new CAttribute("Integer", "Целое число");
+		CAttribute MyNumDouble = new CAttribute("Double", "Дробное число");
 		CAttribute MyTextField = new CAttribute("TextField", "Одинарная строка");
 		CAttribute MyTextArea = new CAttribute("TextArea", "Многострочное описание");
 		CAttribute MyPosition = new CAttribute("MyPosition", "Позиция на карте(координаты)");
@@ -28,7 +29,7 @@ public class CAttributeTypeDAO
 		CAttribute MyTimeOfRange = new CAttribute("MyTimeOfRange", "Диапазон(промежуток) времени");
  
         ObservableList<CAttribute> list //
-                = FXCollections.observableArrayList(MyInteger, MyNumDouble, MyTextField, MyTextArea,
+                = FXCollections.observableArrayList(MyLabel, MyInteger, MyNumDouble, MyTextField, MyTextArea,
                 		MyPosition, MyTimeOfPlace, MyTimeOfRange);
  
         return list;

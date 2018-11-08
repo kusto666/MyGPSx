@@ -67,6 +67,13 @@ public class CMAINCONSTANTS {
 	// ќсновной узел настроек дл€ всего и шаблонов и вс€ких там объктов и вообще настроек!!!
 	public static String FB_my_owner_settings = "my_owner_settings";
 	
+	
+	// «начени€ высоты €чейки списка шаблона и ширины контрола в этой €чейки
+	// по умолчанию!!!
+	public static String Height_cell_start = "55";
+	public static String Width_control_start = "100";
+	
+	
 	// Ёто все сущности-атрибуты!!!
 	public static String FB_my_priority = "my_priority";
 	public static String FB_my_status = "my_status";

@@ -20,7 +20,11 @@ import javafx.util.Callback;
 
 public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 {
-	
+	// fxLb2
+	@FXML
+	Label fxLb1;
+	@FXML
+	Label fxLb2;
 	@FXML
 	Label fxLbUniqueID;
 	@FXML
@@ -52,16 +56,56 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
             try 
             {
                 mLLoader.load();
+                fxLb1 = (Label)mLLoader.getNamespace().get("fxLb1");
+                fxLb2 = (Label)mLLoader.getNamespace().get("fxLb2");
                 fxLbUniqueID = (Label)mLLoader.getNamespace().get("fxLbUniqueID");
                 fxTxtNumberAttrjob = (TextField)mLLoader.getNamespace().get("fxTxtNumberAttrjob");
                 fxTxtNumberAttrjob.setEditable(false);
                 fxTxtNameAttrjob = (TextField)mLLoader.getNamespace().get("fxTxtNameAttrjob");
                 fxBtnDeleteAttrjob = (Button)mLLoader.getNamespace().get("fxBtnDeleteAttrjob");
+                
+                // Для чистоты эксперимента все скроем вначале!!!
+                fxLbUniqueID.setVisible(false);
+                fxTxtNumberAttrjob.setVisible(false);
+                fxTxtNameAttrjob.setVisible(false);
+                fxLb1.setVisible(false);
+                fxLb2.setVisible(false);
+                
+                
+                
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
         		// Здесь выставляем разную высоту для ячейки листа шаблона - блять ! Работает!!!
         		// Get all different heigth from realbase firebase!!!!!!!!!!!!!!!!!!!!
         		// It`s JOBING!!!!!
-        		m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        		// Используем поток создания листа!!!
+        		try 
+        		{
+        			Platform.runLater(
+        			  () -> {
+        				  m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        				  // Теперь попробуем вывести что-нибудь из интерфейса,
+        				  // из ветки my_templates->UniqueID->my_adding_attr->UniqueID
+        				  if(((CStructAttrTmpl)item).getMyAttrType().equals("Label"))
+        				  {
+        					  System.out.println("Раз lCountChildren  > 0 == тогда показываем из базы все прелести интерфейса!!!");
+        					  Label LbTest = new Label();
+        					  LbTest.setText(item.getMyAttrName());
+        					  
+        					  AnchorPane.setTopAnchor(LbTest, 10.0);
+	      					  AnchorPane.setLeftAnchor(LbTest, 10.0);
+	      						
+        					  m_Pane.getChildren().add(LbTest);
+        				  }
+        				  
+        				  
+        			  }
+        			);
+				} 
+        		catch (Exception ex) 
+        		{
+        			ex.getMessage();
+				}
+        		
 
         		fxLbUniqueID.setText(String.valueOf(item.getMyIDUnique()));
         		fxTxtNumberAttrjob.setText(String.valueOf(item.getMyAttrID()));

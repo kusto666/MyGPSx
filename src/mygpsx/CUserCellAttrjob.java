@@ -21,6 +21,8 @@ public class CUserCellAttrjob  extends ListCell<CStructAttrjob>
 	@FXML
 	Label fxLbUniqueID;
 	@FXML
+	Label fxLbHiddenTypeAttr;
+	@FXML
 	TextField fxTxtNumberAttrjob;
 	@FXML
 	public TextField fxTxtNameAttrjob;
@@ -50,6 +52,7 @@ public class CUserCellAttrjob  extends ListCell<CStructAttrjob>
             {
                 mLLoader.load();
                 fxLbUniqueID = (Label)mLLoader.getNamespace().get("fxLbUniqueID");
+                fxLbHiddenTypeAttr = (Label)mLLoader.getNamespace().get("fxLbHiddenTypeAttr");
                 fxTxtNumberAttrjob = (TextField)mLLoader.getNamespace().get("fxTxtNumberAttrjob");
                 fxTxtNumberAttrjob.setEditable(false);
                 fxTxtNameAttrjob = (TextField)mLLoader.getNamespace().get("fxTxtNameAttrjob");
@@ -58,11 +61,13 @@ public class CUserCellAttrjob  extends ListCell<CStructAttrjob>
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
         		
         		fxLbUniqueID.setText(String.valueOf(item.getMyIDUnique()));
+        		fxLbHiddenTypeAttr.setText(String.valueOf(item.getMyTypeAttrjob()));
         		fxTxtNumberAttrjob.setText(String.valueOf(item.getMyCLassAttrjob()));
         		fxTxtNameAttrjob.setText(String.valueOf(item.getMyNameAttrjob()));
             } 
             catch (IOException e) 
             {
+            	e.getMessage();
                 e.printStackTrace();
             }
 

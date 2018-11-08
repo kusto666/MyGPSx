@@ -10,17 +10,25 @@ public class CStructAttrjob
 	private String MyNameAttrjob;
 	private String MyTypeAttrjob; // Тип атрибута(его сущность на экране и в логике программы сущность)
 	private String MyHeight;
+	private String MyWidth;
 	
 	public CStructAttrjob() {// ОБЯЗАТЕЛЬНО УКАЗЫВАЕМ, А ТО БУДЕТ ОШИБКА ТИПА КАК ЗДЕСЬ БЫЛО:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
 	
-	public CStructAttrjob(String MyAutoIncrement, String MyIDUnique, String MyCLassAttrjob, String MyNameAttrjob, String MyHeight) 
+	public CStructAttrjob(
+			String MyAutoIncrement,
+			String MyIDUnique, 
+			String MyCLassAttrjob, 
+			String MyNameAttrjob,
+			String MyHeight, 
+			String MyWidth)
 	{
 		this.MyAutoIncrement = MyAutoIncrement;
 		this.MyIDUnique = MyIDUnique;
 		this.MyCLassAttrjob = MyCLassAttrjob;
 		this.MyNameAttrjob = MyNameAttrjob;
 		this.MyHeight = MyHeight;
+		this.MyWidth = MyWidth;
 	}
 	
 	
@@ -51,6 +59,10 @@ public class CStructAttrjob
     {
         return MyHeight;
     }
+    public String getMyWidth()
+    {
+        return MyWidth;
+    }
     
     public void setMyAutoIncrement(String MyAutoIncrement)
     {
@@ -75,5 +87,9 @@ public class CStructAttrjob
     public void setMyHeight(String MyHeight)
     {
         this.MyHeight = MyHeight;
+    }
+    public void setMyWidth(String MyWidth)
+    {
+        this.MyWidth = MyWidth;
     }
 }

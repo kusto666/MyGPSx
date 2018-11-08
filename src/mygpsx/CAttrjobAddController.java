@@ -42,7 +42,9 @@ public class CAttrjobAddController implements Initializable{
 	@FXML
 	private ComboBox<CAttribute> fxCboxTypeAttrs;
 	
-	private String stAttributeCode = null;
+	
+	private String m_stAttributeClassName = null; // Ёто название контрола в интерфейсе дл€ людей!!!
+	private String stAttributeCode = null;// Ёто название контрола в коде!!!
 	
 	 // ƒобавл€ем приоритет!!!
     @FXML
@@ -69,12 +71,20 @@ public class CAttrjobAddController implements Initializable{
 		ObservableList<CAttribute> list = CAttributeTypeDAO.getPlanetList();
 		fxCboxTypeAttrs.setItems(list);
 		fxCboxTypeAttrs.getSelectionModel().select(0);
+		
+		// —тавим по умолчанию из combobox первое название типа контрола!!!
+		m_stAttributeClassName = ((CAttribute)fxCboxTypeAttrs.getSelectionModel().getSelectedItem()).getName();
+		fxTxtNumberAttrjob.setText(m_stAttributeClassName);
+		
 		fxCboxTypeAttrs.getSelectionModel().selectedItemProperty()
-	    .addListener(new ChangeListener<CAttribute>() {
-
+	    .addListener(new ChangeListener<CAttribute>() 
+	    {
 			@Override
 			public void changed(ObservableValue<? extends CAttribute> observable, CAttribute oldValue,
-					CAttribute newValue) {
+					CAttribute newValue)
+			{
+				m_stAttributeClassName = ((CAttribute)newValue).getName();
+				fxTxtNumberAttrjob.setText(m_stAttributeClassName);
 				stAttributeCode = ((CAttribute)newValue).getCode();
 				System.out.println("stAttributeCode = " + stAttributeCode);
 				
@@ -165,7 +175,9 @@ public class CAttrjobAddController implements Initializable{
 		CLPSMain.mDatabase.child(uploadId).child("MyTypeAttrjob").
 		setValue(stAttributeCode);
 		CLPSMain.mDatabase.child(uploadId).child("MyHeight").
-		setValue("55");
+		setValue(CMAINCONSTANTS.Height_cell_start);
+		CLPSMain.mDatabase.child(uploadId).child("MyWidth").
+		setValue(CMAINCONSTANTS.Width_control_start);
 		
 		CAttrjobEditController.m_stageAttrjobAdd.close();
 	}

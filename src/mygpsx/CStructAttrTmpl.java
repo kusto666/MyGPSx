@@ -5,17 +5,27 @@ public class CStructAttrTmpl {
 	private String MyIDUnique;
 	private String MyAttrID;// ID ‡ÚË·ÛÚ‡ ËÁ ÛÁÎ‡ "my_owner_settings"->"my_attrjob"
 	private String MyAttrName;
+	private String MyAttrType;
 	private String MyAttrHeight;
+	private String MyAttrWidth;
 	
 	public CStructAttrTmpl() {// Œ¡ﬂ«¿“≈À‹ÕŒ ” ¿«€¬¿≈Ã, ¿ “Œ ¡”ƒ≈“ Œÿ»¡ ¿ “»œ¿  ¿  «ƒ≈—‹ ¡€ÀŒ:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
 	
-	public CStructAttrTmpl(String MyIDUnique, String MyAttrID, String MyAttrName, String MyAttrHeight) 
+	public CStructAttrTmpl(
+			String MyIDUnique, 
+			String MyAttrID, 
+			String MyAttrName,
+			String MyAttrHeight,
+			String MyAttrWidth,
+			String MyAttrType) 
 	{
 		this.MyIDUnique = MyIDUnique;
 		this.MyAttrID = MyAttrID;
 		this.MyAttrName = MyAttrName;
 		this.MyAttrHeight = MyAttrHeight;
+		this.MyAttrWidth = MyAttrWidth;
+		this.MyAttrType = MyAttrType;
 	}
 	
 	public String getMyIDUnique()
@@ -36,6 +46,14 @@ public class CStructAttrTmpl {
     {
         return MyAttrHeight;
     }
+    public String getMyAttrWidth()
+    {
+        return MyAttrWidth;
+    }
+    public String getMyAttrType()
+    {
+        return MyAttrType;
+    }
    
     public void setMyIDUnique(String MyIDUnique)
     {
@@ -53,5 +71,12 @@ public class CStructAttrTmpl {
     {
         this.MyAttrHeight = MyAttrHeight;
     }
-
+    public void setMyAttrWidth(String MyAttrWidth)
+    {
+        this.MyAttrWidth = MyAttrWidth;
+    }
+    public void setMyAttrType(String MyAttrType)
+    {
+        this.MyAttrType = MyAttrType;
+    }
 }

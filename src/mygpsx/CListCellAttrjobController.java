@@ -27,6 +27,8 @@ public class CListCellAttrjobController implements Initializable{
 	@FXML
 	private Label fxLbUniqueID;
 	@FXML
+	private Label fxLbHiddenTypeAttr;
+	@FXML
 	private Button fxBtnDeleteAttrjob;
 	@FXML
 	private Button fxBtnAddAttrjobIntoTmpl;
@@ -34,6 +36,9 @@ public class CListCellAttrjobController implements Initializable{
 	private TextField fxTxtNameAttrjob;
 	@FXML
 	private TextField fxTxtHeight;
+	@FXML
+	private TextField fxTxtWidth;
+
 	@FXML
     private void BtnDeleteAttrjob(ActionEvent event) 
     {
@@ -70,15 +75,6 @@ public class CListCellAttrjobController implements Initializable{
 	@FXML
     private void BtnAddAttrjobIntoTmpl(ActionEvent event) 
     {
-		// Это добавление в AnchorPane FXCreateTemplateJobs.fxml 
-		/*		//Button b = new Button(button.getText());
-		Button b = new Button("button.getText()");
-		//fxAPaneMain.add(b);
-		AnchorPane.setTopAnchor(b, 100.0);
-		AnchorPane.setLeftAnchor(b, 10.0);
-		fxAPaneMain.getChildren().add(b);*/
-		//Border brd = CFXCreateTemplateJobCtrl.fxAPaneEditTmpl.getBorder();
-		
 		// Это добавление в firebase real!!!
 		String stTempUniqueID = CLPSMain.mDatabase.push().getKey();
 		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
@@ -89,6 +85,9 @@ public class CListCellAttrjobController implements Initializable{
 		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrID").setValue(fxLbUniqueID.getText());
 		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrName").setValue(fxTxtNameAttrjob.getText());
 		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrHeight").setValue(fxTxtHeight.getText());
+		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrHeight").setValue(fxTxtHeight.getText());
+		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrWidth").setValue(fxTxtWidth.getText());
+		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrType").setValue(fxLbHiddenTypeAttr.getText());
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
