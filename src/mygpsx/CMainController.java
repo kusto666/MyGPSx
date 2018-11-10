@@ -111,7 +111,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	//private TabPane LPSMapTUserAndJobs;//
 	
 	private javafx.scene.control.SingleSelectionModel<Tab> selectionModel;
-	
+	@FXML
+	private AnchorPane m_FXAPaneTemplateJobs;// Это панель в которой и находится сам лист с шаблоном!!!
+	@FXML
+	private ListView<CStructAttrTmpl> fxListTmplJob;
 	////////////////////// Для вкладки настроек!!! START///////////////////////////////////////////
 	 @FXML
 	 Button btnSettingsPriorityEdit;
@@ -891,6 +894,13 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	{
     		apPaneUsersAndJobs = FXMLLoader.load(getClass().getResource("LPSMapTUserAndJobs.fxml"));
     		fxTabPaneUsersAndJobs.setContent(apPaneUsersAndJobs);
+    		
+    		// Добавим сразу в fxAPaneMain для шаблона файлик FXAPaneTemplateJobs.fxml
+			m_FXAPaneTemplateJobs = FXMLLoader.load(getClass().getResource("FXAPaneTemplateJobs.fxml"));
+			apPaneUsersAndJobs.getChildren().add(m_FXAPaneTemplateJobs);
+			apPaneUsersAndJobs.setTopAnchor(m_FXAPaneTemplateJobs, 130.0);
+			apPaneUsersAndJobs.setLeftAnchor(m_FXAPaneTemplateJobs, 10.0);
+			fxListTmplJob = (ListView<CStructAttrTmpl>)m_FXAPaneTemplateJobs.getChildren().get(0);
 		} 
     	catch (Exception e)
     	{

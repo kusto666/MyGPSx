@@ -46,6 +46,8 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 	@FXML
 	private AnchorPane fxAPaneMain;
 	@FXML
+	private AnchorPane m_FXAPaneTemplateJobs;// Это панель в которой и находится сам лист с шаблоном!!!
+	@FXML
 	private AnchorPane fxAPaneEditTmpl;
 	
 	@FXML
@@ -129,8 +131,24 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
         }
     }
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		fxTxtNameTmplJob.setText(m_stTempNameJob);// Это чтобы пото меняли на нормальное название!!
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		try 
+		{
+			// Добавим сразу в fxAPaneMain для шаблона файлик FXAPaneTemplateJobs.fxml
+			m_FXAPaneTemplateJobs = FXMLLoader.load(getClass().getResource("FXAPaneTemplateJobs.fxml"));
+			fxAPaneMain.getChildren().add(m_FXAPaneTemplateJobs);
+			fxAPaneMain.setTopAnchor(m_FXAPaneTemplateJobs, 70.0);
+			fxAPaneMain.setLeftAnchor(m_FXAPaneTemplateJobs, 10.0);
+			fxListTmplJob = (ListView<CStructAttrTmpl>)m_FXAPaneTemplateJobs.getChildren().get(0);
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+		fxTxtNameTmplJob.setText(m_stTempNameJob);// Это чтобы потом меняли на нормальное название!!
 		fxLbErrorSaveTmplJob.setText("ИЗМЕНИТЕ НАЗВАНИЕ ШАБЛОНА!");
 		
 		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
@@ -177,12 +195,12 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 	            				  System.out.println("Попали в создание шаблона!!!");
 	            				  if(lCountChildren > 0)
 	            				  {
-	            					  System.out.println("Раз lCountChildren  > 0 == тогда показываем из базы все прелести интерфейса!!!");
-	            					  Button b = new Button("button.getText()!!!");
+	            					//  System.out.println("Раз lCountChildren  > 0 == тогда показываем из базы все прелести интерфейса!!!");
+	            					//  Button b = new Button("button.getText()!!!");
 	  	      						//fxAPaneMain.add(b);
-	  	      						AnchorPane.setTopAnchor(b, 10.0);
-	  	      						AnchorPane.setLeftAnchor(b, 10.0);
-	  	      						fxAPaneEditTmpl.getChildren().add(b);
+	  	      						//AnchorPane.setTopAnchor(b, 10.0);
+	  	      						//AnchorPane.setLeftAnchor(b, 10.0);
+	  	      						//fxAPaneEditTmpl.getChildren().add(b);
 	  	      						//Border brd = CFXCreateTemplateJobCtrl.fxAPaneEditTmpl.getBorder();
 	            				  }
 	            				
