@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import com.lynden.gmapsfx.*?>
+
+<AnchorPane id="fxAPaneMain" fx:id="fxAPaneMain" prefHeight="556.0" prefWidth="750" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CTUsersJobsController">
+   <children>
+                           <Label layoutX="63.0" layoutY="33.0" text="Выбор сотрудника" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                           <ComboBox fx:id="fxCbSelectUser" layoutX="113.0" layoutY="6.0" prefWidth="250.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="10.0" />
+   </children>
+ </AnchorPane>

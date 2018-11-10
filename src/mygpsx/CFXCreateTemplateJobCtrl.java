@@ -60,7 +60,10 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 	@FXML
     private void btnPreview(ActionEvent event) throws IOException 
     {
-		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPreviewTemplate));
+		CCONSTANTS_EVENTS_JOB.OpenAnyFrame(CFXCreateTemplateJobCtrl.class, CMAINCONSTANTS.m_PathFXPreviewTemplate,
+											CLPSMain.m_rootFXPreviewTemplateJobs, CLPSMain.m_stageFXPreviewTemplateJobs,
+											"Предварительный просмотр шаблона...", false, true, false);
+		/* FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPreviewTemplate));
          CLPSMain.m_rootFXPreviewTemplateJobs = (Parent)fxmlLoader.load();
          CLPSMain.m_stageFXPreviewTemplateJobs = new Stage();
          CLPSMain.m_stageFXPreviewTemplateJobs.setTitle(CStrings.m_APP_NAME + "->Предварительный просмотр шаблона...");
@@ -69,7 +72,7 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
          CLPSMain.m_stageFXPreviewTemplateJobs.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
          CLPSMain.m_stageFXPreviewTemplateJobs.initOwner(CLPSMain.m_stageFXCreateTemplateJobs);
          CLPSMain.m_stageFXPreviewTemplateJobs.show();
-		 System.out.println("btnPreview(ActionEvent event)!!!");
+		 System.out.println("btnPreview(ActionEvent event)!!!");*/
     }
 	
 	@FXML

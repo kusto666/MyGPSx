@@ -90,9 +90,10 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
         					  System.out.println("Раз lCountChildren  > 0 == тогда показываем из базы все прелести интерфейса!!!");
         					  Label LbTest = new Label();
         					  LbTest.setText(item.getMyAttrName());
-        					  
-        					  AnchorPane.setTopAnchor(LbTest, 10.0);
-	      					  AnchorPane.setLeftAnchor(LbTest, 10.0);
+        					  double dAnchorTop = 2.0;
+        					  double dAnchorLeft = 2.0;
+        					  AnchorPane.setTopAnchor(LbTest, dAnchorTop);
+	      					  AnchorPane.setLeftAnchor(LbTest, dAnchorLeft);
 	      						
         					  m_Pane.getChildren().add(LbTest);
         				  }

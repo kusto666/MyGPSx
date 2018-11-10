@@ -100,18 +100,20 @@ public class CAddShipController implements Initializable{
 				flLbInfoSaveErrors.setText("ОТСУТСТВУЮТ КООРДИНАТЫ! ВЫБЕРЕТЕ НА КАРТЕ ТОЧКУ ПОЗИЦИИ.");
 				return;
 			}
-			mDatabaseRef.child("phoneID_" + randomIDPhoneTest).child("phoneID").
+			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyPhoneID").
 			setValue(randomIDPhoneTest);
-			mDatabaseRef.child("phoneID_" + randomIDPhoneTest).child("MyLatitude").
+			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyLatitude").
 			setValue(Double.toString(CMainController.m_LocationTempForCAddShipController.getLatitude()));
-			mDatabaseRef.child("phoneID_" + randomIDPhoneTest).child("MyLongitude").
+			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyLongitude").
 			setValue(Double.toString(CMainController.m_LocationTempForCAddShipController.getLongitude()));
-			mDatabaseRef.child("phoneID_" + randomIDPhoneTest).child("MyNameShip").
+			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyNameShip").
 			setValue(fxLbNameShip.getText());
-			mDatabaseRef.child("phoneID_" + randomIDPhoneTest).child("MyDirectorShip").
+			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyDirectorShip").
 			setValue(fxLbDirectorShip.getText());
-			mDatabaseRef.child("phoneID_" + randomIDPhoneTest).child("MyShortDescriptionShip").
+			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyShortDescriptionShip").
 			setValue(fxTaShortDescriptionShip.getText());
+			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyIsUserSelected").
+			setValue("false");
 			
 			flLbInfoSaveErrors.setText("");
 			CMainController.m_LocationTempForCAddShipController = null;

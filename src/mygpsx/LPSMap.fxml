@@ -10,18 +10,21 @@
 
 <AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="750" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CMainController">
     <children>
-      <TabPane layoutX="225.0" layoutY="14.0" prefHeight="556.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0">
+      <TabPane fx:id="fxTabPaneMain" layoutX="225.0" layoutY="14.0" prefHeight="556.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0">
         <tabs>
           <Tab text="Где сейчас">
                <content>
                   <GoogleMapView fx:id="mapView" prefHeight="472.0" prefWidth="489.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
                </content></Tab>
-          <Tab text="Карта перемещений">
+          <Tab fx:id="fxTabPaneUsersAndJobs" text="Сотрудники --&gt; Задачи">
+		   <content>
+		  
+               </content></Tab>
+			    <Tab text="Карта перемещений">
 		   <content>
 		  
                </content></Tab>
 		  <Tab text="История перемещений" />
-		  <Tab text="Сотрудники" />
 		  <Tab text="Объекты" />
 		  <Tab text="Гео-зоны" />
 		  <Tab text="Отчеты" />

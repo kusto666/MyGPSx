@@ -90,7 +90,7 @@ public class CLPSMain extends Application
 	FirebaseStorage firebasestorage;
 	public static Storage MyGoogleStorage;
 	
-	public static ArrayList<CUser> m_localAllMarkersUsersTempMain = null;
+	public static ArrayList<CStructUser> m_localAllMarkersUsersTempMain = null;
 	
 	// Это окно добавления кораблей!!!
 	@FXML
@@ -161,7 +161,7 @@ public class CLPSMain extends Application
 	@FXML
 	TextArea mymsg;
 	@FXML
-	static ListView<CUser> m_lvAllUsers;
+	static ListView<CStructUser> m_lvAllUsers;
 	 @FXML
 	 public static AnchorPane fxMessageWait;
 	 @FXML
@@ -171,23 +171,23 @@ public class CLPSMain extends Application
 	/*@FXML
 	VBox fxvBoxUsersAll;*/
 	@FXML
-	Scene scene = null;
+	public static Scene scene = null;// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	@FXML
 	public static Stage stage;
 	
-	public static ObservableList<CUser> m_ObservableListUsers;
+	public static ObservableList<CStructUser> m_ObservableListUsers;
 	@FXML
-	static ArrayList<CUser> m_alUsersAll = null;
+	static ArrayList<CStructUser> m_alUsersAll = null;
 
 	@FXML
-	public static ListView<CUser> fxListView;
+	public static ListView<CStructUser> fxListView;
 	
 	@FXML
 	Parent root;
 	@FXML
 	public static FXMLLoader m_Loader;
-	@FXML
-	public static FXMLLoader m_LoaderCell;
+	//@FXML
+	//public static FXMLLoader m_LoaderCell;
 
 	// Самый главный старт!!!!
     @SuppressWarnings("unchecked")
@@ -210,7 +210,7 @@ public class CLPSMain extends Application
         		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
         		root = m_Loader.load();
         		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
-        		fxListView = (ListView<CUser>)m_Loader.getNamespace().get("fxListView");
+        		fxListView = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListView");
         		fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
         		fxLbMessage = (Label)m_Loader.getNamespace().get("fxLbMessage");
         		btnRestartMod = (Button)m_Loader.getNamespace().get("btnRestartMod");
@@ -281,7 +281,7 @@ public class CLPSMain extends Application
         		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
         		root = m_Loader.load();
         		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
-        		fxListView = (ListView<CUser>)m_Loader.getNamespace().get("fxListView");
+        		fxListView = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListView");
         		fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
         		fxLbMessage = (Label)m_Loader.getNamespace().get("fxLbMessage");
         		btnRestartMod = (Button)m_Loader.getNamespace().get("btnRestartMod");
@@ -462,12 +462,12 @@ public class CLPSMain extends Application
 								// Выбираем , что слушать, какую ветку данных!!!
 					            Iterable<DataSnapshot> contactChildren = arg0.getChildren();
 	
-					            m_alUsersAll = new ArrayList<CUser>();
-				            	m_lvAllUsers = new ListView<CUser>();
+					            m_alUsersAll = new ArrayList<CStructUser>();
+				            	m_lvAllUsers = new ListView<CStructUser>();
 				            	
 					            for (DataSnapshot Users : contactChildren)
 				                {
-					            	CUser user = Users.getValue(CUser.class);
+					            	CStructUser user = Users.getValue(CStructUser.class);
 		                        	System.out.println( "CUser user = " + user.getMyNameShip());
 		                        	m_alUsersAll.add(user);// Заполнили массив!!!
 			                	}
@@ -476,7 +476,7 @@ public class CLPSMain extends Application
 					            
 								if(fxListView == null)
 								{
-									fxListView = new ListView<CUser>();
+									fxListView = new ListView<CStructUser>();
 								}
 					            
 					            System.out.println( "fxListView.getItems().size() = " + fxListView.getItems().size());
@@ -486,11 +486,11 @@ public class CLPSMain extends Application
 			            			  () -> {
 			            				  fxListView.setItems(m_ObservableListUsers);
 			            				 fxListView.setPrefSize(200, 500);
-			            				 fxListView.setCellFactory(new Callback<ListView<CUser>, ListCell<CUser>>() 
+			            				 fxListView.setCellFactory(new Callback<ListView<CStructUser>, ListCell<CStructUser>>() 
 			            				 {
 											
 											@Override
-											public ListCell<CUser> call(ListView<CUser> param) 
+											public ListCell<CStructUser> call(ListView<CStructUser> param) 
 											{
 												System.out.println("return new CUserCell();");
 												return new CUserCell();
@@ -509,10 +509,10 @@ public class CLPSMain extends Application
 			            		    				
 			            		    		        if (click.getClickCount() == 2) 
 			            		    		        {
-			            		    		          CUser us = fxListView.getSelectionModel().getSelectedItem();
+			            		    		          CStructUser us = fxListView.getSelectionModel().getSelectedItem();
 			            		    		          System.out.println("tempUser = " + us.getMyNameShip());
-			            		    		          double dLat = Double.parseDouble(us.MyLatitude);
-			            		    		          double dLong = Double.parseDouble(us.MyLongitude);
+			            		    		          double dLat = Double.parseDouble(us.getMyLatitude());
+			            		    		          double dLong = Double.parseDouble(us.getMyLongitude());
 			            		    		          LatLong ll = new LatLong(dLat,dLong); 
 			            		    		          CMainController.map.setCenter(ll);
 			            		    		          
@@ -522,7 +522,7 @@ public class CLPSMain extends Application
 			          										"<h4>Капитан:</h4>" + 
 			          										"<u style=\"color: blue;\"><h4>" + us.getMyDirectorShip() + "</h4></u>" +
 			          										"<h4>Описание судна:</h4>" + 
-			          										"<u style=\"color: blue;\"><h4>" + us.MyShortDescriptionShip + "</h4></u>");
+			          										"<u style=\"color: blue;\"><h4>" + us.getMyShortDescriptionShip() + "</h4></u>");
 			            		    		          MyInfoWindow = new InfoWindow(infoWindowOptions);
 			            		    		          
 			            		    		          markerOptions = new MarkerOptions();
@@ -552,12 +552,12 @@ public class CLPSMain extends Application
 								}
 					            catch (Exception ex)
 					            {
-					            	ex.getMessage();
+					            	ex.getStackTrace();
 								}
 							} 
 							catch (Exception ex) 
 							{
-								ex.getMessage();
+								ex.getStackTrace();
 							}
 						}
 						
@@ -571,7 +571,7 @@ public class CLPSMain extends Application
 				} 
 				catch (Exception ex) 
 				{
-					ex.getMessage();
+					ex.getStackTrace();
 				}
 			//}
 		//});
@@ -657,9 +657,9 @@ public class CLPSMain extends Application
     			{
             		try 
             		{
-            			 System.out.println("mDatabase.addValueEventListener");
-            			 m_localAllMarkersUsersTempMain = new ArrayList<>();
-        			     CUser tempTransport = null;
+						System.out.println("mDatabase.addValueEventListener");
+						m_localAllMarkersUsersTempMain = new ArrayList<>();
+						CStructUser tempTransport = null;
         				DataSnapshot usersSnapshot = arg0;
                         Iterable<DataSnapshot> contactChildren = usersSnapshot.getChildren();
 
@@ -668,17 +668,32 @@ public class CLPSMain extends Application
                         for (DataSnapshot arg : contactChildren)
                         {
                         	System.out.println( "----------Начало маркера!!!-------------" );
-                        	System.out.println(" for (DataSnapshot arg : contactChildren)");
-                        	CUser user = arg.getValue(CUser.class);
-                        	System.out.println( ">>>>>>>>>user.phoneID =  " + user.phoneID + "<<<<<<<<<<<<");
-                        	Double.parseDouble(user.MyLatitude);
-                            Double.parseDouble(user.MyLongitude);
-                            System.out.println( "user.MyLatitude = " + user.MyLatitude );
-                            System.out.println( "user.MyLongitude = " + user.MyLongitude );
-                            
-                            tempTransport = new CUser(user.phoneID, user.MyLatitude, user.MyLongitude, "",
-                            		user.getMyNameShip(), user.getMyDirectorShip(), user.MyShortDescriptionShip);
-                            m_localAllMarkersUsersTempMain.add(tempTransport);
+                        	try 
+                        	{
+                        		System.out.println(" for (DataSnapshot arg : contactChildren)");
+                            	CStructUser user = arg.getValue(CStructUser.class);
+                            	System.out.println( ">>>>>>>>>user.phoneID =  " + user.getMyPhoneID() + "<<<<<<<<<<<<");
+                            	Double.parseDouble(user.getMyLatitude());
+                                Double.parseDouble(user.getMyLongitude());
+                                System.out.println( "user.MyLatitude = " + user.getMyLatitude() );
+                                System.out.println( "user.MyLongitude = " + user.getMyLongitude() );
+                                
+                                tempTransport = new CStructUser(user.getMyPhoneID(),
+																user.getMyLatitude(),
+																user.getMyLongitude(), 
+																"",
+																user.getMyNameShip(), 
+																user.getMyDirectorShip(), 
+																user.getMyShortDescriptionShip(), 
+																user.getMyIsUserSelected());
+                                m_localAllMarkersUsersTempMain.add(tempTransport);
+							}
+                        	catch (Exception e)
+                        	{
+								e.getMessage();
+								e.printStackTrace();
+							}
+
                             System.out.println( "----------Конец маркера!!!-------------" );
                         }
     				}

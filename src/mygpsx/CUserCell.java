@@ -5,23 +5,29 @@ import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.AnchorPane;
 
-public class CUserCell  extends ListCell<CUser>
+public class CUserCell  extends ListCell<CStructUser>
 {
+	//fxLbUniqueID
+	@FXML
+	Label fxLbUniqueID;
 	@FXML
 	Label lbMyNameShip;
 	@FXML
 	Label lbMyDirectorShip;
+	@FXML
+	Button fxBtnViewJobs;
 	@FXML
 	FXMLLoader mLLoader;
 	@FXML
 	AnchorPane m_Pane;
 	
 	@Override
-	public void updateItem(CUser item, boolean empty) 
+	public void updateItem(CStructUser item, boolean empty) 
 	{
 		super.updateItem(item, empty);
 		
@@ -37,7 +43,9 @@ public class CUserCell  extends ListCell<CUser>
             try 
             {
                 mLLoader.load();
+                fxLbUniqueID = (Label)mLLoader.getNamespace().get("fxLbUniqueID");
                 lbMyNameShip = (Label)mLLoader.getNamespace().get("lbMyNameShip");
+                fxBtnViewJobs = (Button)mLLoader.getNamespace().get("fxBtnViewJobs");
                 lbMyDirectorShip = (Label)mLLoader.getNamespace().get("lbMyDirectorShip");
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
         		if(lbMyNameShip == null)
@@ -52,6 +60,7 @@ public class CUserCell  extends ListCell<CUser>
         		{
         			System.out.println("m_Pane == null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         		}
+        		fxLbUniqueID.setText(String.valueOf(item.getMyPhoneID()));
         		lbMyNameShip.setText(String.valueOf(item.getMyNameShip()));
         		lbMyDirectorShip.setText(String.valueOf(item.getMyDirectorShip()));
             } 

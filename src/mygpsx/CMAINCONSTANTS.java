@@ -7,7 +7,7 @@ public class CMAINCONSTANTS {
 	public static String m_PathMainFxml = "LPSMap.fxml";// Самое главное окно!!!
 	
 	public static String m_PathFXAddShipFxml = "FXAddShip.fxml";
-	public static String m_PathFXListCellFxml = "ListCell.fxml";
+	public static String m_PathFXListCellFxml = "ListCellUser.fxml";
 	
 	// Тут приоритеты!!!
 	public static String m_PathFXPriorityEdit = "FXPriorityEdit.fxml";
@@ -75,6 +75,9 @@ public class CMAINCONSTANTS {
 	
 	
 	// Это все сущности-атрибуты!!!
+	public static String MyPhoneID_ = "MyPhoneID_";// Это название-приставка к основному объекту User!!!
+	public static String FB_MyIDUserSelected = "MyIDUserSelected";// Это слушаем, кто выбран, когда нажимаем кнопку "Задачи"!!!
+
 	public static String FB_my_priority = "my_priority";
 	public static String FB_my_status = "my_status";
 	public static String FB_my_typejob = "my_typejob";

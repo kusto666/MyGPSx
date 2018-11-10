@@ -76,8 +76,7 @@ public class CAttrjobAddController implements Initializable{
 		m_stAttributeClassName = ((CAttribute)fxCboxTypeAttrs.getSelectionModel().getSelectedItem()).getName();
 		fxTxtNumberAttrjob.setText(m_stAttributeClassName);
 		
-		fxCboxTypeAttrs.getSelectionModel().selectedItemProperty()
-	    .addListener(new ChangeListener<CAttribute>() 
+		fxCboxTypeAttrs.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CAttribute>() 
 	    {
 			@Override
 			public void changed(ObservableValue<? extends CAttribute> observable, CAttribute oldValue,

@@ -56,6 +56,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
+import javax.swing.SingleSelectionModel;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -78,6 +79,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -96,7 +99,20 @@ import netscape.javascript.JSObject;
  */
 public class CMainController implements Initializable, MapComponentInitializedListener
 {
-	// Для вкладки настроек!!! START
+	////////////////////// Здесь работа с TabPane!!! START///////////////////////////////////////////
+	@FXML
+	private TabPane fxTabPaneMain;
+	@FXML
+	private Tab fxTabPaneUsersAndJobs;
+	@FXML
+	private AnchorPane apPaneUsersAndJobs;
+	
+	//@FXML
+	//private TabPane LPSMapTUserAndJobs;//
+	
+	private javafx.scene.control.SingleSelectionModel<Tab> selectionModel;
+	
+	////////////////////// Для вкладки настроек!!! START///////////////////////////////////////////
 	 @FXML
 	 Button btnSettingsPriorityEdit;
 	//////////////////////Для вкладки настроек!!! END///////////////////////////////////////////
@@ -106,14 +122,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	private File m_FileSelectedOne; // 
 	@FXML
     private Label fxLbNameFileSelect;
-	
-    
-	
-	/*private String PATH_NAME_UPLOADS_MAIN = "uploads/";*/
-	
+
 	@FXML
-	ListView<CUser> fxListView;
-	public static ObservableList<CUser> m_ObservableListUsers;
+	ListView<CStructUser> fxListView;
+	public static ObservableList<CStructUser> m_ObservableListUsers;
 	
 	@FXML
     private Label label1;
@@ -144,8 +156,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	////////////////////////////////////////////////////////
 	
 	// Первый лист с кораблями!!!
-	@FXML
-	ListView<String> m_lvAllUsers;
+	//@FXML
+	//ListView<String> m_lvAllUsers;
 	@FXML
 	VBox fxvBoxUsersAll;
 	
@@ -175,7 +187,6 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     public static GoogleMap map;
     @FXML
     private GeocodingService geocodingService;
-    //FrameSettingsFXCreateTmplOrders
     
     // Открытие окна для создания нового шаблона ОТЧЕТА!!!
     @FXML
@@ -621,11 +632,11 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	{
     		for(int i = 0; i < CLPSMain.m_localAllMarkersUsersTempMain.size(); i++)
         	{
-        		CUser us = (CUser)CLPSMain.m_localAllMarkersUsersTempMain.get(i);
+        		CStructUser us = (CStructUser)CLPSMain.m_localAllMarkersUsersTempMain.get(i);
         		
         		
-        		LatLong markerLocation = new LatLong(Double.parseDouble(us.MyLatitude),
-        												Double.parseDouble(us.MyLongitude));
+        		LatLong markerLocation = new LatLong(Double.parseDouble(us.getMyLatitude()),
+        												Double.parseDouble(us.getMyLongitude()));
         		MarkerOptions markerOptions = new MarkerOptions();
         		//markerOptions.i
         		//markerOptions.icon(iconPath)
@@ -642,7 +653,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 										"<h4>Капитан:</h4>" + 
 										"<u style=\"color: blue;\"><h4>" + us.getMyDirectorShip() + "</h4></u>" +
 										"<h4>Описание судна:</h4>" + 
-										"<u style=\"color: blue;\"><h4>" + us.MyShortDescriptionShip + "</h4></u>");
+										"<u style=\"color: blue;\"><h4>" + us.getMyShortDescriptionShip() + "</h4></u>");
 
                 InfoWindow MyInfoWindow = new InfoWindow(infoWindowOptions);
                 
@@ -660,12 +671,12 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                     	MyInfoWindow.open(map, MyMarker);
                         markerMap.put(MyMarker, true);
                         m_bIsMuveMarker = true;
-                        System.out.println("us.phoneID == " + us.phoneID);
-                        m_SELECTED_MARKER = us.phoneID;
+                        System.out.println("us.getMyPhoneID() == " + us.getMyPhoneID());
+                        m_SELECTED_MARKER = us.getMyPhoneID();
                     }
                 });
                 
-        		System.out.println("us.phoneID == " + us.phoneID);
+        		System.out.println("us.getMyPhoneID() == " + us.getMyPhoneID());
         	}
 
         	System.out.println("Показать все маркеры!!!");
@@ -714,7 +725,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             			 CLPSMain.m_localAllMarkersUsersTempMain = new ArrayList<>();
         				 //MarkerOptions mo = null;
         			    // LatLong ll = null;
-        			     CUser tempTransport = null;
+        			     CStructUser tempTransport = null;
         				DataSnapshot usersSnapshot = arg0;
         				//System.out.println("arg0 = " + arg0.getChildrenCount());
                         Iterable<DataSnapshot> contactChildren = usersSnapshot.getChildren();
@@ -726,15 +737,15 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                         {
                         	System.out.println( "----------Начало маркера!!!-------------" );
                         	System.out.println(" for (DataSnapshot arg : contactChildren)");
-                        	CUser user = arg.getValue(CUser.class);
-                        	System.out.println( ">>>>>>>>>user.phoneID =  " + user.phoneID + "<<<<<<<<<<<<");
-                        	Double.parseDouble(user.MyLatitude);
-                            Double.parseDouble(user.MyLongitude);
-                            System.out.println( "user.MyLatitude = " + user.MyLatitude );
-                            System.out.println( "user.MyLongitude = " + user.MyLongitude );
+                        	CStructUser user = arg.getValue(CStructUser.class);
+                        	System.out.println( ">>>>>>>>>user.getMyPhoneID() =  " + user.getMyPhoneID() + "<<<<<<<<<<<<");
+                        	Double.parseDouble(user.getMyLatitude());
+                            Double.parseDouble(user.getMyLongitude());
+                            System.out.println( "user.MyLatitude = " + user.getMyLatitude() );
+                            System.out.println( "user.MyLongitude = " + user.getMyLongitude() );
                             
-                            tempTransport = new CUser(user.phoneID, user.MyLatitude, user.MyLongitude, "",
-                            		user.getMyNameShip(), user.getMyDirectorShip(), user.MyShortDescriptionShip);
+                            tempTransport = new CStructUser(user.getMyPhoneID(), user.getMyLatitude(), user.getMyLongitude(), "",
+                            		user.getMyNameShip(), user.getMyDirectorShip(), user.getMyShortDescriptionShip(), user.getMyIsUserSelected());
                             CLPSMain.m_localAllMarkersUsersTempMain.add(tempTransport);
                             System.out.println( "----------Конец маркера!!!-------------" );
                             //break;
@@ -742,7 +753,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     				}
             		catch (Exception ex)
             		{
-            			ex.getMessage();
+            			ex.getStackTrace();
     				}
     				
                  
@@ -756,7 +767,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		} 
     	catch (Exception ex) 
     	{
-			ex.getMessage();
+			ex.getStackTrace();
 		}
 
     }
@@ -837,7 +848,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                             	  Marker mkTemp = (Marker)tempMarkerSelected.getKey();
                             	  mkTemp.setPosition(ll);
                             	  // Обновляем координаты в firebase!!!!
-                             	 mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child("phoneID_" + m_SELECTED_MARKER);
+                             	 mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child("MyPhoneID_" + m_SELECTED_MARKER);
                             	 try 
                             	 {
                                      mDatabase.child("MyLatitude").setValue(Double.toString(ll.getLatitude()));
@@ -875,7 +886,25 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @Override
     public synchronized void initialize(URL url, ResourceBundle rb)
     {
-    	fxLbNameFileSelect.setText("");
+    	
+    	try 
+    	{
+    		apPaneUsersAndJobs = FXMLLoader.load(getClass().getResource("LPSMapTUserAndJobs.fxml"));
+    		fxTabPaneUsersAndJobs.setContent(apPaneUsersAndJobs);
+		} 
+    	catch (Exception e)
+    	{
+			e.printStackTrace();
+		}
+    	
+    	
+    	
+    	selectionModel = fxTabPaneMain.getSelectionModel();
+    	//selectionModel.select(tab); //select by object
+    	selectionModel.select(1); //select by index starting with 0
+    	//selectionModel.clearSelection(); //clear your selection
+    	
+    	
     	//CLPSMain.MyEventListnerFireUsers();
     	/*fxListView.setCellFactory(new Callback<ListView<CUser>, ListCell<CUser>>() {
 			
