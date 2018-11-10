@@ -31,27 +31,33 @@ public class CTUsersJobsController implements Initializable
 	private AnchorPane fxAPaneMain;
 	@FXML
 	private ComboBox<CStructUser> fxCbSelectUser;
+	@FXML
+	private ComboBox<CStructTmplJob> fxCbSelectTamplateJob;
 	
-	private DatabaseReference mDatabase;
+	private DatabaseReference mDatabaseUsers;
 	private DatabaseReference mDatabaseListenSelectUser;// Здесь слушаем выбранного пользователя!!!
 	private Task<Void> mDatabaseUpdateSelectedUser;
+	
+	private DatabaseReference mDatabaseTamplates;
+	private ObservableList<CStructTmplJob> m_ObservableListTmpl;
+	private ArrayList<CStructTmplJob> m_aTmpl = null;
 	
 	private ObservableList<CStructUser> m_ObservableList;
 	private ArrayList<CStructUser> m_alAttrjob = null;
 	
-	private String m_stNameShip = null; // Это название чудна в интерфейсе для людей!!!
+	private String m_stNameShip = null; // Это название судна в интерфейсе для людей!!!
 	private String m_stUsersUniqueID = null;// Это UniqueID User в коде!!!
-
-	/*public ComboBox getComboBox(){ return fxCbSelectUser;}
-	public CTUsersJobsController(){}*/
+	
+	private String m_stNameTmpl = null; // Это название шаблона в интерфейсе для людей!!!
+	private String m_stTmplUniqueID = null;// Это UniqueID шаблона в коде!!!
+	
 	int i = 0;
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		mDatabase = FirebaseDatabase.getInstance().getReference()
+		mDatabaseUsers = FirebaseDatabase.getInstance().getReference()
 				.child(CMAINCONSTANTS.FB_users);
-
-		mDatabase.addValueEventListener(new ValueEventListener()
+		mDatabaseUsers.addValueEventListener(new ValueEventListener()
 		 {
 			@Override
 			public void onDataChange(DataSnapshot arg0)
@@ -69,7 +75,6 @@ public class CTUsersJobsController implements Initializable
                 	}
 		            m_ObservableList = FXCollections.observableArrayList (m_alAttrjob);
 		            fxCbSelectUser.setItems(m_ObservableList);
-		            //fxCbSelectUser.getSelectionModel().select(0);
 				}
 				catch (Exception e) 
 				{
@@ -93,8 +98,7 @@ public class CTUsersJobsController implements Initializable
 					{
 						if(newValue != oldValue)
 						{
-							//fxCbSelectUser.getSelectionModel().select(0);
-							System.out.println("Что-то изменилось!!!");
+							//System.out.println("Что-то изменилось!!!");
 						}
 						m_stNameShip =  ((CStructUser)newValue).getMyNameShip();
 						m_stUsersUniqueID =  ((CStructUser)newValue).getMyPhoneID();
@@ -102,7 +106,7 @@ public class CTUsersJobsController implements Initializable
 						mDatabaseUpdateSelectedUser = FirebaseDatabase.getInstance().getReference()
 								.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
 						System.out.println("m_stUsersUniqueID = " + m_stUsersUniqueID);
-						System.out.println("m_stNameShip = " + m_stNameShip);
+						//System.out.println("m_stNameShip = " + m_stNameShip);
 
 					}
 				});
@@ -110,12 +114,8 @@ public class CTUsersJobsController implements Initializable
 
 			@Override
 			public void onCancelled(DatabaseError arg0) {
-				// TODO Auto-generated method stub
-				
 			}
 		 });
-		
-		// mDatabaseListenSelectUser
 		mDatabaseListenSelectUser = FirebaseDatabase.getInstance().getReference()
 				.child(CMAINCONSTANTS.FB_MyIDUserSelected);
 		mDatabaseListenSelectUser.addValueEventListener(new ValueEventListener()
@@ -131,18 +131,11 @@ public class CTUsersJobsController implements Initializable
 					{
 						try {
 							System.out.println("Попали в................ - i = " + Integer.toString(i));
-							//fxCbSelectUser.notifyAll();
-							//fxCbSelectUser.
-							// m_ObservableList = FXCollections.observableArrayList (m_alAttrjob);
-					        // fxCbSelectUser.setItems(m_ObservableList);
+
 							Platform.runLater(
             			  () -> {
             				  	fxCbSelectUser.setValue(m_alAttrjob.get(i));
             			  });
-
-							//fxCbSelectUser.notifyAll();
-							//fxCbSelectUser.impl_updatePeer();
-							
 							break;
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -154,10 +147,70 @@ public class CTUsersJobsController implements Initializable
 
 			@Override
 			public void onCancelled(DatabaseError arg0) {
-				// TODO Auto-generated method stub
-				
+		
 			}
 		 });
+/////////////////////////////////// INIT TEMPLATES ///////////////////////////////////////////////////
+		mDatabaseTamplates = FirebaseDatabase.getInstance().getReference()
+				.child(CMAINCONSTANTS.FB_my_owner_settings).child(CMAINCONSTANTS.FB_my_templates);
+		
+		mDatabaseTamplates.addValueEventListener(new ValueEventListener()
+		 {
+			@Override
+			public void onDataChange(DataSnapshot arg0)
+			{
+				try 
+				{
+					Iterable<DataSnapshot> contactChildren = arg0.getChildren();
+					
+					m_aTmpl = new ArrayList<CStructTmplJob>();
+					for (DataSnapshot structTmplJob : contactChildren)
+	                {
+						CStructTmplJob TempSP = structTmplJob.getValue(CStructTmplJob.class);
+	                 	System.out.println( "structTmplJob = "  + TempSP.getMyNameTemplate());
+	                 	m_aTmpl.add(TempSP);// Заполнили массив!!!
+                	}
+		            m_ObservableListTmpl = FXCollections.observableArrayList (m_aTmpl);
+		            fxCbSelectTamplateJob.setItems(m_ObservableListTmpl);
+		        	/*Platform.runLater(
+	            			  () -> {
+	            				  fxCbSelectTamplateJob.setValue(m_aTmpl.get(0));
+	            			  });*/
+				}
+				catch (Exception e) 
+				{
+					e.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void onCancelled(DatabaseError arg0) {
+		
+			}
+		 });
+		fxCbSelectTamplateJob.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CStructTmplJob>() 
+	    {
+			@Override
+			public void changed(ObservableValue<? extends CStructTmplJob> observable, CStructTmplJob oldValue,
+					CStructTmplJob newValue)
+			{
+				if(newValue != oldValue)
+				{
+					//System.out.println("Что-то изменилось!!!");
+				}
+				m_stNameTmpl =  ((CStructTmplJob)newValue).getMyNameTemplate();
+				m_stTmplUniqueID =  ((CStructTmplJob)newValue).getMyIDUnique();
+				CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL = m_stTmplUniqueID;
+				System.out.println("CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL = " + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
+				/*CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = m_stUsersUniqueID;
+				mDatabaseUpdateSelectedUser = FirebaseDatabase.getInstance().getReference()
+						.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
+				System.out.println("m_stUsersUniqueID = " + m_stUsersUniqueID);
+				System.out.println("m_stNameShip = " + m_stNameShip);*/
+
+			}
+		});
 	}
 }
 

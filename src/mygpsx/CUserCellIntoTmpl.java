@@ -80,8 +80,8 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
         		// Используем поток создания листа!!!
         		try 
         		{
-        			Platform.runLater(
-        			  () -> {
+        			
+        			Platform.runLater( () -> {
         				  m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
         				  // Теперь попробуем вывести что-нибудь из интерфейса,
         				  // из ветки my_templates->UniqueID->my_adding_attr->UniqueID
@@ -97,8 +97,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 	      						
         					  m_Pane.getChildren().add(LbTest);
         				  }
-        				  
-        				  
+
         			  }
         			);
 				} 

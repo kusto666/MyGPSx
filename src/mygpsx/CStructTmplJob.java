@@ -44,8 +44,8 @@ public class CStructTmplJob {
     {
         this.MyNameTemplate = MyNameTemplate;
     }
-   /* public void setmy_adding_attr(HashMap my_adding_attr)
-    {
-        this.my_adding_attr = my_adding_attr;
-    }*/
+    @Override
+    public String toString()  {
+        return this.getMyNameTemplate();
+    }
 }

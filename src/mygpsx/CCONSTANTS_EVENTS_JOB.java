@@ -12,6 +12,8 @@ public class CCONSTANTS_EVENTS_JOB
 {
 	public static String MAIN_SELECTED_SHIP = "";// ѕеременна€ отвечает за основной выбор судна из левого главного списка,
 	// дл€ дальнейших манипул€ций с ним!!!
+	public static String MAIN_SELECTED_TMPL = "";// ѕеременна€ отвечает за основной выбор шаблона из списка юзера,
+	// дл€ дальнейших манипул€ций с ним!!!
 	
 	// «начит просто лазеем по проге и ничего несоздаем или редактируем!!!
 	public static String SAMPLE_JOBING = "NONE"; 
