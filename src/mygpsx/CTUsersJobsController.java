@@ -18,32 +18,47 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 
 public class CTUsersJobsController implements Initializable
 {
+	//
 	//public static int m_iChangeIndex = 0;
-	private IntegerProperty index = new SimpleIntegerProperty(-1);
+	//private IntegerProperty index = new SimpleIntegerProperty(-1);
+	@FXML
+	private Button fxBtnAddingJobNew;
 	@FXML
 	private AnchorPane fxAPaneMain;
 	@FXML
 	private ComboBox<CStructUser> fxCbSelectUser;
 	@FXML
 	private ComboBox<CStructTmplJob> fxCbSelectTamplateJob;
+	@FXML
+	private ComboBox<CStructPriority> fxCbSelectPriorityJob;
 	
 	private DatabaseReference mDatabaseUsers;
+	private Task<Void> mDatabaseAddingJob;
 	private DatabaseReference mDatabaseListenSelectUser;// Здесь слушаем выбранного пользователя!!!
+	private DatabaseReference mDatabasePriorityJobs;// Это для приоритетов!!!
 	private Task<Void> mDatabaseUpdateSelectedUsersTmpls;
 	
 	private DatabaseReference mDatabaseTamplates;
+	
 	private ObservableList<CStructTmplJob> m_ObservableListTmpl;
 	private ArrayList<CStructTmplJob> m_aTmpl = null;
 	
 	private ObservableList<CStructUser> m_ObservableList;
 	private ArrayList<CStructUser> m_alAttrjob = null;
+	
+	private ObservableList<CStructPriority> m_ObservableListPriority;
+	private ArrayList<CStructPriority> m_alPriority = null;
+	
+	
 	
 	private String m_stNameShip = null; // Это название судна в интерфейсе для людей!!!
 	private String m_stUsersUniqueID = null;// Это UniqueID User в коде!!!
@@ -51,7 +66,27 @@ public class CTUsersJobsController implements Initializable
 	private String m_stNameTmpl = null; // Это название шаблона в интерфейсе для людей!!!
 	private String m_stTmplUniqueID = null;// Это UniqueID шаблона в коде!!!
 	
-	int i = 0;
+	private int my_i = 0;
+
+	// Добавление овой задачи!!!
+    @FXML
+    private void BtnAddingJobNew(ActionEvent event) 
+    {
+    	try 
+    	{
+    		String uploadId = CLPSMain.mDatabase.push().getKey();
+    		mDatabaseAddingJob = FirebaseDatabase.getInstance().getReference()
+    				.child(CMAINCONSTANTS.FB_my_users_jobs)
+    				.child(CMAINCONSTANTS.MyPhoneID_ + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP)
+    				.child(uploadId).child("MyTemplateJob").setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
+    		System.out.println("BtnAddingJobNew!!!");
+		} 
+    	catch (Exception e)
+    	{
+			e.printStackTrace();
+		}
+    }
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -125,16 +160,15 @@ public class CTUsersJobsController implements Initializable
 			{
 				System.out.println( "Listen CTUsersJobsController  = " + arg0.getValue());
 				
-				for(i = 0; i < m_alAttrjob.size(); i++)
+				for(my_i = 0; my_i < m_alAttrjob.size(); my_i++)
 				{
-					if(((CStructUser)m_alAttrjob.get(i)).getMyPhoneID().equals(arg0.getValue()))
+					if(((CStructUser)m_alAttrjob.get(my_i)).getMyPhoneID().equals(arg0.getValue()))
 					{
 						try {
-							System.out.println("Попали в................ - i = " + Integer.toString(i));
+							System.out.println("Попали в................ - my_i = " + Integer.toString(my_i));
 
-							Platform.runLater(
-            			  () -> {
-            				  	fxCbSelectUser.setValue(m_alAttrjob.get(i));
+					Platform.runLater(() -> {
+            				  	fxCbSelectUser.setValue(m_alAttrjob.get(my_i));
             			  });
 							break;
 						} catch (Exception e) {
@@ -172,10 +206,10 @@ public class CTUsersJobsController implements Initializable
                 	}
 		            m_ObservableListTmpl = FXCollections.observableArrayList (m_aTmpl);
 		            fxCbSelectTamplateJob.setItems(m_ObservableListTmpl);
-		        	/*Platform.runLater(
+		        	Platform.runLater(
 	            			  () -> {
 	            				  fxCbSelectTamplateJob.setValue(m_aTmpl.get(0));
-	            			  });*/
+	            			  });
 				}
 				catch (Exception e) 
 				{
@@ -209,6 +243,70 @@ public class CTUsersJobsController implements Initializable
 
 			}
 		});
+		CStructPriority TempSPFirstValue = new CStructPriority();
+		TempSPFirstValue.setMyNamePriority("Выберите приоритет задачи...");
+/////////////////////////////////////// INIT PRIORITY OF JOBS //////////////////////////////////////////////////		
+		mDatabasePriorityJobs = FirebaseDatabase.getInstance().getReference()
+				.child(CMAINCONSTANTS.FB_my_owner_settings).child(CMAINCONSTANTS.FB_my_priority);
+		mDatabasePriorityJobs.addValueEventListener(new ValueEventListener()
+		 {
+			
+			//TempSPFirstValue.set
+			@Override
+			public void onDataChange(DataSnapshot arg0)
+			{
+				try 
+				{
+					Iterable<DataSnapshot> contactChildren = arg0.getChildren();
+					
+					m_alPriority = new ArrayList<CStructPriority>();
+					m_alPriority.add(TempSPFirstValue);
+					for (DataSnapshot structPriorityr : contactChildren)
+	                {
+						CStructPriority TempSP = structPriorityr.getValue(CStructPriority.class);
+	                 	System.out.println( "TempSP = "  + TempSP.getMyNamePriority());
+	                 	m_alPriority.add(TempSP);// Заполнили массив!!!
+                	}
+		            m_ObservableListPriority = FXCollections.observableArrayList (m_alPriority);
+		            fxCbSelectPriorityJob.setItems(m_ObservableListPriority);
+				}
+				catch (Exception e) 
+				{
+					e.printStackTrace();
+				}
+				Platform.runLater(() -> {
+					fxCbSelectPriorityJob.setValue(m_alPriority.get(my_i));
+			  });
+				fxCbSelectPriorityJob.valueProperty().addListener(new ChangeListener<CStructPriority>() {
+
+					@Override
+					public void changed(ObservableValue<? extends CStructPriority> observable, CStructPriority oldValue,
+							CStructPriority newValue) 
+					{
+						
+						
+					}
+				});
+				fxCbSelectPriorityJob.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CStructPriority>() 
+			    {
+					@Override
+					public void changed(ObservableValue<? extends CStructPriority> observable, CStructPriority oldValue,
+							CStructPriority newValue)
+					{
+						if(newValue != oldValue)
+						{
+							//System.out.println("Что-то изменилось!!!");
+						}
+						CCONSTANTS_EVENTS_JOB.TEMP_PRIORITY_JOB = newValue.getMyIDUnique();
+						System.out.println("CCONSTANTS_EVENTS_JOB.TEMP_PRIORITY_JOB = " + CCONSTANTS_EVENTS_JOB.TEMP_PRIORITY_JOB);
+					}
+				});
+			}
+
+			@Override
+			public void onCancelled(DatabaseError arg0) {
+			}
+		 });
 	}
 }
 

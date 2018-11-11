@@ -63,6 +63,7 @@ public class CMAINCONSTANTS {
 	
 	// Ќазвание таблиц(веток JSON) в realtime database:
 	public static String FB_users = "users";
+	public static String FB_my_users_jobs = "my_users_jobs";
 	
 	// ќсновной узел настроек дл€ всего и шаблонов и вс€ких там объктов и вообще настроек!!!
 	public static String FB_my_owner_settings = "my_owner_settings";
@@ -70,7 +71,7 @@ public class CMAINCONSTANTS {
 	
 	// «начени€ высоты €чейки списка шаблона и ширины контрола в этой €чейки
 	// по умолчанию!!!
-	public static String Height_cell_start = "55";
+	public static String Height_cell_start = "25";
 	public static String Width_control_start = "100";
 	
 	
@@ -90,6 +91,6 @@ public class CMAINCONSTANTS {
 	public static String FB_my_templates = "my_templates";
 	public static String FB_my_adding_attr = "my_adding_attr";
 	
-	
+	 
 
 }

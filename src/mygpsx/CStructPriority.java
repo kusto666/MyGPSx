@@ -44,4 +44,8 @@ public class CStructPriority
     {
         this.MyNamePriority = MyNamePriority;
     }
+    @Override
+    public String toString()  {
+        return (this.getMyNamePriority());
+    }
 }

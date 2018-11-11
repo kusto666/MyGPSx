@@ -71,6 +71,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
@@ -83,6 +84,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -99,11 +101,37 @@ import netscape.javascript.JSObject;
  */
 public class CMainController implements Initializable, MapComponentInitializedListener
 {
+	@FXML
+	private TextField fxTxtFastSearch;// Быстрый поиск объекта по совпадению в...
+	// Правый и левый меню аккордионы:
+	@FXML
+	private Accordion fxAccordRightMain;
+	@FXML
+	private TitledPane fxTPaneRight1;
+	@FXML
+	private TitledPane fxTPaneRight2;
+	@FXML
+	private TitledPane fxTPaneRight3;
+	
+	// Левый!!
+	// Правый и левый меню аккордионы:
+	@FXML
+	private Accordion fxAccordLeftMain;
+	@FXML
+	private TitledPane fxTPaneLeft1;
+	@FXML
+	private TitledPane fxTPaneLeft2;
+	@FXML
+	private TitledPane fxTPaneLeft3;
+	
 	////////////////////// Здесь работа с TabPane!!! START///////////////////////////////////////////
 	@FXML
 	private TabPane fxTabPaneMain;
 	@FXML
+	private Tab fxTabPaneUsersOnMaps;
+	@FXML
 	private Tab fxTabPaneUsersAndJobs;
+	
 	@FXML
 	private AnchorPane apPaneUsersAndJobs;
 	
@@ -242,10 +270,14 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 						
 						try
 						{
-							if(stTempID.equals("fxTxtNameTmplJob"))// Получили нужный нод с названием задачи и проверяем на изменение онной!!!
+							if(stTempID.equals("fxTxtNameTmplJob"))// Получили нужный "node" с названием задачи и проверяем на изменение онной!!!
 							{
+								// Здесь еще нужно убедиться, что пользователь уже не наляпал в шаблон контролов,
+								// а то пиздец как не удобно перед ним выйдет)))
+								
 								TextField txtFldTemp = (TextField)node;
-								if(txtFldTemp.getText().equals(CFXCreateTemplateJobCtrl.m_stTempNameJob))
+								if(txtFldTemp.getText().equals(CFXCreateTemplateJobCtrl.m_stTempNameJob) 
+										/*$$ =:))*/&& CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL == 0)
 								{
 									System.out.println("Значит изменений не было и мы просто закрываем окно создания шаблона задачи!!!");
 									CLPSMain.mDatabase = FirebaseDatabase.getInstance()
@@ -254,6 +286,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 											.child(CMAINCONSTANTS.FB_my_templates);
 									CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();
 									CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
+									CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // Обнуляем кол-во контролов.
 	    							// шаблона, потому опять == 1.
 								}
 								else// Однако они были, тогда предлагаем выбор!!!
@@ -277,6 +310,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		    							CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();
 		    							CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
 		    							// шаблона, потому опять == 1.
+		    							CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // Обнуляем кол-во контролов.
 		    							break;
 				            		} 
 				            		else
@@ -519,7 +553,12 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             }
     }
     @FXML
-    private void handleDeleteAllMarkers(ActionEvent event) {
+    private void handleDeleteAllMarkers(ActionEvent event) 
+    {
+    	TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
+		javafx.scene.control.SingleSelectionModel<Tab> selectionModel = tb.getSelectionModel();
+		selectionModel.select(0);
+		
     	if(map != null)
     	{
     		map.clearMarkers();
@@ -704,6 +743,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private void btnShowAllMarkers(ActionEvent event) 
     {
+    	TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
+		javafx.scene.control.SingleSelectionModel<Tab> selectionModel = tb.getSelectionModel();
+		selectionModel.select(0);
+		
     	if(!ShowAllMarkersAfterRefresh())
     	{
     		System.out.println("btnRefreshAllMarkers(); - а потом показываем!!!");
@@ -894,7 +937,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @Override
     public synchronized void initialize(URL url, ResourceBundle rb)
     {
-    	
+    	fxAccordLeftMain.setExpandedPane(fxTPaneLeft2);
+    	fxAccordRightMain.setExpandedPane(fxTPaneRight1);
     	try 
     	{
     		apPaneUsersAndJobs = FXMLLoader.load(getClass().getResource("LPSMapTUserAndJobs.fxml"));
@@ -903,7 +947,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		// Добавим сразу в fxAPaneMain для шаблона файлик FXAPaneTemplateJobs.fxml
 			m_FXAPaneTemplateJobs = FXMLLoader.load(getClass().getResource("FXAPaneTemplateJobs.fxml"));
 			apPaneUsersAndJobs.getChildren().add(m_FXAPaneTemplateJobs);
-			apPaneUsersAndJobs.setTopAnchor(m_FXAPaneTemplateJobs, 130.0);
+			apPaneUsersAndJobs.setTopAnchor(m_FXAPaneTemplateJobs, 170.0);
 			apPaneUsersAndJobs.setLeftAnchor(m_FXAPaneTemplateJobs, 10.0);
 			fxListTmplJob = (ListView<CStructAttrTmpl>)m_FXAPaneTemplateJobs.getChildren().get(0);
 		} 

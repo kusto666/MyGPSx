@@ -63,6 +63,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert.AlertType;
@@ -510,12 +512,16 @@ public class CLPSMain extends Application
 			            		    				
 			            		    		        if (click.getClickCount() == 2) 
 			            		    		        {
-			            		    		          CStructUser us = fxListView.getSelectionModel().getSelectedItem();
-			            		    		          System.out.println("tempUser = " + us.getMyNameShip());
-			            		    		          double dLat = Double.parseDouble(us.getMyLatitude());
-			            		    		          double dLong = Double.parseDouble(us.getMyLongitude());
-			            		    		          LatLong ll = new LatLong(dLat,dLong); 
-			            		    		          CMainController.map.setCenter(ll);
+			            		    		        	TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
+			            		    		    		javafx.scene.control.SingleSelectionModel<Tab> selectionModel = tb.getSelectionModel();
+			            		    		    		selectionModel.select(0);
+			            		    		    		
+				            		    		          CStructUser us = fxListView.getSelectionModel().getSelectedItem();
+				            		    		          System.out.println("tempUser = " + us.getMyNameShip());
+				            		    		          double dLat = Double.parseDouble(us.getMyLatitude());
+				            		    		          double dLong = Double.parseDouble(us.getMyLongitude());
+				            		    		          LatLong ll = new LatLong(dLat,dLong); 
+				            		    		          CMainController.map.setCenter(ll);
 			            		    		          
 			            		    		          InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
 			            		    		          infoWindowOptions.content("<h4>Имя судна:</h4>" + 

@@ -75,6 +75,7 @@ public class CListCellAttrjobController implements Initializable{
 	@FXML
     private void BtnAddAttrjobIntoTmpl(ActionEvent event) 
     {
+		CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL++;
 		// Это добавление в firebase real!!!
 		String stTempUniqueID = CLPSMain.mDatabase.push().getKey();
 		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
