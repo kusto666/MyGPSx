@@ -71,6 +71,16 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
                 fxLb1.setVisible(false);
                 fxLb2.setVisible(false);
                 
+                if(CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT == 1)
+                {
+                	fxBtnDeleteAttrjob.setVisible(false);
+                }
+                else
+                {
+                	fxBtnDeleteAttrjob.setVisible(true);
+                }
+                
+                
                 
                 
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
@@ -87,7 +97,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
         				  // из ветки my_templates->UniqueID->my_adding_attr->UniqueID
         				  if(((CStructAttrTmpl)item).getMyAttrType().equals("Label"))
         				  {
-        					  System.out.println("Раз lCountChildren  > 0 == тогда показываем из базы все прелести интерфейса!!!");
+        					  System.out.println("Adding Label into Template.");
         					  Label LbTest = new Label();
         					  LbTest.setText(item.getMyAttrName());
         					  double dAnchorTop = 2.0;
@@ -96,6 +106,18 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 	      					  AnchorPane.setLeftAnchor(LbTest, dAnchorLeft);
 	      						
         					  m_Pane.getChildren().add(LbTest);
+        				  }
+        				  if(((CStructAttrTmpl)item).getMyAttrType().equals("TextField"))
+        				  {
+        					  System.out.println("Adding TextField into Template.");
+        					  TextField TxtField= new TextField();
+        					  TxtField.setText(item.getMyAttrName());
+        					  double dAnchorTop = 2.0;
+        					  double dAnchorLeft = 2.0;
+        					  AnchorPane.setTopAnchor(TxtField, dAnchorTop);
+	      					  AnchorPane.setLeftAnchor(TxtField, dAnchorLeft);
+	      						
+        					  m_Pane.getChildren().add(TxtField);
         				  }
 
         			  }

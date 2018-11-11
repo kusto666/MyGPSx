@@ -96,6 +96,7 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 			 CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).
 			 child("MyNameTemplate").setValue(fxTxtNameTmplJob.getText());
 			 ((Stage)fxBtnCloseFrame.getScene().getWindow()).close();// И успешно закрываем окно!!!
+			 CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;
 		 }
 		
 
@@ -133,6 +134,7 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
+		CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 0;
 		try 
 		{
 			// Добавим сразу в fxAPaneMain для шаблона файлик FXAPaneTemplateJobs.fxml

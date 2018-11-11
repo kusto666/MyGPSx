@@ -36,7 +36,7 @@ public class CTUsersJobsController implements Initializable
 	
 	private DatabaseReference mDatabaseUsers;
 	private DatabaseReference mDatabaseListenSelectUser;// Здесь слушаем выбранного пользователя!!!
-	private Task<Void> mDatabaseUpdateSelectedUser;
+	private Task<Void> mDatabaseUpdateSelectedUsersTmpls;
 	
 	private DatabaseReference mDatabaseTamplates;
 	private ObservableList<CStructTmplJob> m_ObservableListTmpl;
@@ -103,7 +103,7 @@ public class CTUsersJobsController implements Initializable
 						m_stNameShip =  ((CStructUser)newValue).getMyNameShip();
 						m_stUsersUniqueID =  ((CStructUser)newValue).getMyPhoneID();
 						CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = m_stUsersUniqueID;
-						mDatabaseUpdateSelectedUser = FirebaseDatabase.getInstance().getReference()
+						mDatabaseUpdateSelectedUsersTmpls = FirebaseDatabase.getInstance().getReference()
 								.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
 						System.out.println("m_stUsersUniqueID = " + m_stUsersUniqueID);
 						//System.out.println("m_stNameShip = " + m_stNameShip);
@@ -203,11 +203,9 @@ public class CTUsersJobsController implements Initializable
 				m_stTmplUniqueID =  ((CStructTmplJob)newValue).getMyIDUnique();
 				CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL = m_stTmplUniqueID;
 				System.out.println("CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL = " + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
-				/*CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = m_stUsersUniqueID;
-				mDatabaseUpdateSelectedUser = FirebaseDatabase.getInstance().getReference()
-						.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
-				System.out.println("m_stUsersUniqueID = " + m_stUsersUniqueID);
-				System.out.println("m_stNameShip = " + m_stNameShip);*/
+				
+				mDatabaseUpdateSelectedUsersTmpls = FirebaseDatabase.getInstance().getReference()
+						.child(CMAINCONSTANTS.FB_MyIDTmplSelected).setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
 
 			}
 		});

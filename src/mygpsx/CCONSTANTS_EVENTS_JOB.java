@@ -24,6 +24,9 @@ public class CCONSTANTS_EVENTS_JOB
 	// то кнопка "DEL" скрываетс€, а кнопка "ADD" - по€вл€етс€!!!
 	public static String SAMPLE_ANY_OR_ANY = "DEL"; // "ADD" - значит добавл€ем в шаблон задач (в данном случае!!!)
 	
+	// Ёто тоже св€зано с шаблоном, но здесь мы смотрим, что делаем, а именно:
+	public static int TEMPLATE_FILLING_OR_EDIT = 1;//1 - «начит заполн€ем, 0 - создаем или редактируем!!!
+	
 	// „ј—“ќ »—ѕќЋ№«”≈ћџ≈ ‘”Ќ ÷»»!!!
 	public static <T> boolean OpenAnyFrame( Class<T> MyClassFrame, 
 											String stPathFXFrame,

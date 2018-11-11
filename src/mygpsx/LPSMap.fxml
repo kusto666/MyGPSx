@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import com.lynden.gmapsfx.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="750" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CMainController">
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CMainController">
     <children>
       <TabPane fx:id="fxTabPaneMain" layoutX="225.0" layoutY="14.0" prefHeight="556.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0">
         <tabs>

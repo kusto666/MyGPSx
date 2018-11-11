@@ -194,6 +194,7 @@ public class CLPSMain extends Application
 	@Override
     public void start(Stage st) throws Exception
     {
+    	CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Изначально все шаблоны готовы к заполнению!!!
     	if(!InitFireBase())
     	{
     		System.out.println("InitFireBase() - ошибка инициализации!!!");

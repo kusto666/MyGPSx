@@ -240,7 +240,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 						//TextField txtFldTemp
 						System.out.println("node.getId() = " + stTempID);
 						
-						try {
+						try
+						{
 							if(stTempID.equals("fxTxtNameTmplJob"))// Получили нужный нод с названием задачи и проверяем на изменение онной!!!
 							{
 								TextField txtFldTemp = (TextField)node;
@@ -252,6 +253,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 											.child(CMAINCONSTANTS.FB_my_owner_settings)
 											.child(CMAINCONSTANTS.FB_my_templates);
 									CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();
+									CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
+	    							// шаблона, потому опять == 1.
 								}
 								else// Однако они были, тогда предлагаем выбор!!!
 								{
@@ -272,6 +275,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		    									.child(CMAINCONSTANTS.FB_my_owner_settings)
 		    									.child(CMAINCONSTANTS.FB_my_templates);
 		    							CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();
+		    							CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
+		    							// шаблона, потому опять == 1.
 		    							break;
 				            		} 
 				            		else
@@ -906,36 +911,12 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	{
 			e.printStackTrace();
 		}
-    	
-    	
-    	
+
     	selectionModel = fxTabPaneMain.getSelectionModel();
     	//selectionModel.select(tab); //select by object
     	selectionModel.select(1); //select by index starting with 0
-    	//selectionModel.clearSelection(); //clear your selection
-    	
-    	
-    	//CLPSMain.MyEventListnerFireUsers();
-    	/*fxListView.setCellFactory(new Callback<ListView<CUser>, ListCell<CUser>>() {
-			
-			@Override
-			public ListCell<CUser> call(ListView<CUser> param) {
-				// TODO Auto-generated method stub
-				return new StudentListViewCell();
-			}
-		});*/
-    	/*setCellFactory(new Callback<ListView<Student>, ListCell<Student>>() {
-    	    @Override
-    	    public ListCell<CUser> call(ListView<CUser> studentListView) {
-    	        return new StudentListViewCell();
-    	    }
-    	});*/
     	try 
     	{
-    	//	fxListView.setItems(m_ObservableListUsers);
-    	//	fxListView.setCellFactory(studentListView -> new CMainController());
-    	//	fxListView.setItems(CLPSMain.m_ObservableListUsers);
-       //    fxListView.setCellFactory(fxListViewUsersMy -> new CMainController());
             mapView.addMapInializedListener(this);
 		}
     	catch (Exception ex)
