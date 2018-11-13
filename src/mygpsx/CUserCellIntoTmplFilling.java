@@ -19,7 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
 
-public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
+public class CUserCellIntoTmplFilling  extends ListCell<CStructAttrTmplFilling>
 {
 	@FXML
 	Label fxLb1;
@@ -39,7 +39,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 	AnchorPane m_Pane;
 	
 	@Override
-	public void updateItem(CStructAttrTmpl  item, boolean empty) 
+	public void updateItem(CStructAttrTmplFilling  item, boolean empty) 
 	{
 		super.updateItem(item, empty);
 		// Rectangle rect = new Rectangle(100, 20);
@@ -52,7 +52,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
         }
         else
         {
-            mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXCellIntoTmpl));
+            mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXCellIntoTmplFilling));
             try 
             {
                 mLLoader.load();
@@ -82,7 +82,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
         				  m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
         				  // Теперь попробуем вывести что-нибудь из интерфейса,
         				  // из ветки my_templates->UniqueID->my_adding_attr->UniqueID
-        				  if(((CStructAttrTmpl)item).getMyAttrType().equals("Label"))
+        				  if(((CStructAttrTmplFilling)item).getMyAttrType().equals("Label"))
         				  {
         					  System.out.println("Adding Label into Template.");
         					  Label LbTest = new Label();
@@ -95,7 +95,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 	      						
         					  m_Pane.getChildren().add(LbTest);
         				  }
-        				  if(((CStructAttrTmpl)item).getMyAttrType().equals("TextField"))
+        				  if(((CStructAttrTmplFilling)item).getMyAttrType().equals("TextField"))
         				  {
         					  System.out.println("Adding TextField into Template.");
         					  TextField TxtField= new TextField();
@@ -108,7 +108,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 	      						
         					  m_Pane.getChildren().add(TxtField);
         				  }
-        				  if(((CStructAttrTmpl)item).getMyAttrType().equals("TextArea"))
+        				  if(((CStructAttrTmplFilling)item).getMyAttrType().equals("TextArea"))
         				  {
         					  System.out.println("Adding TextArea into Template.");
         					  TextArea TxtArea= new TextArea();

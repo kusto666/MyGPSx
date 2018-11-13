@@ -142,7 +142,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	@FXML
 	private AnchorPane m_FXAPaneTemplateJobs;// Это панель в которой и находится сам лист с шаблоном!!!
 	@FXML
-	private ListView<CStructAttrTmpl> fxListTmplJob;
+	private ListView<CStructAttrTmplFilling> fxListTmplJob;
 	////////////////////// Для вкладки настроек!!! START///////////////////////////////////////////
 	 @FXML
 	 Button btnSettingsPriorityEdit;
@@ -285,7 +285,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 											.child(CMAINCONSTANTS.FB_my_owner_settings)
 											.child(CMAINCONSTANTS.FB_my_templates);
 									CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();
-									CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
+									//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
 									CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // Обнуляем кол-во контролов.
 	    							// шаблона, потому опять == 1.
 								}
@@ -308,7 +308,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		    									.child(CMAINCONSTANTS.FB_my_owner_settings)
 		    									.child(CMAINCONSTANTS.FB_my_templates);
 		    							CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();
-		    							CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
+		    							//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
 		    							// шаблона, потому опять == 1.
 		    							CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // Обнуляем кол-во контролов.
 		    							break;
@@ -945,11 +945,11 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		fxTabPaneUsersAndJobs.setContent(apPaneUsersAndJobs);
     		
     		// Добавим сразу в fxAPaneMain для шаблона файлик FXAPaneTemplateJobs.fxml
-			m_FXAPaneTemplateJobs = FXMLLoader.load(getClass().getResource("FXAPaneTemplateJobs.fxml"));
+			m_FXAPaneTemplateJobs = FXMLLoader.load(getClass().getResource(CMAINCONSTANTS.m_PathFXAPaneTemplateFilling));
 			apPaneUsersAndJobs.getChildren().add(m_FXAPaneTemplateJobs);
 			apPaneUsersAndJobs.setTopAnchor(m_FXAPaneTemplateJobs, 170.0);
 			apPaneUsersAndJobs.setLeftAnchor(m_FXAPaneTemplateJobs, 10.0);
-			fxListTmplJob = (ListView<CStructAttrTmpl>)m_FXAPaneTemplateJobs.getChildren().get(0);
+			fxListTmplJob = (ListView<CStructAttrTmplFilling>)m_FXAPaneTemplateJobs.getChildren().get(0);
 		} 
     	catch (Exception e)
     	{
@@ -967,6 +967,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	{
     		ex.getMessage();
 		}
+    	
+    	// Здесь потом инициализируем поиск по вхождению!!! 
 
     } 
     private void uploadImage(File fFile)

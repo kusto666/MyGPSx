@@ -23,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 public class CTUsersJobsController implements Initializable
@@ -31,15 +32,17 @@ public class CTUsersJobsController implements Initializable
 	//public static int m_iChangeIndex = 0;
 	//private IntegerProperty index = new SimpleIntegerProperty(-1);
 	@FXML
+	private Label fxLbErrorSelectPriority;
+	@FXML
 	private Button fxBtnAddingJobNew;
 	@FXML
 	private AnchorPane fxAPaneMain;
 	@FXML
-	private ComboBox<CStructUser> fxCbSelectUser;
+	private ComboBox<CStructUser> fxCbSelectUser;// Здесь список пользователей!!!
 	@FXML
-	private ComboBox<CStructTmplJob> fxCbSelectTamplateJob;
+	private ComboBox<CStructTmplJob> fxCbSelectTamplateJob; // List of templates!!!
 	@FXML
-	private ComboBox<CStructPriority> fxCbSelectPriorityJob;
+	private ComboBox<CStructPriority> fxCbSelectPriorityJob; // List of priority!!!
 	
 	private DatabaseReference mDatabaseUsers;
 	private Task<Void> mDatabaseAddingJob;
@@ -68,18 +71,26 @@ public class CTUsersJobsController implements Initializable
 	
 	private int my_i = 0;
 
-	// Добавление овой задачи!!!
+	// Добавление новой задачи!!!
     @FXML
     private void BtnAddingJobNew(ActionEvent event) 
     {
     	try 
     	{
-    		String uploadId = CLPSMain.mDatabase.push().getKey();
-    		mDatabaseAddingJob = FirebaseDatabase.getInstance().getReference()
-    				.child(CMAINCONSTANTS.FB_my_users_jobs)
-    				.child(CMAINCONSTANTS.MyPhoneID_ + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP)
-    				.child(uploadId).child("MyTemplateJob").setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
-    		System.out.println("BtnAddingJobNew!!!");
+    		if(fxCbSelectPriorityJob.getSelectionModel().getSelectedIndex() != 0)
+    		{
+    			String uploadId = CLPSMain.mDatabase.push().getKey();
+        		mDatabaseAddingJob = FirebaseDatabase.getInstance().getReference()
+        				.child(CMAINCONSTANTS.FB_my_users_jobs)
+        				.child(CMAINCONSTANTS.MyPhoneID_ + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP)
+        				.child(uploadId).child("MyTemplateJob").setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
+        		System.out.println("BtnAddingJobNew!!!");
+    		}
+    		else
+    		{
+    			fxLbErrorSelectPriority.setVisible(true);
+    		}
+    		
 		} 
     	catch (Exception e)
     	{
@@ -90,6 +101,7 @@ public class CTUsersJobsController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		fxLbErrorSelectPriority.setVisible(false);
 		mDatabaseUsers = FirebaseDatabase.getInstance().getReference()
 				.child(CMAINCONSTANTS.FB_users);
 		mDatabaseUsers.addValueEventListener(new ValueEventListener()
@@ -208,7 +220,21 @@ public class CTUsersJobsController implements Initializable
 		            fxCbSelectTamplateJob.setItems(m_ObservableListTmpl);
 		        	Platform.runLater(
 	            			  () -> {
-	            				  fxCbSelectTamplateJob.setValue(m_aTmpl.get(0));
+	            				  try
+	            				  {
+	            					  // Здесь если попадаем в исключение, то ниже т.к. нет ни одного шаблона в списке!!!
+	            					  fxCbSelectTamplateJob.setValue(m_aTmpl.get(0));
+	            				  } 
+	            				  catch (Exception e)
+	            				  {
+	            					  // ... ставим заглушку из пустого объекта CStructTmplJob 
+	            					  CStructTmplJob tempStructTmplJob = new CStructTmplJob();
+	            					  tempStructTmplJob.setMyNameTemplate("Empty list of templates!");
+	            					  m_aTmpl.add(tempStructTmplJob);
+	            					  fxCbSelectTamplateJob.setValue(m_aTmpl.get(0));
+	            					  //e.getMessage();
+								  }
+	            				  
 	            			  });
 				}
 				catch (Exception e) 
@@ -297,6 +323,11 @@ public class CTUsersJobsController implements Initializable
 						{
 							//System.out.println("Что-то изменилось!!!");
 						}
+						if(fxLbErrorSelectPriority.isVisible()) 
+						{
+							fxLbErrorSelectPriority.setVisible(false);
+						}
+						
 						CCONSTANTS_EVENTS_JOB.TEMP_PRIORITY_JOB = newValue.getMyIDUnique();
 						System.out.println("CCONSTANTS_EVENTS_JOB.TEMP_PRIORITY_JOB = " + CCONSTANTS_EVENTS_JOB.TEMP_PRIORITY_JOB);
 					}

@@ -31,6 +31,8 @@ public class CUserCellAttrjob  extends ListCell<CStructAttrjob>
 	@FXML
 	TextField fxTxtHeight;
 	@FXML
+	TextField fxTxtWidth;
+	@FXML
 	FXMLLoader mLLoader;
 	@FXML
 	AnchorPane m_Pane;
@@ -58,6 +60,9 @@ public class CUserCellAttrjob  extends ListCell<CStructAttrjob>
                 fxTxtNameAttrjob = (TextField)mLLoader.getNamespace().get("fxTxtNameAttrjob");
                 fxBtnDeleteAttrjob = (Button)mLLoader.getNamespace().get("fxBtnDeleteAttrjob");
                 fxTxtHeight = (TextField)mLLoader.getNamespace().get("fxTxtHeight");
+                fxTxtHeight.setText(CMAINCONSTANTS.Height_cell_start);
+                fxTxtWidth = (TextField)mLLoader.getNamespace().get("fxTxtWidth");
+                fxTxtWidth.setText(CMAINCONSTANTS.Width_control_start); 
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
         		
         		fxLbUniqueID.setText(String.valueOf(item.getMyIDUnique()));

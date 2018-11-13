@@ -59,23 +59,13 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 	@FXML
 	private TextField fxTxtNameTmplJob;
 	
-	@FXML
+	/*@FXML
     private void btnPreview(ActionEvent event) throws IOException 
     {
 		CCONSTANTS_EVENTS_JOB.OpenAnyFrame(CFXCreateTemplateJobCtrl.class, CMAINCONSTANTS.m_PathFXPreviewTemplate,
 											CLPSMain.m_rootFXPreviewTemplateJobs, CLPSMain.m_stageFXPreviewTemplateJobs,
 											"Предварительный просмотр шаблона...", false, true, false);
-		/* FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPreviewTemplate));
-         CLPSMain.m_rootFXPreviewTemplateJobs = (Parent)fxmlLoader.load();
-         CLPSMain.m_stageFXPreviewTemplateJobs = new Stage();
-         CLPSMain.m_stageFXPreviewTemplateJobs.setTitle(CStrings.m_APP_NAME + "->Предварительный просмотр шаблона...");
-         CLPSMain.m_stageFXPreviewTemplateJobs.setScene(new Scene(CLPSMain.m_rootFXPreviewTemplateJobs));  
-         CLPSMain.m_stageFXPreviewTemplateJobs.setResizable(false);
-         CLPSMain.m_stageFXPreviewTemplateJobs.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
-         CLPSMain.m_stageFXPreviewTemplateJobs.initOwner(CLPSMain.m_stageFXCreateTemplateJobs);
-         CLPSMain.m_stageFXPreviewTemplateJobs.show();
-		 System.out.println("btnPreview(ActionEvent event)!!!");*/
-    }
+    }*/
 	
 	@FXML
     private void btnCloseFrame(ActionEvent event) 
@@ -96,7 +86,7 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 			 CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).
 			 child("MyNameTemplate").setValue(fxTxtNameTmplJob.getText());
 			 ((Stage)fxBtnCloseFrame.getScene().getWindow()).close();// И успешно закрываем окно!!!
-			 CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;
+			 //CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;
 		 }
 		
 
@@ -104,13 +94,6 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 	@FXML
     private void btnOpenFrameWithAttributes(ActionEvent event)// Открываем окно для добавления атрибутов!!!
     {
-/*		//Button b = new Button(button.getText());
-		Button b = new Button("button.getText()");
-		//fxAPaneMain.add(b);
-		AnchorPane.setTopAnchor(b, 100.0);
-		AnchorPane.setLeftAnchor(b, 10.0);
-		fxAPaneMain.getChildren().add(b);*/
-
 		System.out.println("FrameSettingsAttrjobEdit!!!");
     	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
@@ -134,14 +117,15 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 0;
+		//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 0;
 		try 
 		{
 			// Добавим сразу в fxAPaneMain для шаблона файлик FXAPaneTemplateJobs.fxml
-			m_FXAPaneTemplateJobs = FXMLLoader.load(getClass().getResource("FXAPaneTemplateJobs.fxml"));
+			m_FXAPaneTemplateJobs = FXMLLoader.load(getClass().getResource(CMAINCONSTANTS.m_PathFXAPaneTemplateJobs));
 			fxAPaneMain.getChildren().add(m_FXAPaneTemplateJobs);
 			fxAPaneMain.setTopAnchor(m_FXAPaneTemplateJobs, 70.0);
 			fxAPaneMain.setLeftAnchor(m_FXAPaneTemplateJobs, 10.0);
+			fxAPaneMain.setRightAnchor(m_FXAPaneTemplateJobs, 10.0);
 			fxListTmplJob = (ListView<CStructAttrTmpl>)m_FXAPaneTemplateJobs.getChildren().get(0);
 		} 
 		catch (Exception e)

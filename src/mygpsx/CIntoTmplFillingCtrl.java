@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class CIntoTmplCtrl implements Initializable
+public class CIntoTmplFillingCtrl implements Initializable
 {
 	@FXML
 	private TextField fxTxtNumberAttrjob;

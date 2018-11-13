@@ -51,10 +51,18 @@ public class CMAINCONSTANTS {
 	// Тут все для создания шаблона!!!
 	public static String m_PathFXCreateTemplate = "FXCreateTemplateJobs.fxml";
 	public static String m_PathFXCellIntoTmpl = "FXCellIntoTmplJobs.fxml";
+	// Это ячейка для заполненя во вкладке(Tab) "Сотрудники-Задачи"
+	public static String m_PathFXCellIntoTmplFilling = "FXCellIntoTmplFilling.fxml";
 	
 	// Здесь пути к файлам для окна просмотра шаблона!!!
 	public static String m_PathFXPreviewTemplate = "FXPreviewTemplateJob.fxml";// Основное окно просмотра!!! 
 	public static String m_PathFXListCellTmplJob = "ListCellTmplJob.fxml";
+	
+	// Основной лист для отображения шаблона задания при редактировании и наполнении!!!
+	// Наверно всетаки надо ДВА РАЗНЫХ!!!
+	public static String m_PathFXAPaneTemplateJobs = "FXAPaneTemplateJobs.fxml";
+	// Это в главном окне во втором табе "Сотрудники-Задачи"
+	public static String m_PathFXAPaneTemplateFilling = "FXAPaneTemplateFilling.fxml";
 	
 	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";
 
@@ -68,11 +76,12 @@ public class CMAINCONSTANTS {
 	// Основной узел настроек для всего и шаблонов и всяких там объктов и вообще настроек!!!
 	public static String FB_my_owner_settings = "my_owner_settings";
 	
+		
 	
 	// Значения высоты ячейки списка шаблона и ширины контрола в этой ячейки
 	// по умолчанию!!!
 	public static String Height_cell_start = "25";
-	public static String Width_control_start = "100";
+	public static String Width_control_start = "200";
 	
 	
 	// Это все сущности-атрибуты!!!

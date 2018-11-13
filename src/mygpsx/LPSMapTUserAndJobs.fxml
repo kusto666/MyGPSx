@@ -16,6 +16,7 @@
       <ComboBox fx:id="fxCbSelectTamplateJob" layoutX="162.0" layoutY="81.0" prefHeight="25.0" prefWidth="260.0" AnchorPane.topAnchor="80.0" />
       <Label layoutX="10.0" layoutY="129.0" text="ПРИОРИТЕТ ЗАДАЧИ:" />
       <ComboBox fx:id="fxCbSelectPriorityJob" layoutX="162.0" layoutY="125.0" prefHeight="25.0" prefWidth="260.0" />
-      <Button fx:id="fxBtnAddingJobNew" layoutX="430.0" layoutY="125.0" mnemonicParsing="false" onAction="#BtnAddingJobNew" text="Добавить задачу?" />
+      <Button fx:id="fxBtnAddingJobNew" layoutX="430.0" layoutY="125.0" mnemonicParsing="false" onAction="#BtnAddingJobNew" prefHeight="25.0" prefWidth="153.0" text="Добавить задачу?" />
+      <Label fx:id="fxLbErrorSelectPriority" layoutX="162.0" layoutY="150.0" prefHeight="17.0" prefWidth="260.0" text="ВЫ НЕ УКАЗАЛИ ПРИОРИТЕТ!" textFill="RED" />
    </children>
  </AnchorPane>
