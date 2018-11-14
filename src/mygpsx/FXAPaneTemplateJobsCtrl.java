@@ -36,7 +36,7 @@ public class FXAPaneTemplateJobsCtrl implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		mDatabaseMyIDTmplSelected = FirebaseDatabase.getInstance().getReference()
-				.child(CMAINCONSTANTS.FB_MyIDTmplSelected);
+				.child(CMAINCONSTANTS.m_UniqueTempIDTempate);
 		mDatabaseMyIDTmplSelected.addValueEventListener(new ValueEventListener()
 		 {
 			@Override

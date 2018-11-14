@@ -3,6 +3,7 @@ package mygpsx;
 public class CMAINCONSTANTS {
 	
 	public static String m_UniqueTempIDTempate = "";
+	public static String m_UniqueTempEditIDTempate = "";
 	// Всекие пути к файлам окошек программы!!!
 	public static String m_PathMainFxml = "LPSMap.fxml";// Самое главное окно!!!
 	
@@ -53,6 +54,8 @@ public class CMAINCONSTANTS {
 	public static String m_PathFXCellIntoTmpl = "FXCellIntoTmplJobs.fxml";
 	// Это ячейка для заполненя во вкладке(Tab) "Сотрудники-Задачи"
 	public static String m_PathFXCellIntoTmplFilling = "FXCellIntoTmplFilling.fxml";
+	// Тут все для редактирования шаблона!!!
+	public static String m_PathFXEditTemplate = "FXEditTemplateJobs.fxml";
 	
 	// Здесь пути к файлам для окна просмотра шаблона!!!
 	public static String m_PathFXPreviewTemplate = "FXPreviewTemplateJob.fxml";// Основное окно просмотра!!! 

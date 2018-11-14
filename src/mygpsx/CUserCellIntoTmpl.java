@@ -21,32 +21,57 @@ import javafx.util.Callback;
 
 public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 {
+	////////////  ВСЕ ПО НОВОЙ!!!   ////////////////////////////////////////
 	@FXML
 	Label fxLb1;
 	@FXML
-	Label fxLb2;
+	Label fxLbTypeControl;
 	@FXML
 	Label fxLbUniqueID;
+	
+	//@FXML
+	//AnchorPane fxCellPane; // Самая главная панель!!!
 	@FXML
-	TextField fxTxtNumberAttrjob;
+	AnchorPane fxAPaneLabel;
 	@FXML
-	public TextField fxTxtNameAttrjob;
+	Label fxLbAPaneLabel;
+	@FXML
+	AnchorPane fxAPaneTextField;
+	@FXML
+	TextField fxTxtAPaneField;
+	@FXML
+	AnchorPane fxAPaneTextArea;
+	@FXML
+	TextArea fxTxtAPaneArea;
+	@FXML
+	AnchorPane fxAPaneControls;
+	
+	
+	@FXML
+	private TextField fxTxtHeight;
+	@FXML
+	private TextField fxTxtWidth;
 	@FXML
 	Button fxBtnDeleteAttrjob;
+	@FXML
+	Button fxBtnRefreshAttrjob;
+	
 	@FXML
 	FXMLLoader mLLoader;
 	@FXML
 	AnchorPane m_Pane;
 	
+	double dAnchorTop = 0.0;
+	double dAnchorLeft = 0.0;
+	double dAnchorButtom = 0.0;
+	////////////////////////////////////////////////////////////////////////
+	
 	@Override
 	public void updateItem(CStructAttrTmpl  item, boolean empty) 
 	{
 		super.updateItem(item, empty);
-		// Rectangle rect = new Rectangle(100, 20);
         if(empty || item == null) 
         {
-        	//rect.setFill(Color.web("blue"));
-        	//item.getMyHeight();
             setText(null);
             setGraphic(null);
         }
@@ -57,71 +82,101 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
             {
                 mLLoader.load();
                 fxLb1 = (Label)mLLoader.getNamespace().get("fxLb1");
-                fxLb2 = (Label)mLLoader.getNamespace().get("fxLb2");
+                fxLbTypeControl = (Label)mLLoader.getNamespace().get("fxLbTypeControl");
+               
                 fxLbUniqueID = (Label)mLLoader.getNamespace().get("fxLbUniqueID");
-                fxTxtNumberAttrjob = (TextField)mLLoader.getNamespace().get("fxTxtNumberAttrjob");
-                fxTxtNumberAttrjob.setEditable(false);
-                fxTxtNameAttrjob = (TextField)mLLoader.getNamespace().get("fxTxtNameAttrjob");
-                fxBtnDeleteAttrjob = (Button)mLLoader.getNamespace().get("fxBtnDeleteAttrjob");
                 
-                // Для чистоты эксперимента все скроем вначале!!!
-               // fxLbUniqueID.setVisible(false);
-                fxTxtNumberAttrjob.setVisible(false);
-                fxTxtNameAttrjob.setVisible(false);
+                fxAPaneLabel = (AnchorPane)mLLoader.getNamespace().get("fxAPaneLabel");
+                fxLbAPaneLabel = (Label)mLLoader.getNamespace().get("fxLbAPaneLabel");
+                fxAPaneTextField = (AnchorPane)mLLoader.getNamespace().get("fxAPaneTextField");
+                fxTxtAPaneField = (TextField)mLLoader.getNamespace().get("fxTxtAPaneField");
+                fxAPaneTextArea = (AnchorPane)mLLoader.getNamespace().get("fxAPaneTextArea");
+                fxTxtAPaneArea = (TextArea)mLLoader.getNamespace().get("fxTxtAPaneArea");
+                
+                fxAPaneControls = (AnchorPane)mLLoader.getNamespace().get("fxAPaneControls");
+                fxTxtHeight = (TextField)mLLoader.getNamespace().get("fxTxtHeight");
+                fxTxtWidth = (TextField)mLLoader.getNamespace().get("fxTxtWidth");
+                fxBtnDeleteAttrjob = (Button)mLLoader.getNamespace().get("fxBtnDeleteAttrjob");
+                fxBtnRefreshAttrjob = (Button)mLLoader.getNamespace().get("fxBtnRefreshAttrjob");
+
                 fxLb1.setVisible(false);
-                fxLb2.setVisible(false);
+                fxLbTypeControl.setVisible(false);
+                fxLbUniqueID.setVisible(false);
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
-        		// Здесь выставляем разную высоту для ячейки листа шаблона - блять ! Работает!!!
-        		// Get all different heigth from realbase firebase!!!!!!!!!!!!!!!!!!!!
-        		// It`s JOBING!!!!!
+
         		// Используем поток создания листа!!!
         		try 
         		{
         			
         			Platform.runLater( () -> {
-        				  m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        				  //m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
         				  // Теперь попробуем вывести что-нибудь из интерфейса,
         				  // из ветки my_templates->UniqueID->my_adding_attr->UniqueID
+        				  AnchorPane.setTopAnchor(fxAPaneControls, dAnchorTop);
         				  if(((CStructAttrTmpl)item).getMyAttrType().equals("Label"))
         				  {
         					  System.out.println("Adding Label into Template.");
-        					  Label LbTest = new Label();
-        					  LbTest.setText(item.getMyAttrName());
-        					  double dAnchorTop = 2.0;
-        					  double dAnchorLeft = 2.0;
-        					  AnchorPane.setTopAnchor(LbTest, dAnchorTop);
-	      					  AnchorPane.setLeftAnchor(LbTest, dAnchorLeft);
-	      					  LbTest.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
-	      						
-        					  m_Pane.getChildren().add(LbTest);
+       					  	  fxAPaneLabel.setVisible(true);
+        					  fxAPaneTextField.setVisible(false);
+        					  fxAPaneTextArea.setVisible(false);
+        					  
+        					  m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        					  
+        					  AnchorPane.setTopAnchor(fxAPaneLabel, dAnchorTop);
+        					  //AnchorPane.setLeftAnchor(fxAPaneLabel, dAnchorLeft);
+        					  
+        					  fxAPaneLabel.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
+        					  fxAPaneLabel.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        					  // Здесь данные контрола и позиция с размерами!!!
+        					  fxLbAPaneLabel.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
+        					  fxLbAPaneLabel.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        					  fxLbAPaneLabel.setText(item.getMyAttrName());
         				  }
         				  if(((CStructAttrTmpl)item).getMyAttrType().equals("TextField"))
         				  {
         					  System.out.println("Adding TextField into Template.");
-        					  TextField TxtField= new TextField();
-        					  TxtField.setText(item.getMyAttrName());
-        					  double dAnchorTop = 2.0;
-        					  double dAnchorLeft = 2.0;
-        					  AnchorPane.setTopAnchor(TxtField, dAnchorTop);
-	      					  AnchorPane.setLeftAnchor(TxtField, dAnchorLeft);
-	      					  TxtField.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
-	      						
-        					  m_Pane.getChildren().add(TxtField);
+
+        					  fxAPaneLabel.setVisible(false);
+        					  fxAPaneTextField.setVisible(true);
+        					  fxAPaneTextArea.setVisible(false);
+        					  
+        					  m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        					  
+        					  AnchorPane.setTopAnchor(fxAPaneTextField, dAnchorTop);
+        					  
+        					  fxAPaneTextField.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
+        					  fxAPaneTextField.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        					  
+        					  // Здесь данные контрола и позиция с размерами!!!
+        					  fxTxtAPaneField.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
+        					  fxTxtAPaneField.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        					  fxTxtAPaneField.setText(item.getMyAttrName());
         				  }
         				  if(((CStructAttrTmpl)item).getMyAttrType().equals("TextArea"))
         				  {
         					  System.out.println("Adding TextArea into Template.");
-        					  TextArea TxtArea= new TextArea();
-        					  TxtArea.setText(item.getMyAttrName());
-        					  double dAnchorTop = 2.0;
-        					  double dAnchorLeft = 2.0;
-        					  AnchorPane.setTopAnchor(TxtArea, dAnchorTop);
-	      					  AnchorPane.setLeftAnchor(TxtArea, dAnchorLeft);
-	      					  TxtArea.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
-	      						
-        					  m_Pane.getChildren().add(TxtArea);
+        					  
+        					  fxAPaneLabel.setVisible(false);
+        					  fxAPaneTextField.setVisible(false);
+        					  fxAPaneTextArea.setVisible(true);
+        					  
+        					  m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        					  
+        					  AnchorPane.setTopAnchor(fxAPaneTextArea, dAnchorTop);
+        					  
+        					  fxAPaneTextArea.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
+        					  fxAPaneTextArea.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        					  
+        					// Здесь данные контрола и позиция с размерами!!!
+        					  fxTxtAPaneArea.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
+        					  fxTxtAPaneArea.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
+        					  fxTxtAPaneArea.setText(item.getMyAttrName());
         				  }
-
+        				  fxLbTypeControl.setText(item.getMyAttrType());
+        				  System.out.println("fxLbTypeControl = " + fxLbTypeControl.getText());
+        				  fxTxtHeight.setText(item.getMyAttrHeight());
+        				  fxTxtWidth.setText(item.getMyAttrWidth());
+         	        	  fxLbUniqueID.setText(String.valueOf(item.getMyIDUnique()));
         			  }
         			);
 				} 
@@ -129,18 +184,12 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
         		{
         			ex.getMessage();
 				}
-        		
-
-        		fxLbUniqueID.setText(String.valueOf(item.getMyIDUnique()));
-        		fxTxtNumberAttrjob.setText(String.valueOf(item.getMyAttrID()));
-        		fxTxtNameAttrjob.setText(String.valueOf(item.getMyAttrName()));
             } 
             catch (IOException e) 
             {
                 e.printStackTrace();
             }
 
-           // System.out.println(fxTxtNameAttrobj.getText());
             setText(null);
             setGraphic(m_Pane);
         }

@@ -237,7 +237,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsFXCreateTemplate(ActionEvent event) 
     {
     	System.out.println("FrameSettingsFXCreateTemplate!!!");
-    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
+    	//CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
     	try 
     	{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXCreateTemplate));
@@ -272,7 +272,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 						{
 							if(stTempID.equals("fxTxtNameTmplJob"))// Получили нужный "node" с названием задачи и проверяем на изменение онной!!!
 							{
-								// Здесь еще нужно убедиться, что пользователь уже не наляпал в шаблон контролов,
+								// Здесь еще нужно убедиться, что пользователь уже(еще) не наляпал в шаблон контролов,
 								// а то пиздец как не удобно перед ним выйдет)))
 								
 								TextField txtFldTemp = (TextField)node;

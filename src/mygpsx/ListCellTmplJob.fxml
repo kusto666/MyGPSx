@@ -12,6 +12,6 @@
       <TextField fx:id="fxTxtNameTmplJob" layoutX="3.0" layoutY="25.0" prefHeight="25.0" prefWidth="276.0" AnchorPane.bottomAnchor="0.0" />
       <Button fx:id="fxBtnDeleteTmplJob" layoutX="283.0" layoutY="26.0" mnemonicParsing="false" onAction="#BtnDeleteTmplJob" prefHeight="25.0" prefWidth="45.0" text="DEL" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="73.0" />
       <Label fx:id="fxLbUniqueID" layoutX="27.0" layoutY="6.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="RED" />
-      <Button fx:id="fxBtnEditTmplJob" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="EDIT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Button fx:id="fxBtnEditTmplJob" mnemonicParsing="false" onAction="#BtnEditTmplJob" prefHeight="25.0" prefWidth="63.0" text="EDIT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>

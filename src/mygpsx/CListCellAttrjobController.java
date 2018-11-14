@@ -75,14 +75,32 @@ public class CListCellAttrjobController implements Initializable{
 	@FXML
     private void BtnAddAttrjobIntoTmpl(ActionEvent event) 
     {
+		// Это самая крутая кнопка! ))) 
+		// Самая рабочая, мы на нее еще вариант повесим для добавление сущностей в шаблон задачи
+		// открытый для редактирования!!!
 		CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL++;
-		// Это добавление в firebase real!!!
+		
 		String stTempUniqueID = CLPSMain.mDatabase.push().getKey();
-		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
-				.getReference()
-				.child(CMAINCONSTANTS.FB_my_owner_settings)
-				.child(CMAINCONSTANTS.FB_my_templates)
-				.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child(CMAINCONSTANTS.FB_my_adding_attr);
+		
+		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD"))
+		{
+			// Это добавление в firebase real!!!
+
+			CLPSMain.mDatabase = FirebaseDatabase.getInstance()
+					.getReference()
+					.child(CMAINCONSTANTS.FB_my_owner_settings)
+					.child(CMAINCONSTANTS.FB_my_templates)
+					.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child(CMAINCONSTANTS.FB_my_adding_attr);
+		}
+		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))
+		{
+			// Это добавление в firebase real!!!
+			CLPSMain.mDatabase = FirebaseDatabase.getInstance()
+					.getReference()
+					.child(CMAINCONSTANTS.FB_my_owner_settings)
+					.child(CMAINCONSTANTS.FB_my_templates)
+					.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate).child(CMAINCONSTANTS.FB_my_adding_attr);
+		}
 		CLPSMain.mDatabase.child(stTempUniqueID).child("MyIDUnique").setValue(stTempUniqueID);
 		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrID").setValue(fxLbUniqueID.getText());
 		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrName").setValue(fxTxtNameAttrjob.getText());
@@ -90,6 +108,8 @@ public class CListCellAttrjobController implements Initializable{
 		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrHeight").setValue(fxTxtHeight.getText());
 		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrWidth").setValue(fxTxtWidth.getText());
 		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrType").setValue(fxLbHiddenTypeAttr.getText());
+		
+		
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
@@ -99,7 +119,7 @@ public class CListCellAttrjobController implements Initializable{
 			fxBtnDeleteAttrjob.setVisible(true);
 			fxBtnAddAttrjobIntoTmpl.setVisible(false);
 		}
-		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD")) 
+		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD") || CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT")) 
 		{
 			fxBtnDeleteAttrjob.setVisible(false);
 			fxBtnAddAttrjobIntoTmpl.setVisible(true);

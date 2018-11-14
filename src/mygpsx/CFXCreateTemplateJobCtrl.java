@@ -120,6 +120,7 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 		//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 0;
 		try 
 		{
+			CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY = "ADD";
 			// Добавим сразу в fxAPaneMain для шаблона файлик FXAPaneTemplateJobs.fxml
 			m_FXAPaneTemplateJobs = FXMLLoader.load(getClass().getResource(CMAINCONSTANTS.m_PathFXAPaneTemplateJobs));
 			fxAPaneMain.getChildren().add(m_FXAPaneTemplateJobs);
