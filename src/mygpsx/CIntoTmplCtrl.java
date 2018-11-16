@@ -117,7 +117,7 @@ public class CIntoTmplCtrl implements Initializable
 				.child(CMAINCONSTANTS.FB_my_adding_attr)
 				.child(fxLbUniqueID.getText());
     			mDatabaseCurrentTmpl.child("MyAttrHeight").setValue(fxTxtHeight.getText());
-    			//mDatabaseCurrentTmpl.child("MyAttrName").setValue(fxTxtNameAttrjob.getText());
+    			mDatabaseCurrentTmpl.child("MyAttrName").setValue(fxTxtAPaneField.getText());
     			mDatabaseCurrentTmpl.child("MyAttrWidth").setValue(fxTxtWidth.getText());
 			}
 			if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))

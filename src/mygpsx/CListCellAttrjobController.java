@@ -3,8 +3,14 @@ package mygpsx;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -22,6 +28,8 @@ import javafx.scene.layout.Border;
 
 @SuppressWarnings("unused")
 public class CListCellAttrjobController implements Initializable{
+	DatabaseReference mDatabase;
+	//Query mDatabaseCurrentTmpl;
 
 	private String stUniqueIDAttrjob = null;
 	@FXML
@@ -46,7 +54,7 @@ public class CListCellAttrjobController implements Initializable{
     	{
     		
     		System.out.println("BtnDeleteAttrjob");
-    		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
+    		mDatabase = FirebaseDatabase.getInstance()
     				.getReference()
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_attrjob);
@@ -60,12 +68,12 @@ public class CListCellAttrjobController implements Initializable{
     		Label nodeOne = (Label)listNode.get(5);// Выбераем по ID(ID - это от 0 и т.д. выше!) объект(контролл)
     		stUniqueIDAttrjob = nodeOne.getText();// Порядок можно посмотреть в Scene Biulder
     		System.out.println("stUniqueIDAttrjob = " + stUniqueIDAttrjob);
-    		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
+    		mDatabase = FirebaseDatabase.getInstance()
     				.getReference()
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_attrjob)
     				.child(stUniqueIDAttrjob);
-    		CLPSMain.mDatabase.setValue(null);// Удаляем значение(объект) из базы!!!
+    		mDatabase.setValue(null);// Удаляем значение(объект) из базы!!!
         }
 		catch(Exception e) 
 		{
@@ -79,14 +87,17 @@ public class CListCellAttrjobController implements Initializable{
 		// Самая рабочая, мы на нее еще вариант повесим для добавление сущностей в шаблон задачи
 		// открытый для редактирования!!!
 		CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL++;
-		
-		String stTempUniqueID = CLPSMain.mDatabase.push().getKey();
+		mDatabase = FirebaseDatabase.getInstance()
+				.getReference()
+				.child(CMAINCONSTANTS.FB_my_owner_settings)
+				.child(CMAINCONSTANTS.FB_my_attrjob);
+		String stTempUniqueID = mDatabase.push().getKey();
 		
 		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD"))
 		{
 			// Это добавление в firebase real!!!
 
-			CLPSMain.mDatabase = FirebaseDatabase.getInstance()
+			mDatabase = FirebaseDatabase.getInstance()
 					.getReference()
 					.child(CMAINCONSTANTS.FB_my_owner_settings)
 					.child(CMAINCONSTANTS.FB_my_templates)
@@ -95,25 +106,48 @@ public class CListCellAttrjobController implements Initializable{
 		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))
 		{
 			// Это добавление в firebase real!!!
-			CLPSMain.mDatabase = FirebaseDatabase.getInstance()
+			mDatabase = FirebaseDatabase.getInstance()
 					.getReference()
 					.child(CMAINCONSTANTS.FB_my_owner_settings)
 					.child(CMAINCONSTANTS.FB_my_templates)
 					.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate).child(CMAINCONSTANTS.FB_my_adding_attr);
+
 		}
-		CLPSMain.mDatabase.child(stTempUniqueID).child("MyIDUnique").setValue(stTempUniqueID);
-		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrID").setValue(fxLbUniqueID.getText());
-		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrName").setValue(fxTxtNameAttrjob.getText());
-		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrHeight").setValue(fxTxtHeight.getText());
-		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrHeight").setValue(fxTxtHeight.getText());
-		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrWidth").setValue(fxTxtWidth.getText());
-		CLPSMain.mDatabase.child(stTempUniqueID).child("MyAttrType").setValue(fxLbHiddenTypeAttr.getText());
-		
-		
+		// Здесь слушаем количество для сортировки
+
+			mDatabase.addValueEventListener(new ValueEventListener() {
+				
+				@Override
+				public void onDataChange(DataSnapshot arg0) {
+					CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr = (long) arg0.getChildrenCount();
+					System.out.println("CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr ===========  "
+					+ CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr);
+					
+				}
+				
+				@Override
+				public void onCancelled(DatabaseError arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
+
+				CStructAttrTmpl tmpl = new CStructAttrTmpl(stTempUniqueID,
+						fxLbUniqueID.getText(),
+						fxTxtNameAttrjob.getText(),
+						fxTxtHeight.getText(),
+						fxTxtWidth.getText(),
+						fxLbHiddenTypeAttr.getText(),
+						CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr);
+				mDatabase.child(stTempUniqueID).setValue(tmpl);
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
+		
+		
+		
 		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("DEL")) 
 		{
 			fxBtnDeleteAttrjob.setVisible(true);
@@ -121,6 +155,45 @@ public class CListCellAttrjobController implements Initializable{
 		}
 		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD") || CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT")) 
 		{
+			// Здесь слушаем количество контролов для будущей сортировки//////////////////////
+			// Но надо проверить, какой шаблон слушаем: m_UniqueTempIDTempate or m_UniqueTempEditIDTempate
+			if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD"))// m_UniqueTempIDTempate
+			{
+				mDatabase = FirebaseDatabase.getInstance()
+						.getReference()
+						.child(CMAINCONSTANTS.FB_my_owner_settings)
+						.child(CMAINCONSTANTS.FB_my_templates)
+						.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child(CMAINCONSTANTS.FB_my_adding_attr);
+			}
+			if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))// m_UniqueTempEditIDTempate
+			{
+				mDatabase = FirebaseDatabase.getInstance()
+						.getReference()
+						.child(CMAINCONSTANTS.FB_my_owner_settings)
+						.child(CMAINCONSTANTS.FB_my_templates)
+						.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate).child(CMAINCONSTANTS.FB_my_adding_attr);
+			}
+			
+			mDatabase.addValueEventListener(new ValueEventListener() {
+				
+				@Override
+				public void onDataChange(DataSnapshot arg0) {
+					CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr = (long) arg0.getChildrenCount();
+					System.out.println("CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr ===========  "
+					+ CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr);
+					
+				}
+				
+				@Override
+				public void onCancelled(DatabaseError arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
+			////Здесь заканчиваем слушать количество контролов для будущей сортировки - END!!! /////////////////
+			
+			
 			fxBtnDeleteAttrjob.setVisible(false);
 			fxBtnAddAttrjobIntoTmpl.setVisible(true);
 		}
@@ -137,12 +210,12 @@ public class CListCellAttrjobController implements Initializable{
 		    		Label nodeOne = (Label)listNode.get(5);
 		    		stUniqueIDAttrjob = nodeOne.getText();
 		    		
-		    		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
+		    		mDatabase = FirebaseDatabase.getInstance()
 		    				.getReference()
 		    				.child(CMAINCONSTANTS.FB_my_owner_settings)
 		    				.child(CMAINCONSTANTS.FB_my_attrjob)
 		    				.child(stUniqueIDAttrjob);
-		    		CLPSMain.mDatabase.child("MyNameAttrjob").setValue(fxTxtNameAttrjob.getText());
+		    		mDatabase.child("MyNameAttrjob").setValue(fxTxtNameAttrjob.getText());
 	            }
 			}
 		});

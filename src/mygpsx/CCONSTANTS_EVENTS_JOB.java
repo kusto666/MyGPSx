@@ -1,6 +1,7 @@
 package mygpsx;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,11 @@ import javafx.stage.Stage;
 
 public class CCONSTANTS_EVENTS_JOB
 {
+	// Глобальная переменная хранения последнего количества атрибутов в узле my_adding_attr
+	public static long COUNT_ATTRIBUTES_IN_my_adding_attr = 0;
+	
+	public static ArrayList<CStructAttrTmpl> CFXEditTemplateJobCtrl_alAttrjob = null;// Был в классе CFXEditTemplateJobCtrl -> private m_alAttrjob;
+	
 	// Это временное хранение количества добавленных контролов в создаваемый временный шаблон задачи!!!
 	// Эта переменная служил для контроля при выходе из создания шаблона по "крестику" - это предупреждает о наличии
 	// проделанной работы в создаваемом шаблоне!!!

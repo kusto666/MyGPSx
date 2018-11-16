@@ -2,6 +2,8 @@ package mygpsx;
 
 import java.io.IOException;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +16,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -23,28 +26,28 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 {
 	////////////  ВСЕ ПО НОВОЙ!!!   ////////////////////////////////////////
 	@FXML
-	Label fxLb1;
+	private Label fxLb1;
 	@FXML
-	Label fxLbTypeControl;
+	private Label fxLbTypeControl;
 	@FXML
-	Label fxLbUniqueID;
+	private Label fxLbUniqueID;
 	
 	//@FXML
 	//AnchorPane fxCellPane; // Самая главная панель!!!
 	@FXML
-	AnchorPane fxAPaneLabel;
+	private AnchorPane fxAPaneLabel;
 	@FXML
-	Label fxLbAPaneLabel;
+	private Label fxLbAPaneLabel;
 	@FXML
-	AnchorPane fxAPaneTextField;
+	private AnchorPane fxAPaneTextField;
 	@FXML
-	TextField fxTxtAPaneField;
+	private TextField fxTxtAPaneField;
 	@FXML
-	AnchorPane fxAPaneTextArea;
+	private AnchorPane fxAPaneTextArea;
 	@FXML
-	TextArea fxTxtAPaneArea;
+	private TextArea fxTxtAPaneArea;
 	@FXML
-	AnchorPane fxAPaneControls;
+	private AnchorPane fxAPaneControls;
 	
 	
 	@FXML
@@ -52,19 +55,37 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 	@FXML
 	private TextField fxTxtWidth;
 	@FXML
-	Button fxBtnDeleteAttrjob;
+	private Button fxBtnDeleteAttrjob;
 	@FXML
-	Button fxBtnRefreshAttrjob;
+	private Button fxBtnRefreshAttrjob;
+	@FXML
+	private Button fxBtnMoveUp;
+	@FXML
+	private Button fxBtnMoveDown;
 	
 	@FXML
-	FXMLLoader mLLoader;
+	private FXMLLoader mLLoader;
 	@FXML
-	AnchorPane m_Pane;
+	private AnchorPane m_Pane;
 	
-	double dAnchorTop = 0.0;
-	double dAnchorLeft = 0.0;
-	double dAnchorButtom = 0.0;
+	private double dAnchorTop = 0.0;
+	//private double dAnchorLeft = 0.0;
+	//private double dAnchorButtom = 0.0;
 	////////////////////////////////////////////////////////////////////////
+	private CStructAttrTmpl m_TempAttrTmpl;
+	
+	private CStructAttrTmpl GetItemByAttrOrder(long lNumOrder)
+	{
+		CStructAttrTmpl tempStruct = null;
+		for(int i = 0; i < CCONSTANTS_EVENTS_JOB.CFXEditTemplateJobCtrl_alAttrjob.size(); i++)
+		{
+			if(lNumOrder == CCONSTANTS_EVENTS_JOB.CFXEditTemplateJobCtrl_alAttrjob.get(i).getMyAttrOrder())
+			{
+				tempStruct = CCONSTANTS_EVENTS_JOB.CFXEditTemplateJobCtrl_alAttrjob.get(i);
+			}
+		}
+		return tempStruct;
+	}
 	
 	@Override
 	public void updateItem(CStructAttrTmpl  item, boolean empty) 
@@ -98,7 +119,56 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
                 fxTxtWidth = (TextField)mLLoader.getNamespace().get("fxTxtWidth");
                 fxBtnDeleteAttrjob = (Button)mLLoader.getNamespace().get("fxBtnDeleteAttrjob");
                 fxBtnRefreshAttrjob = (Button)mLLoader.getNamespace().get("fxBtnRefreshAttrjob");
+                fxBtnMoveUp = (Button)mLLoader.getNamespace().get("fxBtnMoveUp");
+                fxBtnMoveUp.setOnMouseClicked(new EventHandler<MouseEvent>() 
+                {
+					@Override
+					public void handle(MouseEvent event) 
+					{
+						
+						long iTempAttrOrder = item.getMyAttrOrder();
+						m_TempAttrTmpl = GetItemByAttrOrder(iTempAttrOrder - 1);
+						if(m_TempAttrTmpl != null)
+						{
+							FirebaseDatabase.getInstance().getReference()
+							.child(CMAINCONSTANTS.FB_my_owner_settings)
+							.child(CMAINCONSTANTS.FB_my_templates)
+							.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
+							.child(CMAINCONSTANTS.FB_my_adding_attr)
+							.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder);// Опускаем контролл!!!
 
+							item.setMyAttrOrder(iTempAttrOrder - 1);// Поднимаем поднимаем .
+							FirebaseDatabase.getInstance().getReference()
+							.child(CMAINCONSTANTS.FB_my_owner_settings)
+							.child(CMAINCONSTANTS.FB_my_templates)
+							.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
+							.child(CMAINCONSTANTS.FB_my_adding_attr)
+							.child(item.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder - 1);
+						}
+						else
+						{
+							System.out.println("CUserCellIntoTmpl - что-то пошло не так!!!");
+						}
+
+					}
+				});
+
+                if(item.getMyAttrOrder() == 0)
+                {
+                	fxBtnMoveUp.setVisible(false);
+                }
+                fxBtnMoveDown = (Button)mLLoader.getNamespace().get("fxBtnMoveDown");
+                fxBtnMoveDown.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent event) {
+						//System.out.println("fxBtnMoveDown.setOnMouseClicked.");
+					}
+				});
+                if(item.getMyAttrOrder() == (CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr - 1))
+                {
+                	fxBtnMoveDown.setVisible(false);
+                }
                 fxLb1.setVisible(false);
                 fxLbTypeControl.setVisible(false);
                 fxLbUniqueID.setVisible(false);

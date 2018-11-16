@@ -48,11 +48,14 @@ public class FXAPaneTemplateJobsCtrl implements Initializable{
 				// Здесь инициализируем список сущностей(атрибутов добавленных в шаблон задачи)
 				try
 				{
-					mDatabaseCurrentTmpl = FirebaseDatabase.getInstance().getReference()
+					mDatabaseCurrentTmpl = (DatabaseReference) FirebaseDatabase.getInstance().getReference()
 							.child(CMAINCONSTANTS.FB_my_owner_settings)
 							.child(CMAINCONSTANTS.FB_my_templates)
 							.child(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL)
-							.child(CMAINCONSTANTS.FB_my_adding_attr);
+							.child(CMAINCONSTANTS.FB_my_adding_attr).orderByChild("MyAttrOrder");
+					
+					
+					
 					mDatabaseCurrentTmpl.addValueEventListener(new ValueEventListener()
 					 {
 						@Override
