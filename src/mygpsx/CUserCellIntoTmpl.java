@@ -70,9 +70,35 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 	
 	private double dAnchorTop = 0.0;
 	//private double dAnchorLeft = 0.0;
-	//private double dAnchorButtom = 0.0;
+	private double dAnchorButtom = 0.0;
 	////////////////////////////////////////////////////////////////////////
-	private CStructAttrTmpl m_TempAttrTmpl;
+	private CStructAttrTmpl m_TempAttrTmpl = null;
+	String m_stGetForUniqueNodeEditOrAddTemplate = null;
+	////////////////////////////////////////////////////////////////////////
+/*	private void UpDownControl(CStructAttrTmpl movingItem, long lNextMoving, String stGetForNodeEditOrAddTemplate)
+	{
+		if(m_TempAttrTmpl != null)
+		{
+			FirebaseDatabase.getInstance().getReference()
+			.child(CMAINCONSTANTS.FB_my_owner_settings)
+			.child(CMAINCONSTANTS.FB_my_templates)
+			.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
+			.child(CMAINCONSTANTS.FB_my_adding_attr)
+			.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder);// Опускаем контролл!!!
+
+			item.setMyAttrOrder(iTempAttrOrder - 1);// Поднимаем поднимаем .
+			FirebaseDatabase.getInstance().getReference()
+			.child(CMAINCONSTANTS.FB_my_owner_settings)
+			.child(CMAINCONSTANTS.FB_my_templates)
+			.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
+			.child(CMAINCONSTANTS.FB_my_adding_attr)
+			.child(item.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder - 1);
+		}
+		else
+		{
+			System.out.println("CUserCellIntoTmpl - что-то пошло не так с переещением кнопки!!!");
+		}
+	}*/
 	
 	private CStructAttrTmpl GetItemByAttrOrder(long lNumOrder)
 	{
@@ -101,6 +127,15 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
             mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXCellIntoTmpl));
             try 
             {
+            	// Смотрим откуда пришли сюда: из редактирования или из создания шаблона!!!
+            	if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY == "ADD")
+            	{
+            		m_stGetForUniqueNodeEditOrAddTemplate = CMAINCONSTANTS.m_UniqueTempIDTempate;
+            	}
+            	if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY == "EDIT")
+            	{
+            		m_stGetForUniqueNodeEditOrAddTemplate = CMAINCONSTANTS.m_UniqueTempEditIDTempate;
+            	}
                 mLLoader.load();
                 fxLb1 = (Label)mLLoader.getNamespace().get("fxLb1");
                 fxLbTypeControl = (Label)mLLoader.getNamespace().get("fxLbTypeControl");
@@ -119,13 +154,15 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
                 fxTxtWidth = (TextField)mLLoader.getNamespace().get("fxTxtWidth");
                 fxBtnDeleteAttrjob = (Button)mLLoader.getNamespace().get("fxBtnDeleteAttrjob");
                 fxBtnRefreshAttrjob = (Button)mLLoader.getNamespace().get("fxBtnRefreshAttrjob");
+                
+                /////////////// - Здесь кнопки вверх и вниз!!! - /////////////////////////////////////////////
+                
                 fxBtnMoveUp = (Button)mLLoader.getNamespace().get("fxBtnMoveUp");
                 fxBtnMoveUp.setOnMouseClicked(new EventHandler<MouseEvent>() 
                 {
 					@Override
 					public void handle(MouseEvent event) 
 					{
-						
 						long iTempAttrOrder = item.getMyAttrOrder();
 						m_TempAttrTmpl = GetItemByAttrOrder(iTempAttrOrder - 1);
 						if(m_TempAttrTmpl != null)
@@ -133,7 +170,8 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 							FirebaseDatabase.getInstance().getReference()
 							.child(CMAINCONSTANTS.FB_my_owner_settings)
 							.child(CMAINCONSTANTS.FB_my_templates)
-							.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
+							.child(m_stGetForUniqueNodeEditOrAddTemplate)
+							/*.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)*/
 							.child(CMAINCONSTANTS.FB_my_adding_attr)
 							.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder);// Опускаем контролл!!!
 
@@ -141,34 +179,59 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 							FirebaseDatabase.getInstance().getReference()
 							.child(CMAINCONSTANTS.FB_my_owner_settings)
 							.child(CMAINCONSTANTS.FB_my_templates)
-							.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
+							.child(m_stGetForUniqueNodeEditOrAddTemplate)
 							.child(CMAINCONSTANTS.FB_my_adding_attr)
 							.child(item.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder - 1);
 						}
 						else
 						{
-							System.out.println("CUserCellIntoTmpl - что-то пошло не так!!!");
+							System.out.println("CUserCellIntoTmpl - что-то пошло не так с переещением кнопки!!!");
 						}
-
 					}
 				});
-
-                if(item.getMyAttrOrder() == 0)
+                
+                if(item.getMyAttrOrder() == 0)// Hidden!!!
                 {
                 	fxBtnMoveUp.setVisible(false);
                 }
+                
                 fxBtnMoveDown = (Button)mLLoader.getNamespace().get("fxBtnMoveDown");
-                fxBtnMoveDown.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
+                fxBtnMoveDown.setOnMouseClicked(new EventHandler<MouseEvent>() 
+                {
 					@Override
-					public void handle(MouseEvent event) {
-						//System.out.println("fxBtnMoveDown.setOnMouseClicked.");
+					public void handle(MouseEvent event) 
+					{
+						long iTempAttrOrder = item.getMyAttrOrder();
+						m_TempAttrTmpl = GetItemByAttrOrder(iTempAttrOrder + 1);
+						if(m_TempAttrTmpl != null)
+						{
+							FirebaseDatabase.getInstance().getReference()
+							.child(CMAINCONSTANTS.FB_my_owner_settings)
+							.child(CMAINCONSTANTS.FB_my_templates)
+							.child(m_stGetForUniqueNodeEditOrAddTemplate)
+							.child(CMAINCONSTANTS.FB_my_adding_attr)
+							.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder);// Опускаем контролл!!!
+
+							item.setMyAttrOrder(iTempAttrOrder + 1);// Опускаем.
+							FirebaseDatabase.getInstance().getReference()
+							.child(CMAINCONSTANTS.FB_my_owner_settings)
+							.child(CMAINCONSTANTS.FB_my_templates)
+							.child(m_stGetForUniqueNodeEditOrAddTemplate)
+							.child(CMAINCONSTANTS.FB_my_adding_attr)
+							.child(item.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder + 1);
+						}
+						else
+						{
+							System.out.println("CUserCellIntoTmpl - что-то пошло не так с переещением кнопки!!!");
+						}
 					}
 				});
+                
                 if(item.getMyAttrOrder() == (CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr - 1))
                 {
-                	fxBtnMoveDown.setVisible(false);
+                	fxBtnMoveDown.setVisible(false);// Hidden!!!
                 }
+                /////////////////////////////////////////////////////////////////////////////////////////////
                 fxLb1.setVisible(false);
                 fxLbTypeControl.setVisible(false);
                 fxLbUniqueID.setVisible(false);
@@ -213,6 +276,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
         					  m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
         					  
         					  AnchorPane.setTopAnchor(fxAPaneTextField, dAnchorTop);
+        					  AnchorPane.setBottomAnchor(fxAPaneTextField, dAnchorButtom);
         					  
         					  fxAPaneTextField.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
         					  fxAPaneTextField.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));

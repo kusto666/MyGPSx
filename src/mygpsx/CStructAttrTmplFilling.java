@@ -8,7 +8,7 @@ public class CStructAttrTmplFilling {
 	private String MyAttrType;
 	private String MyAttrHeight;
 	private String MyAttrWidth;
-	private int MyAttrOrder;
+	private long MyAttrOrder;
 	
 	public CStructAttrTmplFilling() {// Œ¡ﬂ«¿“≈À‹ÕŒ ” ¿«€¬¿≈Ã, ¿ “Œ ¡”ƒ≈“ Œÿ»¡ ¿ “»œ¿  ¿  «ƒ≈—‹ ¡€ÀŒ:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
@@ -20,7 +20,7 @@ public class CStructAttrTmplFilling {
 			String MyAttrHeight,
 			String MyAttrWidth,
 			String MyAttrType, 
-			String MyAttrOrder) 
+			long MyAttrOrder) 
 	{
 		this.MyIDUnique = MyIDUnique;
 		this.MyAttrID = MyAttrID;
@@ -28,6 +28,7 @@ public class CStructAttrTmplFilling {
 		this.MyAttrHeight = MyAttrHeight;
 		this.MyAttrWidth = MyAttrWidth;
 		this.MyAttrType = MyAttrType;
+		this.MyAttrOrder = MyAttrOrder;
 	}
 	
 	public String getMyIDUnique()
@@ -56,7 +57,7 @@ public class CStructAttrTmplFilling {
     {
         return MyAttrType;
     }
-    public int getMyAttrOrder()
+    public long getMyAttrOrder()
     {
         return MyAttrOrder;
     }
@@ -85,7 +86,7 @@ public class CStructAttrTmplFilling {
     {
         this.MyAttrType = MyAttrType;
     }
-    public void setMyAttrOrder(int MyAttrOrder)
+    public void setMyAttrOrder(long MyAttrOrder)
     {
         this.MyAttrOrder = MyAttrOrder;
     }

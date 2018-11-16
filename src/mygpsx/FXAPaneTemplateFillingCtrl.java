@@ -8,6 +8,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import javafx.application.Platform;
@@ -48,11 +49,11 @@ public class FXAPaneTemplateFillingCtrl implements Initializable{
 				// Здесь инициализируем список сущностей(атрибутов добавленных в шаблон задачи)
 				try
 				{
-					mDatabaseCurrentTmpl = FirebaseDatabase.getInstance().getReference()
+					Query mDatabaseCurrentTmpl = FirebaseDatabase.getInstance().getReference()
 							.child(CMAINCONSTANTS.FB_my_owner_settings)
 							.child(CMAINCONSTANTS.FB_my_templates)
 							.child(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL)
-							.child(CMAINCONSTANTS.FB_my_adding_attr);
+							.child(CMAINCONSTANTS.FB_my_adding_attr).orderByChild("myAttrOrder");
 					mDatabaseCurrentTmpl.addValueEventListener(new ValueEventListener()
 					 {
 						@Override

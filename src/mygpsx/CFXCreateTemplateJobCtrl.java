@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import javafx.application.Platform;
@@ -36,7 +37,7 @@ import javafx.util.Callback;
 public class CFXCreateTemplateJobCtrl implements Initializable{
 
 	DatabaseReference mDatabaseCurrentTmpl;
-	private ArrayList<CStructAttrTmpl> m_alAttrjob = null;
+	//private ArrayList<CStructAttrTmpl> m_alAttrjob = null;
 	private ObservableList<CStructAttrTmpl> m_ObservableList;
 	@FXML
 	private ListView<CStructAttrTmpl> fxListTmplJob;
@@ -149,11 +150,11 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 		// Здесь инициализируем список сущностей(атрибутов добавленных в шаблон задачи)
 		try
 		{
-			mDatabaseCurrentTmpl = FirebaseDatabase.getInstance().getReference()
+			Query mDatabaseCurrentTmpl = FirebaseDatabase.getInstance().getReference()
 					.child(CMAINCONSTANTS.FB_my_owner_settings)
 					.child(CMAINCONSTANTS.FB_my_templates)
 					.child(CMAINCONSTANTS.m_UniqueTempIDTempate)
-					.child(CMAINCONSTANTS.FB_my_adding_attr);
+					.child(CMAINCONSTANTS.FB_my_adding_attr).orderByChild("myAttrOrder");
 			mDatabaseCurrentTmpl.addValueEventListener(new ValueEventListener()
 			 {
 				@Override
@@ -165,14 +166,14 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 			            Iterable<DataSnapshot> contactChildren = arg0.getChildren();
 			            long lCountChildren = arg0.getChildrenCount();
 			        	
-			            m_alAttrjob = new ArrayList<CStructAttrTmpl>();
+			            CCONSTANTS_EVENTS_JOB.CFXEditTemplateJobCtrl_alAttrjob = new ArrayList<CStructAttrTmpl>();
 			            for (DataSnapshot structAttrjob : contactChildren)
 		                {
 			            	CStructAttrTmpl TempSP = structAttrjob.getValue(CStructAttrTmpl.class);
                         	System.out.println( "String CStructAttrTmpl = "  + TempSP);
-                        	m_alAttrjob.add(TempSP);// Заполнили массив!!!
+                        	CCONSTANTS_EVENTS_JOB.CFXEditTemplateJobCtrl_alAttrjob.add(TempSP);// Заполнили массив!!!
 	                	}
-			            m_ObservableList = FXCollections.observableArrayList (m_alAttrjob);
+			            m_ObservableList = FXCollections.observableArrayList (CCONSTANTS_EVENTS_JOB.CFXEditTemplateJobCtrl_alAttrjob);
 			            
 			            
 			            try 
