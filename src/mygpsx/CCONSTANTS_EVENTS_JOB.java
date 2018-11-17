@@ -13,6 +13,10 @@ public class CCONSTANTS_EVENTS_JOB
 {
 	// Глобальная переменная хранения последнего количества атрибутов в узле my_adding_attr
 	public static long COUNT_ATTRIBUTES_IN_my_adding_attr = 0;
+	// Переменная отвечает за то, что мы делаем с атрибутом в списке, а именно:
+	// - "DEL_AT" - только перемещаем
+	// - "MOVE_AT" - только удаляем
+	public static String MOVE_OR_DELETE_ATTRIBUTE = "DEL_AT";
 	
 	public static ArrayList<CStructAttrTmpl> CFXEditTemplateJobCtrl_alAttrjob = null;// Был в классе CFXEditTemplateJobCtrl -> private m_alAttrjob;
 	

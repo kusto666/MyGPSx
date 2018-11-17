@@ -213,6 +213,7 @@ public class CLPSMain extends Application
             MyEventListnerFireUsers();
         	root = null;
         	stage = st;
+        	stage.setY(0);// Прикрепили к верху - для удобства отладки снизу)))
         	try 
         	{
         		// Инициализация всех внутренних контролов!!!

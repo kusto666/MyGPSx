@@ -3,8 +3,11 @@ package mygpsx;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +24,7 @@ import javafx.scene.layout.AnchorPane;
 public class CIntoTmplCtrl implements Initializable
 {
 	DatabaseReference mDatabaseCurrentTmpl;
+	//DatabaseReference mDatabaseCurrentTmpl;
 	////////////  ВСЕ ПО НОВОЙ!!!   ////////////////////////////////////////
 	@FXML
 	Label fxLb1;
@@ -63,16 +67,17 @@ public class CIntoTmplCtrl implements Initializable
 	double dAnchorButtom = 0.0;
 	////////////////////////////////////////////////////////////////////////
 	private AnchorPane fxCellPane;
+	CStructAttrTmpl m_TempAttrTmpl;
 
 	@FXML
     private void BtnDeleteAttrjob(ActionEvent event)// Открываем окно для добавления атрибутов!!!
     {
-		System.out.println("btnOpenFrameWithAttributes!!!");
-		System.out.println("fxLbUniqueID.getText() = " + fxLbUniqueID.getText());
+/*//		System.out.println("btnOpenFrameWithAttributes!!!");
+//		System.out.println("fxLbUniqueID.getText() = " + fxLbUniqueID.getText());
 //    	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
 		try 
 		{
-			if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD"))
+			if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD"))// Delete attr!
 			{
 	    		FirebaseDatabase.getInstance()
 				.getReference()
@@ -82,7 +87,7 @@ public class CIntoTmplCtrl implements Initializable
 				.child(CMAINCONSTANTS.FB_my_adding_attr)
 				.child(fxLbUniqueID.getText()).setValue(null);
 			}
-			if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))
+			if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))// Delete attr!
 			{
 				FirebaseDatabase.getInstance()
 				.getReference()
@@ -91,15 +96,37 @@ public class CIntoTmplCtrl implements Initializable
 				.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
 				.child(CMAINCONSTANTS.FB_my_adding_attr)
 				.child(fxLbUniqueID.getText()).setValue(null);
+				// Попали в список атрибутов
+				mDatabaseCurrentTmpl = FirebaseDatabase.getInstance().getReference().child(CMAINCONSTANTS.FB_my_owner_settings)
+				.child(CMAINCONSTANTS.FB_my_templates)
+				.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
+				.child(CMAINCONSTANTS.FB_my_adding_attr);
+				mDatabaseCurrentTmpl.addValueEventListener(new ValueEventListener() {
+					
+					@Override
+					public void onDataChange(DataSnapshot arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void onCancelled(DatabaseError arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				
+				
+				
 			}
 
-    		System.out.println("Click - BtnDeleteAttrjob!!!");
+    		//System.out.println("Click - BtnDeleteAttrjob!!!");
 		}
 		catch (Exception e) 
 		{
 			e.printStackTrace();
 		}
-    	
+    	*/
     }
 
 	@FXML

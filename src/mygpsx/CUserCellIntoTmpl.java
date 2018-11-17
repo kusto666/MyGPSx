@@ -2,7 +2,11 @@ package mygpsx;
 
 import java.io.IOException;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -75,31 +79,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 	private CStructAttrTmpl m_TempAttrTmpl = null;
 	String m_stGetForUniqueNodeEditOrAddTemplate = null;
 	////////////////////////////////////////////////////////////////////////
-/*	private void UpDownControl(CStructAttrTmpl movingItem, long lNextMoving, String stGetForNodeEditOrAddTemplate)
-	{
-		if(m_TempAttrTmpl != null)
-		{
-			FirebaseDatabase.getInstance().getReference()
-			.child(CMAINCONSTANTS.FB_my_owner_settings)
-			.child(CMAINCONSTANTS.FB_my_templates)
-			.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
-			.child(CMAINCONSTANTS.FB_my_adding_attr)
-			.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder);// Опускаем контролл!!!
 
-			item.setMyAttrOrder(iTempAttrOrder - 1);// Поднимаем поднимаем .
-			FirebaseDatabase.getInstance().getReference()
-			.child(CMAINCONSTANTS.FB_my_owner_settings)
-			.child(CMAINCONSTANTS.FB_my_templates)
-			.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
-			.child(CMAINCONSTANTS.FB_my_adding_attr)
-			.child(item.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder - 1);
-		}
-		else
-		{
-			System.out.println("CUserCellIntoTmpl - что-то пошло не так с переещением кнопки!!!");
-		}
-	}*/
-	
 	private CStructAttrTmpl GetItemByAttrOrder(long lNumOrder)
 	{
 		CStructAttrTmpl tempStruct = null;
@@ -155,6 +135,95 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
                 fxBtnDeleteAttrjob = (Button)mLLoader.getNamespace().get("fxBtnDeleteAttrjob");
                 fxBtnRefreshAttrjob = (Button)mLLoader.getNamespace().get("fxBtnRefreshAttrjob");
                 
+                fxBtnDeleteAttrjob.setOnMouseClicked(new EventHandler<MouseEvent>()
+                {
+					@Override
+					public void handle(MouseEvent event) 
+					{
+						CCONSTANTS_EVENTS_JOB.MOVE_OR_DELETE_ATTRIBUTE = "DEL_AT";
+						System.out.println(" fxBtnDeleteAttrjob.setOnMouseClicked(new EventHandler<MouseEvent>()!!!");
+						System.out.println("item.getMyAttrOrder() = " + item.getMyAttrOrder());
+/*						if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD"))// Delete attr!
+						{
+				    		FirebaseDatabase.getInstance()
+							.getReference()
+							.child(CMAINCONSTANTS.FB_my_owner_settings)
+							.child(CMAINCONSTANTS.FB_my_templates)
+							.child(CMAINCONSTANTS.m_UniqueTempIDTempate)
+							.child(CMAINCONSTANTS.FB_my_adding_attr)
+							.child(fxLbUniqueID.getText()).setValue(null);
+						}*/
+						//if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))// Delete attr!
+						//{
+							// Проверим - если порядок сортировки элемента последний, то просто удаляем и ничего более!!!
+							if(item.getMyAttrOrder() == (CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr - 1))
+							{
+								FirebaseDatabase.getInstance()
+								.getReference()
+								.child(CMAINCONSTANTS.FB_my_owner_settings)
+								.child(CMAINCONSTANTS.FB_my_templates)
+								.child(m_stGetForUniqueNodeEditOrAddTemplate)
+								.child(CMAINCONSTANTS.FB_my_adding_attr)
+								.child(fxLbUniqueID.getText()).setValue(null);
+							}
+							else
+							{
+								FirebaseDatabase.getInstance()
+								.getReference()
+								.child(CMAINCONSTANTS.FB_my_owner_settings)
+								.child(CMAINCONSTANTS.FB_my_templates)
+								.child(m_stGetForUniqueNodeEditOrAddTemplate)
+								.child(CMAINCONSTANTS.FB_my_adding_attr)
+								.child(fxLbUniqueID.getText()).setValue(null);
+								
+								Query quQuerySort = FirebaseDatabase.getInstance()
+										.getReference()
+										.child(CMAINCONSTANTS.FB_my_owner_settings)
+										.child(CMAINCONSTANTS.FB_my_templates)
+										.child(m_stGetForUniqueNodeEditOrAddTemplate)
+										.child(CMAINCONSTANTS.FB_my_adding_attr).orderByChild("myAttrOrder");
+								
+								quQuerySort.addValueEventListener(new ValueEventListener()
+								{
+									@Override
+									public void onDataChange(DataSnapshot arg0) 
+									{
+										if(CCONSTANTS_EVENTS_JOB.MOVE_OR_DELETE_ATTRIBUTE == "DEL_AT")
+										{
+											Iterable<DataSnapshot> contactChildren = arg0.getChildren();
+											long lPos = 0;
+											for (DataSnapshot structAttrjob : contactChildren)
+							                {
+												System.out.println("##################################################################");
+												CStructAttrTmpl TempSP = structAttrjob.getValue(CStructAttrTmpl.class);
+												FirebaseDatabase.getInstance()
+												.getReference()
+												.child(CMAINCONSTANTS.FB_my_owner_settings)
+												.child(CMAINCONSTANTS.FB_my_templates)
+												.child(m_stGetForUniqueNodeEditOrAddTemplate)
+												.child(CMAINCONSTANTS.FB_my_adding_attr)
+												.child(TempSP.getMyIDUnique())
+												.child("myAttrOrder")
+												.setValue(lPos);
+												lPos++;
+											}
+										}
+									}
+									
+									@Override
+									public void onCancelled(DatabaseError arg0) {
+										// TODO Auto-generated method stub
+										
+									}
+								});
+
+								
+							}
+						//}
+						
+					}
+				});
+                
                 /////////////// - Здесь кнопки вверх и вниз!!! - /////////////////////////////////////////////
                 
                 fxBtnMoveUp = (Button)mLLoader.getNamespace().get("fxBtnMoveUp");
@@ -163,6 +232,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 					@Override
 					public void handle(MouseEvent event) 
 					{
+						CCONSTANTS_EVENTS_JOB.MOVE_OR_DELETE_ATTRIBUTE = "MOVE_AT";
 						long iTempAttrOrder = item.getMyAttrOrder();
 						m_TempAttrTmpl = GetItemByAttrOrder(iTempAttrOrder - 1);
 						if(m_TempAttrTmpl != null)
@@ -201,6 +271,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 					@Override
 					public void handle(MouseEvent event) 
 					{
+						CCONSTANTS_EVENTS_JOB.MOVE_OR_DELETE_ATTRIBUTE = "MOVE_AT";
 						long iTempAttrOrder = item.getMyAttrOrder();
 						m_TempAttrTmpl = GetItemByAttrOrder(iTempAttrOrder + 1);
 						if(m_TempAttrTmpl != null)
