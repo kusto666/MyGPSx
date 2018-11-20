@@ -151,7 +151,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 							.child(CMAINCONSTANTS.FB_my_templates)
 							.child(CMAINCONSTANTS.m_UniqueTempIDTempate)
 							.child(CMAINCONSTANTS.FB_my_adding_attr)
-							.child(fxLbUniqueID.getText()).setValue(null);
+							.child(fxLbUniqueID.getText()).setValueAsync(null);
 						}*/
 						//if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))// Delete attr!
 						//{
@@ -164,7 +164,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 								.child(CMAINCONSTANTS.FB_my_templates)
 								.child(m_stGetForUniqueNodeEditOrAddTemplate)
 								.child(CMAINCONSTANTS.FB_my_adding_attr)
-								.child(fxLbUniqueID.getText()).setValue(null);
+								.child(fxLbUniqueID.getText()).setValueAsync(null);
 							}
 							else
 							{
@@ -174,7 +174,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 								.child(CMAINCONSTANTS.FB_my_templates)
 								.child(m_stGetForUniqueNodeEditOrAddTemplate)
 								.child(CMAINCONSTANTS.FB_my_adding_attr)
-								.child(fxLbUniqueID.getText()).setValue(null);
+								.child(fxLbUniqueID.getText()).setValueAsync(null);
 								
 								Query quQuerySort = FirebaseDatabase.getInstance()
 										.getReference()
@@ -204,7 +204,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 												.child(CMAINCONSTANTS.FB_my_adding_attr)
 												.child(TempSP.getMyIDUnique())
 												.child("myAttrOrder")
-												.setValue(lPos);
+												.setValueAsync(lPos);
 												lPos++;
 											}
 										}
@@ -243,7 +243,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 							.child(m_stGetForUniqueNodeEditOrAddTemplate)
 							/*.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)*/
 							.child(CMAINCONSTANTS.FB_my_adding_attr)
-							.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder);// Опускаем контролл!!!
+							.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValueAsync(iTempAttrOrder);// Опускаем контролл!!!
 
 							item.setMyAttrOrder(iTempAttrOrder - 1);// Поднимаем поднимаем .
 							FirebaseDatabase.getInstance().getReference()
@@ -251,7 +251,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 							.child(CMAINCONSTANTS.FB_my_templates)
 							.child(m_stGetForUniqueNodeEditOrAddTemplate)
 							.child(CMAINCONSTANTS.FB_my_adding_attr)
-							.child(item.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder - 1);
+							.child(item.getMyIDUnique()).child("myAttrOrder").setValueAsync(iTempAttrOrder - 1);
 						}
 						else
 						{
@@ -281,7 +281,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 							.child(CMAINCONSTANTS.FB_my_templates)
 							.child(m_stGetForUniqueNodeEditOrAddTemplate)
 							.child(CMAINCONSTANTS.FB_my_adding_attr)
-							.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder);// Опускаем контролл!!!
+							.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValueAsync(iTempAttrOrder);// Опускаем контролл!!!
 
 							item.setMyAttrOrder(iTempAttrOrder + 1);// Опускаем.
 							FirebaseDatabase.getInstance().getReference()
@@ -289,7 +289,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 							.child(CMAINCONSTANTS.FB_my_templates)
 							.child(m_stGetForUniqueNodeEditOrAddTemplate)
 							.child(CMAINCONSTANTS.FB_my_adding_attr)
-							.child(item.getMyIDUnique()).child("myAttrOrder").setValue(iTempAttrOrder + 1);
+							.child(item.getMyIDUnique()).child("myAttrOrder").setValueAsync(iTempAttrOrder + 1);
 						}
 						else
 						{

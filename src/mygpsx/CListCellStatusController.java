@@ -51,7 +51,7 @@ public class CListCellStatusController implements Initializable{
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_status)
     				.child(stUniqueIDStatus);
-    		CLPSMain.mDatabase.setValue(null);// Удаляем значение(объект) из базы!!!
+    		CLPSMain.mDatabase.setValueAsync(null);// Удаляем значение(объект) из базы!!!
         }
 		catch(Exception e) 
 		{
@@ -81,7 +81,7 @@ public class CListCellStatusController implements Initializable{
 		    				.child(CMAINCONSTANTS.FB_my_owner_settings)
 		    				.child(CMAINCONSTANTS.FB_my_status)
 		    				.child(stUniqueIDStatus);
-		    		CLPSMain.mDatabase.child("MyNameStatus").setValue(fxTxtNameStatus.getText());
+		    		CLPSMain.mDatabase.child("MyNameStatus").setValueAsync(fxTxtNameStatus.getText());
 	            }
 			}
 		});

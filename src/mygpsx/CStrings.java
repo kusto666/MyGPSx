@@ -6,4 +6,6 @@ public class CStrings {
 	public static String m_APP_NAME_CHOOSE = "Ваш выбор";
 	public static String m_APP_NAME_CHOOSE_YES = "Да";
 	public static String m_APP_NAME_CHOOSE_NO = "Нет";
+	
+	public static String m_APP_ERROR = "#Ошибка!";
 }

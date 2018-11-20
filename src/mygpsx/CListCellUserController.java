@@ -8,7 +8,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.tasks.Task;
+/*import com.google.firebase.tasks.Task;*/
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,7 +41,7 @@ public class CListCellUserController implements Initializable{
 	@FXML
 	private AnchorPane fxCellPane;
 	
-	private Task<Void> mDatabase;
+/*	private Task<Void> mDatabase;*/
 	//private Task<Void> mDatabaseIn;
 	//String stUserUniqueIDClass = "";
 	
@@ -60,8 +60,8 @@ public class CListCellUserController implements Initializable{
 		TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
 		SingleSelectionModel<Tab> selectionModel = tb.getSelectionModel();
 		selectionModel.select(1);
-		mDatabase = FirebaseDatabase.getInstance().getReference()
-				.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
+		/*mDatabase = */FirebaseDatabase.getInstance().getReference()
+				.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
 		//System.out.println("BtnViewJobs(ActionEvent event)");
     }
 

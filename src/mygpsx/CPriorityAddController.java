@@ -84,11 +84,11 @@ public class CPriorityAddController implements Initializable{
 		
 		String uploadId = CLPSMain.mDatabase.push().getKey();
 		CLPSMain.mDatabase.child(uploadId).child("MyIDUnique").
-		setValue(uploadId);
+		setValueAsync(uploadId);
 		CLPSMain.mDatabase.child(uploadId).child("MyCLassPriority").
-		setValue(fxTxtNumberPriority.getText());
+		setValueAsync(fxTxtNumberPriority.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyNamePriority").
-		setValue(fxTxtNamePriority.getText());
+		setValueAsync(fxTxtNamePriority.getText());
 		
 		CPriorityEditController.m_stagePriorityAdd.close();
 	}

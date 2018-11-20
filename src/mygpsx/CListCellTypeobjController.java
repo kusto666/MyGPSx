@@ -51,7 +51,7 @@ public class CListCellTypeobjController implements Initializable{
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_typeobj)
     				.child(stUniqueIDTypeobj);
-    		CLPSMain.mDatabase.setValue(null);// Удаляем значение(объект) из базы!!!
+    		CLPSMain.mDatabase.setValueAsync(null);// Удаляем значение(объект) из базы!!!
         }
 		catch(Exception e) 
 		{
@@ -80,7 +80,7 @@ public class CListCellTypeobjController implements Initializable{
 		    				.child(CMAINCONSTANTS.FB_my_owner_settings)
 		    				.child(CMAINCONSTANTS.FB_my_typeobj)
 		    				.child(stUniqueIDTypeobj);
-		    		CLPSMain.mDatabase.child("MyNameTypeobj").setValue(fxTxtNameTypeobj.getText());
+		    		CLPSMain.mDatabase.child("MyNameTypeobj").setValueAsync(fxTxtNameTypeobj.getText());
 	            }
 			}
 		});

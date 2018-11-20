@@ -15,8 +15,7 @@ import com.google.firebase.internal.NonNull;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.google.firebase.tasks.OnFailureListener;
-import com.google.firebase.tasks.Task;
+
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventHandler;
@@ -101,6 +100,8 @@ import netscape.javascript.JSObject;
  */
 public class CMainController implements Initializable, MapComponentInitializedListener
 {
+	@FXML
+	private Label idOfAnyControl;
 	@FXML
 	private TextField fxTxtFastSearch;// Быстрый поиск объекта по совпадению в...
 	// Правый и левый меню аккордионы:
@@ -215,7 +216,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private GoogleMapView mapView;
     @FXML
-    public static GoogleMap map;
+    public static GoogleMap MyGoogleMap;
     @FXML
     private GeocodingService geocodingService;
     
@@ -224,6 +225,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsFXCreateTmplOrders(ActionEvent event) 
     {
     	System.out.println("FrameSettingsFXCreateTmplOrders!!!");
+    	CMyToast.makeText(CLPSMain.stage, "System.out.println(\"FrameSettingsFXCreateTmplOrders!!!\");", CMyToast.TOAST_SHORT, CMyToast.TOAST_WARN);
     }
     
     // Открытие окна со списком готовых шаблонов ОТЧЕТОВ для редактирования!!!
@@ -231,6 +233,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameSettingsFXListOrders(ActionEvent event) 
     {
     	System.out.println("FrameSettingsFXListOrders!!!");
+    	CMyToast.makeText(CLPSMain.stage, "System.out.println(\"FrameSettingsFXCreateTmplOrders!!!\");", CMyToast.TOAST_LONG, CMyToast.TOAST_SUCCESS);
     }
     // Открытие окна для создания нового шаблона задачи!!!
     @FXML
@@ -284,7 +287,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 											.getReference()
 											.child(CMAINCONSTANTS.FB_my_owner_settings)
 											.child(CMAINCONSTANTS.FB_my_templates);
-									CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();
+									CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValueAsync();
 									//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
 									CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // Обнуляем кол-во контролов.
 	    							// шаблона, потому опять == 1.
@@ -307,7 +310,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		    									.getReference()
 		    									.child(CMAINCONSTANTS.FB_my_owner_settings)
 		    									.child(CMAINCONSTANTS.FB_my_templates);
-		    							CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();
+		    							CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValueAsync();
 		    							//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
 		    							// шаблона, потому опять == 1.
 		    							CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // Обнуляем кол-во контролов.
@@ -559,9 +562,9 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		javafx.scene.control.SingleSelectionModel<Tab> selectionModel = tb.getSelectionModel();
 		selectionModel.select(0);
 		
-    	if(map != null)
+    	if(MyGoogleMap != null)
     	{
-    		map.clearMarkers();
+    		MyGoogleMap.clearMarkers();
         	System.out.println("Удалить все маркеры!!!");
     	}
     	else
@@ -573,7 +576,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private void btnRefreshMapMod(ActionEvent event) throws IOException// Обновить карту вручную!!!
     {
-    		Alert alert = new Alert(AlertType.CONFIRMATION);
+    	/*	Alert alert = new Alert(AlertType.CONFIRMATION);
     		alert.setTitle(CStrings.m_APP_NAME);
     		alert.setHeaderText("КОСЯК!!!");
     		alert.setContentText("Что-то пошло не так)))\nМожет перегрузим карту???");
@@ -582,7 +585,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		
     		alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
     		
-    		/*java.util.Optional<ButtonType> result = alert.showAndWait();
+    		java.util.Optional<ButtonType> result = alert.showAndWait();
     		if (result.get() == buttonTypeYes)
     		{*/
 				  CLPSMain.stage.close();
@@ -597,7 +600,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private void btnRefreshMap(ActionEvent event) throws IOException// Обновить карту вручную!!!
     {
-    		Alert alert = new Alert(AlertType.CONFIRMATION);
+    		/*Alert alert = new Alert(AlertType.CONFIRMATION);
     		alert.setTitle(CStrings.m_APP_NAME);
     		alert.setHeaderText("КОСЯК!!!");
     		alert.setContentText("Что-то пошло не так)))\nМожет перегрузим карту???");
@@ -606,7 +609,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		
     		alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
     		
-    		/*java.util.Optional<ButtonType> result = alert.showAndWait();
+    		java.util.Optional<ButtonType> result = alert.showAndWait();
     		if (result.get() == buttonTypeYes)
     		{*/
 				  CLPSMain.stage.close();
@@ -657,7 +660,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	mDatabaseRefSendMsg = FirebaseDatabase.getInstance().getReference().child("message_to_android");
     	 try 
     	 {
-    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValue(taOutMsg.getText().toString());
+    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValueAsync(taOutMsg.getText().toString());
              taOutMsg.clear();
              System.out.println("Типа послали сообщение!!!");
          } 
@@ -691,7 +694,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         		Marker MyMarker = new Marker(markerOptions);
         		
         		
-                map.addMarker( MyMarker );
+        		MyGoogleMap.addMarker( MyMarker );
                 markerMap.put(MyMarker, false);
 
                 InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
@@ -704,7 +707,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 
                 InfoWindow MyInfoWindow = new InfoWindow(infoWindowOptions);
                 
-                map.addUIEventHandler(MyMarker, UIEventType.click, (JSObject obj) -> {
+                MyGoogleMap.addUIEventHandler(MyMarker, UIEventType.click, (JSObject obj) -> {
                     if (markerMap.get(MyMarker)) 
                     {
 
@@ -715,7 +718,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                     }
                     else 
                     {
-                    	MyInfoWindow.open(map, MyMarker);
+                    	MyInfoWindow.open(MyGoogleMap, MyMarker);
                         markerMap.put(MyMarker, true);
                         m_bIsMuveMarker = true;
                         System.out.println("us.getMyPhoneID() == " + us.getMyPhoneID());
@@ -750,7 +753,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	if(!ShowAllMarkersAfterRefresh())
     	{
     		System.out.println("btnRefreshAllMarkers(); - а потом показываем!!!");
-    		btnRefreshAllMarkers();
+    		//btnRefreshAllMarkers();
     	}
     	else
     	{
@@ -758,8 +761,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	}
     }
     
-    @FXML
-    private synchronized void btnRefreshAllMarkers(/*ActionEvent event*/) 
+/*    @FXML
+    private synchronized void btnRefreshAllMarkers(ActionEvent event) 
     {
     	try
     	{
@@ -796,7 +799,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                             System.out.println( "user.MyLongitude = " + user.getMyLongitude() );
                             
                             tempTransport = new CStructUser(user.getMyPhoneID(), user.getMyLatitude(), user.getMyLongitude(), "",
-                            		user.getMyNameShip(), user.getMyDirectorShip(), user.getMyShortDescriptionShip(), user.getMyIsUserSelected());
+                            		user.getMyNameShip(), user.getMyDirectorShip(), user.getMyShortDescriptionShip(), user.getMyIsUserSelected(), user.getMyPass());
                             CLPSMain.m_localAllMarkersUsersTempMain.add(tempTransport);
                             System.out.println( "----------Конец маркера!!!-------------" );
                             //break;
@@ -821,13 +824,13 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 			ex.getStackTrace();
 		}
 
-    }
-    @FXML
+    }*/
+    @Override
     public void mapInitialized() 
     {
     	try 
     	{
-    		geocodingService = new GeocodingService();
+    		//geocodingService = new GeocodingService();
  	        MapOptions mapOptions = new MapOptions();
  	        
  	        mapOptions.center(new LatLong(56.890471, 37.3498416))
@@ -839,10 +842,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
  	                .streetViewControl(true)
  	                .zoomControl(false)
  	                .zoom(12);
-
- 	        map = mapView.createMap(mapOptions);
+ 	       System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapInitialized");
+ 	       MyGoogleMap = mapView.createMap(mapOptions);
        
- 	        mapReady(markerMap);
+ 	       mapReady(markerMap);
 		} 
     	catch (Exception ex)
     	{
@@ -855,7 +858,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     {
     	try 
     	{
-            map.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
+    		MyGoogleMap.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
                 LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
                 System.out.println("Latitude: " + ll.getLatitude());
                 System.out.println("Longitude: " + ll.getLongitude());
@@ -902,8 +905,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                              	 mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child("MyPhoneID_" + m_SELECTED_MARKER);
                             	 try 
                             	 {
-                                     mDatabase.child("MyLatitude").setValue(Double.toString(ll.getLatitude()));
-                                     mDatabase.child("MyLongitude").setValue(Double.toString(ll.getLongitude()));
+                                     mDatabase.child("MyLatitude").setValueAsync(Double.toString(ll.getLatitude()));
+                                     mDatabase.child("MyLongitude").setValueAsync(Double.toString(ll.getLongitude()));
 
                                  }
                             	 catch (Exception e) 
@@ -932,11 +935,13 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	{
 			ex.getMessage();
 		}
-
+    	System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapReady");
     }
     @Override
     public synchronized void initialize(URL url, ResourceBundle rb)
     {
+    	
+    	
     	fxAccordLeftMain.setExpandedPane(fxTPaneLeft2);
     	fxAccordRightMain.setExpandedPane(fxTPaneRight1);
     	try 
@@ -958,7 +963,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 
     	selectionModel = fxTabPaneMain.getSelectionModel();
     	//selectionModel.select(tab); //select by object
-    	selectionModel.select(1); //select by index starting with 0
+    	selectionModel.select(0); //select by index starting with 0
     	try 
     	{
             mapView.addMapInializedListener(this);
@@ -1050,7 +1055,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                 //adding an upload to firebase database
                 mDatabase = FirebaseDatabase.getInstance().getReference();
                 String uploadId = mDatabase.push().getKey();
-                mDatabase.child("my_files").child(uploadId).setValue(upload);
+                mDatabase.child("my_files").child(uploadId).setValueAsync(upload);
                 
                 //progressDialog.dismiss();
                 //Toast.makeText(getActivity().getApplicationContext(), "Файл отправлен!", Toast.LENGTH_SHORT).show();
@@ -1063,7 +1068,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         }
         else
         {
-           System.out.println("No selected file!!!");
+        	System.out.println("No selected file!!!");
         }
 
     }

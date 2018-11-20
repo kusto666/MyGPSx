@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.paint.*?>
 <?import java.lang.*?>
@@ -14,8 +15,16 @@
         <tabs>
           <Tab fx:id="fxTabPaneUsersOnMaps" text="Где сейчас">
                <content>
-                  <GoogleMapView fx:id="mapView" prefHeight="472.0" prefWidth="489.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
-               </content></Tab>
+			   <AnchorPane prefHeight="200.0" prefWidth="200.0">
+   <children>
+                     <GoogleMapView fx:id="mapView" prefHeight="472.0" prefWidth="489.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+                        <Button fx:id="fxBtnInTabRefreshMap" mnemonicParsing="false" onAction="#btnRefreshMap" text="Обновить" />
+   </children>
+				  
+				  </AnchorPane>
+               </content>
+                  
+			</Tab>
           <Tab fx:id="fxTabPaneUsersAndJobs" text="Сотрудники --&gt; Задачи">
 		   <content>
 		  
@@ -36,7 +45,6 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="434.0" prefWidth="222.0">
                      <children>
-                        <Button fx:id="btnRestart" layoutX="9.0" layoutY="309.0" mnemonicParsing="false" onAction="#btnRefreshMap" prefHeight="30.0" prefWidth="150.0" text="Обновить карту" textFill="#0d0dee" AnchorPane.bottomAnchor="141.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="10.199999999999989" />
                         <Label alignment="CENTER" contentDisplay="TOP" layoutX="9.0" layoutY="14.0" prefHeight="28.0" prefWidth="130.0" text="Входящее сообщение" textAlignment="CENTER" textFill="#f51212" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="10.199999999999989" />
                         <TextArea fx:id="mymsg" layoutX="9.0" layoutY="42.0" prefHeight="68.0" prefWidth="204.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="10.199999999999989" />
                         <TextArea fx:id="taOutMsg" layoutX="9.0" layoutY="184.0" prefHeight="38.0" prefWidth="150.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="10.199999999999989" />
@@ -56,7 +64,6 @@
                         <ListView fx:id="fxListView" layoutX="39.6" layoutY="120.6" prefHeight="348.0" prefWidth="166.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="111.0" />
                           <Button layoutX="21.6" layoutY="43.6" onAction="#btnShowAllMarkers" prefHeight="25.0" prefWidth="192.0" text="Показать все маркеры" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
                           <Button layoutX="10.0" layoutY="54.0" onAction="#handleDeleteAllMarkers" prefHeight="25.0" prefWidth="150.0" text="Удалить все маркеры" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
-                          <Button layoutX="29.6" layoutY="54.6" onAction="#btnRefreshAllMarkers" prefHeight="30.0" prefWidth="75.0" text="Обновить все маркеры" textFill="#f50a0a" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="128.0" AnchorPane.topAnchor="45.0" />
                         <TextField fx:id="fxTxtFastSearch" layoutX="11.0" layoutY="94.0" prefHeight="25.0" prefWidth="163.0" promptText="Поиск объекта..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
                      </children>
                   </AnchorPane>
@@ -66,17 +73,18 @@
             <content>
               <AnchorPane prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnSettingsStatusEdit" mnemonicParsing="false" onAction="#FrameSettingsStatusEdit" prefHeight="25.0" prefWidth="200.0" text="Ред. статусов задач" textFill="BLUE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Button fx:id="btnSettingsPriorityEdit" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" onAction="#FrameSettingsPrioritetsEdit" prefHeight="25.0" prefWidth="200.0" text="Ред. приоритетов задач" textFill="BLUE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Button fx:id="btnSettingsTypejobEdit" layoutX="10.0" layoutY="79.0" mnemonicParsing="false" onAction="#FrameSettingsTypejobEdit" prefHeight="25.0" prefWidth="200.0" text="Ред. типов задач" textFill="BLUE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Button fx:id="btnSettingsAttrjobEdit" layoutX="10.0" layoutY="114.0" mnemonicParsing="false" onAction="#FrameSettingsAttrjobEdit" prefHeight="25.0" prefWidth="200.0" text="Ред. атрибутов задач" textFill="#00cc66" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Button fx:id="btnSettingsTypedescjobEdit" layoutX="10.0" layoutY="148.0" mnemonicParsing="false" onAction="#FrameSettingsTypedescjobEdit" prefHeight="25.0" prefWidth="200.0" text="Ред. типовых описаний" textFill="BLUE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Button fx:id="btnSettingsTypeobjEdit" layoutX="10.0" layoutY="183.0" mnemonicParsing="false" onAction="#FrameSettingsTypeobjEdit" prefHeight="25.0" prefWidth="196.0" text="Ред. типов объектов" textFill="BLUE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Button fx:id="btnSettingsAttrobjEdit" layoutX="10.0" layoutY="215.0" mnemonicParsing="false" onAction="#FrameSettingsAttrobjEdit" text="Ред. атрибутов объектов" textFill="#00cc66" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Button layoutX="10.0" layoutY="252.0" mnemonicParsing="false" onAction="#FrameSettingsFXCreateTemplate" text="Создать шаблон задачи" textFill="RED" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Button layoutX="10.0" layoutY="288.0" mnemonicParsing="false" onAction="#FrameSettingsFXListTemplates" text="Шаблоны задач" textFill="RED" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Button layoutX="10.0" layoutY="324.0" mnemonicParsing="false" onAction="#FrameSettingsFXCreateTmplOrders" prefHeight="25.0" prefWidth="157.0" text="Создать шаблон отчета" textFill="RED" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Button layoutX="10.0" layoutY="357.0" mnemonicParsing="false" onAction="#FrameSettingsFXListOrders" prefHeight="25.0" prefWidth="168.0" text="Шаблоны отчетов" textFill="RED" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="btnSettingsStatusEdit" layoutX="47.0" layoutY="46.0" mnemonicParsing="false" onAction="#FrameSettingsStatusEdit" prefHeight="25.0" prefWidth="200.0" text="Ред. статусов задач" textFill="BLUE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0" />
+                        <Button fx:id="btnSettingsPriorityEdit" layoutX="10.0" layoutY="79.0" mnemonicParsing="false" onAction="#FrameSettingsPrioritetsEdit" prefHeight="25.0" prefWidth="200.0" text="Ред. приоритетов задач" textFill="BLUE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                        <Button fx:id="btnSettingsTypejobEdit" layoutX="10.0" layoutY="114.0" mnemonicParsing="false" onAction="#FrameSettingsTypejobEdit" prefHeight="25.0" prefWidth="200.0" text="Ред. типов задач" textFill="BLUE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
+                        <Button fx:id="btnSettingsAttrjobEdit" layoutX="10.0" layoutY="149.0" mnemonicParsing="false" onAction="#FrameSettingsAttrjobEdit" prefHeight="25.0" prefWidth="200.0" text="Ред. атрибутов задач" textFill="#00cc66" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
+                        <Button fx:id="btnSettingsTypedescjobEdit" layoutX="10.0" layoutY="183.0" mnemonicParsing="false" onAction="#FrameSettingsTypedescjobEdit" prefHeight="25.0" prefWidth="200.0" text="Ред. типовых описаний" textFill="BLUE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
+                        <Button fx:id="btnSettingsTypeobjEdit" layoutX="10.0" layoutY="218.0" mnemonicParsing="false" onAction="#FrameSettingsTypeobjEdit" prefHeight="25.0" prefWidth="196.0" text="Ред. типов объектов" textFill="BLUE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
+                        <Button fx:id="btnSettingsAttrobjEdit" layoutX="10.0" layoutY="250.0" mnemonicParsing="false" onAction="#FrameSettingsAttrobjEdit" text="Ред. атрибутов объектов" textFill="#00cc66" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
+                        <Button layoutX="10.0" layoutY="287.0" mnemonicParsing="false" onAction="#FrameSettingsFXCreateTemplate" text="Создать шаблон задачи" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
+                        <Button layoutX="10.0" layoutY="323.0" mnemonicParsing="false" onAction="#FrameSettingsFXListTemplates" text="Шаблоны задач" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
+                        <Button layoutX="10.0" layoutY="359.0" mnemonicParsing="false" onAction="#FrameSettingsFXCreateTmplOrders" prefHeight="25.0" prefWidth="157.0" text="Создать шаблон отчета" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
+                        <Button layoutX="10.0" layoutY="392.0" mnemonicParsing="false" onAction="#FrameSettingsFXListOrders" prefHeight="25.0" prefWidth="168.0" text="Шаблоны отчетов" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
+                        <Button fx:id="fxBtnSysUsers" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Системные пользователи" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -112,5 +120,6 @@
           </TitledPane>
         </panes>
       </Accordion>
+      <ProgressBar fx:id="fxPBarLpsMain" prefWidth="200.0" progress="0.0" visible="false" AnchorPane.leftAnchor="0.0" />
     </children>
 </AnchorPane>

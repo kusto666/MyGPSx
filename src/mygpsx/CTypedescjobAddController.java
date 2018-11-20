@@ -84,11 +84,11 @@ public class CTypedescjobAddController implements Initializable{
 		
 		String uploadId = CLPSMain.mDatabase.push().getKey();
 		CLPSMain.mDatabase.child(uploadId).child("MyIDUnique").
-		setValue(uploadId);
+		setValueAsync(uploadId);
 		CLPSMain.mDatabase.child(uploadId).child("MyCLassTypedescjob").
-		setValue(fxTxtNumberTypedescjob.getText());
+		setValueAsync(fxTxtNumberTypedescjob.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyNameTypedescjob").
-		setValue(fxTxtNameTypedescjob.getText());
+		setValueAsync(fxTxtNameTypedescjob.getText());
 		
 		CTypedescjobEditController.m_stageTypedescjobAdd.close();
 	}

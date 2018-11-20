@@ -12,12 +12,14 @@ public class CStructUser {
 	private String MyLatitude;
 	private String MyLongitude;
 	private String MyEmail;
+
     
     private String MyNameShip;
     private String MyDirectorShip;
     private String MyShortDescriptionShip;
     
     private String MyIsUserSelected; // Переменная отвечает за то что обект выбран - true, и наоборот - false!!!
+	private String MyPass;
    
     
     enum GENDER {
@@ -45,7 +47,8 @@ public class CStructUser {
     			 String MyNameShip,
     			 String MyDirectorShip,
     			 String MyShortDescriptionShip, 
-    			 String MyIsUserSelected) 
+    			 String MyIsUserSelected,
+    			 String MyPass) 
     {
         this.MyPhoneID = MyPhoneID;
         this.MyLatitude = MyLatitude;
@@ -56,6 +59,7 @@ public class CStructUser {
         this.MyDirectorShip = MyDirectorShip;
         this.MyShortDescriptionShip = MyShortDescriptionShip;
         this.MyIsUserSelected = MyIsUserSelected;
+        this.MyPass = MyPass;
     }
     
     public String getMyPhoneID()
@@ -78,7 +82,6 @@ public class CStructUser {
     {
     	return MyShortDescriptionShip;
     }
-    
     public String getMyDirectorShip()
     {
     	return MyDirectorShip;
@@ -90,6 +93,10 @@ public class CStructUser {
     public String getMyIsUserSelected()
     {
     	return MyIsUserSelected;
+    }
+    public String getMyPass()
+    {
+    	return MyPass;
     }
     /////////////////////////////////////SET////////////////////////////////////////
     public void setMyPhoneID(String MyPhoneID)
@@ -123,6 +130,10 @@ public class CStructUser {
     public void setMyIsUserSelected(String MyIsUserSelected)
     {
         this.MyIsUserSelected = MyIsUserSelected;
+    }
+    public void setMyPass(String MyPass)
+    {
+        this.MyPass = MyPass;
     }
     @Override
     public String toString()  {

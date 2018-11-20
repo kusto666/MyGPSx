@@ -84,13 +84,13 @@ public class CAttrobjAddController implements Initializable{
 		
 		String uploadId = CLPSMain.mDatabase.push().getKey();
 		CLPSMain.mDatabase.child(uploadId).child("MyIDUnique").
-		setValue(uploadId);
+		setValueAsync(uploadId);
 		CLPSMain.mDatabase.child(uploadId).child("MyCLassAttrobj").
-		setValue(fxTxtNumberAttrobj.getText());
+		setValueAsync(fxTxtNumberAttrobj.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyNameAttrobj").
-		setValue(fxTxtNameAttrobj.getText());
+		setValueAsync(fxTxtNameAttrobj.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyHeight").
-		setValue("55");
+		setValueAsync("55");
 		
 		CAttrobjEditController.m_stageAttrobjAdd.close();
 	}

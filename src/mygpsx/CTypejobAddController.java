@@ -84,11 +84,11 @@ public class CTypejobAddController implements Initializable{
 		
 		String uploadId = CLPSMain.mDatabase.push().getKey();
 		CLPSMain.mDatabase.child(uploadId).child("MyIDUnique").
-		setValue(uploadId);
+		setValueAsync(uploadId);
 		CLPSMain.mDatabase.child(uploadId).child("MyCLassTypejob").
-		setValue(fxTxtNumberTypejob.getText());
+		setValueAsync(fxTxtNumberTypejob.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyNameTypejob").
-		setValue(fxTxtNameTypejob.getText());
+		setValueAsync(fxTxtNameTypejob.getText());
 		
 		CTypejobEditController.m_stageTypejobAdd.close();
 	}

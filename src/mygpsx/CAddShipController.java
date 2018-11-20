@@ -10,8 +10,16 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.http.util.TextUtils;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
+import com.google.firebase.auth.UserRecord.CreateRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+/*import com.google.firebase.tasks.OnCompleteListener;
+import com.google.firebase.tasks.Task;*/
 import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.javascript.object.Marker;
@@ -25,6 +33,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -37,6 +46,12 @@ public class CAddShipController implements Initializable{
 	 
 	DatabaseReference mDatabaseRef;
 	
+	 @FXML
+	 TextField fxTxtEmail;
+	 @FXML
+	 PasswordField fxTxtPassFirst;
+	 @FXML
+	 PasswordField fxTxtPassSecond;
 	 @FXML
 	 TextField fxLbNameShip;
 	 @FXML
@@ -51,17 +66,23 @@ public class CAddShipController implements Initializable{
 	 Label fxLbLongitudeText;
 	 @FXML
 	 private CMainController objectController;
-	 
-
-	/* public CAddShipController(CMainController objectController) 
-	 {
-		this.objectController = objectController;
-		fxLbLatitudeText = objectController.getMyLabelLatitude();
-	 }
-	 public void writeThis(String whatToWrite) {
-		 fxLbLatitudeText.setText(whatToWrite);
-	    }*/
-
+	 @FXML
+	 Label fxLbSuccessPass;
+	
+	 private void CreateAccount(String email, String password) throws FirebaseAuthException {
+		
+		 CreateRequest request = new CreateRequest()
+				    .setEmail("user@example.com")
+				    .setEmailVerified(false)
+				    .setPassword("secretPassword")
+				    .setPhoneNumber("+11234567890")
+				    .setDisplayName("John Doe")
+				    .setPhotoUrl("http://www.example.com/12345678/photo.png")
+				    .setDisabled(false);
+		 
+		 UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
+		 System.out.println("Successfully created new user: " + userRecord.getUid());
+		}
 	 @FXML
 	 private void btnAddShip(ActionEvent event) 
 	 {
@@ -101,20 +122,22 @@ public class CAddShipController implements Initializable{
 				return;
 			}
 			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyPhoneID").
-			setValue(randomIDPhoneTest);
+			setValueAsync(randomIDPhoneTest);
 			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyLatitude").
-			setValue(Double.toString(CMainController.m_LocationTempForCAddShipController.getLatitude()));
+			setValueAsync(Double.toString(CMainController.m_LocationTempForCAddShipController.getLatitude()));
 			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyLongitude").
-			setValue(Double.toString(CMainController.m_LocationTempForCAddShipController.getLongitude()));
+			setValueAsync(Double.toString(CMainController.m_LocationTempForCAddShipController.getLongitude()));
 			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyNameShip").
-			setValue(fxLbNameShip.getText());
+			setValueAsync(fxLbNameShip.getText());
 			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyDirectorShip").
-			setValue(fxLbDirectorShip.getText());
+			setValueAsync(fxLbDirectorShip.getText());
 			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyShortDescriptionShip").
-			setValue(fxTaShortDescriptionShip.getText());
+			setValueAsync(fxTaShortDescriptionShip.getText());
 			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyIsUserSelected").
-			setValue("false");
-			
+			setValueAsync("false");
+			////////////////// - Здесь создание авторизации в firebase - //////////////////////////////
+			CreateAccount(fxTxtEmail.getText(), fxTxtPassFirst.getText());
+			//////////////////- Здесь создание авторизации в firebase ENDING !!!- //////////////////////////////
 			flLbInfoSaveErrors.setText("");
 			CMainController.m_LocationTempForCAddShipController = null;
 			System.out.println("Типа создали кораблик!!!");
@@ -134,7 +157,16 @@ public class CAddShipController implements Initializable{
 	 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		//UserRecord
+		/*mAFirebaseAuth.createUserWithEmailAndPassword("", "")
+        .addOnCompleteListener(this, new OnCompleteListener() {
+
+			@Override
+			public void onComplete(Task arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});*/
 	}
 	
 

@@ -85,7 +85,7 @@ public class CIntoTmplCtrl implements Initializable
 				.child(CMAINCONSTANTS.FB_my_templates)
 				.child(CMAINCONSTANTS.m_UniqueTempIDTempate)
 				.child(CMAINCONSTANTS.FB_my_adding_attr)
-				.child(fxLbUniqueID.getText()).setValue(null);
+				.child(fxLbUniqueID.getText()).setValueAsync(null);
 			}
 			if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))// Delete attr!
 			{
@@ -95,7 +95,7 @@ public class CIntoTmplCtrl implements Initializable
 				.child(CMAINCONSTANTS.FB_my_templates)
 				.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
 				.child(CMAINCONSTANTS.FB_my_adding_attr)
-				.child(fxLbUniqueID.getText()).setValue(null);
+				.child(fxLbUniqueID.getText()).setValueAsync(null);
 				// ѕопали в список атрибутов
 				mDatabaseCurrentTmpl = FirebaseDatabase.getInstance().getReference().child(CMAINCONSTANTS.FB_my_owner_settings)
 				.child(CMAINCONSTANTS.FB_my_templates)
@@ -143,9 +143,9 @@ public class CIntoTmplCtrl implements Initializable
 				.child(CMAINCONSTANTS.m_UniqueTempIDTempate)
 				.child(CMAINCONSTANTS.FB_my_adding_attr)
 				.child(fxLbUniqueID.getText());
-    			mDatabaseCurrentTmpl.child("MyAttrHeight").setValue(fxTxtHeight.getText());
-    			mDatabaseCurrentTmpl.child("MyAttrName").setValue(fxTxtAPaneField.getText());
-    			mDatabaseCurrentTmpl.child("MyAttrWidth").setValue(fxTxtWidth.getText());
+    			mDatabaseCurrentTmpl.child("myAttrHeight").setValueAsync(fxTxtHeight.getText());
+    			mDatabaseCurrentTmpl.child("myAttrName").setValueAsync(fxTxtAPaneField.getText());
+    			mDatabaseCurrentTmpl.child("myAttrWidth").setValueAsync(fxTxtWidth.getText());
 			}
 			if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))
 			{
@@ -157,23 +157,23 @@ public class CIntoTmplCtrl implements Initializable
 				.child(CMAINCONSTANTS.FB_my_adding_attr)
 				.child(fxLbUniqueID.getText());
 
-    			mDatabaseCurrentTmpl.child("MyAttrWidth").setValue(fxTxtWidth.getText());
-				mDatabaseCurrentTmpl.child("MyAttrHeight").setValue(fxTxtHeight.getText());
+    			mDatabaseCurrentTmpl.child("myAttrWidth").setValueAsync(fxTxtWidth.getText());
+				mDatabaseCurrentTmpl.child("myAttrHeight").setValueAsync(fxTxtHeight.getText());
 				
 				if(fxLbTypeControl.getText().equals("Label"))
 				{
 					System.out.println("fxLbTypeControl = " + fxLbTypeControl.getText());
-					mDatabaseCurrentTmpl.child("MyAttrName").setValue(fxLbAPaneLabel.getText());
+					mDatabaseCurrentTmpl.child("myAttrName").setValueAsync(fxLbAPaneLabel.getText());
 				}
 				if(fxLbTypeControl.getText().equals("TextField"))
 				{
 					System.out.println("fxLbTypeControl = " + fxLbTypeControl.getText());
-					mDatabaseCurrentTmpl.child("MyAttrName").setValue(fxTxtAPaneField.getText());
+					mDatabaseCurrentTmpl.child("myAttrName").setValueAsync(fxTxtAPaneField.getText());
 				}
 				if(fxLbTypeControl.getText().equals("TextArea"))
 				{
 					System.out.println("fxLbTypeControl = " + fxLbTypeControl.getText());
-					mDatabaseCurrentTmpl.child("MyAttrName").setValue(fxTxtAPaneArea.getText());
+					mDatabaseCurrentTmpl.child("myAttrName").setValueAsync(fxTxtAPaneArea.getText());
 				}
 				
 				// ¬от оно то самое, когда € создаю левый контрол и потом мне его надо найти
@@ -188,7 +188,7 @@ public class CIntoTmplCtrl implements Initializable
 					{
 						// ѕолучить пока можно из TextField и AreaField(Label - не в счет!!! он не мен€етс€!!!)
 						System.out.println(My_ID_IntoControl_Value);
-						mDatabaseCurrentTmpl.child("MyAttrName").setValue(((TextField)tempNodes.get(i)).getText());
+						mDatabaseCurrentTmpl.child("MyAttrName").setValueAsync(((TextField)tempNodes.get(i)).getText());
 					}
 
 				}*/

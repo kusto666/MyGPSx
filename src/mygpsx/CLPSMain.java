@@ -1,13 +1,20 @@
-
 package mygpsx;
 
+import java.util.*;
+import java.text.*;
+import java.net.URL;
 import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Timer;
+
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 import com.google.api.Page;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -29,8 +36,8 @@ import com.google.cloud.storage.StorageOptions;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseCredential;
-import com.google.firebase.auth.FirebaseCredentials;
+/*import com.google.firebase.auth.FirebaseCredential;
+import com.google.firebase.auth.FirebaseCredentials;*/
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -170,8 +177,8 @@ public class CLPSMain extends Application
 	TextArea mymsg;
 	@FXML
 	static ListView<CStructUser> m_lvAllUsers;
-	 @FXML
-	 public static AnchorPane fxMessageWait;
+	 /*@FXML
+	 public static AnchorPane fxMessageWait;*/
 	 @FXML
 	 public static Label fxLbMessage;
 	 @FXML
@@ -189,23 +196,35 @@ public class CLPSMain extends Application
 
 	@FXML
 	public static ListView<CStructUser> fxListView;
-	
+	/*@FXML
+	private Button fxBtnInTabRefreshMap;*/
 	@FXML
 	Parent root;
 	@FXML
 	public static FXMLLoader m_Loader;
 	//@FXML
 	//public static FXMLLoader m_LoaderCell;
-
+	// one icon location is shared between the application tray icon and task bar icon.
+    // you could also use multiple icons to allow for clean display of tray icons on hi-dpi devices.
+    private static final String iconImageLoc =
+            "http://icons.iconarchive.com/icons/scafer31000/bubble-circle-3/16/GameCenter-icon.png";
+    // a timer allowing the tray icon to provide a periodic notification event.
+    private Timer notificationTimer = new Timer();
+ // format used to display the current time in a tray icon notification.
+    private DateFormat timeFormat = SimpleDateFormat.getTimeInstance();
+    public static java.awt.TrayIcon trayIcon;
+    
 	// Самый главный старт!!!!
     @SuppressWarnings("unchecked")
 	@Override
     public void start(Stage st) throws Exception
     {
+    	
     	//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Изначально все шаблоны готовы к заполнению!!!
     	if(!InitFireBase())
     	{
     		System.out.println("InitFireBase() - ошибка инициализации!!!");
+    		
     	}
     	else
     	{
@@ -214,6 +233,8 @@ public class CLPSMain extends Application
         	root = null;
         	stage = st;
         	stage.setY(0);// Прикрепили к верху - для удобства отладки снизу)))
+        	// sets up the tray icon (using awt code run on the swing thread).
+            javax.swing.SwingUtilities.invokeLater(this::addAppToTray);
         	try 
         	{
         		// Инициализация всех внутренних контролов!!!
@@ -221,9 +242,20 @@ public class CLPSMain extends Application
         		root = m_Loader.load();
         		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
         		fxListView = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListView");
-        		fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
+        		//fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
         		fxLbMessage = (Label)m_Loader.getNamespace().get("fxLbMessage");
         		btnRestartMod = (Button)m_Loader.getNamespace().get("btnRestartMod");
+        		//fxBtnInTabRefreshMap = (Button)m_Loader.getNamespace().get("fxBtnInTabRefreshMap");
+        		/*fxBtnInTabRefreshMap.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent event)
+					{
+
+						System.out.println("START - fxBtnInTabRefreshMap.setOnMouseClicked");
+						System.out.println("END - fxBtnInTabRefreshMap.setOnMouseClicked");
+					}
+				});*/
     		} 
         	catch (Exception ex) 
         	{
@@ -235,6 +267,7 @@ public class CLPSMain extends Application
             scene = new Scene(root);
             stage.setTitle(CStrings.m_APP_NAME);
             stage.setScene(scene);
+
 
             stage.setOnCloseRequest(new EventHandler<WindowEvent>()
             {
@@ -265,14 +298,14 @@ public class CLPSMain extends Application
                 }
             });
             stage.show();
-            fxMessageWait.setVisible(true);
+            //fxMessageWait.setVisible(true);
             MyEventListnerFireMessage();
     	}
 
     }
-    // вызываем в контроллере!!! - btnRefreshMap
     
-	@SuppressWarnings("unchecked")
+    // вызываем в контроллере!!! - btnRefreshMap
+ 	@SuppressWarnings("unchecked")
 	public void reload() throws IOException
     {
     	if(!InitFireBase())
@@ -281,7 +314,7 @@ public class CLPSMain extends Application
     	}
     	else
     	{
-    		fxMessageWait.setVisible(false);
+    		//fxMessageWait.setVisible(false);
     		btnRefreshAllMarkers();
             MyEventListnerFireUsers();
         	root = null;
@@ -292,7 +325,7 @@ public class CLPSMain extends Application
         		root = m_Loader.load();
         		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
         		fxListView = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListView");
-        		fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
+        		//fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
         		fxLbMessage = (Label)m_Loader.getNamespace().get("fxLbMessage");
         		btnRestartMod = (Button)m_Loader.getNamespace().get("btnRestartMod");
     		} 
@@ -336,7 +369,7 @@ public class CLPSMain extends Application
                 }
             });
             stage.show();
-            fxMessageWait.setVisible(true);
+           // fxMessageWait.setVisible(true);
             MyEventListnerFireMessage();
     	}
     }
@@ -362,10 +395,15 @@ public class CLPSMain extends Application
 				System.out.println("Fucking!!!");
 			}
 
-			FirebaseOptions options = new FirebaseOptions.Builder()
-			  .setCredential(FirebaseCredentials.fromCertificate(serviceAccount))
+
+					FirebaseOptions options = new FirebaseOptions.Builder()
+				    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+				    .setDatabaseUrl("https://mygpsone-kusto1.firebaseio.com/")
+				    .build();
+			/*FirebaseOptions options = new FirebaseOptions.Builder()
+			  .setCredentials(credentials)(Credential.fromCertificate(serviceAccount))
 			  .setDatabaseUrl("https://mygpsone-kusto1.firebaseio.com/")
-			  .build();
+			  .build();*/
 
 			if(defaultApp == null)
 			{
@@ -412,6 +450,7 @@ public class CLPSMain extends Application
 				} 
 				catch (Exception ex) 
 				{
+					ex.printStackTrace();
 					System.out.println(ex.getMessage());
 					bRet = false;
 				}
@@ -438,7 +477,7 @@ public class CLPSMain extends Application
 			}
 			else
 			{
-				System.out.println("ОШИБКА СОЗДАНИЯ defaultApp.getName() !!!");
+				System.out.println("ОШИБОК СОЗДАНИЯ defaultApp.getName() НЕТ!!!");
 			}
 		} 
     	catch (Exception ex) 
@@ -528,7 +567,21 @@ public class CLPSMain extends Application
 				            		    		          double dLat = Double.parseDouble(us.getMyLatitude());
 				            		    		          double dLong = Double.parseDouble(us.getMyLongitude());
 				            		    		          LatLong ll = new LatLong(dLat,dLong); 
-				            		    		          CMainController.map.setCenter(ll);
+				            		    		          try 
+				            		    		          {
+				            		    		        	  //CMainController.map = null; // - это для теста ошибки и всплывающего окна в трее!!!
+				            		    		        	  CMainController.MyGoogleMap.setCenter(ll);
+				            		    		          }
+				            		    		          catch (Exception e) 
+				            		    		          {
+				            		    		        	  e.printStackTrace();
+				            		    		        	  trayIcon.displayMessage(
+				            		    		        			  	CStrings.m_APP_ERROR,
+				            	                                        "Ошибка инициализации карты ->\n перезапустите программу!",
+				            	                                        java.awt.TrayIcon.MessageType.INFO
+				            	                                );
+														  }
+				            		    		         
 			            		    		          
 			            		    		          InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
 			            		    		          infoWindowOptions.content("<h4>Имя судна:</h4>" + 
@@ -543,14 +596,14 @@ public class CLPSMain extends Application
 
 														markerOptions.position(ll);
 														MyMarker = new Marker(markerOptions);
-														CMainController.map.addMarker( MyMarker );
+														CMainController.MyGoogleMap.addMarker( MyMarker );
 														CMainController.markerMap.put(MyMarker, false);
-														MyInfoWindow.open(CMainController.map, MyMarker);
+														MyInfoWindow.open(CMainController.MyGoogleMap, MyMarker);
 													    CMainController.markerMap.put(MyMarker, true);
 			            		    		        }
 			            		    		    }
 			            					});
-			            				  if(CMainController.map == null)
+			            				    if(CMainController.MyGoogleMap == null)
 			            		            {
 			            		            	System.out.println("Ошибка инициализации map!!!");
 			            		            	CLPSMain.fxLbMessage.setText("Ошибка инициализации\nкарты!\nПерегрузите карту,\nнажимте кнопку:\n\"Обновить карту\"");
@@ -558,7 +611,8 @@ public class CLPSMain extends Application
 			            		            }
 			            		            else
 			            		            {
-			            		            	CLPSMain.fxMessageWait.setVisible(false);
+			            		            	//CLPSMain.fxMessageWait.setVisible(false);
+			            		            	//CLPSMain.btnRestartMod.setVisible(false);
 			            		            }
 			            			  }
 			            			);
@@ -604,8 +658,8 @@ public class CLPSMain extends Application
 				{
 					mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("messages");
 
-					 System.out.println(mDatabaseRef.toString());
-					 System.out.println( "-----------------------------------" );
+					 //System.out.println(mDatabaseRef.toString());
+					// System.out.println( "-----------------------------------" );
 					 mDatabaseRef.addValueEventListener(new ValueEventListener()
 					 {
 						@Override
@@ -616,7 +670,7 @@ public class CLPSMain extends Application
 								// Выбираем , что слушать, какую ветку данных!!!
 								DataSnapshot messagesSnapshot = arg0;
 					            Iterable<DataSnapshot> messageChildren = messagesSnapshot.getChildren();
-					            System.out.println("arg0 = " + arg0.getChildrenCount());
+					            //System.out.println("arg0 = " + arg0.getChildrenCount());
 					            for (DataSnapshot message : messageChildren)
 				                {
 					            	System.out.println( "message!!!" );
@@ -657,8 +711,8 @@ public class CLPSMain extends Application
 
     }
     
-    @FXML
-    private synchronized void btnRefreshAllMarkers(/*ActionEvent event*/) 
+//    @FXML 
+    private void btnRefreshAllMarkers() 
     {
     	try
     	{
@@ -699,7 +753,8 @@ public class CLPSMain extends Application
 																user.getMyNameShip(), 
 																user.getMyDirectorShip(), 
 																user.getMyShortDescriptionShip(), 
-																user.getMyIsUserSelected());
+																user.getMyIsUserSelected(),
+																user.getMyPass());
                                 m_localAllMarkersUsersTempMain.add(tempTransport);
 							}
                         	catch (Exception e)
@@ -730,5 +785,103 @@ public class CLPSMain extends Application
 			ex.getMessage();
 		}
 
+    }
+    /**
+     * Shows the application stage and ensures that it is brought ot the front of all stages.
+     */
+    private void showStage() {
+        if (stage != null) {
+            stage.show();
+            stage.toFront();
+        }
+    }
+    /**
+     * Sets up a system tray icon for the application.
+     */
+    private void addAppToTray() {
+        try {
+            // ensure awt toolkit is initialized.
+            java.awt.Toolkit.getDefaultToolkit();
+
+            // app requires system tray support, just exit if there is no support.
+            if (!java.awt.SystemTray.isSupported()) {
+                System.out.println("No system tray support, application exiting.");
+                Platform.exit();
+            }
+
+            // set up a system tray icon.
+            java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
+            URL imageLoc = new URL(iconImageLoc);
+            java.awt.Image image = ImageIO.read(imageLoc);
+            /*java.awt.TrayIcon */trayIcon = new java.awt.TrayIcon(image);
+
+            // if the user double-clicks on the tray icon, show the main app stage.
+            trayIcon.addActionListener(event -> Platform.runLater(this::showStage));
+
+            // if the user selects the default menu item (which includes the app name), 
+            // show the main app stage.
+            java.awt.MenuItem openItem = new java.awt.MenuItem("hello, world");
+            openItem.addActionListener(event -> Platform.runLater(this::showStage));
+
+            // the convention for tray icons seems to be to set the default icon for opening
+            // the application stage in a bold font.
+            java.awt.Font defaultFont = java.awt.Font.decode(null);
+            java.awt.Font boldFont = defaultFont.deriveFont(java.awt.Font.BOLD);
+            openItem.setFont(boldFont);
+
+            // to really exit the application, the user must go to the system tray icon
+            // and select the exit option, this will shutdown JavaFX and remove the
+            // tray icon (removing the tray icon will also shut down AWT).
+            java.awt.MenuItem exitItem = new java.awt.MenuItem("Exit");
+            exitItem.addActionListener(event -> {
+            	
+            	int dialogResult = JOptionPane.showConfirmDialog(null, CStrings.m_APP_NAME_QUESTION_EXIT, CStrings.m_APP_NAME, JOptionPane.YES_NO_OPTION);
+
+            	if (dialogResult == JOptionPane.YES_OPTION) {
+            		// Здесь все подчищаем и выходим!!!
+        			notificationTimer.cancel();
+        			Platform.exit();
+        			tray.remove(trayIcon);
+            		System.out.println("Выход->");
+            		System.exit(0);
+            	}
+            });
+
+            // setup the popup menu for the application.
+            final java.awt.PopupMenu popup = new java.awt.PopupMenu();
+            popup.add(openItem);
+            popup.addSeparator();
+            popup.add(exitItem);
+            trayIcon.setPopupMenu(popup);
+
+            // create a timer which periodically displays a notification message.
+           /* notificationTimer.schedule(
+                    new TimerTask() {
+                        @Override
+                        public void run() {
+                            javax.swing.SwingUtilities.invokeLater(() ->
+                                trayIcon.displayMessage(
+                                        CStrings.m_APP_NAME,
+                                        "Я - время): " + timeFormat.format(new Date()),
+                                        java.awt.TrayIcon.MessageType.INFO
+                                )
+                            );
+                        }
+                    },
+                    5_000,
+                    60_000
+            );*/
+           
+            // add the application tray icon to the system tray.
+            tray.add(trayIcon);
+            trayIcon.displayMessage(
+                    CStrings.m_APP_NAME,
+                    "Я - время): " + timeFormat.format(new Date()),
+                    java.awt.TrayIcon.MessageType.INFO
+            );
+        } catch (java.awt.AWTException | IOException e) {
+            System.out.println("Unable to init system tray");
+            e.printStackTrace();
+        }
     }
 }

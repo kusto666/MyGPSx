@@ -84,11 +84,11 @@ public class CTypeobjAddController implements Initializable{
 		
 		String uploadId = CLPSMain.mDatabase.push().getKey();
 		CLPSMain.mDatabase.child(uploadId).child("MyIDUnique").
-		setValue(uploadId);
+		setValueAsync(uploadId);
 		CLPSMain.mDatabase.child(uploadId).child("MyCLassTypeobj").
-		setValue(fxTxtNumberTypeobj.getText());
+		setValueAsync(fxTxtNumberTypeobj.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyNameTypeobj").
-		setValue(fxTxtNameTypeobj.getText());
+		setValueAsync(fxTxtNameTypeobj.getText());
 		
 		CTypeobjEditController.m_stageTypeobjAdd.close();
 	}

@@ -85,7 +85,7 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 						.child(CMAINCONSTANTS.FB_my_owner_settings)
 						.child(CMAINCONSTANTS.FB_my_templates);
 			 CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).
-			 child("MyNameTemplate").setValue(fxTxtNameTmplJob.getText());
+			 child("MyNameTemplate").setValueAsync(fxTxtNameTmplJob.getText());
 			 ((Stage)fxBtnCloseFrame.getScene().getWindow()).close();// » успешно закрываем окно!!!
 			 //CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;
 		 }
@@ -144,8 +144,8 @@ public class CFXCreateTemplateJobCtrl implements Initializable{
 				.child(CMAINCONSTANTS.FB_my_owner_settings)
 				.child(CMAINCONSTANTS.FB_my_templates);
 		CMAINCONSTANTS.m_UniqueTempIDTempate = CLPSMain.mDatabase.push().getKey();
-		CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child("MyIDUnique").setValue(CMAINCONSTANTS.m_UniqueTempIDTempate);
-		CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child("MyNameTemplate").setValue(m_stTempNameJob);
+		CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child("MyIDUnique").setValueAsync(CMAINCONSTANTS.m_UniqueTempIDTempate);
+		CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child("MyNameTemplate").setValueAsync(m_stTempNameJob);
 		
 		// «десь инициализируем список сущностей(атрибутов добавленных в шаблон задачи)
 		try

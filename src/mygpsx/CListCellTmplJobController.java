@@ -49,10 +49,10 @@ public class CListCellTmplJobController implements Initializable{
     				.getReference()
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_templates)
-    				.child(fxLbUniqueID.getText()).setValue(null);
+    				.child(fxLbUniqueID.getText()).setValueAsync(null);
     		
     		
-    		//CLPSMain.mDatabase.setValue(null);// Удаляем значение(объект) из базы!!!
+    		//CLPSMain.mDatabase.setValueAsync(null);// Удаляем значение(объект) из базы!!!
         }
 		catch(Exception e) 
 		{

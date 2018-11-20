@@ -51,7 +51,7 @@ public class CListCellAttrobjController implements Initializable{
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_attrobj)
     				.child(stUniqueIDAttrobj);
-    		CLPSMain.mDatabase.setValue(null);// Удаляем значение(объект) из базы!!!
+    		CLPSMain.mDatabase.setValueAsync(null);// Удаляем значение(объект) из базы!!!
         }
 		catch(Exception e) 
 		{
@@ -80,7 +80,7 @@ public class CListCellAttrobjController implements Initializable{
 		    				.child(CMAINCONSTANTS.FB_my_owner_settings)
 		    				.child(CMAINCONSTANTS.FB_my_attrobj)
 		    				.child(stUniqueIDAttrobj);
-		    		CLPSMain.mDatabase.child("MyNameAttrobj").setValue(fxTxtNameAttrobj.getText());
+		    		CLPSMain.mDatabase.child("MyNameAttrobj").setValueAsync(fxTxtNameAttrobj.getText());
 	            }
 			}
 		});

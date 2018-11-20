@@ -163,26 +163,26 @@ public class CAttrjobAddController implements Initializable{
 		
 		
 		String uploadId = CLPSMain.mDatabase.push().getKey();
-		CLPSMain.mDatabase.child(uploadId).child("MyIDUnique").setValue(uploadId);
+		CLPSMain.mDatabase.child(uploadId).child("MyIDUnique").setValueAsync(uploadId);
 		
 		CLPSMain.mDatabase.child(uploadId).child("MyAutoIncrement")
-		.setValue(Long.toString(m_lChildrenCount));// Здесь пишем MyAutoIncrement
+		.setValueAsync(Long.toString(m_lChildrenCount));// Здесь пишем MyAutoIncrement
 
-		CLPSMain.mDatabase.child(uploadId).child("MyCLassAttrjob").setValue(fxTxtNumberAttrjob.getText());
+		CLPSMain.mDatabase.child(uploadId).child("MyCLassAttrjob").setValueAsync(fxTxtNumberAttrjob.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyNameAttrjob").
-		setValue(fxTxtNameAttrjob.getText());
+		setValueAsync(fxTxtNameAttrjob.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyTypeAttrjob").
-		setValue(stAttributeCode);
+		setValueAsync(stAttributeCode);
 		CLPSMain.mDatabase.child(uploadId).child("MyHeight").
-		setValue(CMAINCONSTANTS.Height_cell_start);
+		setValueAsync(CMAINCONSTANTS.Height_cell_start);
 		CLPSMain.mDatabase.child(uploadId).child("MyWidth").
-		setValue(CMAINCONSTANTS.Width_control_start);
+		setValueAsync(CMAINCONSTANTS.Width_control_start);
 		
 		CAttrjobEditController.m_stageAttrjobAdd.close();
 	}
 	/*void AddAttrjobInBaseType(String stAttributeCode)
 	{
 		CLPSMain.mDatabase.child(uploadId).child("MyTypeAttrjob").
-		setValue(stAttributeCode);
+		setValueAsync(stAttributeCode);
 	}*/
 }

@@ -1,12 +1,12 @@
 package mygpsx;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 
 //Ñòğóêòóğà òèïîâ çàäà÷!!!
 public class CStructTmplJob {
 	private String MyIDUnique;
 	private String MyNameTemplate;
-	//private HashMap<String, String> my_adding_attr;
+	//private String my_adding_attr;
 	
 	public CStructTmplJob() {// ÎÁßÇÀÒÅËÜÍÎ ÓÊÀÇÛÂÀÅÌ, À ÒÎ ÁÓÄÅÒ ÎØÈÁÊÀ ÒÈÏÀ ÊÀÊ ÇÄÅÑÜ ÁÛËÎ:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
@@ -22,20 +22,19 @@ public class CStructTmplJob {
 		this.MyIDUnique = MyIDUnique;
 		this.MyNameTemplate = MyNameTemplate;
 	}
-	
 	public String getMyIDUnique()
     {
         return MyIDUnique;
     }
-
     public String getMyNameTemplate()
     {
         return MyNameTemplate;
     }
-   /* public HashMap getmy_adding_attr()
+   /* public String getmy_adding_attr()
     {
         return my_adding_attr;
     }*/
+    
     public void setMyIDUnique(String MyIDUnique)
     {
         this.MyIDUnique = MyIDUnique;
@@ -44,6 +43,10 @@ public class CStructTmplJob {
     {
         this.MyNameTemplate = MyNameTemplate;
     }
+    /*public void setmy_adding_attr(String my_adding_attr)
+    {
+        this.my_adding_attr = my_adding_attr;
+    }*/
     @Override
     public String toString()  {
         return this.getMyNameTemplate();

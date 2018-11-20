@@ -2,6 +2,7 @@ package mygpsx;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import com.google.firebase.database.DataSnapshot;
@@ -9,7 +10,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.tasks.Task;
+/*import com.google.firebase.tasks.Task;*/
 
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
@@ -40,15 +41,15 @@ public class CTUsersJobsController implements Initializable
 	@FXML
 	private ComboBox<CStructUser> fxCbSelectUser;// Здесь список пользователей!!!
 	@FXML
-	private ComboBox<CStructTmplJob> fxCbSelectTamplateJob; // List of templates!!!
+	private ComboBox<CStructTmplJob> fxCbSelectTemplateJob; // List of templates!!!
 	@FXML
 	private ComboBox<CStructPriority> fxCbSelectPriorityJob; // List of priority!!!
 	
 	private DatabaseReference mDatabaseUsers;
-	private Task<Void> mDatabaseAddingJob;
+	private DatabaseReference mDatabaseAddingJob;
 	private DatabaseReference mDatabaseListenSelectUser;// Здесь слушаем выбранного пользователя!!!
 	private DatabaseReference mDatabasePriorityJobs;// Это для приоритетов!!!
-	private Task<Void> mDatabaseUpdateSelectedUsersTmpls;
+	private DatabaseReference mDatabaseUpdateSelectedUsersTmpls;
 	
 	private DatabaseReference mDatabaseTamplates;
 	
@@ -80,10 +81,10 @@ public class CTUsersJobsController implements Initializable
     		if(fxCbSelectPriorityJob.getSelectionModel().getSelectedIndex() != 0)
     		{
     			String uploadId = CLPSMain.mDatabase.push().getKey();
-        		mDatabaseAddingJob = FirebaseDatabase.getInstance().getReference()
+        		/*mDatabaseAddingJob = */FirebaseDatabase.getInstance().getReference()
         				.child(CMAINCONSTANTS.FB_my_users_jobs)
         				.child(CMAINCONSTANTS.MyPhoneID_ + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP)
-        				.child(uploadId).child("MyTemplateJob").setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
+        				.child(uploadId).child("MyTemplateJob").setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
         		System.out.println("BtnAddingJobNew!!!");
     		}
     		else
@@ -150,8 +151,8 @@ public class CTUsersJobsController implements Initializable
 						m_stNameShip =  ((CStructUser)newValue).getMyNameShip();
 						m_stUsersUniqueID =  ((CStructUser)newValue).getMyPhoneID();
 						CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = m_stUsersUniqueID;
-						mDatabaseUpdateSelectedUsersTmpls = FirebaseDatabase.getInstance().getReference()
-								.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
+						/*mDatabaseUpdateSelectedUsersTmpls = */FirebaseDatabase.getInstance().getReference()
+								.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
 						System.out.println("m_stUsersUniqueID = " + m_stUsersUniqueID);
 						//System.out.println("m_stNameShip = " + m_stNameShip);
 
@@ -212,30 +213,36 @@ public class CTUsersJobsController implements Initializable
 					m_aTmpl = new ArrayList<CStructTmplJob>();
 					for (DataSnapshot structTmplJob : contactChildren)
 	                {
+						//HashMap<String, CStructTmplJob> hmTemp = new HashMap<>();
+						
 						CStructTmplJob TempSP = structTmplJob.getValue(CStructTmplJob.class);
 	                 	System.out.println( "structTmplJob = "  + TempSP.getMyNameTemplate());
 	                 	m_aTmpl.add(TempSP);// Заполнили массив!!!
                 	}
 		            m_ObservableListTmpl = FXCollections.observableArrayList (m_aTmpl);
-		            fxCbSelectTamplateJob.setItems(m_ObservableListTmpl);
-		        	Platform.runLater(
-	            			  () -> {
-	            				  try
-	            				  {
-	            					  // Здесь если попадаем в исключение, то ниже т.к. нет ни одного шаблона в списке!!!
-	            					  fxCbSelectTamplateJob.setValue(m_aTmpl.get(0));
-	            				  } 
-	            				  catch (Exception e)
-	            				  {
-	            					  // ... ставим заглушку из пустого объекта CStructTmplJob 
-	            					  CStructTmplJob tempStructTmplJob = new CStructTmplJob();
-	            					  tempStructTmplJob.setMyNameTemplate("Empty list of templates!");
-	            					  m_aTmpl.add(tempStructTmplJob);
-	            					  fxCbSelectTamplateJob.setValue(m_aTmpl.get(0));
-	            					  //e.getMessage();
-								  }
-	            				  
-	            			  });
+		            fxCbSelectTemplateJob.setItems(m_ObservableListTmpl);
+	/*	        	Platform.runLater(
+	    			  () -> {
+	    				  try
+	    				  {
+	    					  if(m_aTmpl.size() < 0)
+	    					  {
+	    						  System.out.println("CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL = " + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
+	    					  }
+	    					  // Здесь если попадаем в исключение, то ниже т.к. нет ни одного шаблона в списке!!!
+	    					  fxCbSelectTemplateJob.setValue(m_aTmpl.get(0));
+	    				  } 
+	    				  catch (Exception e)
+	    				  {
+	    					  // ... ставим заглушку из пустого объекта CStructTmplJob 
+	    					 CStructTmplJob tempStructTmplJob = new CStructTmplJob();
+	    					  tempStructTmplJob.setMyNameTemplate("Empty list of templates!");
+	    					  //m_aTmpl.add(tempStructTmplJob);
+	    					  //fxCbSelectTemplateJob.setValue(m_aTmpl.get(0));
+	    					  //e.getMessage();
+						  }
+	    				  
+	    			  });*/
 				}
 				catch (Exception e) 
 				{
@@ -249,7 +256,7 @@ public class CTUsersJobsController implements Initializable
 		
 			}
 		 });
-		fxCbSelectTamplateJob.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CStructTmplJob>() 
+		fxCbSelectTemplateJob.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CStructTmplJob>() 
 	    {
 			@Override
 			public void changed(ObservableValue<? extends CStructTmplJob> observable, CStructTmplJob oldValue,
@@ -257,15 +264,24 @@ public class CTUsersJobsController implements Initializable
 			{
 				if(newValue != oldValue)
 				{
-					//System.out.println("Что-то изменилось!!!");
+					System.out.println("Что-то изменилось!!!");
 				}
 				m_stNameTmpl =  ((CStructTmplJob)newValue).getMyNameTemplate();
 				m_stTmplUniqueID =  ((CStructTmplJob)newValue).getMyIDUnique();
 				CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL = m_stTmplUniqueID;
 				System.out.println("CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL = " + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
 				
-				mDatabaseUpdateSelectedUsersTmpls = FirebaseDatabase.getInstance().getReference()
-						.child(CMAINCONSTANTS.FB_MyIDTmplSelected).setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
+				/*mDatabaseUpdateSelectedUsersTmpls = */FirebaseDatabase.getInstance().getReference()
+						.child(CMAINCONSTANTS.FB_MyIDTmplSelected).setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
+				/*FirebaseDatabase.getInstance().getReference()
+				.child(CMAINCONSTANTS.FB_MyIDTmplSelected).setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL, new CompletionListener() {
+					
+					@Override
+					public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
+						// TODO Auto-generated method stub
+						
+					}
+				});*/
 
 			}
 		});

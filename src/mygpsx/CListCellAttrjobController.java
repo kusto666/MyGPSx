@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseReference.CompletionListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -73,7 +74,7 @@ public class CListCellAttrjobController implements Initializable{
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_attrjob)
     				.child(stUniqueIDAttrjob);
-    		mDatabase.setValue(null);// Удаляем значение(объект) из базы!!!
+    		mDatabase.setValueAsync(null);// Удаляем значение(объект) из базы!!!
         }
 		catch(Exception e) 
 		{
@@ -140,7 +141,15 @@ public class CListCellAttrjobController implements Initializable{
 						fxTxtWidth.getText(),
 						fxLbHiddenTypeAttr.getText(),
 						CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr);
-				mDatabase.child(stTempUniqueID).setValue(tmpl);
+				//mDatabase.child(stTempUniqueID).setValueAsync(tmpl);
+				mDatabase.child(stTempUniqueID).setValue(tmpl, new CompletionListener() {
+					
+					@Override
+					public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
@@ -215,7 +224,7 @@ public class CListCellAttrjobController implements Initializable{
 		    				.child(CMAINCONSTANTS.FB_my_owner_settings)
 		    				.child(CMAINCONSTANTS.FB_my_attrjob)
 		    				.child(stUniqueIDAttrjob);
-		    		mDatabase.child("MyNameAttrjob").setValue(fxTxtNameAttrjob.getText());
+		    		mDatabase.child("MyNameAttrjob").setValueAsync(fxTxtNameAttrjob.getText());
 	            }
 			}
 		});

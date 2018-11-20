@@ -51,7 +51,7 @@ public class CListCellTypejobController implements Initializable{
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_typejob)
     				.child(stUniqueIDTypejob);
-    		CLPSMain.mDatabase.setValue(null);// Удаляем значение(объект) из базы!!!
+    		CLPSMain.mDatabase.setValueAsync(null);// Удаляем значение(объект) из базы!!!
         }
 		catch(Exception e) 
 		{
@@ -80,7 +80,7 @@ public class CListCellTypejobController implements Initializable{
 		    				.child(CMAINCONSTANTS.FB_my_owner_settings)
 		    				.child(CMAINCONSTANTS.FB_my_typejob)
 		    				.child(stUniqueIDTypejob);
-		    		CLPSMain.mDatabase.child("MyNameTypejob").setValue(fxTxtNameTypejob.getText());
+		    		CLPSMain.mDatabase.child("MyNameTypejob").setValueAsync(fxTxtNameTypejob.getText());
 	            }
 			}
 		});

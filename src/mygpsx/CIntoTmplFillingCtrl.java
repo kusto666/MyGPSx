@@ -38,7 +38,7 @@ public class CIntoTmplFillingCtrl implements Initializable
     				.child(CMAINCONSTANTS.FB_my_templates)
     				.child(CMAINCONSTANTS.m_UniqueTempIDTempate)
     				.child(CMAINCONSTANTS.FB_my_adding_attr)
-    				.child(fxLbUniqueID.getText()).setValue(null);
+    				.child(fxLbUniqueID.getText()).setValueAsync(null);
     		System.out.println("Click - BtnDeleteAttrjob!!!");
 		}
 		catch (Exception e) 

@@ -84,11 +84,11 @@ public class CStatusAddController implements Initializable{
 		
 		String uploadId = CLPSMain.mDatabase.push().getKey();
 		CLPSMain.mDatabase.child(uploadId).child("MyIDUnique").
-		setValue(uploadId);
+		setValueAsync(uploadId);
 		CLPSMain.mDatabase.child(uploadId).child("MyCLassStatus").
-		setValue(fxTxtNumberStatus.getText());
+		setValueAsync(fxTxtNumberStatus.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyNameStatus").
-		setValue(fxTxtNameStatus.getText());
+		setValueAsync(fxTxtNameStatus.getText());
 		
 		CStatusEditController.m_stageStatusAdd.close();
 	}
