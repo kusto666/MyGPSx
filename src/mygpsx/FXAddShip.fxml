@@ -35,5 +35,7 @@
       <Label layoutX="216.0" layoutY="103.0" text="Подтвердите пароль:" />
       <PasswordField fx:id="fxTxtPassSecond" layoutX="216.0" layoutY="120.0" prefHeight="25.0" prefWidth="192.0" promptText="#############" />
       <Label fx:id="fxLbSuccessPass" layoutX="216.0" layoutY="145.0" prefHeight="17.0" prefWidth="192.0" text="ПАРОЛИ НЕ СОВПАДАЮТ!" textFill="RED" />
+      <ComboBox fx:id="fxCbSelectSysUser" layoutX="216.0" layoutY="188.0" prefHeight="25.0" prefWidth="214.0" />
+      <Label layoutX="216.0" layoutY="171.0" prefHeight="17.0" prefWidth="214.0" text="Выбор системного пользователя:" />
    </children>
 </AnchorPane>

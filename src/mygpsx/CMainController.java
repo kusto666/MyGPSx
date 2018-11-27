@@ -220,6 +220,29 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private GeocodingService geocodingService;
     
+    //Open list of window with SysUsers -- >> FrameSettingsSysUserEdit
+    @FXML
+    private void FrameSettingsSysUserEdit(ActionEvent event) 
+    {
+    	System.out.println("FrameSettingsSysUserEdit!!!");
+    	//CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
+    	try 
+    	{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXSysUserEdit));
+            CLPSMain.m_rootFXSysUserEdit = (Parent)fxmlLoader.load();
+            CLPSMain.m_stageFXSysUserEdit = new Stage();
+            CLPSMain.m_stageFXSysUserEdit.setTitle(CStrings.m_APP_NAME + "-> Список аккаунтов");
+            CLPSMain.m_stageFXSysUserEdit.setScene(new Scene(CLPSMain.m_rootFXSysUserEdit));  
+            CLPSMain.m_stageFXSysUserEdit.setResizable(false);
+            CLPSMain.m_stageFXSysUserEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageFXSysUserEdit.initOwner(CLPSMain.stage);
+            CLPSMain.m_stageFXSysUserEdit.show();
+        }
+		catch(Exception e) 
+		{
+           e.printStackTrace();
+        }
+    }
     // Открытие окна для создания нового шаблона ОТЧЕТА!!!
     @FXML
     private void FrameSettingsFXCreateTmplOrders(ActionEvent event) 

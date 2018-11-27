@@ -39,7 +39,7 @@ public class CTUsersJobsController implements Initializable
 	@FXML
 	private AnchorPane fxAPaneMain;
 	@FXML
-	private ComboBox<CStructUser> fxCbSelectUser;// Здесь список пользователей!!!
+	private ComboBox<CStructUser> fxCbSelectUser;// Здесь список "обычных" пользователей!!!
 	@FXML
 	private ComboBox<CStructTmplJob> fxCbSelectTemplateJob; // List of templates!!!
 	@FXML

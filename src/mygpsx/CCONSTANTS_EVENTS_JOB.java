@@ -11,6 +11,12 @@ import javafx.stage.Stage;
 
 public class CCONSTANTS_EVENTS_JOB
 {
+	// Переменная говорит о том, что карта загрузилась, проверка двух этапов:
+	// 1 - этап: GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapInitialized 
+	// 2 - этап: GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapReady
+	// if LOAD_GOOGLEMAP_STEP == 2 then GOOD!!!
+	public static int LOAD_GOOGLEMAP_STEP = 0;
+	
 	// Глобальная переменная хранения последнего количества атрибутов в узле my_adding_attr
 	public static long COUNT_ATTRIBUTES_IN_my_adding_attr = 0;
 	// Переменная отвечает за то, что мы делаем с атрибутом в списке, а именно:

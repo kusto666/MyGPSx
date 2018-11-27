@@ -2,6 +2,7 @@ package mygpsx;
 
 import java.net.URL;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
@@ -12,8 +13,10 @@ import java.util.stream.Collectors;
 
 import org.apache.http.util.TextUtils;
 
+import com.google.firebase.auth.ExportedUserRecord;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.ListUsersPage;
 import com.google.firebase.auth.UserRecord;
 import com.google.firebase.auth.UserRecord.CreateRequest;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +27,10 @@ import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.javascript.object.Marker;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -37,6 +44,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -52,6 +60,11 @@ public class CAddShipController implements Initializable{
 	 PasswordField fxTxtPassFirst;
 	 @FXML
 	 PasswordField fxTxtPassSecond;
+	 @FXML
+	 private ComboBox<CStructSysUser> fxCbSelectSysUser;// Системный пользователь - выбор по мылу!!!
+	 private ArrayList<CStructSysUser> m_alSysUser = null;
+	 private ObservableList<CStructSysUser> m_ObservableList;
+	 
 	 @FXML
 	 TextField fxLbNameShip;
 	 @FXML
@@ -71,7 +84,7 @@ public class CAddShipController implements Initializable{
 	
 	 private void CreateAccount(String email, String password) throws FirebaseAuthException {
 		
-		 CreateRequest request = new CreateRequest()
+		/* CreateRequest request = new CreateRequest()
 				    .setEmail("user@example.com")
 				    .setEmailVerified(false)
 				    .setPassword("secretPassword")
@@ -81,7 +94,7 @@ public class CAddShipController implements Initializable{
 				    .setDisabled(false);
 		 
 		 UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
-		 System.out.println("Successfully created new user: " + userRecord.getUid());
+		 System.out.println("Successfully created new user: " + userRecord.getUid());*/
 		}
 	 @FXML
 	 private void btnAddShip(ActionEvent event) 
@@ -156,7 +169,60 @@ public class CAddShipController implements Initializable{
 	 }
 	 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		// Start listing users from the beginning, 1000 at a time.
+				CStructSysUser SysUser = null;
+				m_alSysUser = new ArrayList<CStructSysUser>();
+				
+				ListUsersPage page = null;
+				try 
+				{
+					page = FirebaseAuth.getInstance().listUsers(null);
+				} 
+				catch (FirebaseAuthException e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				while (page != null)
+				{
+				  for (ExportedUserRecord user : page.getValues())
+				  {
+					  SysUser = new CStructSysUser(user.getUid(), user.getEmail(), user.getPasswordHash());
+					  m_alSysUser.add(SysUser);
+					  System.out.println("SysUser: " + user.getUid());
+					  System.out.println("user.getEmail(): " + user.getEmail());
+					  System.out.println("user.getPasswordHash(): " + user.getPasswordHash());
+				  }
+				  page = page.getNextPage();
+				}
+				m_ObservableList = FXCollections.observableArrayList (m_alSysUser);
+				fxCbSelectSysUser.setItems(m_ObservableList);
+/*				fxCbSelectSysUser.valueProperty().addListener(new ChangeListener<CStructSysUser>() {
+
+					@Override
+					public void changed(ObservableValue<? extends CStructSysUser> observable, CStructSysUser oldValue,
+							CStructSysUser newValue) 
+					{
+						
+						
+					}
+				});
+				fxCbSelectSysUser.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CStructSysUser>() 
+			    {
+					@Override
+					public void changed(ObservableValue<? extends CStructSysUser> observable, CStructSysUser oldValue,
+							CStructSysUser newValue)
+					{
+						if(newValue != oldValue)
+						{
+
+						}
+((CStructSysUser)newValue).getMyEmail();
+
+					}
+				});*/
 		//UserRecord
 		/*mAFirebaseAuth.createUserWithEmailAndPassword("", "")
         .addOnCompleteListener(this, new OnCompleteListener() {

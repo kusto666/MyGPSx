@@ -172,6 +172,12 @@ public class CLPSMain extends Application
 	public static Parent m_rootFXPreviewTemplateJobs = null;
 	@FXML
 	public static Stage m_stageFXPreviewTemplateJobs = null;
+	
+	// This is a window edit, add FXPreviewTemplateJobs!!!
+	@FXML
+	public static Parent m_rootFXSysUserEdit = null;
+	@FXML
+	public static Stage m_stageFXSysUserEdit = null;
 
 	@FXML
 	TextArea mymsg;
@@ -605,9 +611,12 @@ public class CLPSMain extends Application
 			            					});
 			            				    if(CMainController.MyGoogleMap == null)
 			            		            {
+			            				    	/*CMyToast.makeText(CLPSMain.stage, 
+			            				    			"Ошибка инициализации map!", 
+			            				    			CMyToast.TOAST_SHORT, CMyToast.TOAST_WARN);*/
 			            		            	System.out.println("Ошибка инициализации map!!!");
-			            		            	CLPSMain.fxLbMessage.setText("Ошибка инициализации\nкарты!\nПерегрузите карту,\nнажимте кнопку:\n\"Обновить карту\"");
-			            		            	CLPSMain.btnRestartMod.setVisible(true);
+			            		            	//CLPSMain.fxLbMessage.setText("Ошибка инициализации\nкарты!\nПерегрузите карту,\nнажимте кнопку:\n\"Обновить карту\"");
+			            		            	//CLPSMain.btnRestartMod.setVisible(true);
 			            		            }
 			            		            else
 			            		            {

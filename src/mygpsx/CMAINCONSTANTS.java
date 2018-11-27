@@ -48,6 +48,10 @@ public class CMAINCONSTANTS {
 	public static String m_PathFXListTemplatesJobs = "FXListTemplatesJobs.fxml";
 	//public static String m_PathFXAttrobjAdd = "FXAttrobjAdd.fxml";
 	
+	// Это для системных пользователей SysUser!!!
+	public static String m_PathFXSysUserEdit = "FXSysUserEdit.fxml";
+	public static String m_PathFXSysUserAdd = "FXSysUserAdd.fxml";
+	public static String m_PathFXListCellSysUser = "ListCellSysUser.fxml";
 	
 	// Тут все для создания шаблона!!!
 	public static String m_PathFXCreateTemplate = "FXCreateTemplateJobs.fxml";

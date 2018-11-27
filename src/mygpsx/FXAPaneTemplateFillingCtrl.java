@@ -129,15 +129,7 @@ public class FXAPaneTemplateFillingCtrl implements Initializable{
 				{
 					System.out.println(e.getMessage());
 				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
+
 /*				for(i = 0; i < m_alAttrjob.size(); i++)
 				{*/
 /*					if(((CStructUser)m_alAttrjob.get(i)).getMyPhoneID().equals(arg0.getValue()))
@@ -167,21 +159,5 @@ public class FXAPaneTemplateFillingCtrl implements Initializable{
 		
 			}
 		 });
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 	}
-
 }

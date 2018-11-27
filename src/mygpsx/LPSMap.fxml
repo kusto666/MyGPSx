@@ -84,7 +84,7 @@
                         <Button layoutX="10.0" layoutY="323.0" mnemonicParsing="false" onAction="#FrameSettingsFXListTemplates" text="Шаблоны задач" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
                         <Button layoutX="10.0" layoutY="359.0" mnemonicParsing="false" onAction="#FrameSettingsFXCreateTmplOrders" prefHeight="25.0" prefWidth="157.0" text="Создать шаблон отчета" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
                         <Button layoutX="10.0" layoutY="392.0" mnemonicParsing="false" onAction="#FrameSettingsFXListOrders" prefHeight="25.0" prefWidth="168.0" text="Шаблоны отчетов" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.199999999999989" />
-                        <Button fx:id="fxBtnSysUsers" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Системные пользователи" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+                        <Button fx:id="fxBtnSettingsSysUserEdit" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#FrameSettingsSysUserEdit" prefHeight="25.0" prefWidth="156.0" text="Системные пользователи" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
             </content>
