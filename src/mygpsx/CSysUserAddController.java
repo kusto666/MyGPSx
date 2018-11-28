@@ -60,6 +60,16 @@ public class CSysUserAddController implements Initializable{
     			    .setPassword(fxTxtPass.getText());
     		UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
     		System.out.println("Successfully created new user: " + userRecord.getUid());
+    		
+    		// Здесь добавим запись в my_sys_users_binding
+    		CStructSysUser tempSysUser = new CStructSysUser(userRecord.getUid(),
+    														userRecord.getEmail(), 
+    														fxTxtPass.getText(),"none");
+    		
+    		FirebaseDatabase.getInstance()
+			.getReference()
+			.child(CMAINCONSTANTS.FB_my_sys_users_binding).child(userRecord.getUid()).setValueAsync(tempSysUser);
+    		///////////////////////////////////////////////////////////
     		CMyToast.makeText(CLPSMain.stage,
     				"Successfully created new user: " + userRecord.getUid(),
 					CMyToast.TOAST_SHORT, CMyToast.TOAST_SUCCESS);
@@ -78,6 +88,8 @@ public class CSysUserAddController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		fxTxtPass.setText("111111");
+		fxTxtPassToo.setText("111111");
         // [START initialize_auth]
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]

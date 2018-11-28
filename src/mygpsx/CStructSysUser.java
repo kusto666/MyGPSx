@@ -5,20 +5,22 @@ public class CStructSysUser
 	private String MyIDSysUser;
 	private String MyEmail;
 	private String MyPass;
+	private String MyPhoneBinding;
 	
 	public CStructSysUser()
 	{
 		
 	}
 	
-	public CStructSysUser(String MyIDSysUser, String MyEmail, String MyPass)
+	public CStructSysUser(String MyIDSysUser, String MyEmail, String MyPass, String MyPhoneBinding)
 	{
 		this.MyIDSysUser = MyIDSysUser;
 		this.MyEmail = MyEmail;
 		this.MyPass = MyPass;
+		this.MyPhoneBinding = MyPhoneBinding;
 	}
 	
-	 public String getMyIDSysUser()
+	public String getMyIDSysUser()
     {
     	return MyIDSysUser;
     }
@@ -29,6 +31,10 @@ public class CStructSysUser
     public String getMyPass()
     {
     	return MyPass;
+    }
+    public String getMyPhoneBinding()
+    {
+    	return MyPhoneBinding;
     }
     /////////////////////////////////////SET////////////////////////////////////////
     public void setMyIDSysUser(String MyIDSysUser)
@@ -42,6 +48,10 @@ public class CStructSysUser
     public void setMyPass(String MyPass)
     {
         this.MyPass = MyPass;
+    }
+    public void setMyPhoneBinding(String MyPhoneBinding)
+    {
+        this.MyPhoneBinding = MyPhoneBinding;
     }
     
     @Override

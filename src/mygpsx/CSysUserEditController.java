@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.ListUsersPage;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lynden.gmapsfx.javascript.object.InfoWindow;
@@ -38,6 +39,7 @@ import javafx.util.Callback;
 
 public class CSysUserEditController implements Initializable
 {
+	public static DatabaseReference m_Database;
 	private ObservableList<CStructSysUser> m_ObservableList;
 	@FXML
 	private ListView<CStructSysUser> fxListViewStatus;
@@ -76,8 +78,12 @@ public class CSysUserEditController implements Initializable
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
+		System.out.println("CSysUserEditController - initialize!!!");
+		
+		// Это как вытаскивать реальных юзеров, а не самодельных из базы!!!
 		// Start listing users from the beginning, 1000 at a time.
-		CStructSysUser SysUser = null;
+		///////////////////////////////////////////////////////////////////
+/*		CStructSysUser SysUser = null;
 		m_alSysUser = new ArrayList<CStructSysUser>();
 		
 		ListUsersPage page = null;
@@ -101,49 +107,113 @@ public class CSysUserEditController implements Initializable
 			  System.out.println("user.getPasswordHash(): " + user.getPasswordHash());
 		  }
 		  page = page.getNextPage();
+		}*/
+		// Это как вытаскивать реальных юзеров, а не самодельных из базы!!!
+		// ENDING!!! ------   Start listing users from the beginning, 1000 at a time.
+		///////////////////////////////////////////////////////////////////
+		
+		
+		
+		
+		
+		CStructSysUser SysUser = null;
+		m_alSysUser = new ArrayList<CStructSysUser>();
+		
+		try
+		{
+			m_Database = FirebaseDatabase.getInstance().getReference()
+					.child(CMAINCONSTANTS.FB_my_sys_users_binding);
+			m_Database.addValueEventListener(new ValueEventListener()
+			 {
+				@Override
+				public void onDataChange(DataSnapshot arg0)
+				{
+					try 
+					{
+			            Iterable<DataSnapshot> contactChildren = arg0.getChildren();
+			        	
+			            m_alSysUser = new ArrayList<CStructSysUser>();
+			            for (DataSnapshot structSysUser : contactChildren)
+		                {
+			            	CStructSysUser TempSP = structSysUser.getValue(CStructSysUser.class);
+                        	System.out.println( "CStructStatus = "  + TempSP.getMyEmail());
+                        	m_alSysUser.add(TempSP);// Заполнили массив!!!
+	                	}
+			            m_ObservableList = FXCollections.observableArrayList(m_alSysUser);
+			            
+			            try 
+			            {
+			            	Platform.runLater(
+			    			  () -> {
+			    				  fxListViewStatus.setItems(m_ObservableList);
+			    				// fxListViewPriority.setPrefSize(200, 500);
+			    				  fxListViewStatus.setCellFactory(new Callback<ListView<CStructSysUser>, ListCell<CStructSysUser>>() {
+			    					
+			    					@Override
+			    					public ListCell<CStructSysUser> call(ListView<CStructSysUser> param)
+			    					{
+			    						// TODO Auto-generated method stub
+			    						return new CUserCellSysUser();
+			    					}
+			    				});
+			    				  fxListViewStatus.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			    		    			@Override
+			    		    			public void handle(MouseEvent click)
+			    		    			{
+			    		    				if (click.getClickCount() == 1) 
+			    		    		        {
+			    		    					System.out.println("click.getClickCount() == 1");
+			    		    		        }
+			    		    		        if (click.getClickCount() == 2) 
+			    		    		        {
+			    		    		        	System.out.println("click.getClickCount() == 2");
+			    		    		        }
+			    		    		    }
+			    					});
+			    			  }
+			    			);
+			            	
+			    		}
+			            catch (Exception ex)
+			            {
+			            	ex.getMessage();
+			    		}
+
+					} 
+					catch (Exception e) 
+					{
+						System.out.println(e.getMessage());
+					}
+				}
+				@Override
+				public void onCancelled(DatabaseError arg0)
+				{
+					System.out.println(arg0.getMessage());
+				}
+			 });
 		}
-		m_ObservableList = FXCollections.observableArrayList (m_alSysUser);
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 	
 		
-        try 
-        {
-        	Platform.runLater(
-			  () -> {
-				  fxListViewStatus.setItems(m_ObservableList);
-				// fxListViewPriority.setPrefSize(200, 500);
-				  fxListViewStatus.setCellFactory(new Callback<ListView<CStructSysUser>, ListCell<CStructSysUser>>() {
-					
-					@Override
-					public ListCell<CStructSysUser> call(ListView<CStructSysUser> param)
-					{
-						// TODO Auto-generated method stub
-						return new CUserCellSysUser();
-					}
-				});
-				  fxListViewStatus.setOnMouseClicked(new EventHandler<MouseEvent>() {
-		    			@Override
-		    			public void handle(MouseEvent click)
-		    			{
-		    				if (click.getClickCount() == 1) 
-		    		        {
-		    					System.out.println("click.getClickCount() == 1");
-		    					//CStructStatus StrStatus = fxListViewStatus.getSelectionModel().getSelectedItem();
-		    					//System.out.println("StrPrior = " + StrStatus.getMyIDUnique());
-		    		        }
-		    		        if (click.getClickCount() == 2) 
-		    		        {
-		    		        	System.out.println("click.getClickCount() == 2");
-		    		        }
-		    		    }
-					});
-			  }
-			);
-        	
-		}
-        catch (Exception ex)
-        {
-        	ex.getMessage();
-		}
+
 /*		System.out.println("CStatusEditController - initialize!!!");
 		try
 		{

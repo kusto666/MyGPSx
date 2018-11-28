@@ -55,6 +55,12 @@ public class CListCellSysUserController implements Initializable{
     			System.out.println("BtnDeleteSysUser(fxLbUniqueID) = " + fxLbUniqueID.getText());
         		System.out.println("BtnDeleteSysUser(fxTxtEmail) = " + fxTxtEmail.getText());
 				FirebaseAuth.getInstance().deleteUser(fxLbUniqueID.getText());
+				
+				// Удаляем и из FB realtime:
+				FirebaseDatabase.getInstance()
+				.getReference()
+				.child(CMAINCONSTANTS.FB_my_sys_users_binding).child(fxLbUniqueID.getText()).setValueAsync(null);
+				
 				System.out.println("Successfully deleted user.");
 				CMyToast.makeText(CLPSMain.stage,
     					"Successfully deleted user!",

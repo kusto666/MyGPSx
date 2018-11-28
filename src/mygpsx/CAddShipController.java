@@ -19,8 +19,11 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.ListUsersPage;
 import com.google.firebase.auth.UserRecord;
 import com.google.firebase.auth.UserRecord.CreateRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 /*import com.google.firebase.tasks.OnCompleteListener;
 import com.google.firebase.tasks.Task;*/
 import com.lynden.gmapsfx.javascript.event.UIEventType;
@@ -52,7 +55,7 @@ import netscape.javascript.JSObject;
 
 public class CAddShipController implements Initializable{
 	 
-	DatabaseReference mDatabaseRef;
+	DatabaseReference m_DatabaseRef;
 	
 	 @FXML
 	 TextField fxTxtEmail;
@@ -64,6 +67,7 @@ public class CAddShipController implements Initializable{
 	 private ComboBox<CStructSysUser> fxCbSelectSysUser;// Системный пользователь - выбор по мылу!!!
 	 private ArrayList<CStructSysUser> m_alSysUser = null;
 	 private ObservableList<CStructSysUser> m_ObservableList;
+	 private String m_stTempIDSysUser;
 	 
 	 @FXML
 	 TextField fxLbNameShip;
@@ -82,23 +86,17 @@ public class CAddShipController implements Initializable{
 	 @FXML
 	 Label fxLbSuccessPass;
 	
-	 private void CreateAccount(String email, String password) throws FirebaseAuthException {
-		
-		/* CreateRequest request = new CreateRequest()
-				    .setEmail("user@example.com")
-				    .setEmailVerified(false)
-				    .setPassword("secretPassword")
-				    .setPhoneNumber("+11234567890")
-				    .setDisplayName("John Doe")
-				    .setPhotoUrl("http://www.example.com/12345678/photo.png")
-				    .setDisabled(false);
-		 
-		 UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
-		 System.out.println("Successfully created new user: " + userRecord.getUid());*/
-		}
+	 private void CreateBinding(String stMyPhoneID_, String stSysUserID) throws FirebaseAuthException
+	 {
+		// Работаем с firebase - привязываем!!!
+		FirebaseDatabase.getInstance().getReference()
+				 .child(CMAINCONSTANTS.FB_my_sys_users_binding).child(stSysUserID)
+				 .child("myPhoneBinding").setValueAsync(stMyPhoneID_);
+	 }
 	 @FXML
 	 private void btnAddShip(ActionEvent event) 
 	 {
+		 CStructUser tempUser = null;
 		// Текущая дата для создания судна(объекта - пока не знаю для чего))))
 		Date date = new Date();
 		long lUnixTimeCreate = date.getTime();
@@ -115,7 +113,7 @@ public class CAddShipController implements Initializable{
 		try 
    	 	{
 			// Работаем с firebase - записываем!!!
-			mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("users");
+			m_DatabaseRef = FirebaseDatabase.getInstance().getReference().child(CMAINCONSTANTS.FB_users);
 		
 
 			// Потом добавим проверку на пустоту полей!!!
@@ -134,26 +132,37 @@ public class CAddShipController implements Initializable{
 				flLbInfoSaveErrors.setText("ОТСУТСТВУЮТ КООРДИНАТЫ! ВЫБЕРЕТЕ НА КАРТЕ ТОЧКУ ПОЗИЦИИ.");
 				return;
 			}
-			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyPhoneID").
-			setValueAsync(randomIDPhoneTest);
-			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyLatitude").
-			setValueAsync(Double.toString(CMainController.m_LocationTempForCAddShipController.getLatitude()));
-			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyLongitude").
-			setValueAsync(Double.toString(CMainController.m_LocationTempForCAddShipController.getLongitude()));
-			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyNameShip").
-			setValueAsync(fxLbNameShip.getText());
-			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyDirectorShip").
-			setValueAsync(fxLbDirectorShip.getText());
-			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyShortDescriptionShip").
-			setValueAsync(fxTaShortDescriptionShip.getText());
-			mDatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).child("MyIsUserSelected").
-			setValueAsync("false");
-			////////////////// - Здесь создание авторизации в firebase - //////////////////////////////
-			CreateAccount(fxTxtEmail.getText(), fxTxtPassFirst.getText());
-			//////////////////- Здесь создание авторизации в firebase ENDING !!!- //////////////////////////////
+			
+			tempUser = new CStructUser(
+					randomIDPhoneTest, 
+					Double.toString(CMainController.m_LocationTempForCAddShipController.getLatitude()),
+					Double.toString(CMainController.m_LocationTempForCAddShipController.getLongitude()),
+					"MyEmail", 
+					fxLbNameShip.getText(),
+					fxLbDirectorShip.getText(), 
+					fxTaShortDescriptionShip.getText(),
+					"false",
+					"MyPass");
+			
+			// Создаем корабль-телефон(MyPhoneID_*****************)		
+			m_DatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).setValueAsync(tempUser);
+			////////////////// - Здесь привязывание авторизации в firebase - //////////////////////////////
+			// Привязываем корабль-телефон к SysUser:
+			if(m_stTempIDSysUser != null)// Был ли тронут ComboBox с SysUsers вообще или даже не заходили в него)))
+			{
+				CreateBinding(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest, m_stTempIDSysUser);
+			}
+			//////////////////- Здесь привязывание авторизации в firebase ENDING !!!- //////////////////////////////
+			
+			
 			flLbInfoSaveErrors.setText("");
 			CMainController.m_LocationTempForCAddShipController = null;
 			System.out.println("Типа создали кораблик!!!");
+			
+			CMyToast.makeText(CLPSMain.stage,
+    				"Типа создали кораблик!!!",
+					CMyToast.TOAST_SHORT, CMyToast.TOAST_SUCCESS);
+			
             CLPSMain.m_stageAddShip.close();
         } 
    	 	catch (Exception e) 
@@ -171,44 +180,41 @@ public class CAddShipController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		// Start listing users from the beginning, 1000 at a time.
-				CStructSysUser SysUser = null;
-				m_alSysUser = new ArrayList<CStructSysUser>();
-				
-				ListUsersPage page = null;
+		m_stTempIDSysUser = null;
+		DatabaseReference mDBRefSysUser;
+		CStructSysUser tempSysUser = null;
+		m_alSysUser = new ArrayList<CStructSysUser>();
+
+		mDBRefSysUser = FirebaseDatabase.getInstance().getReference()
+				.child(CMAINCONSTANTS.FB_my_sys_users_binding);
+		mDBRefSysUser.addValueEventListener(new ValueEventListener()
+		 {
+			@Override
+			public void onDataChange(DataSnapshot arg0)
+			{
 				try 
 				{
-					page = FirebaseAuth.getInstance().listUsers(null);
-				} 
-				catch (FirebaseAuthException e) 
+					Iterable<DataSnapshot> contactChildren = arg0.getChildren();
+					
+					m_alSysUser = new ArrayList<CStructSysUser>();
+					for (DataSnapshot structCStructSysUser : contactChildren)
+	                {
+						CStructSysUser TempSP = structCStructSysUser.getValue(CStructSysUser.class);
+						// Проверим свободен ли для биндинга:
+						if(TempSP.getMyPhoneBinding().equals("none"))
+						{
+		                 	System.out.println( "CStructSysUser = "  + TempSP.getMyEmail());
+		                 	m_alSysUser.add(TempSP);// Заполнили массив!!!
+						}
+                	}
+		            m_ObservableList = FXCollections.observableArrayList (m_alSysUser);
+		            fxCbSelectSysUser.setItems(m_ObservableList);
+				}
+				catch (Exception e) 
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				while (page != null)
-				{
-				  for (ExportedUserRecord user : page.getValues())
-				  {
-					  SysUser = new CStructSysUser(user.getUid(), user.getEmail(), user.getPasswordHash());
-					  m_alSysUser.add(SysUser);
-					  System.out.println("SysUser: " + user.getUid());
-					  System.out.println("user.getEmail(): " + user.getEmail());
-					  System.out.println("user.getPasswordHash(): " + user.getPasswordHash());
-				  }
-				  page = page.getNextPage();
-				}
-				m_ObservableList = FXCollections.observableArrayList (m_alSysUser);
-				fxCbSelectSysUser.setItems(m_ObservableList);
-/*				fxCbSelectSysUser.valueProperty().addListener(new ChangeListener<CStructSysUser>() {
 
-					@Override
-					public void changed(ObservableValue<? extends CStructSysUser> observable, CStructSysUser oldValue,
-							CStructSysUser newValue) 
-					{
-						
-						
-					}
-				});
 				fxCbSelectSysUser.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CStructSysUser>() 
 			    {
 					@Override
@@ -217,22 +223,17 @@ public class CAddShipController implements Initializable{
 					{
 						if(newValue != oldValue)
 						{
-
+							m_stTempIDSysUser = newValue.getMyIDSysUser();
+							System.out.println("fxCbSelectSysUser.getSelectionModel() newValue = " + m_stTempIDSysUser);
 						}
-((CStructSysUser)newValue).getMyEmail();
-
 					}
-				});*/
-		//UserRecord
-		/*mAFirebaseAuth.createUserWithEmailAndPassword("", "")
-        .addOnCompleteListener(this, new OnCompleteListener() {
+				});
+			}
 
 			@Override
-			public void onComplete(Task arg0) {
-				// TODO Auto-generated method stub
-				
+			public void onCancelled(DatabaseError arg0) {
 			}
-		});*/
+		 });
 	}
 	
 

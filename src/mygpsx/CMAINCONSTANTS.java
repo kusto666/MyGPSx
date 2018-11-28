@@ -107,6 +107,8 @@ public class CMAINCONSTANTS {
 	public static String FB_my_templates = "my_templates";
 	public static String FB_my_adding_attr = "my_adding_attr";
 	
+	public static String FB_my_sys_users_binding = "my_sys_users_binding";
+	
 	 
 
 }
