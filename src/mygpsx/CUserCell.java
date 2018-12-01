@@ -26,6 +26,7 @@ public class CUserCell  extends ListCell<CStructUser>
 	@FXML
 	AnchorPane m_Pane;
 	
+	
 	@Override
 	public void updateItem(CStructUser item, boolean empty) 
 	{

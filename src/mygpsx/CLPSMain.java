@@ -3,9 +3,12 @@ package mygpsx;
 import java.util.*;
 import java.text.*;
 import java.net.URL;
+import java.awt.AWTException;
 import java.awt.EventQueue;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -73,6 +76,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
@@ -106,6 +110,12 @@ public class CLPSMain extends Application
 	public static Parent m_rootAddShip = null;
 	@FXML
 	public static Stage m_stageAddShip = null;
+	
+	// Это окно редактирования кораблей!!!
+	@FXML
+	public static Parent m_rootEditShip = null;
+	@FXML
+	public static Stage m_stageEditShip = null;
 	
 	// This is a window edit, add priority!!!
 	@FXML
@@ -214,6 +224,7 @@ public class CLPSMain extends Application
     // you could also use multiple icons to allow for clean display of tray icons on hi-dpi devices.
     private static final String iconImageLoc =
             "http://icons.iconarchive.com/icons/scafer31000/bubble-circle-3/16/GameCenter-icon.png";
+    
     // a timer allowing the tray icon to provide a periodic notification event.
     private Timer notificationTimer = new Timer();
  // format used to display the current time in a tray icon notification.
@@ -763,7 +774,8 @@ public class CLPSMain extends Application
 																user.getMyDirectorShip(), 
 																user.getMyShortDescriptionShip(), 
 																user.getMyIsUserSelected(),
-																user.getMyPass());
+																user.getMyPass(),
+																user.getmySysUserBinding());
                                 m_localAllMarkersUsersTempMain.add(tempTransport);
 							}
                         	catch (Exception e)
@@ -807,8 +819,10 @@ public class CLPSMain extends Application
     /**
      * Sets up a system tray icon for the application.
      */
-    private void addAppToTray() {
-        try {
+    private void addAppToTray()
+    {
+        try 
+        {
             // ensure awt toolkit is initialized.
             java.awt.Toolkit.getDefaultToolkit();
 
@@ -819,10 +833,11 @@ public class CLPSMain extends Application
             }
 
             // set up a system tray icon.
+            // Заодно проверим и подключение к интернету прямо на иконке!!!
             java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
             URL imageLoc = new URL(iconImageLoc);
             java.awt.Image image = ImageIO.read(imageLoc);
-            /*java.awt.TrayIcon */trayIcon = new java.awt.TrayIcon(image);
+            trayIcon = new java.awt.TrayIcon(image);
 
             // if the user double-clicks on the tray icon, show the main app stage.
             trayIcon.addActionListener(event -> Platform.runLater(this::showStage));
@@ -888,7 +903,36 @@ public class CLPSMain extends Application
                     "Я - время): " + timeFormat.format(new Date()),
                     java.awt.TrayIcon.MessageType.INFO
             );
-        } catch (java.awt.AWTException | IOException e) {
+        } 
+        catch (java.awt.AWTException | IOException e) 
+        {
+        	InputStream is = null;
+			try 
+			{
+				is = new BufferedInputStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\MyIconErrorConn.png"));
+				//is = new BufferedInputStream(new FileInputStream("/src/MyIconErrorConn.png"));
+				java.awt.Image image = ImageIO.read(is);
+	        	trayIcon = new java.awt.TrayIcon(image);
+	        	java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
+	        	tray.add(trayIcon);
+	        	trayIcon.displayMessage(
+	                    CStrings.m_APP_NAME,
+	                    "Проверьте подключение!",
+	                    java.awt.TrayIcon.MessageType.ERROR
+	            );
+			} 
+			catch (FileNotFoundException e1) 
+			{
+				e1.printStackTrace();
+			}
+			catch (IOException e1) 
+			{
+				e1.printStackTrace();
+			}
+			catch (AWTException e1)
+			{
+				e1.printStackTrace();
+			}
             System.out.println("Unable to init system tray");
             e.printStackTrace();
         }

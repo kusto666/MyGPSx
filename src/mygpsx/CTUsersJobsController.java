@@ -121,8 +121,11 @@ public class CTUsersJobsController implements Initializable
 	                 	System.out.println( "structCStructUser = "  + TempSP.getMyDirectorShip());
 	                 	m_alAttrjob.add(TempSP);// Заполнили массив!!!
                 	}
-		            m_ObservableList = FXCollections.observableArrayList (m_alAttrjob);
-		            fxCbSelectUser.setItems(m_ObservableList);
+					Platform.runLater(
+				        	() -> {
+					            m_ObservableList = FXCollections.observableArrayList (m_alAttrjob);
+					            fxCbSelectUser.setItems(m_ObservableList);
+				        	});
 				}
 				catch (Exception e) 
 				{
@@ -148,14 +151,23 @@ public class CTUsersJobsController implements Initializable
 						{
 							//System.out.println("Что-то изменилось!!!");
 						}
-						m_stNameShip =  ((CStructUser)newValue).getMyNameShip();
-						m_stUsersUniqueID =  ((CStructUser)newValue).getMyPhoneID();
-						CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = m_stUsersUniqueID;
-						/*mDatabaseUpdateSelectedUsersTmpls = */FirebaseDatabase.getInstance().getReference()
-								.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
-						System.out.println("m_stUsersUniqueID = " + m_stUsersUniqueID);
-						//System.out.println("m_stNameShip = " + m_stNameShip);
+						Platform.runLater(
+					        	() -> {
+					        		try 
+					        		{
+										m_stNameShip =  ((CStructUser)newValue).getMyNameShip();
+										m_stUsersUniqueID =  ((CStructUser)newValue).getMyPhoneID();
+										CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = m_stUsersUniqueID;
+										FirebaseDatabase.getInstance().getReference()
+												.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
+										System.out.println("m_stUsersUniqueID = " + m_stUsersUniqueID);
+									} 
+					        		catch (Exception e) 
+					        		{
+										// TODO: handle exception
+									}
 
+					        });
 					}
 				});
 			}

@@ -168,12 +168,12 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	// Позиция для 
 	// Координаты для CAddShipController //////////////////////////////
 	public static LatLong m_LocationTempForCAddShipController = null;
-	 @FXML
-	 Label fxLbLatitudeText;
-	 @FXML
-	 Label fxLbLongitudeText;
-	 @FXML
-	 CAddShipController m_AddShipController = null;
+	@FXML
+	public static Label fxLbLatitudeText;
+	@FXML
+	public static Label fxLbLongitudeText;
+	@FXML
+	CAddShipController m_AddShipController = null;
     /////////////////////////////////////////////////////////////////////
 	private static DatabaseReference mDatabase;
 	
@@ -555,22 +555,23 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void FrameAddShip(ActionEvent event) {
     	System.out.println("btnAddShip!!!");
     	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
-    	try {
-	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAddShipFxml));
-	            CLPSMain.m_rootAddShip = (Parent)fxmlLoader.load();
-	            CLPSMain.m_stageAddShip = new Stage();
-	            CLPSMain.m_stageAddShip.setTitle(CStrings.m_APP_NAME + "->Добавление судна");
-	            CLPSMain.m_stageAddShip.setScene(new Scene(CLPSMain.m_rootAddShip));  
-	            CLPSMain.m_stageAddShip.setResizable(false);
-	           // CLPSMain.m_stageAddShip.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
-	            CLPSMain.m_stageAddShip.setAlwaysOnTop(true); // А так ВЫБРАТЬ!!!
-	            CLPSMain.m_stageAddShip.initOwner(CLPSMain.stage);
-	            CLPSMain.m_stageAddShip.show();
-	            
-	            fxLbLatitudeText = (Label)fxmlLoader.getNamespace().get("fxLbLatitudeText");
-	            fxLbLongitudeText = (Label)fxmlLoader.getNamespace().get("fxLbLongitudeText");
-	            System.out.println("fxLbLatitudeText = " + fxLbLatitudeText.getText());
-	            System.out.println("fxLbLongitudeText = " + fxLbLongitudeText.getText());
+    	try 
+    	{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAddShipFxml));
+            CLPSMain.m_rootAddShip = (Parent)fxmlLoader.load();
+            CLPSMain.m_stageAddShip = new Stage();
+            CLPSMain.m_stageAddShip.setTitle(CStrings.m_APP_NAME + "->Добавление судна");
+            CLPSMain.m_stageAddShip.setScene(new Scene(CLPSMain.m_rootAddShip));  
+            CLPSMain.m_stageAddShip.setResizable(false);
+           // CLPSMain.m_stageAddShip.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageAddShip.setAlwaysOnTop(true); // А так ВЫБРАТЬ!!!
+            CLPSMain.m_stageAddShip.initOwner(CLPSMain.stage);
+            CLPSMain.m_stageAddShip.show();
+            
+            fxLbLatitudeText = (Label)fxmlLoader.getNamespace().get("fxLbLatitudeText");
+            fxLbLongitudeText = (Label)fxmlLoader.getNamespace().get("fxLbLongitudeText");
+           // System.out.println("fxLbLatitudeText = " + fxLbLatitudeText.getText());
+           // System.out.println("fxLbLongitudeText = " + fxLbLongitudeText.getText());
             
             }
     		catch(Exception e) 

@@ -54,9 +54,9 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import netscape.javascript.JSObject;
 
-public class CAddShipController implements Initializable{
+public class CEditShipController implements Initializable{
 	 
-	DatabaseReference m_DatabaseRef;
+	 DatabaseReference m_DatabaseRef;
 	
 	 @FXML
 	 TextField fxTxtEmail;
@@ -72,6 +72,8 @@ public class CAddShipController implements Initializable{
 	 private String m_stTempEMailSysUser;
 	 CStructSysUser TempSP;
 	 
+	 @FXML
+	 private Label fxLbUniqueID;
 	 @FXML
 	 TextField fxLbNameShip;
 	 @FXML
@@ -92,9 +94,9 @@ public class CAddShipController implements Initializable{
 	 private void CreateBinding(String stMyPhoneID_, String stSysUserID) throws FirebaseAuthException
 	 {
 		// Работаем с firebase - привязываем!!!
-		FirebaseDatabase.getInstance().getReference()
+		/*FirebaseDatabase.getInstance().getReference()
 				 .child(CMAINCONSTANTS.FB_my_sys_users_binding).child(stSysUserID)
-				 .child("myPhoneBinding").setValueAsync(stMyPhoneID_);
+				 .child("myPhoneBinding").setValueAsync(stMyPhoneID_);*/
 	 }
 	 @FXML
 	 private void btnAddShip(ActionEvent event) 
@@ -201,6 +203,7 @@ public class CAddShipController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
+		fxLbUniqueID.setText(CCONSTANTS_EVENTS_JOB.EDITING_SHIP_ID);
 		m_stTempIDSysUser = null;
 		DatabaseReference mDBRefSysUser;
 		//CStructSysUser tempSysUser = null;

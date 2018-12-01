@@ -8,6 +8,7 @@ public class CMAINCONSTANTS {
 	public static String m_PathMainFxml = "LPSMap.fxml";// Самое главное окно!!!
 	
 	public static String m_PathFXAddShipFxml = "FXAddShip.fxml";
+	public static String m_PathFXEditShipFxml = "FXEditShip.fxml";
 	public static String m_PathFXListCellFxml = "ListCellUser.fxml";
 	
 	// Тут приоритеты!!!

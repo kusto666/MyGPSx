@@ -14,7 +14,15 @@
          </font></Label>
       <Label layoutX="-6.0" layoutY="27.0" text="КАПИТАН СУДНА(ФИО):" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
       <Label fx:id="lbMyDirectorShip" layoutX="-11.0" layoutY="43.0" prefHeight="15.0" prefWidth="180.0" text="Label" textFill="#ed160c" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0" />
+      <Label fx:id="fxLbUniqueID" prefHeight="90.0" prefWidth="175.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#eventEditObject" text="Редактировать объект" />
+                  <MenuItem mnemonicParsing="false" onAction="#eventDeleteObject" text="Удалить объект" />
+              </items>
+            </ContextMenu>
+         </contextMenu></Label>
       <Button fx:id="fxBtnViewJobs" layoutX="-5.0" layoutY="56.0" mnemonicParsing="false" onAction="#BtnViewJobs" text="Создать задачу" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="64.0" />
-      <Label fx:id="fxLbUniqueID" text="Label" />
    </children>
 </AnchorPane>

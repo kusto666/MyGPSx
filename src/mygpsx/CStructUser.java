@@ -20,6 +20,7 @@ public class CStructUser {
     
     private String MyIsUserSelected; // ѕеременна€ отвечает за то что обект выбран - true, и наоборот - false!!!
 	private String MyPass;
+	private String mySysUserBinding;// ѕоказывает св€зано ли судно с сисемным пользователем!!!
    
     
     enum GENDER {
@@ -48,7 +49,8 @@ public class CStructUser {
     			 String MyDirectorShip,
     			 String MyShortDescriptionShip, 
     			 String MyIsUserSelected,
-    			 String MyPass) 
+    			 String MyPass,
+    			 String mySysUserBinding) 
     {
         this.MyPhoneID = MyPhoneID;
         this.MyLatitude = MyLatitude;
@@ -60,6 +62,7 @@ public class CStructUser {
         this.MyShortDescriptionShip = MyShortDescriptionShip;
         this.MyIsUserSelected = MyIsUserSelected;
         this.MyPass = MyPass;
+        this.mySysUserBinding = mySysUserBinding;
     }
     
     public String getMyPhoneID()
@@ -98,6 +101,10 @@ public class CStructUser {
     {
     	return MyPass;
     }
+    public String getmySysUserBinding()
+    {
+    	return mySysUserBinding;
+    }
     /////////////////////////////////////SET////////////////////////////////////////
     public void setMyPhoneID(String MyPhoneID)
     {
@@ -134,6 +141,10 @@ public class CStructUser {
     public void setMyPass(String MyPass)
     {
         this.MyPass = MyPass;
+    }
+    public void setmySysUserBinding(String mySysUserBinding)
+    {
+        this.mySysUserBinding = mySysUserBinding;
     }
     @Override
     public String toString()  {
