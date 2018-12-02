@@ -56,40 +56,42 @@ import netscape.javascript.JSObject;
 
 public class CEditShipController implements Initializable{
 	 
-	 DatabaseReference m_DatabaseRef;
+	// DatabaseReference m_DatabaseRef;
 	
 	 @FXML
-	 TextField fxTxtEmail;
+	 private TextField fxTxtEmail;
 	 @FXML
-	 PasswordField fxTxtPassFirst;
+	 private PasswordField fxTxtPassFirst;
 	 @FXML
-	 PasswordField fxTxtPassSecond;
+	 private PasswordField fxTxtPassSecond;
 	 @FXML
 	 private ComboBox<CStructSysUser> fxCbSelectSysUser;// Системный пользователь - выбор по мылу!!!
 	 private ArrayList<CStructSysUser> m_alSysUser = null;
 	 private ObservableList<CStructSysUser> m_ObservableList;
-	 private String m_stTempIDSysUser;
-	 private String m_stTempEMailSysUser;
-	 CStructSysUser TempSP;
+	 private String m_stTempIDSysOldUser;// Эти два значения нужны для того, если редактируемое судно имело
+	 private String m_stTempEMailOldSysUser;// binding by email(id) для проверки: если больше не нужно, то тогда освобождаем этот email!!!
+	 private CStructSysUser m_TempSP;
+	 private CStructUser m_tempUser;
+	 boolean m_bRetIsBindingSysUser = false;
 	 
 	 @FXML
 	 private Label fxLbUniqueID;
 	 @FXML
-	 TextField fxLbNameShip;
+	 private TextField fxLbNameShip;
 	 @FXML
-	 TextField fxLbDirectorShip;
+	 private TextField fxLbDirectorShip;
 	 @FXML
-	 TextArea fxTaShortDescriptionShip;
+	 private TextArea fxTaShortDescriptionShip;
 	 @FXML
-	 Label flLbInfoSaveErrors;
+	 private Label flLbInfoSaveErrors;
 	 @FXML
-	 Label fxLbLatitudeText;
+	 private Label fxLbLatitudeText;
 	 @FXML
-	 Label fxLbLongitudeText;
+	 private  Label fxLbLongitudeText;
 	 @FXML
 	 private CMainController objectController;
 	 @FXML
-	 Label fxLbSuccessPass;
+	 private Label fxLbSuccessPass;
 	
 	 private void CreateBinding(String stMyPhoneID_, String stSysUserID) throws FirebaseAuthException
 	 {
@@ -98,100 +100,106 @@ public class CEditShipController implements Initializable{
 				 .child(CMAINCONSTANTS.FB_my_sys_users_binding).child(stSysUserID)
 				 .child("myPhoneBinding").setValueAsync(stMyPhoneID_);*/
 	 }
-	 @FXML
-	 private void btnAddShip(ActionEvent event) 
+	 @SuppressWarnings("unlikely-arg-type")
+	@FXML
+	 private void btnRefreshShip(ActionEvent event) 
 	 {
-		 CStructUser tempUser = null;
-		// Текущая дата для создания судна(объекта - пока не знаю для чего))))
-		Date date = new Date();
-		long lUnixTimeCreate = date.getTime();
-		System.out.println("lUnixTimeCreate = " + Long.toString(lUnixTimeCreate));
-		System.out.println("btnAddShip!!!");
-		
-		// Случайный уникальный ID устройства - к примуру!!!
-		String symbols = "abcdefghijklmnopqrstuvwxyz";
-		String randomIDPhoneTest= new Random().ints(11, 0, symbols.length())
-		    .mapToObj(symbols::charAt)
-		    .map(Object::toString)
-		    .collect(Collectors.joining());
-		System.out.println("String random = " + randomIDPhoneTest);
-		try 
-   	 	{
-			// Работаем с firebase - записываем!!!
-			m_DatabaseRef = FirebaseDatabase.getInstance().getReference().child(CMAINCONSTANTS.FB_users);
-		
-
-			// Потом добавим проверку на пустоту полей!!!
-			if(fxLbNameShip.getText().replaceAll("\\s","").length() == 0 ||
+		 try
+		 {
+			 System.out.println("btnRefreshShip(ActionEvent event)!!!");
+			 
+			 
+			 // Потом добавим проверку на пустоту полей!!!
+			 if(fxLbNameShip.getText().replaceAll("\\s","").length() == 0 ||
 			   fxLbDirectorShip.getText().replaceAll("\\s","").length() == 0 ||
 			   fxTaShortDescriptionShip.getText().replaceAll("\\s","").length() == 0)
-			{
-				flLbInfoSaveErrors.setText("ЗАПОЛНИТЕ ВСЕ ПОЛЯ!");
-				return;
-			}
-		
-			
-			// Проверка на координаты для создоваемого объекта!!!
-			if(CMainController.m_LocationTempForCAddShipController == null)
-			{
-				flLbInfoSaveErrors.setText("ОТСУТСТВУЮТ КООРДИНАТЫ! ВЫБЕРЕТЕ НА КАРТЕ ТОЧКУ ПОЗИЦИИ.");
-				return;
-			}
-			
-			if(m_stTempIDSysUser == null)
-			{
-				tempUser = new CStructUser(
-						randomIDPhoneTest, 
-						Double.toString(CMainController.m_LocationTempForCAddShipController.getLatitude()),
-						Double.toString(CMainController.m_LocationTempForCAddShipController.getLongitude()),
-						"none", 
-						fxLbNameShip.getText(),
-						fxLbDirectorShip.getText(), 
-						fxTaShortDescriptionShip.getText(),
-						"false",
-						"MyPass",
-						"none");
-			}
-			else
-			{
-				tempUser = new CStructUser(
-						randomIDPhoneTest, 
-						Double.toString(CMainController.m_LocationTempForCAddShipController.getLatitude()),
-						Double.toString(CMainController.m_LocationTempForCAddShipController.getLongitude()),
-						m_stTempEMailSysUser, 
-						fxLbNameShip.getText(),
-						fxLbDirectorShip.getText(), 
-						fxTaShortDescriptionShip.getText(),
-						"false",
-						"MyPass",
-						m_stTempIDSysUser);
-			}
+			 {
+				 flLbInfoSaveErrors.setText("ЗАПОЛНИТЕ ВСЕ ПОЛЯ!");
+				 return;
+			 }
+				
+			 // Обновляем данные в структуре!!!
+			 m_tempUser.setMyNameShip(fxLbNameShip.getText());
+			 m_tempUser.setMyDirectorShip(fxLbDirectorShip.getText());
+			 m_tempUser.setMyShortDescriptionShip(fxTaShortDescriptionShip.getText());
+			 m_tempUser.setMyLatitude(fxLbLatitudeText.getText());
+			 m_tempUser.setMyLongitude(fxLbLongitudeText.getText());
+			 
+			 System.out.println("fxCbSelectSysUser.getValue() = " + fxCbSelectSysUser.getValue().toString());
+			 System.out.println("CStrings.m_EMPTY_SEL_USER = " + CStrings.m_EMPTY_SEL_USER);
+			 if(fxCbSelectSysUser.getValue().toString().equals(CStrings.m_EMPTY_SEL_USER))// Пользователь(пустой) не выбран!!!
+			 {
+				 System.out.println("Пользователь(пустой) не выбран!!!");
+				 if(m_stTempEMailOldSysUser == null)// Значит привязанного пользователя не было, тогда привязываем(оставляем) пустого!!!
+				 {
+					 m_tempUser.setMyEmail("none");
+					 m_tempUser.setMySysUserBinding("none");
+				 }
+				 else// Пользователь был!!!
+				 {
+					 // Обновим сист. пользователя!!!
+					 FirebaseDatabase.getInstance().getReference()
+					 .child(CMAINCONSTANTS.FB_my_sys_users_binding)
+					 .child(m_tempUser.getMySysUserBinding())
+					 .child("myPhoneBinding")
+					 .setValueAsync("none");
+					 
+					 m_tempUser.setMyEmail("none");
+					 m_tempUser.setMySysUserBinding("none");
+				 }
+				
+			 }
+			 else
+			 {
+				 System.out.println("SYS-Пользователь(не пустой) ВЫБРАН!!!");
+				 // Простой случай - ничего не изменили!!!
+				 if(fxCbSelectSysUser.getValue().toString().equals(m_stTempEMailOldSysUser))
+				 {
+					 //m_tempUser.setMyEmail(fxCbSelectSysUser.getValue().getMyEmail());
+					 //m_tempUser.setMySysUserBinding(fxCbSelectSysUser.getValue().getMyIDSysUser());
+				 }
+				 else// Старого сист. польз. сделаем привязку "none"
+				 {
+					// Обновим старого сист. пользователя!!!
+					 if(!m_tempUser.getMySysUserBinding().equals("none"))
+					 {
+						 FirebaseDatabase.getInstance().getReference()
+						 .child(CMAINCONSTANTS.FB_my_sys_users_binding)
+						 .child(m_tempUser.getMySysUserBinding())
+						 .child("myPhoneBinding")
+						 .setValueAsync("none");
+					 }
 
-			// Создаем корабль-телефон(MyPhoneID_*****************)		
-			m_DatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).setValueAsync(tempUser);
-			////////////////// - Здесь привязывание авторизации в firebase - //////////////////////////////
-			// Привязываем корабль-телефон к SysUser:
-			if(m_stTempIDSysUser != null)// Был ли тронут ComboBox с SysUsers вообще или даже не заходили в него)))
-			{
-				CreateBinding(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest, m_stTempIDSysUser);
-			}
-			//////////////////- Здесь привязывание авторизации в firebase ENDING !!!- //////////////////////////////
-			
-			
-			flLbInfoSaveErrors.setText("");
-			CMainController.m_LocationTempForCAddShipController = null;
-			System.out.println("Типа создали кораблик!!!");
-			
-			CMyToast.makeText(CLPSMain.stage,
-    				"Типа создали кораблик!!!",
-					CMyToast.TOAST_SHORT, CMyToast.TOAST_SUCCESS);
-			
-            CLPSMain.m_stageAddShip.close();
-        } 
-   	 	catch (Exception e) 
-   	 	{
-            e.printStackTrace();
-        }
+					 
+					 m_tempUser.setMyEmail(fxCbSelectSysUser.getValue().getMyEmail());
+					 m_tempUser.setMySysUserBinding(fxCbSelectSysUser.getValue().getMyIDSysUser());
+					 
+					// Обновим нового сист. пользователя!!!
+					 FirebaseDatabase.getInstance().getReference()
+					 .child(CMAINCONSTANTS.FB_my_sys_users_binding)
+					 .child(fxCbSelectSysUser.getValue().getMyIDSysUser().toString())
+					 .child("myPhoneBinding")
+					 .setValueAsync(fxLbUniqueID.getText());
+				 }
+
+			 }
+			 
+			// Работаем с firebase - update user!!!
+			FirebaseDatabase.getInstance().getReference()
+						 .child(CMAINCONSTANTS.FB_users).child(fxLbUniqueID.getText()).setValueAsync(m_tempUser);
+
+			CLPSMain.m_stageEditShip.close();
+			 CMyToast.makeText(CLPSMain.stage,
+	    				"Типа обновили кораблик :=))",
+						CMyToast.TOAST_SHORT, CMyToast.TOAST_SUCCESS);
+		 } 
+		 catch (Exception e) 
+		 {
+			 e.printStackTrace();
+			 CMyToast.makeText(CLPSMain.stage,
+	    				e.getMessage(),
+						CMyToast.TOAST_SHORT, CMyToast.TOAST_ERROR);
+		 }
 	 }
 	 
 	 @FXML
@@ -203,87 +211,105 @@ public class CEditShipController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		fxLbUniqueID.setText(CCONSTANTS_EVENTS_JOB.EDITING_SHIP_ID);
-		m_stTempIDSysUser = null;
-		DatabaseReference mDBRefSysUser;
-		//CStructSysUser tempSysUser = null;
-		m_alSysUser = new ArrayList<CStructSysUser>();
-
-		TempSP = new CStructSysUser();
-		TempSP.setMyEmail("Без пользователя...");
+		m_bRetIsBindingSysUser = false;
+		// Инициализация:
+		m_stTempIDSysOldUser = null;
+		m_stTempEMailOldSysUser = null;
 		
+		fxLbUniqueID.setText(CCONSTANTS_EVENTS_JOB.EDITING_SHIP_ID);
+		DatabaseReference mDBRefSysUser;
 		mDBRefSysUser = FirebaseDatabase.getInstance().getReference()
-				.child(CMAINCONSTANTS.FB_my_sys_users_binding);
-		mDBRefSysUser.addValueEventListener(new ValueEventListener()
-		 {
+				.child(CMAINCONSTANTS.FB_users).child(CCONSTANTS_EVENTS_JOB.EDITING_SHIP_ID);
+		mDBRefSysUser.addListenerForSingleValueEvent(new ValueEventListener()
+		{
 			@Override
-			public void onDataChange(DataSnapshot arg0)
+			public void onDataChange(DataSnapshot arg0) 
 			{
-			//	Platform.runLater(
-			//  			  () -> {
 				try 
 				{
-					Iterable<DataSnapshot> contactChildren = arg0.getChildren();
-					
-					m_alSysUser = new ArrayList<CStructSysUser>();
-					m_alSysUser.add(TempSP);
-					for (DataSnapshot structCStructSysUser : contactChildren)
-	                {
-						TempSP = structCStructSysUser.getValue(CStructSysUser.class);
-						// Проверим свободен ли для биндинга:
-						if(TempSP.getMyPhoneBinding().equals("none"))
-						{
-		                 	System.out.println( "CStructSysUser = "  + TempSP.getMyEmail());
-		                 	m_alSysUser.add(TempSP);// Заполнили массив!!!
-						}
-                	}
-		            m_ObservableList = FXCollections.observableArrayList (m_alSysUser);
-					            
-					            Platform.runLater(
-					        	() -> {
-					        		fxCbSelectSysUser.setItems(m_ObservableList);
-					        		fxCbSelectSysUser.setValue(m_alSysUser.get(0));
-					        	});
+					Platform.runLater(
+					() -> {
+						m_tempUser = arg0.getValue(CStructUser.class);
+						
+						fxLbNameShip.setText(m_tempUser.getMyNameShip());
+						fxLbDirectorShip.setText(m_tempUser.getMyDirectorShip());
+						fxTaShortDescriptionShip.setText(m_tempUser.getMyShortDescriptionShip());
+						fxLbLatitudeText.setText(m_tempUser.getMyLatitude());
+						fxLbLongitudeText.setText(m_tempUser.getMyLongitude());
+					});
 				}
-				catch (Exception e) 
+				catch (Exception e)
 				{
 					e.printStackTrace();
 				}
-
-				fxCbSelectSysUser.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CStructSysUser>() 
-			    {
-					@Override
-					public void changed(ObservableValue<? extends CStructSysUser> observable, CStructSysUser oldValue,
-							CStructSysUser newValue)
-					{
-						if(newValue != oldValue)
-						{
-							//Platform.setImplicitExit(false);
-							Platform.runLater(
-						        	() -> {
-						        		try 
-						        		{
-						        			m_stTempIDSysUser = newValue.getMyIDSysUser();
-							        		m_stTempEMailSysUser = newValue.getMyEmail();
-										} catch (Exception e) 
-						        		{
-											// TODO: handle exception
-										}
-						        		
-						        	});
-							
-							System.out.println("fxCbSelectSysUser.getSelectionModel() newValue = " + m_stTempIDSysUser);
-						}
-					}
-				});
-			//});
+				
 			}
+			@Override
+			public void onCancelled(DatabaseError arg0) 
+			{
+				System.out.println(arg0.getMessage());
+			}
+		});
+		// Здесь наполняем ComboBox системн. пользователями!!!
+		m_TempSP = new CStructSysUser();
+		m_TempSP.setMyEmail(CStrings.m_EMPTY_SEL_USER);
 
+		mDBRefSysUser = FirebaseDatabase.getInstance().getReference()
+				.child(CMAINCONSTANTS.FB_my_sys_users_binding);
+		mDBRefSysUser.addListenerForSingleValueEvent(new ValueEventListener()
+		{
+			@Override
+			public void onDataChange(DataSnapshot arg0)
+			{
+				
+				Iterable<DataSnapshot> contactChildren = arg0.getChildren();
+				 Platform.runLater(
+				        	() -> {
+				m_alSysUser = new ArrayList<CStructSysUser>();
+				m_alSysUser.add(m_TempSP);
+				
+				if(!m_tempUser.getMySysUserBinding().equals("none"))// Проверим привязан ли к судну системный пользователь!!!
+				{
+					m_bRetIsBindingSysUser = true;
+					m_TempSP = new CStructSysUser();
+					m_TempSP.setMyEmail(m_tempUser.getMyEmail());
+					m_TempSP.setMyPhoneBinding(m_tempUser.getMySysUserBinding());
+					m_alSysUser.add(m_TempSP);
+				}
+				
+				for (DataSnapshot structCStructSysUser : contactChildren)
+                {
+					m_TempSP = structCStructSysUser.getValue(CStructSysUser.class);
+					// Проверим свободен ли для биндинга:
+					if(m_TempSP.getMyPhoneBinding().equals("none"))
+					{
+	                 	System.out.println( "CStructSysUser = "  + m_TempSP.getMyEmail());
+	                 	m_alSysUser.add(m_TempSP);// Заполнили массив!!!
+					}
+            	}
+				
+				m_ObservableList = FXCollections.observableArrayList (m_alSysUser);
+	            
+	           
+	        		if(!m_bRetIsBindingSysUser)
+	        		{
+	        			fxCbSelectSysUser.setItems(m_ObservableList);
+		        		fxCbSelectSysUser.setValue(m_alSysUser.get(0));
+	        		}
+	        		else
+	        		{
+	        			fxCbSelectSysUser.setItems(m_ObservableList);
+		        		fxCbSelectSysUser.setValue(m_alSysUser.get(1));
+		        		m_stTempIDSysOldUser = fxCbSelectSysUser.getValue().getMyIDSysUser();
+		        		m_stTempEMailOldSysUser = fxCbSelectSysUser.getValue().getMyEmail();
+	        		}
+	        	});
+				
+			}
 			@Override
 			public void onCancelled(DatabaseError arg0) {
+				arg0.toException();
 			}
-		 });
+		});
 	}
-	
-
 }

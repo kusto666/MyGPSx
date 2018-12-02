@@ -517,7 +517,7 @@ public class CLPSMain extends Application
 			//{
 				try
 				{
-					 mDatabaseRefUsers = FirebaseDatabase.getInstance().getReference().child("users");
+					 mDatabaseRefUsers = FirebaseDatabase.getInstance().getReference().child(CMAINCONSTANTS.FB_users);
 					 mDatabaseRefUsers.addValueEventListener(new ValueEventListener()
 					 {
 						@Override
@@ -775,7 +775,7 @@ public class CLPSMain extends Application
 																user.getMyShortDescriptionShip(), 
 																user.getMyIsUserSelected(),
 																user.getMyPass(),
-																user.getmySysUserBinding());
+																user.getMySysUserBinding());
                                 m_localAllMarkersUsersTempMain.add(tempTransport);
 							}
                         	catch (Exception e)

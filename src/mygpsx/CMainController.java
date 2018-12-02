@@ -929,15 +929,17 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                              	 mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child("MyPhoneID_" + m_SELECTED_MARKER);
                             	 try 
                             	 {
-                                     mDatabase.child("MyLatitude").setValueAsync(Double.toString(ll.getLatitude()));
-                                     mDatabase.child("MyLongitude").setValueAsync(Double.toString(ll.getLongitude()));
+                            		 System.out.println("mDatabase.child(\"MyLatitude\").setValueAsync(Double.toString(ll.getLatitude()));");
+                            		 System.out.println("mDatabase.child(\"MyLongitude\").setValueAsync(Double.toString(ll.getLongitude()));");
+                                    mDatabase.child("myLatitude").setValueAsync(Double.toString(ll.getLatitude()));
+                                    mDatabase.child("myLongitude").setValueAsync(Double.toString(ll.getLongitude()));
 
                                  }
                             	 catch (Exception e) 
                             	 {
                                      e.printStackTrace();
                                  }
-                            	 System.out.println("Типа послали сообщение!!!");
+                            	 //System.out.println("Типа послали сообщение!!!");
                         	   } 
                         	   catch (Exception ex)
                         	   {

@@ -8,4 +8,5 @@ public class CStrings {
 	public static String m_APP_NAME_CHOOSE_NO = "Нет";
 	
 	public static String m_APP_ERROR = "#Ошибка!";
+	public static String m_EMPTY_SEL_USER = "Без пользователя...";
 }

@@ -68,8 +68,8 @@ public class CAddShipController implements Initializable{
 	 private ComboBox<CStructSysUser> fxCbSelectSysUser;// Системный пользователь - выбор по мылу!!!
 	 private ArrayList<CStructSysUser> m_alSysUser = null;
 	 private ObservableList<CStructSysUser> m_ObservableList;
-	 private String m_stTempIDSysUser;
-	 private String m_stTempEMailSysUser;
+	// private String m_stTempIDSysUser;
+	// private String m_stTempEMailSysUser;
 	 CStructSysUser TempSP;
 	 
 	 @FXML
@@ -136,7 +136,7 @@ public class CAddShipController implements Initializable{
 				return;
 			}
 			
-			if(m_stTempIDSysUser == null)
+			if(fxCbSelectSysUser.getValue().getMyIDSysUser() == null)
 			{
 				tempUser = new CStructUser(
 						randomIDPhoneTest, 
@@ -156,22 +156,22 @@ public class CAddShipController implements Initializable{
 						randomIDPhoneTest, 
 						Double.toString(CMainController.m_LocationTempForCAddShipController.getLatitude()),
 						Double.toString(CMainController.m_LocationTempForCAddShipController.getLongitude()),
-						m_stTempEMailSysUser, 
+						fxCbSelectSysUser.getValue().getMyEmail(), 
 						fxLbNameShip.getText(),
 						fxLbDirectorShip.getText(), 
 						fxTaShortDescriptionShip.getText(),
 						"false",
 						"MyPass",
-						m_stTempIDSysUser);
+						fxCbSelectSysUser.getValue().getMyIDSysUser());
 			}
 
 			// Создаем корабль-телефон(MyPhoneID_*****************)		
 			m_DatabaseRef.child(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest).setValueAsync(tempUser);
 			////////////////// - Здесь привязывание авторизации в firebase - //////////////////////////////
 			// Привязываем корабль-телефон к SysUser:
-			if(m_stTempIDSysUser != null)// Был ли тронут ComboBox с SysUsers вообще или даже не заходили в него)))
+			if(fxCbSelectSysUser.getValue().getMyIDSysUser() != null)// Был ли тронут ComboBox с SysUsers вообще или даже не заходили в него)))
 			{
-				CreateBinding(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest, m_stTempIDSysUser);
+				CreateBinding(CMAINCONSTANTS.MyPhoneID_ + randomIDPhoneTest, fxCbSelectSysUser.getValue().getMyIDSysUser());
 			}
 			//////////////////- Здесь привязывание авторизации в firebase ENDING !!!- //////////////////////////////
 			
@@ -201,13 +201,13 @@ public class CAddShipController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		m_stTempIDSysUser = null;
+		//m_stTempIDSysUser = null;
 		DatabaseReference mDBRefSysUser;
 		//CStructSysUser tempSysUser = null;
 		m_alSysUser = new ArrayList<CStructSysUser>();
 
 		TempSP = new CStructSysUser();
-		TempSP.setMyEmail("Без пользователя...");
+		TempSP.setMyEmail(CStrings.m_EMPTY_SEL_USER);
 		
 		mDBRefSysUser = FirebaseDatabase.getInstance().getReference()
 				.child(CMAINCONSTANTS.FB_my_sys_users_binding);
@@ -256,7 +256,7 @@ public class CAddShipController implements Initializable{
 						if(newValue != oldValue)
 						{
 							//Platform.setImplicitExit(false);
-							Platform.runLater(
+							/*Platform.runLater(
 						        	() -> {
 						        		try 
 						        		{
@@ -269,7 +269,7 @@ public class CAddShipController implements Initializable{
 						        		
 						        	});
 							
-							System.out.println("fxCbSelectSysUser.getSelectionModel() newValue = " + m_stTempIDSysUser);
+							System.out.println("fxCbSelectSysUser.getSelectionModel() newValue = " + m_stTempIDSysUser);*/
 						}
 					}
 				});

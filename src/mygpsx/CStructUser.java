@@ -3,7 +3,7 @@ package mygpsx;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 /////////////////////////////////////////////////////////////
-// Основной class пользователя(перемещаемого объекта)!!! 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /////////////////////////////////////////////////////////////
 
 @IgnoreExtraProperties
@@ -101,7 +101,7 @@ public class CStructUser {
     {
     	return MyPass;
     }
-    public String getmySysUserBinding()
+    public String getMySysUserBinding()
     {
     	return mySysUserBinding;
     }
@@ -142,7 +142,7 @@ public class CStructUser {
     {
         this.MyPass = MyPass;
     }
-    public void setmySysUserBinding(String mySysUserBinding)
+    public void setMySysUserBinding(String mySysUserBinding)
     {
         this.mySysUserBinding = mySysUserBinding;
     }

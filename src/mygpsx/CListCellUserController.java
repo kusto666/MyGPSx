@@ -69,21 +69,19 @@ public class CListCellUserController implements Initializable{
 			@Override
 			public void onDataChange(DataSnapshot arg0)
 			{
-				//System.out.println("m_tempStructUser.getmySysUserBinding() = ");
-				// TODO Auto-generated method stub
 				m_tempStructUser = arg0.getValue(CStructUser.class);
-				System.out.println("m_tempStructUser.getmySysUserBinding() = " + m_tempStructUser.getmySysUserBinding());
+				System.out.println("m_tempStructUser.getmySysUserBinding() = " + m_tempStructUser.getMySysUserBinding());
 				System.out.println("m_tempStructUser.getMyEmail() = " + m_tempStructUser.getMyEmail());
 				Platform.runLater(
 			  			  () -> {
 						Alert alert = new Alert(AlertType.CONFIRMATION);
 						alert.setTitle("Удаление судна!");
 						
-						if(m_tempStructUser.getmySysUserBinding() == null)
+						if(m_tempStructUser.getMySysUserBinding() == null)
 						{
-							m_tempStructUser.setmySysUserBinding("none");// Это для старых тестируемых пользователей!!!
+							m_tempStructUser.setMySysUserBinding("none");// Это для старых тестируемых пользователей!!!
 						}
-						if(m_tempStructUser.getmySysUserBinding().equals("none"))
+						if(m_tempStructUser.getMySysUserBinding().equals("none"))
 						{
 							alert.setHeaderText("Вы действительно хотите удалить судно ?");
 						}
@@ -111,11 +109,11 @@ public class CListCellUserController implements Initializable{
 								 .setValueAsync(null);
 								
 								// Второе: unbinding from my_sys_users_binding id of ship
-								if(!m_tempStructUser.getmySysUserBinding().equals("none"))
+								if(!m_tempStructUser.getMySysUserBinding().equals("none"))
 								{
 									FirebaseDatabase.getInstance().getReference()
 									 .child(CMAINCONSTANTS.FB_my_sys_users_binding)
-									 .child(m_tempStructUser.getmySysUserBinding()).child("myPhoneBinding")
+									 .child(m_tempStructUser.getMySysUserBinding()).child("myPhoneBinding")
 									 .setValueAsync("none");
 								}
 								
@@ -128,30 +126,6 @@ public class CListCellUserController implements Initializable{
 							{
 								e.printStackTrace();
 							}
-							
-				/*    		try 
-				    		{
-				    			System.out.println("BtnDeleteSysUser(fxLbUniqueID) = " + fxLbUniqueID.getText());
-				        		System.out.println("BtnDeleteSysUser(fxTxtEmail) = " + fxTxtEmail.getText());
-								FirebaseAuth.getInstance().deleteUser(fxLbUniqueID.getText());
-								
-								// Удаляем и из FB realtime:
-								FirebaseDatabase.getInstance()
-								.getReference()
-								.child(CMAINCONSTANTS.FB_my_sys_users_binding).child(fxLbUniqueID.getText()).setValueAsync(null);
-								
-								System.out.println("Successfully deleted user.");
-								CMyToast.makeText(CLPSMain.stage,
-				    					"Successfully deleted user!",
-				    					CMyToast.TOAST_SHORT, CMyToast.TOAST_SUCCESS);
-							} 
-				    		catch (FirebaseAuthException e)
-				    		{
-				    			CMyToast.makeText(CLPSMain.stage,
-				    					"Ошибка удаления!!!",
-				    					CMyToast.TOAST_SHORT, CMyToast.TOAST_ERROR);
-								e.printStackTrace();
-							}*/
 						} 
 						else
 						{
