@@ -766,7 +766,8 @@ public class CLPSMain extends Application
                                 System.out.println( "user.MyLatitude = " + user.getMyLatitude() );
                                 System.out.println( "user.MyLongitude = " + user.getMyLongitude() );
                                 
-                                tempTransport = new CStructUser(user.getMyPhoneID(),
+                                tempTransport = new CStructUser(user.getMyFreeNameFirst(),
+                                								user.getMyPhoneID(),
 																user.getMyLatitude(),
 																user.getMyLongitude(), 
 																"",

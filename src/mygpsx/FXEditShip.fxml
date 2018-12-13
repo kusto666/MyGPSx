@@ -8,12 +8,12 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CEditShipController">
    <children>
       <Button layoutX="479.0" layoutY="364.0" mnemonicParsing="false" onAction="#btnRefreshShip" prefHeight="30.0" prefWidth="110.0" text="Обновить" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-      <Label layoutX="14.0" layoutY="14.0" text="Введите название судна" />
-      <Label layoutX="14.0" layoutY="59.0" text="Ответственное лицо ФИО" />
-      <TextField fx:id="fxLbNameShip" layoutX="14.0" layoutY="28.0" prefHeight="22.0" prefWidth="192.0" promptText="Введите название судна" />
-      <TextField fx:id="fxLbDirectorShip" layoutX="14.0" layoutY="73.0" prefHeight="22.0" prefWidth="192.0" promptText="Ответственное лицо ФИО" />
-      <Label layoutX="14.0" layoutY="103.0" text="Краткое описание судна" />
-      <TextArea fx:id="fxTaShortDescriptionShip" layoutX="14.0" layoutY="120.0" prefHeight="204.0" prefWidth="192.0" promptText="Введите краткое описание судна..." />
+      <Label layoutX="14.0" layoutY="45.0" text="Введите название судна" />
+      <Label layoutX="14.0" layoutY="90.0" text="Ответственное лицо ФИО" />
+      <TextField fx:id="fxLbNameShip" layoutX="14.0" layoutY="59.0" prefHeight="22.0" prefWidth="192.0" promptText="Введите название судна" />
+      <TextField fx:id="fxLbDirectorShip" layoutX="14.0" layoutY="104.0" prefHeight="22.0" prefWidth="192.0" promptText="Ответственное лицо ФИО" />
+      <Label layoutX="14.0" layoutY="134.0" text="Краткое описание судна" />
+      <TextArea fx:id="fxTaShortDescriptionShip" layoutX="14.0" layoutY="151.0" prefHeight="204.0" prefWidth="192.0" promptText="Введите краткое описание судна..." />
       <Button layoutX="535.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnInsertStartCoords" prefHeight="30.0" prefWidth="167.0" text="Ввести координаты" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <Pane layoutX="423.0" layoutY="50.0" prefHeight="55.0" prefWidth="167.0" style="-fx-border-color: blue;">
          <children>
@@ -28,15 +28,17 @@
             <Font size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="fxTxtEmail" layoutX="216.0" layoutY="28.0" prefHeight="25.0" prefWidth="192.0" promptText="\@Введите email" />
-      <Label layoutX="216.0" layoutY="14.0" text="Email для авторизации:" />
-      <Label layoutX="216.0" layoutY="59.0" text="Введите пароль:" />
-      <PasswordField fx:id="fxTxtPassFirst" layoutX="216.0" layoutY="73.0" prefHeight="25.0" prefWidth="192.0" promptText="#############" />
-      <Label layoutX="216.0" layoutY="103.0" text="Подтвердите пароль:" />
-      <PasswordField fx:id="fxTxtPassSecond" layoutX="216.0" layoutY="120.0" prefHeight="25.0" prefWidth="192.0" promptText="#############" />
-      <Label fx:id="fxLbSuccessPass" layoutX="216.0" layoutY="145.0" prefHeight="17.0" prefWidth="192.0" text="ПАРОЛИ НЕ СОВПАДАЮТ!" textFill="RED" />
-      <ComboBox fx:id="fxCbSelectSysUser" layoutX="216.0" layoutY="188.0" prefHeight="25.0" prefWidth="214.0" />
-      <Label layoutX="216.0" layoutY="171.0" prefHeight="17.0" prefWidth="214.0" text="Выбор системного пользователя:" />
+      <TextField fx:id="fxTxtEmail" layoutX="217.0" layoutY="57.0" prefHeight="25.0" prefWidth="192.0" promptText="\@Введите email" />
+      <Label layoutX="217.0" layoutY="43.0" text="Email для авторизации:" />
+      <Label layoutX="217.0" layoutY="88.0" text="Введите пароль:" />
+      <PasswordField fx:id="fxTxtPassFirst" layoutX="217.0" layoutY="102.0" prefHeight="25.0" prefWidth="192.0" promptText="#############" />
+      <Label layoutX="217.0" layoutY="132.0" text="Подтвердите пароль:" />
+      <PasswordField fx:id="fxTxtPassSecond" layoutX="217.0" layoutY="149.0" prefHeight="25.0" prefWidth="192.0" promptText="#############" />
+      <Label fx:id="fxLbSuccessPass" layoutX="217.0" layoutY="174.0" prefHeight="17.0" prefWidth="192.0" text="ПАРОЛИ НЕ СОВПАДАЮТ!" textFill="RED" />
+      <ComboBox fx:id="fxCbSelectSysUser" layoutX="217.0" layoutY="217.0" prefHeight="25.0" prefWidth="214.0" />
+      <Label layoutX="217.0" layoutY="200.0" prefHeight="17.0" prefWidth="214.0" text="Выбор системного пользователя:" />
       <Label fx:id="fxLbUniqueID" text="fxLbUniqueID" textFill="RED" />
+      <TextField fx:id="fxTxtFreeNameFirst" layoutX="8.0" layoutY="21.0" prefHeight="25.0" prefWidth="397.0" promptText="Название для понимания в целом сущности Онного" />
+      <Label layoutX="8.0" layoutY="4.0" text="Общее название объекта(представление)" textFill="GREEN" />
    </children>
 </AnchorPane>

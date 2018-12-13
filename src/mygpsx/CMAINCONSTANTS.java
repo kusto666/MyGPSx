@@ -94,6 +94,7 @@ public class CMAINCONSTANTS {
 	
 	// Это все сущности-атрибуты!!!
 	public static String MyPhoneID_ = "MyPhoneID_";// Это название-приставка к основному объекту User!!!
+	public static String NoFB_MyIDSysUserSelected = "MyIDSysUserSelected";// Это запомнили временно ID SysUser , когда нажимаем кнопку "Задачи"!!!
 	public static String FB_MyIDUserSelected = "MyIDUserSelected";// Это слушаем, кто выбран, когда нажимаем кнопку "Задачи"!!!
 	public static String FB_MyIDTmplSelected = "MyIDTmplSelected";// Это слушаем(это шаблон!), кто выбран, когда нажимаем кнопку "Задачи"!!!
 

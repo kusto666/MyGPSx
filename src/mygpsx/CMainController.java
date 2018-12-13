@@ -852,6 +852,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @Override
     public void mapInitialized() 
     {
+    	CCONSTANTS_EVENTS_JOB.LOAD_GOOGLEMAP_STEP = 0;
     	try 
     	{
     		//geocodingService = new GeocodingService();
@@ -867,9 +868,26 @@ public class CMainController implements Initializable, MapComponentInitializedLi
  	                .zoomControl(false)
  	                .zoom(12);
  	       System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapInitialized");
+ 	       
+ 	       CCONSTANTS_EVENTS_JOB.LOAD_GOOGLEMAP_STEP++;// Первый этап инициализации пройден!!!
+ 	       
  	       MyGoogleMap = mapView.createMap(mapOptions);
        
  	       mapReady(markerMap);
+ 	       
+ 	       // Если оба этапа инициализации карты прошли:
+ 	       if(CCONSTANTS_EVENTS_JOB.LOAD_GOOGLEMAP_STEP == 2)
+ 	       {
+ 	    	  CMyToast.makeText(CLPSMain.stage, 
+ 	    			  "Карта загружается!",
+ 	    			  CMyToast.TOAST_LONG, CMyToast.TOAST_SUCCESS);
+ 	       }
+ 	       else
+ 	       {
+ 	    	  CMyToast.makeText(CLPSMain.stage, 
+ 	    			  "Ошибка загрузки карты - нажмите кнопку \"Обновить\"",
+ 	    			  CMyToast.TOAST_LONG, CMyToast.TOAST_ERROR);
+ 	       }
 		} 
     	catch (Exception ex)
     	{
@@ -956,12 +974,14 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                 	
                 }
             });
+    		CCONSTANTS_EVENTS_JOB.LOAD_GOOGLEMAP_STEP++;// Второй этап инициализации пройден!!!
+    		System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapReady");
 		}
     	catch (Exception ex) 
     	{
 			ex.getMessage();
 		}
-    	System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapReady");
+    	/*System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapReady");*/
     }
     @Override
     public synchronized void initialize(URL url, ResourceBundle rb)

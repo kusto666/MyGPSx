@@ -22,6 +22,8 @@ public class CUserCell  extends ListCell<CStructUser>
 	@FXML
 	Button fxBtnViewJobs;
 	@FXML
+	Label fxLbBindingEmail;
+	@FXML
 	FXMLLoader mLLoader;
 	@FXML
 	AnchorPane m_Pane;
@@ -48,6 +50,7 @@ public class CUserCell  extends ListCell<CStructUser>
                 lbMyNameShip = (Label)mLLoader.getNamespace().get("lbMyNameShip");
                 fxBtnViewJobs = (Button)mLLoader.getNamespace().get("fxBtnViewJobs");
                 lbMyDirectorShip = (Label)mLLoader.getNamespace().get("lbMyDirectorShip");
+                fxLbBindingEmail = (Label)mLLoader.getNamespace().get("fxLbBindingEmail");
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
         		if(lbMyNameShip == null)
         		{
@@ -64,6 +67,7 @@ public class CUserCell  extends ListCell<CStructUser>
         		fxLbUniqueID.setText(String.valueOf(item.getMyPhoneID()));
         		lbMyNameShip.setText(String.valueOf(item.getMyNameShip()));
         		lbMyDirectorShip.setText(String.valueOf(item.getMyDirectorShip()));
+        		fxLbBindingEmail.setText(String.valueOf(item.getMyEmail()));
             } 
             catch (IOException e) 
             {

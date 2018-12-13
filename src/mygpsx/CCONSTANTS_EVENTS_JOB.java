@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 public class CCONSTANTS_EVENTS_JOB
 {
+	public static String MYNONE = "none";
 	// Переменная говорит о том, что карта загрузилась, проверка двух этапов:
 	// 1 - этап: GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapInitialized 
 	// 2 - этап: GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapReady

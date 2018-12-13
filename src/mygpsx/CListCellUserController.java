@@ -145,7 +145,7 @@ public class CListCellUserController implements Initializable{
 		
 
     }
-	// Удаление объекта.
+	// Редактирование объекта.
 	@FXML
     private void eventEditObject() 
     {

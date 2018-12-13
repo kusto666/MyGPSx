@@ -64,7 +64,9 @@ public class CSysUserAddController implements Initializable{
     		// Здесь добавим запись в my_sys_users_binding
     		CStructSysUser tempSysUser = new CStructSysUser(userRecord.getUid(),
     														userRecord.getEmail(), 
-    														fxTxtPass.getText(),"none");
+    														fxTxtPass.getText(),
+    														CCONSTANTS_EVENTS_JOB.MYNONE,
+    														CCONSTANTS_EVENTS_JOB.MYNONE);
     		
     		FirebaseDatabase.getInstance()
 			.getReference()

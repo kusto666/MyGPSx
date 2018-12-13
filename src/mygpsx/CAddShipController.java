@@ -59,6 +59,8 @@ public class CAddShipController implements Initializable{
 	DatabaseReference m_DatabaseRef;
 	
 	 @FXML
+	 TextField fxTxtFreeNameFirst;
+	 @FXML
 	 TextField fxTxtEmail;
 	 @FXML
 	 PasswordField fxTxtPassFirst;
@@ -127,7 +129,14 @@ public class CAddShipController implements Initializable{
 				flLbInfoSaveErrors.setText("ЗАПОЛНИТЕ ВСЕ ПОЛЯ!");
 				return;
 			}
-		
+			
+			String stTempSpaces = fxTxtFreeNameFirst.getText().replace(" ", "");
+			if(stTempSpaces.equals(""))
+			{
+				fxTxtFreeNameFirst.setText("EMPTY FREE NAME!!! - Не может быть пустым!!!");
+				fxTxtFreeNameFirst.setStyle("-fx-text-inner-color: red;");
+				return;
+			}
 			
 			// Проверка на координаты для создоваемого объекта!!!
 			if(CMainController.m_LocationTempForCAddShipController == null)
@@ -139,6 +148,7 @@ public class CAddShipController implements Initializable{
 			if(fxCbSelectSysUser.getValue().getMyIDSysUser() == null)
 			{
 				tempUser = new CStructUser(
+						fxTxtFreeNameFirst.getText(),
 						randomIDPhoneTest, 
 						Double.toString(CMainController.m_LocationTempForCAddShipController.getLatitude()),
 						Double.toString(CMainController.m_LocationTempForCAddShipController.getLongitude()),
@@ -153,6 +163,7 @@ public class CAddShipController implements Initializable{
 			else
 			{
 				tempUser = new CStructUser(
+						fxTxtFreeNameFirst.getText(),
 						randomIDPhoneTest, 
 						Double.toString(CMainController.m_LocationTempForCAddShipController.getLatitude()),
 						Double.toString(CMainController.m_LocationTempForCAddShipController.getLongitude()),

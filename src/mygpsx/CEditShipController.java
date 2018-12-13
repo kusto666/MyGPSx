@@ -75,6 +75,8 @@ public class CEditShipController implements Initializable{
 	 boolean m_bRetIsBindingSysUser = false;
 	 
 	 @FXML
+	 private TextField fxTxtFreeNameFirst;
+	 @FXML
 	 private Label fxLbUniqueID;
 	 @FXML
 	 private TextField fxLbNameShip;
@@ -87,7 +89,7 @@ public class CEditShipController implements Initializable{
 	 @FXML
 	 private Label fxLbLatitudeText;
 	 @FXML
-	 private  Label fxLbLongitudeText;
+	 private Label fxLbLongitudeText;
 	 @FXML
 	 private CMainController objectController;
 	 @FXML
@@ -108,6 +110,13 @@ public class CEditShipController implements Initializable{
 		 {
 			 System.out.println("btnRefreshShip(ActionEvent event)!!!");
 			 
+			 String stTempSpaces = fxTxtFreeNameFirst.getText().replace(" ", "");
+				if(stTempSpaces.equals(""))
+				{
+					fxTxtFreeNameFirst.setText("EMPTY FREE NAME!!! - Не может быть пустым!!!");
+					fxTxtFreeNameFirst.setStyle("-fx-text-inner-color: red;");
+					return;
+				}
 			 
 			 // Потом добавим проверку на пустоту полей!!!
 			 if(fxLbNameShip.getText().replaceAll("\\s","").length() == 0 ||
@@ -119,6 +128,7 @@ public class CEditShipController implements Initializable{
 			 }
 				
 			 // Обновляем данные в структуре!!!
+			 m_tempUser.setMyFreeNameFirst(fxTxtFreeNameFirst.getText());
 			 m_tempUser.setMyNameShip(fxLbNameShip.getText());
 			 m_tempUser.setMyDirectorShip(fxLbDirectorShip.getText());
 			 m_tempUser.setMyShortDescriptionShip(fxTaShortDescriptionShip.getText());
@@ -231,6 +241,7 @@ public class CEditShipController implements Initializable{
 					() -> {
 						m_tempUser = arg0.getValue(CStructUser.class);
 						
+						fxTxtFreeNameFirst.setText(m_tempUser.getMyFreeNameFirst());
 						fxLbNameShip.setText(m_tempUser.getMyNameShip());
 						fxLbDirectorShip.setText(m_tempUser.getMyDirectorShip());
 						fxTaShortDescriptionShip.setText(m_tempUser.getMyShortDescriptionShip());

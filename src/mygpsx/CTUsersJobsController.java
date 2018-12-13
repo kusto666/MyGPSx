@@ -80,11 +80,39 @@ public class CTUsersJobsController implements Initializable
     	{
     		if(fxCbSelectPriorityJob.getSelectionModel().getSelectedIndex() != 0)
     		{
+    			
     			String uploadId = CLPSMain.mDatabase.push().getKey();
-        		/*mDatabaseAddingJob = */FirebaseDatabase.getInstance().getReference()
+    			
+    			// Тут надо будет сделать проверки , что правильно выбрали пользователя!!!
+    			if(CMAINCONSTANTS.NoFB_MyIDSysUserSelected == null)// - это типа вообще только начало, только запустили и не понимаем)))
+    			{
+    				CMyToast.makeText(CLPSMain.stage, 
+        	    			  "Как раз доделать без привязки пользователя к задаче!!!",
+        	    			  CMyToast.TOAST_LONG, CMyToast.TOAST_ERROR);
+      				return;
+    			}
+    			if(CMAINCONSTANTS.NoFB_MyIDSysUserSelected.equals(CCONSTANTS_EVENTS_JOB.MYNONE))// Это типа без пользователя SysUser!!!
+    			{
+    				CMyToast.makeText(CLPSMain.stage, 
+      	    			  "К судну не привязан пользователь!",
+      	    			  CMyToast.TOAST_LONG, CMyToast.TOAST_ERROR);
+    				return;
+    			}
+    			
+    			FirebaseDatabase.getInstance().getReference()
+				.child(CMAINCONSTANTS.FB_my_users_jobs)
+				.child(CMAINCONSTANTS.NoFB_MyIDSysUserSelected)
+				.child(uploadId).child("MyTemplateJob").setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
+    			
+    			
+        		/* Это старый вариант с привызкой по ID телефона!!!
+        		 * FirebaseDatabase.getInstance().getReference()
         				.child(CMAINCONSTANTS.FB_my_users_jobs)
         				.child(CMAINCONSTANTS.MyPhoneID_ + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP)
-        				.child(uploadId).child("MyTemplateJob").setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
+        				.child(uploadId).child("MyTemplateJob").setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);*/
+    			 CMyToast.makeText(CLPSMain.stage, 
+    	    			  "Задача успешно добавлена!",
+    	    			  CMyToast.TOAST_LONG, CMyToast.TOAST_SUCCESS);
         		System.out.println("BtnAddingJobNew!!!");
     		}
     		else
@@ -102,6 +130,8 @@ public class CTUsersJobsController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		CMAINCONSTANTS.NoFB_MyIDSysUserSelected = "MyIDSysUserSelected";
+		System.out.println("Проверка при инициализации CMAINCONSTANTS.NoFB_MyIDSysUserSelected = " + CMAINCONSTANTS.NoFB_MyIDSysUserSelected);
 		fxLbErrorSelectPriority.setVisible(false);
 		mDatabaseUsers = FirebaseDatabase.getInstance().getReference()
 				.child(CMAINCONSTANTS.FB_users);
@@ -113,11 +143,16 @@ public class CTUsersJobsController implements Initializable
 				try 
 				{
 					Iterable<DataSnapshot> contactChildren = arg0.getChildren();
-					
+
 					m_alAttrjob = new ArrayList<CStructUser>();
+					
+					CStructUser TempSP = new CStructUser();// Создадим пустого пользователя для первого элемента списка!!!
+					TempSP.setMyFreeNameFirst("Выбор судна(необязательно)");
+					m_alAttrjob.add(TempSP);
+					
 					for (DataSnapshot structCStructUser : contactChildren)
 	                {
-						CStructUser TempSP = structCStructUser.getValue(CStructUser.class);
+						TempSP = structCStructUser.getValue(CStructUser.class);
 	                 	System.out.println( "structCStructUser = "  + TempSP.getMyDirectorShip());
 	                 	m_alAttrjob.add(TempSP);// Заполнили массив!!!
                 	}
@@ -125,6 +160,8 @@ public class CTUsersJobsController implements Initializable
 				        	() -> {
 					            m_ObservableList = FXCollections.observableArrayList (m_alAttrjob);
 					            fxCbSelectUser.setItems(m_ObservableList);
+					            fxCbSelectUser.setValue(m_ObservableList.get(0));
+					            m_stUsersUniqueID = null;
 				        	});
 				}
 				catch (Exception e) 
@@ -158,6 +195,7 @@ public class CTUsersJobsController implements Initializable
 										m_stNameShip =  ((CStructUser)newValue).getMyNameShip();
 										m_stUsersUniqueID =  ((CStructUser)newValue).getMyPhoneID();
 										CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = m_stUsersUniqueID;
+										CMAINCONSTANTS.NoFB_MyIDSysUserSelected = ((CStructUser)newValue).getMySysUserBinding();
 										FirebaseDatabase.getInstance().getReference()
 												.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
 										System.out.println("m_stUsersUniqueID = " + m_stUsersUniqueID);
@@ -176,7 +214,9 @@ public class CTUsersJobsController implements Initializable
 			public void onCancelled(DatabaseError arg0) {
 			}
 		 });
-		mDatabaseListenSelectUser = FirebaseDatabase.getInstance().getReference()
+		
+
+/*		mDatabaseListenSelectUser = FirebaseDatabase.getInstance().getReference()
 				.child(CMAINCONSTANTS.FB_MyIDUserSelected);
 		mDatabaseListenSelectUser.addValueEventListener(new ValueEventListener()
 		 {
@@ -208,7 +248,7 @@ public class CTUsersJobsController implements Initializable
 			public void onCancelled(DatabaseError arg0) {
 		
 			}
-		 });
+		 });*/
 /////////////////////////////////// INIT TEMPLATES ///////////////////////////////////////////////////
 		mDatabaseTamplates = FirebaseDatabase.getInstance().getReference()
 				.child(CMAINCONSTANTS.FB_my_owner_settings).child(CMAINCONSTANTS.FB_my_templates);
@@ -223,16 +263,26 @@ public class CTUsersJobsController implements Initializable
 					Iterable<DataSnapshot> contactChildren = arg0.getChildren();
 					
 					m_aTmpl = new ArrayList<CStructTmplJob>();
+					
+					CStructTmplJob TempSP = new CStructTmplJob();// Создадим пустой шаблон для первого элемента списка!!!
+					TempSP.setMyNameTemplate("Выберите шаблон...");
+					m_aTmpl.add(TempSP);
+					
 					for (DataSnapshot structTmplJob : contactChildren)
 	                {
 						//HashMap<String, CStructTmplJob> hmTemp = new HashMap<>();
 						
-						CStructTmplJob TempSP = structTmplJob.getValue(CStructTmplJob.class);
+						TempSP = structTmplJob.getValue(CStructTmplJob.class);
 	                 	System.out.println( "structTmplJob = "  + TempSP.getMyNameTemplate());
 	                 	m_aTmpl.add(TempSP);// Заполнили массив!!!
                 	}
-		            m_ObservableListTmpl = FXCollections.observableArrayList (m_aTmpl);
-		            fxCbSelectTemplateJob.setItems(m_ObservableListTmpl);
+					Platform.runLater(
+			    			  () -> {
+						            m_ObservableListTmpl = FXCollections.observableArrayList (m_aTmpl);
+						            fxCbSelectTemplateJob.setItems(m_ObservableListTmpl);
+						            fxCbSelectTemplateJob.setValue(m_ObservableListTmpl.get(0));
+						            m_stTmplUniqueID = null;
+			    			  });
 	/*	        	Platform.runLater(
 	    			  () -> {
 	    				  try
@@ -283,22 +333,11 @@ public class CTUsersJobsController implements Initializable
 				CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL = m_stTmplUniqueID;
 				System.out.println("CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL = " + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
 				
-				/*mDatabaseUpdateSelectedUsersTmpls = */FirebaseDatabase.getInstance().getReference()
+				FirebaseDatabase.getInstance().getReference()
 						.child(CMAINCONSTANTS.FB_MyIDTmplSelected).setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
-				/*FirebaseDatabase.getInstance().getReference()
-				.child(CMAINCONSTANTS.FB_MyIDTmplSelected).setValue(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL, new CompletionListener() {
-					
-					@Override
-					public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
-						// TODO Auto-generated method stub
-						
-					}
-				});*/
-
 			}
 		});
-		CStructPriority TempSPFirstValue = new CStructPriority();
-		TempSPFirstValue.setMyNamePriority("Выберите приоритет задачи...");
+		
 /////////////////////////////////////// INIT PRIORITY OF JOBS //////////////////////////////////////////////////		
 		mDatabasePriorityJobs = FirebaseDatabase.getInstance().getReference()
 				.child(CMAINCONSTANTS.FB_my_owner_settings).child(CMAINCONSTANTS.FB_my_priority);
@@ -314,6 +353,10 @@ public class CTUsersJobsController implements Initializable
 					Iterable<DataSnapshot> contactChildren = arg0.getChildren();
 					
 					m_alPriority = new ArrayList<CStructPriority>();
+					
+					CStructPriority TempSPFirstValue = new CStructPriority();
+					TempSPFirstValue.setMyNamePriority("Выберите приоритет задачи...");
+					
 					m_alPriority.add(TempSPFirstValue);
 					for (DataSnapshot structPriorityr : contactChildren)
 	                {
@@ -321,16 +364,20 @@ public class CTUsersJobsController implements Initializable
 	                 	System.out.println( "TempSP = "  + TempSP.getMyNamePriority());
 	                 	m_alPriority.add(TempSP);// Заполнили массив!!!
                 	}
+					Platform.runLater(() -> {
 		            m_ObservableListPriority = FXCollections.observableArrayList (m_alPriority);
 		            fxCbSelectPriorityJob.setItems(m_ObservableListPriority);
+		            fxCbSelectPriorityJob.setValue(m_ObservableListPriority.get(0));
+					});
+		           // m_stTmplUniqueID = null;
 				}
 				catch (Exception e) 
 				{
 					e.printStackTrace();
 				}
-				Platform.runLater(() -> {
+				/*Platform.runLater(() -> {
 					fxCbSelectPriorityJob.setValue(m_alPriority.get(my_i));
-			  });
+			  });*/
 				fxCbSelectPriorityJob.valueProperty().addListener(new ChangeListener<CStructPriority>() {
 
 					@Override

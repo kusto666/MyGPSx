@@ -7,7 +7,9 @@ import com.google.firebase.database.IgnoreExtraProperties;
 /////////////////////////////////////////////////////////////
 
 @IgnoreExtraProperties
-public class CStructUser {
+public class CStructUser 
+{
+	private String MyFreeNameFirst;// Первое имя(название) в свободной форме - пригодиться, например для первых пустых строк(ComboBox`ов)
 	private String MyPhoneID;
 	private String MyLatitude;
 	private String MyLongitude;
@@ -34,14 +36,16 @@ public class CStructUser {
     }
 
     
-    public CStructUser(String MyPhoneID, String MyNameShip, String MyDirectorShip) 
+   /* public CStructUser(String MyPhoneID, String MyNameShip, String MyDirectorShip) 
     {
         this.MyPhoneID = MyPhoneID;
         this.MyNameShip = MyNameShip;
         this.MyDirectorShip = MyDirectorShip;
-    }
+    }*/
 
-    public CStructUser(String MyPhoneID,
+    public CStructUser(
+    			 String MyFreeNameFirst,
+    			 String MyPhoneID,
     			 String MyLatitude, 
     			 String MyLongitude,  
     			 String MyEmail,
@@ -52,6 +56,8 @@ public class CStructUser {
     			 String MyPass,
     			 String mySysUserBinding) 
     {
+    	this.MyFreeNameFirst = MyFreeNameFirst;
+    	
         this.MyPhoneID = MyPhoneID;
         this.MyLatitude = MyLatitude;
         this.MyLongitude = MyLongitude;
@@ -64,7 +70,10 @@ public class CStructUser {
         this.MyPass = MyPass;
         this.mySysUserBinding = mySysUserBinding;
     }
-    
+    public String getMyFreeNameFirst()
+    {
+    	return MyFreeNameFirst;
+    }
     public String getMyPhoneID()
     {
     	return MyPhoneID;
@@ -106,6 +115,10 @@ public class CStructUser {
     	return mySysUserBinding;
     }
     /////////////////////////////////////SET////////////////////////////////////////
+    public void setMyFreeNameFirst(String MyFreeNameFirst)
+    {
+        this.MyFreeNameFirst = MyFreeNameFirst;
+    }
     public void setMyPhoneID(String MyPhoneID)
     {
         this.MyPhoneID = MyPhoneID;
@@ -147,9 +160,11 @@ public class CStructUser {
         this.mySysUserBinding = mySysUserBinding;
     }
     @Override
-    public String toString()  {
+    /*public String toString()  {
         return ("Капитан: '" + this.getMyDirectorShip() + "', Судно: '" + this.getMyNameShip() + "'");
+    }*/
+    public String toString()  {
+        return (this.getMyFreeNameFirst());
     }
-    
-    
+  
 }
