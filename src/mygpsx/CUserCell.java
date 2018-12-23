@@ -49,6 +49,9 @@ public class CUserCell  extends ListCell<CStructUser>
                 fxLbUniqueID = (Label)mLLoader.getNamespace().get("fxLbUniqueID");
                 lbMyNameShip = (Label)mLLoader.getNamespace().get("lbMyNameShip");
                 fxBtnViewJobs = (Button)mLLoader.getNamespace().get("fxBtnViewJobs");
+                
+                // Здесь проверим есть ли текущая задача, если есть, то пишем "Текущая задача" или "Задачи нет".
+                // .......................
                 lbMyDirectorShip = (Label)mLLoader.getNamespace().get("lbMyDirectorShip");
                 fxLbBindingEmail = (Label)mLLoader.getNamespace().get("fxLbBindingEmail");
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
@@ -64,8 +67,8 @@ public class CUserCell  extends ListCell<CStructUser>
         		{
         			System.out.println("m_Pane == null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         		}
-        		fxLbUniqueID.setText(String.valueOf(item.getMyPhoneID()));
-        		lbMyNameShip.setText(String.valueOf(item.getMyNameShip()));
+        		//fxLbUniqueID.setText(String.valueOf(item.getMyPhoneID()));
+        		//lbMyNameShip.setText(String.valueOf(item.getMyNameShip()));
         		lbMyDirectorShip.setText(String.valueOf(item.getMyDirectorShip()));
         		fxLbBindingEmail.setText(String.valueOf(item.getMyEmail()));
             } 

@@ -3,9 +3,11 @@ package mygpsx;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TabPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -34,7 +36,8 @@ public class CCONSTANTS_EVENTS_JOB
 	// Это временное хранение приоритета задачи!!!
 	public static String TEMP_PRIORITY_JOB = ""; // Здесь пишеться UniqueID приоритета задачи.
 	
-	public static String MAIN_SELECTED_SHIP = "";// Переменная отвечает за основной выбор судна из левого главного списка,
+	public static ObservableList<CStructUser> MAIN_ObservableListUser;// Это список ComboBox с пользователями из второго таба его всегда и обновляем!!!
+	public static String MAIN_SELECTED_SHIP = null;// Переменная отвечает за основной выбор судна из левого главного списка,
 	// для дальнейших манипуляций с ним!!!
 	public static String EDITING_SHIP_ID = ""; // ID - выбранного для редактирования судна!!!
 	public static String MAIN_SELECTED_TMPL = "";// Переменная отвечает за основной выбор шаблона из списка юзера,
@@ -54,6 +57,15 @@ public class CCONSTANTS_EVENTS_JOB
 	
 	// Это тоже связано с шаблоном, но здесь мы смотрим, что делаем, а именно:
 	//public static int TEMPLATE_FILLING_OR_EDIT = 1;//1 - Значит заполняем, 0 - создаем или редактируем!!!
+	
+	// TabPane tb - главная, в которой все основные табы!!!
+	public static TabPane MY_TABPANE_MAIN = null;
+	public static String MY_TAB_1_NAME = "Сотрудники --> Задачи";
+	public static boolean MY_CHANGE_TAB_TO_MY_TAB_1_NAME = false;// Эта переменная говорит о том, что переключаемся на вкладку(Tab)
+	// посредством их перелистывания - false, или true - когда попадаем на эту вкладку путем нажатия кнопки в ячейке судна "Добавить задачу". 
+	
+	// Надпись на кнопке в списке судов для текущего задания - или есть или задания нет.
+	public static String MY_fxBtnViewJobsText = "Текущее задание";
 	
 	// ЧАСТО ИСПОЛЬЗУЕМЫЕ ФУНКЦИИ!!!
 	public static <T> boolean OpenAnyFrame( Class<T> MyClassFrame, 

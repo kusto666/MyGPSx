@@ -60,6 +60,8 @@ import javax.swing.SingleSelectionModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -139,7 +141,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	//@FXML
 	//private TabPane LPSMapTUserAndJobs;//
 	
-	private javafx.scene.control.SingleSelectionModel<Tab> selectionModel;
+	private javafx.scene.control.SingleSelectionModel<Tab> m_MainTabsSelectionModel;
 	@FXML
 	private AnchorPane m_FXAPaneTemplateJobs;// Это панель в которой и находится сам лист с шаблоном!!!
 	@FXML
@@ -582,9 +584,9 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private void handleDeleteAllMarkers(ActionEvent event) 
     {
-    	TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
-		javafx.scene.control.SingleSelectionModel<Tab> selectionModel = tb.getSelectionModel();
-		selectionModel.select(0);
+    	//TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
+		javafx.scene.control.SingleSelectionModel<Tab> selectionModel = CCONSTANTS_EVENTS_JOB.MY_TABPANE_MAIN.getSelectionModel();
+		m_MainTabsSelectionModel.select(0);
 		
     	if(MyGoogleMap != null)
     	{
@@ -770,9 +772,9 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private void btnShowAllMarkers(ActionEvent event) 
     {
-    	TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
-		javafx.scene.control.SingleSelectionModel<Tab> selectionModel = tb.getSelectionModel();
-		selectionModel.select(0);
+    	//TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
+		javafx.scene.control.SingleSelectionModel<Tab> selectionModel = CCONSTANTS_EVENTS_JOB.MY_TABPANE_MAIN.getSelectionModel();
+		m_MainTabsSelectionModel.select(0);
 		
     	if(!ShowAllMarkersAfterRefresh())
     	{
@@ -986,8 +988,6 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @Override
     public synchronized void initialize(URL url, ResourceBundle rb)
     {
-    	
-    	
     	fxAccordLeftMain.setExpandedPane(fxTPaneLeft2);
     	fxAccordRightMain.setExpandedPane(fxTPaneRight1);
     	try 
@@ -1006,10 +1006,38 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	{
 			e.printStackTrace();
 		}
-
-    	selectionModel = fxTabPaneMain.getSelectionModel();
+    	
+    	CCONSTANTS_EVENTS_JOB.MY_TABPANE_MAIN = fxTabPaneMain;
+    	m_MainTabsSelectionModel = CCONSTANTS_EVENTS_JOB.MY_TABPANE_MAIN.getSelectionModel();
+    	//m_MainTabsSelectionModel.
+    	m_MainTabsSelectionModel.selectedItemProperty().addListener(new ChangeListener<Tab>() 
+    	{
+			@Override
+			public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue)
+			{
+				System.out.println("selectionModel.select() = " + newValue.getText());
+				if(newValue.getText().equals(CCONSTANTS_EVENTS_JOB.MY_TAB_1_NAME))
+				{
+					/*FXMLLoader fxmlLoader = new FXMLLoader();
+					fxmlLoader.setLocation(getClass().getResource("LPSMapTUserAndJobs.fxml"));
+					try 
+					{
+						AnchorPane frame = fxmlLoader.load();
+						CTUsersJobsController tUsersJobsController = (CTUsersJobsController) fxmlLoader.getController();
+						tUsersJobsController.RefreshSelectedUser(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
+						
+					} 
+					catch (IOException e) 
+					{
+						e.printStackTrace();
+					}*/
+					
+				}
+			}
+		});
+    	
     	//selectionModel.select(tab); //select by object
-    	selectionModel.select(0); //select by index starting with 0
+    	m_MainTabsSelectionModel.select(0); //select by index starting with 0
     	try 
     	{
             mapView.addMapInializedListener(this);

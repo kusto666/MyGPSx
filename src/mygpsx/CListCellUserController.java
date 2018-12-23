@@ -13,6 +13,8 @@ import com.google.firebase.database.ValueEventListener;
 /*import com.google.firebase.tasks.Task;*/
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -176,12 +178,10 @@ public class CListCellUserController implements Initializable{
 	@FXML
     private void BtnViewJobs(ActionEvent event) 
     {
+		//CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME = true;
 		CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = fxLbUniqueID.getText();
-		TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
-		SingleSelectionModel<Tab> selectionModel = tb.getSelectionModel();
-		selectionModel.select(1);
-		FirebaseDatabase.getInstance().getReference()
-			.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
+		System.out.println("BtnViewJobs - CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = " + fxLbUniqueID.getText());
+		CCONSTANTS_EVENTS_JOB.MY_TABPANE_MAIN.getSelectionModel().select(1);
     }
 
 }

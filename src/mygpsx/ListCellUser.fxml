@@ -23,7 +23,7 @@
               </items>
             </ContextMenu>
          </contextMenu></Label>
-      <Button fx:id="fxBtnViewJobs" layoutX="-5.0" layoutY="56.0" mnemonicParsing="false" onAction="#BtnViewJobs" text="Создать задачу" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <Button fx:id="fxBtnViewJobs" layoutX="-5.0" layoutY="56.0" mnemonicParsing="false" onAction="#BtnViewJobs" text="Текущее задание" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
       <Label fx:id="fxLbBindingEmail" text="Label" textFill="BLUE" AnchorPane.topAnchor="80.0" />
    </children>
 </AnchorPane>
