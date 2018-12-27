@@ -61,6 +61,7 @@ public class CCONSTANTS_EVENTS_JOB
 	// TabPane tb - главная, в которой все основные табы!!!
 	public static TabPane MY_TABPANE_MAIN = null;
 	public static String MY_TAB_1_NAME = "Сотрудники --> Задачи";
+	//public static String MY_TAB_1_NAME777 = "Сотрудники --> Задачи";
 	public static boolean MY_CHANGE_TAB_TO_MY_TAB_1_NAME = false;// Эта переменная говорит о том, что переключаемся на вкладку(Tab)
 	// посредством их перелистывания - false, или true - когда попадаем на эту вкладку путем нажатия кнопки в ячейке судна "Добавить задачу". 
 	

@@ -75,6 +75,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -1018,20 +1019,37 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				System.out.println("selectionModel.select() = " + newValue.getText());
 				if(newValue.getText().equals(CCONSTANTS_EVENTS_JOB.MY_TAB_1_NAME))
 				{
-					/*FXMLLoader fxmlLoader = new FXMLLoader();
-					fxmlLoader.setLocation(getClass().getResource("LPSMapTUserAndJobs.fxml"));
+					//Platform.runLater(
+				    //    	() -> {
+					//FXMLLoader fxmlLoader = new FXMLLoader();
+					//fxmlLoader.setLocation(getClass().getResource("LPSMapTUserAndJobs.fxml"));
+					
 					try 
 					{
-						AnchorPane frame = fxmlLoader.load();
-						CTUsersJobsController tUsersJobsController = (CTUsersJobsController) fxmlLoader.getController();
-						tUsersJobsController.RefreshSelectedUser(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
+						
+						
+						if(CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME)// Проверим пришли ли по кнопке!!!
+						{
+							CLPSMain.m_CTUsersJobsController.RefreshSelectedUser("7777777");
+							System.out.println("Пришли по кнопке!!!");
+						}
+						else
+						{
+							System.out.println("Пришли НЕ !!! по кнопке!!!");
+							CLPSMain.m_CTUsersJobsController.RefreshSelectedUser("5555555");
+						}
+						CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME = false;// Вернем обратно, чтобы не запутаться, что мы заходили посредством
+						 // нажатия к нопки в судне "Добавить задачу".
+
 						
 					} 
-					catch (IOException e) 
+					catch (Exception e) 
 					{
 						e.printStackTrace();
-					}*/
-					
+					}
+					//CTUsersJobsController tUsersJobsController = (CTUsersJobsController) fxmlLoader.getController();
+					//tUsersJobsController.RefreshSelectedUser(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
+				         // 	});
 				}
 			}
 		});

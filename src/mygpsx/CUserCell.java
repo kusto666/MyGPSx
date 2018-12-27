@@ -67,8 +67,8 @@ public class CUserCell  extends ListCell<CStructUser>
         		{
         			System.out.println("m_Pane == null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         		}
-        		//fxLbUniqueID.setText(String.valueOf(item.getMyPhoneID()));
-        		//lbMyNameShip.setText(String.valueOf(item.getMyNameShip()));
+        		fxLbUniqueID.setText(String.valueOf(item.getMyPhoneID()));
+        		lbMyNameShip.setText(String.valueOf(item.getMyNameShip()));
         		lbMyDirectorShip.setText(String.valueOf(item.getMyDirectorShip()));
         		fxLbBindingEmail.setText(String.valueOf(item.getMyEmail()));
             } 

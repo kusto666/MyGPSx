@@ -93,6 +93,7 @@ import javafx.util.Callback;
  */
 public class CLPSMain extends Application  
 {
+	
 	public static FirebaseApp defaultApp;
 	
 	public static DatabaseReference mDatabase;
@@ -230,7 +231,11 @@ public class CLPSMain extends Application
  // format used to display the current time in a tray icon notification.
     private DateFormat timeFormat = SimpleDateFormat.getTimeInstance();
     public static java.awt.TrayIcon trayIcon;
-    
+
+	@FXML
+    public static CTUsersJobsController m_CTUsersJobsController;// Контроллер отвечает за обмен данными с вкладкой "Сотрудники --> Задачи"
+	// или Tab #1.
+	
 	// Самый главный старт!!!!
     @SuppressWarnings("unchecked")
 	@Override

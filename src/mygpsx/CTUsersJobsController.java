@@ -1,9 +1,12 @@
 package mygpsx;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,11 +30,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+
 public class CTUsersJobsController implements Initializable
 {
 	//
 	//public static int m_iChangeIndex = 0;
 	//private IntegerProperty index = new SimpleIntegerProperty(-1);
+	@FXML
+	public Label fxLbNameUser;
 	@FXML
 	private Label fxLbErrorSelectPriority;
 	@FXML
@@ -76,34 +82,36 @@ public class CTUsersJobsController implements Initializable
 	CStructUser cStructUser2 = null;
 	
 	
+
 	public void RefreshSelectedUser(String stSelectedUserShip) 
 	{  
-		/*Platform.runLater(
-	        	() -> {
-	        		m_iTemp = 0;
-	        		for (CStructUser cStructUser : CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser) 
-	        		{
-	        			try
-	        			{
-	        				if(cStructUser.getMyPhoneID().equals(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP))
-	        				{
-	        					//fxCbSelectUser.setValue(CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser.get(m_iTemp));
-	        					System.out.println("RefreshSelectedUser = " + cStructUser.getMyDirectorShip() + " - номер - " + Integer.toString(m_iTemp));
-	        				}
-	        			} 
-	        			catch (Exception e) 
-	        			{
-	        				e.printStackTrace();// Чтобы не ругался на первый элемент ComboBox - он только фиктивен и не для выбора вообще!!!
-	        			}
-	        			m_iTemp++;
-	        		} 
-	        	});*/
+//		fxLbNameUser.setText(stSelectedUserShip);
+//		System.out.println("RefreshSelectedUser = fxLbNameUser.getText() = " + fxLbNameUser.getText());
 		
+		m_iTemp = 0;
+		for (CStructUser cStructUser : CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser) 
+		{
+			try
+			{
+				if(cStructUser.getMyPhoneID().equals(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP))
+				{
+					fxCbSelectUser.setValue(CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser.get(m_iTemp));
+					System.out.println("RefreshSelectedUser = " + cStructUser.getMyDirectorShip() + " - номер - " + Integer.toString(m_iTemp));
+				}
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();// Чтобы не ругался на первый элемент ComboBox - он только фиктивен и не для выбора вообще!!!
+			}
+			m_iTemp++;
+		} 
     }  
 	// Добавление новой задачи!!!
     @FXML
     private void BtnAddingJobNew(ActionEvent event) 
     {
+    	m_iTemp = 2;
+    	fxCbSelectUser.setValue(CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser.get(m_iTemp));
     	try 
     	{
     		if(fxCbSelectPriorityJob.getSelectionModel().getSelectedIndex() != 0)
@@ -175,7 +183,7 @@ public class CTUsersJobsController implements Initializable
 			        				.child(CMAINCONSTANTS.NoFB_MyIDSysUserSelected)
 			        				.child("myCurrentTaskID").setValueAsync(uploadIdTask);
 			            			
-			                		 //Это старый вариант с привызкой по ID телефона!!!
+			                		 //Это старый вариант с привязкой по ID телефона!!!
 			                		/* FirebaseDatabase.getInstance().getReference()
 			                				.child(CMAINCONSTANTS.FB_my_users_jobs)
 			                				.child(CMAINCONSTANTS.MyPhoneID_ + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP)
@@ -218,16 +226,9 @@ public class CTUsersJobsController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		CLPSMain.m_CTUsersJobsController = this;// Инициализация статического контроллера для доступа из вне(других контроллов)
 		CMAINCONSTANTS.NoFB_MyIDSysUserSelected = "MyIDSysUserSelected";
 		System.out.println("Проверка при инициализации CMAINCONSTANTS.NoFB_MyIDSysUserSelected = " + CMAINCONSTANTS.NoFB_MyIDSysUserSelected);
-		// Здесь и делаем выбор, что показывать: если false - значит начинаем с начала, а не по выбору!!!
-		if(!CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME)
-		{
-			/*CMyToast.makeText(CLPSMain.stage, 
-		  			  "CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME = "
-				+ Boolean.toString(CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME),
-		  			  CMyToast.TOAST_SHORT, CMyToast.TOAST_SUCCESS);*/
-			
 			
 			fxLbErrorSelectPriority.setVisible(false);
 			mDatabaseUsers = FirebaseDatabase.getInstance().getReference()
@@ -254,11 +255,12 @@ public class CTUsersJobsController implements Initializable
 		                 	System.out.println( "structCStructUser = "  + TempSP.getMyDirectorShip());
 		                 	m_alUsers.add(TempSP);// Заполнили массив!!!
 	                	}
-						
+						 m_ObservableList = FXCollections.observableArrayList (m_alUsers);
+				            CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser = m_ObservableList;
 						Platform.runLater(
 					        	() -> {
-						            m_ObservableList = FXCollections.observableArrayList (m_alUsers);
-						            CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser = m_ObservableList;
+						           // m_ObservableList = FXCollections.observableArrayList (m_alUsers);
+						            //CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser = m_ObservableList;
 						            fxCbSelectUser.setItems(CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser);
 						            fxCbSelectUser.setValue(CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser.get(m_iTemp));
 					        	});
@@ -285,8 +287,7 @@ public class CTUsersJobsController implements Initializable
 												m_stUsersUniqueID =  ((CStructUser)newValue).getMyPhoneID();
 												CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = m_stUsersUniqueID;
 												CMAINCONSTANTS.NoFB_MyIDSysUserSelected = ((CStructUser)newValue).getMySysUserBinding();
-												/*FirebaseDatabase.getInstance().getReference()// Пока уберем, надеюсь не пригодиться!!!
-														.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);*/
+												
 												System.out.println("CMAINCONSTANTS.NoFB_MyIDSysUserSelected = " + CMAINCONSTANTS.NoFB_MyIDSysUserSelected);
 												System.out.println("CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = " + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
 												fxCbSelectUser.setValue(newValue);
@@ -307,100 +308,8 @@ public class CTUsersJobsController implements Initializable
 				public void onCancelled(DatabaseError arg0) {
 				}
 			 });
-		}
-		else// Ну а здесь только что мы выбрали по кнопке  - "Создать задачу"!
-		{
-/*			fxCbSelectUser.getItems().clear();
-			CMyToast.makeText(CLPSMain.stage, 
-		  			  "По кнопке = " + "CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME = "
-				+ Boolean.toString(CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME),
-		  			  CMyToast.TOAST_SHORT, CMyToast.TOAST_SUCCESS);
-			fxCbSelectUser.setVisibleRowCount(1);*/
-/*			fxLbErrorSelectPriority.setVisible(false);
-			mDatabaseUsers = FirebaseDatabase.getInstance().getReference()
-					.child(CMAINCONSTANTS.FB_users);
-			 mDatabaseUsers.addValueEventListener(new ValueEventListener()
-			 {
-					@Override
-					public void onDataChange(DataSnapshot arg0)
-					{
-						try 
-						{
-							Iterable<DataSnapshot> contactChildren = arg0.getChildren();
 
-							m_alUsers = new ArrayList<CStructUser>();
-							
-							CStructUser TempSP = new CStructUser();// Создадим пустого пользователя для первого элемента списка!!!
-							TempSP.setMyFreeNameFirst("Выбор судна(необязательно)");
-							TempSP.setMyPhoneID("facking_id");
-							m_alUsers.add(TempSP);
-							
-							for (DataSnapshot structCStructUser : contactChildren)
-			                {
-								TempSP = structCStructUser.getValue(CStructUser.class);
-			                 	System.out.println( "structCStructUserByButton = "  + TempSP.getMyDirectorShip());
-			                 	m_alUsers.add(TempSP);// Заполнили массив!!!
-		                	}
-							
-							Platform.runLater(
-						        	() -> {
-							            m_ObservableList = FXCollections.observableArrayList (m_alUsers);
-							            CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser = m_ObservableList;
-							            fxCbSelectUser.setItems(CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser);
-							            fxCbSelectUser.setValue(CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser.get(1));
-						        	});
-					       
-						}
-						catch (Exception e) 
-						{
-							e.printStackTrace();
-						}
 
-						fxCbSelectUser.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CStructUser>() 
-					    {
-							@Override
-							public void changed(ObservableValue<? extends CStructUser> observable, CStructUser oldValue,
-									CStructUser newValue)
-							{
-								if(newValue != oldValue)
-								{
-									Platform.runLater(
-								        	() -> {
-								        		try 
-								        		{
-													m_stNameShip =  ((CStructUser)newValue).getMyNameShip();
-													m_stUsersUniqueID =  ((CStructUser)newValue).getMyPhoneID();
-													CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = m_stUsersUniqueID;
-													CMAINCONSTANTS.NoFB_MyIDSysUserSelected = ((CStructUser)newValue).getMySysUserBinding();
-													FirebaseDatabase.getInstance().getReference()// Пока уберем, надеюсь не пригодиться!!!
-															.child(CMAINCONSTANTS.FB_MyIDUserSelected).setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
-													System.out.println("CMAINCONSTANTS.NoFB_MyIDSysUserSelected = " + CMAINCONSTANTS.NoFB_MyIDSysUserSelected);
-													System.out.println("CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = " + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
-													fxCbSelectUser.setValue(newValue);
-												} 
-								        		catch (Exception e) 
-								        		{
-													e.printStackTrace();
-												}
-
-								        });
-								}
-								
-							}
-						});
-					}
-
-					@Override
-					public void onCancelled(DatabaseError arg0) {
-					}
-			 });*/
-		}
-
-		
-
-		 CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME = false;// Вернем обратно, чтобы не запутаться, что мы заходили посредством
-		 // нажатия к нопки в судне "Добавить задачу".
-		 
 /////////////////////////////////// ### INIT TEMPLATES ### ///////////////////////////////////////////////////
 		mDatabaseTamplates = FirebaseDatabase.getInstance().getReference()
 				.child(CMAINCONSTANTS.FB_my_owner_settings).child(CMAINCONSTANTS.FB_my_templates);

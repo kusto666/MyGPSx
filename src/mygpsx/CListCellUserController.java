@@ -1,5 +1,6 @@
 package mygpsx;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -178,9 +179,9 @@ public class CListCellUserController implements Initializable{
 	@FXML
     private void BtnViewJobs(ActionEvent event) 
     {
-		//CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME = true;
+		CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME = true;
 		CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = fxLbUniqueID.getText();
-		System.out.println("BtnViewJobs - CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = " + fxLbUniqueID.getText());
+		System.out.println("BtnViewJobs - CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = " + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
 		CCONSTANTS_EVENTS_JOB.MY_TABPANE_MAIN.getSelectionModel().select(1);
     }
 
