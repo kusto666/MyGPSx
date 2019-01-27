@@ -1030,13 +1030,14 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 						
 						if(CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME)// Проверим пришли ли по кнопке!!!
 						{
-							CLPSMain.m_CTUsersJobsController.RefreshSelectedUser("7777777");
+							CLPSMain.m_CTUsersJobsController.RefreshSelectedUser(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
 							System.out.println("Пришли по кнопке!!!");
 						}
 						else
 						{
+							CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = null;
 							System.out.println("Пришли НЕ !!! по кнопке!!!");
-							CLPSMain.m_CTUsersJobsController.RefreshSelectedUser("5555555");
+							CLPSMain.m_CTUsersJobsController.RefreshSelectedUser(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
 						}
 						CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME = false;// Вернем обратно, чтобы не запутаться, что мы заходили посредством
 						 // нажатия к нопки в судне "Добавить задачу".

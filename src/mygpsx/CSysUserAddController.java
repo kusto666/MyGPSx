@@ -29,6 +29,8 @@ import javafx.stage.Stage;
 
 public class CSysUserAddController implements Initializable{
 
+	@FXML 
+	private AnchorPane fxApaneMain;
 	// [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
@@ -72,8 +74,9 @@ public class CSysUserAddController implements Initializable{
 			.getReference()
 			.child(CMAINCONSTANTS.FB_my_sys_users_binding).child(userRecord.getUid()).setValueAsync(tempSysUser);
     		///////////////////////////////////////////////////////////
-    		CMyToast.makeText(CLPSMain.stage,
-    				"Successfully created new user: " + userRecord.getUid(),
+    		//Parent root = FXMLLoader.load(getClass().getResource("FXSysUserEdit.fxml"));
+    		CMyToast.makeText(CLPSMain.m_stageFXSysUserEdit,
+    				"Успешное создание sysuser: " + userRecord.getUid(),
 					CMyToast.TOAST_SHORT, CMyToast.TOAST_SUCCESS);
             // [END create_user_with_email]
     		((Stage)fxBtnAddSysUser.getScene().getWindow()).close();// И успешно закрываем окно!!!

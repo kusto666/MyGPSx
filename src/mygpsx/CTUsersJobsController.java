@@ -79,16 +79,21 @@ public class CTUsersJobsController implements Initializable
 	private int my_i = 0;
 	
 	int m_iTemp = 0;
-	CStructUser cStructUser2 = null;
+	//CStructUser cStructUser2 = null;
 	
 	
 
 	public void RefreshSelectedUser(String stSelectedUserShip) 
 	{  
+		m_iTemp = 0;
 //		fxLbNameUser.setText(stSelectedUserShip);
 //		System.out.println("RefreshSelectedUser = fxLbNameUser.getText() = " + fxLbNameUser.getText());
+		if(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP == null)
+		{
+			fxCbSelectUser.setValue(CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser.get(m_iTemp));
+			return;
+		}
 		
-		m_iTemp = 0;
 		for (CStructUser cStructUser : CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser) 
 		{
 			try
@@ -110,8 +115,8 @@ public class CTUsersJobsController implements Initializable
     @FXML
     private void BtnAddingJobNew(ActionEvent event) 
     {
-    	m_iTemp = 2;
-    	fxCbSelectUser.setValue(CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser.get(m_iTemp));
+    	//m_iTemp = 2;
+    	//fxCbSelectUser.setValue(CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser.get(m_iTemp));
     	try 
     	{
     		if(fxCbSelectPriorityJob.getSelectionModel().getSelectedIndex() != 0)
@@ -290,7 +295,7 @@ public class CTUsersJobsController implements Initializable
 												
 												System.out.println("CMAINCONSTANTS.NoFB_MyIDSysUserSelected = " + CMAINCONSTANTS.NoFB_MyIDSysUserSelected);
 												System.out.println("CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = " + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
-												fxCbSelectUser.setValue(newValue);
+												//fxCbSelectUser.setValue(newValue);
 											} 
 							        		catch (Exception e) 
 							        		{

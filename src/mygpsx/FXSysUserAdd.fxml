@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="214.0" prefWidth="314.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CSysUserAddController">
+<AnchorPane fx:id="fxApaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="214.0" prefWidth="314.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CSysUserAddController">
    <children>
       <Button fx:id="fxBtnAddSysUser" layoutX="205.0" layoutY="175.0" mnemonicParsing="false" onAction="#AddSysUser" text="Добавить пользователя" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
       <TextField fx:id="fxTxtEmail" layoutX="4.0" layoutY="24.0" prefHeight="25.0" prefWidth="306.0" promptText="Введите email" text="test1@gmail.com" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="24.0" />

@@ -3,6 +3,7 @@ package mygpsx;
 import java.util.*;
 import java.text.*;
 import java.net.URL;
+import java.net.URLConnection;
 import java.awt.AWTException;
 import java.awt.EventQueue;
 import java.io.BufferedInputStream;
@@ -219,12 +220,12 @@ public class CLPSMain extends Application
 	Parent root;
 	@FXML
 	public static FXMLLoader m_Loader;
-	//@FXML
-	//public static FXMLLoader m_LoaderCell;
-	// one icon location is shared between the application tray icon and task bar icon.
-    // you could also use multiple icons to allow for clean display of tray icons on hi-dpi devices.
-    private static final String iconImageLoc =
-            "http://icons.iconarchive.com/icons/scafer31000/bubble-circle-3/16/GameCenter-icon.png";
+
+	// Иконки для информирования удачного или неудачного соединения с инетом!!!
+    private static final String MyIconSuccessConn = "src/MyIconSuccessConn.png";
+    private static final String MyIconErrorConn = "src/MyIconErrorConn.png";
+    // Строка для проверки инета, проверяем в месте создания MyIconSuccessConn!!!
+    private static final String MyIsConnectionInet = "http://www.google.com";
     
     // a timer allowing the tray icon to provide a periodic notification event.
     private Timer notificationTimer = new Timer();
@@ -838,11 +839,30 @@ public class CLPSMain extends Application
                 Platform.exit();
             }
 
+            
+            /*File root = new File("yourfolder");
+            root.mkdir(); //this makes sure the folder exists
+            File file = new File(root,"mytextfile.txt");
+            FileOutputStream fout = new FileOutputStream(file, false);*/
+           
+            
             // set up a system tray icon.
-            // Заодно проверим и подключение к интернету прямо на иконке!!!
             java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
-            URL imageLoc = new URL(iconImageLoc);
-            java.awt.Image image = ImageIO.read(imageLoc);
+            
+            InputStream is = null;
+            
+            
+            is = new BufferedInputStream(new FileInputStream(MyIconSuccessConn));
+  
+            
+            // Проверка инета!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            URL urlTestInet = new URL(MyIsConnectionInet);
+            URLConnection conn = urlTestInet.openConnection();
+            conn.connect();
+            conn.getInputStream().close();
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            
+            java.awt.Image image = ImageIO.read(is);
             trayIcon = new java.awt.TrayIcon(image);
 
             // if the user double-clicks on the tray icon, show the main app stage.
@@ -915,7 +935,7 @@ public class CLPSMain extends Application
         	InputStream is = null;
 			try 
 			{
-				is = new BufferedInputStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\MyIconErrorConn.png"));
+				is = new BufferedInputStream(new FileInputStream(MyIconErrorConn));
 				//is = new BufferedInputStream(new FileInputStream("/src/MyIconErrorConn.png"));
 				java.awt.Image image = ImageIO.read(is);
 	        	trayIcon = new java.awt.TrayIcon(image);

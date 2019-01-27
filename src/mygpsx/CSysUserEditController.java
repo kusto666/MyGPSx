@@ -29,16 +29,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 public class CSysUserEditController implements Initializable
 {
+	@FXML 
+	public static AnchorPane fxApaneMain;
+	//public static Stage m_Stage;
+	
 	public static DatabaseReference m_Database;
 	private ObservableList<CStructSysUser> m_ObservableList;
 	@FXML
@@ -51,6 +60,11 @@ public class CSysUserEditController implements Initializable
 	@FXML
 	public static Stage m_stageSysUserAdd = null;
 
+	public static Stage GetMyStage()
+	{
+		//Stage stage = (Stage) fxApaneMain.getScene().getWindow();
+		return (Stage)fxApaneMain.getScene().getWindow();
+	}
 	 // Открытие окна добавление статуса задачи!!! 
     @FXML
     private void FrameAddSysUser(ActionEvent event) 
@@ -67,6 +81,15 @@ public class CSysUserEditController implements Initializable
             m_stageSysUserAdd.initModality(Modality.WINDOW_MODAL);
             m_stageSysUserAdd.initOwner(CLPSMain.m_stageFXSysUserEdit);
             m_stageSysUserAdd.show();
+            
+            m_stageSysUserAdd.setOnCloseRequest(new EventHandler<WindowEvent>()
+            {
+                @Override
+                public void handle(WindowEvent t)
+                {
+                	// так просто)))
+                }
+            });
         }
 		catch(Exception e) 
 		{
@@ -79,7 +102,7 @@ public class CSysUserEditController implements Initializable
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
 		System.out.println("CSysUserEditController - initialize!!!");
-		
+		//m_Stage = (Stage) fxApaneMain.getScene().getWindow();
 		// Это как вытаскивать реальных юзеров, а не самодельных из базы!!!
 		// Start listing users from the beginning, 1000 at a time.
 		///////////////////////////////////////////////////////////////////
