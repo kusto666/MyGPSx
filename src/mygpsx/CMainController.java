@@ -87,6 +87,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -205,23 +206,29 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	private boolean m_bIsMuveMarker = false;
 
     @FXML 
-    TextArea mymsg;
+    private TextArea mymsg;
     @FXML
     private Label label;
     @FXML
-    TextArea taOutMsg;
+    private TextArea taOutMsg;
     @FXML
-   	AnchorPane fxMessageWait;
+    private AnchorPane fxMessageWait;
     @FXML
-    Label fxLbMessage;
+    private Label fxLbMessage;
     @FXML
-    Button btnRestartMod;
+    private Button btnRestartMod;
     @FXML
     private GoogleMapView mapView;
     @FXML
     public static GoogleMap MyGoogleMap;
     @FXML
     private GeocodingService geocodingService;
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    @FXML
+    private Button btnSampleObject;// Кнопка окна простого объекта
+    @FXML
+    private Button btnPlaceObject;// Кнопка установки стоянки(остановки)
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     
     //Open list of window with SysUsers -- >> FrameSettingsSysUserEdit
     @FXML
@@ -986,9 +993,27 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		}
     	/*System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapReady");*/
     }
+    private void SetTooltipsButtons()
+    {
+    	btnSampleObject.setTooltip(new Tooltip("Создание простого объекта.\n"
+    			+ "В него входит:\n"
+    			+ "#Заголовок.\n"
+    			+ "#Описание.\n"
+    			+ "#Координаты объекта."));
+    	//btnPlaceObject
+    	btnPlaceObject.setTooltip(new Tooltip("Знак указывающий на остановку по каким либо причинам.\n"
+    			+ "В него входит:\n"
+    			+ "#Заголовок.\n"
+    			+ "#Описание(причины) стоянки.\n"
+    			+ "#Координаты стоянки.\n"
+    			+ "Время(диапазон от и до)"));
+    }
     @Override
     public synchronized void initialize(URL url, ResourceBundle rb)
     {
+    	// Установка tooltips(подсказок для кнопок!)
+    	SetTooltipsButtons();
+    	
     	fxAccordLeftMain.setExpandedPane(fxTPaneLeft2);
     	fxAccordRightMain.setExpandedPane(fxTPaneRight1);
     	try 

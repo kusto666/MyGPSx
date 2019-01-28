@@ -56,7 +56,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
-          <TitledPane fx:id="fxTPaneLeft2" animated="false" text="Флот">
+          <TitledPane fx:id="fxTPaneLeft2" animated="false" text="Флот (Осн. объекты)">
             <content>
               <AnchorPane prefWidth="200.0">
                      <children>
@@ -69,6 +69,17 @@
                   </AnchorPane>
             </content>
           </TitledPane>
+            <TitledPane animated="false" text="Доп. объекты">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnSampleObject" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Простой объект" />
+                        <Button fx:id="btnPlaceObject" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Остановка - стоянка" />
+                        <Button layoutX="14.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Button" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </TitledPane>
           <TitledPane fx:id="fxTPaneLeft3" animated="false" text="Настройки">
             <content>
               <AnchorPane prefWidth="200.0">
