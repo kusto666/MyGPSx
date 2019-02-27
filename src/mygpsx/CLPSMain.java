@@ -16,6 +16,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Timer;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -94,6 +99,8 @@ import javafx.util.Callback;
  */
 public class CLPSMain extends Application  
 {
+	// Пока для тестов - надо реализовать!!!
+	private static final Logger LOGGER = Logger.getLogger(CLPSMain.class.getName());
 	
 	public static FirebaseApp defaultApp;
 	
@@ -235,6 +242,8 @@ public class CLPSMain extends Application
 
 	@FXML
     public static CTUsersJobsController m_CTUsersJobsController;// Контроллер отвечает за обмен данными с вкладкой "Сотрудники --> Задачи"
+	
+
 	// или Tab #1.
 	
 	// Самый главный старт!!!!
@@ -242,7 +251,37 @@ public class CLPSMain extends Application
 	@Override
     public void start(Stage st) throws Exception
     {
-    	
+    	// Для тестов - надо реализовать!!!!!!!!!!!!!!!!
+    	 Handler consoleHandler = null;
+         Handler fileHandler  = null;
+         try{
+             //Creating consoleHandler and fileHandler
+             consoleHandler = new ConsoleHandler();
+             fileHandler  = new FileHandler("./mygpsx_log.log");
+              
+             //Assigning handlers to LOGGER object
+             LOGGER.addHandler(consoleHandler);
+             LOGGER.addHandler(fileHandler);
+              
+             //Setting levels to handlers and LOGGER
+             consoleHandler.setLevel(Level.ALL);
+             fileHandler.setLevel(Level.ALL);
+             LOGGER.setLevel(Level.ALL);
+              
+             LOGGER.config("Configuration done.");
+              
+             //Console handler removed
+             LOGGER.removeHandler(consoleHandler);
+              
+             LOGGER.log(Level.FINE, "Finer logged");
+         }catch(IOException exception){
+             LOGGER.log(Level.SEVERE, "Error occur in FileHandler.", exception);
+         }
+          
+         LOGGER.finer("Finest example on LOGGER handler completed.");
+    	//LOGGER.info("Logger Name: "+LOGGER.getName());
+        
+        //LOGGER.warning("Can cause ArrayIndexOutOfBoundsException");
     	//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Изначально все шаблоны готовы к заполнению!!!
     	if(!InitFireBase())
     	{
@@ -268,6 +307,11 @@ public class CLPSMain extends Application
         		//fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
         		fxLbMessage = (Label)m_Loader.getNamespace().get("fxLbMessage");
         		btnRestartMod = (Button)m_Loader.getNamespace().get("btnRestartMod");
+        		
+        		CMainController.fxTxtArLogs = (TextArea)m_Loader.getNamespace().get("fxTxtArLogs");
+        		CMainController.fxTxtArLogs.setText("start(Stage st) throws Exception");
+        		
+        		
         		//fxBtnInTabRefreshMap = (Button)m_Loader.getNamespace().get("fxBtnInTabRefreshMap");
         		/*fxBtnInTabRefreshMap.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -402,6 +446,38 @@ public class CLPSMain extends Application
     public static void main(String[] args) 
     {
         launch(args);
+        System.setProperty("http.proxyHost","200.1.1.60");
+        System.setProperty("http.proxyPort","3128");
+        System.setProperty("http.proxyUserName","user");
+        System.setProperty("http.proxyPassword","pass");
+        System.setProperty("http.proxySet","true");
+       /* Handler consoleHandler = null;
+        Handler fileHandler  = null;
+        try{
+            //Creating consoleHandler and fileHandler
+            consoleHandler = new ConsoleHandler();
+            fileHandler  = new FileHandler("./javacodegeeks.log");
+             
+            //Assigning handlers to LOGGER object
+            LOGGER.addHandler(consoleHandler);
+            LOGGER.addHandler(fileHandler);
+             
+            //Setting levels to handlers and LOGGER
+            consoleHandler.setLevel(Level.ALL);
+            fileHandler.setLevel(Level.ALL);
+            LOGGER.setLevel(Level.ALL);
+             
+            LOGGER.config("Configuration done.");
+             
+            //Console handler removed
+            LOGGER.removeHandler(consoleHandler);
+             
+            LOGGER.log(Level.FINE, "Finer logged");
+        }catch(IOException exception){
+            LOGGER.log(Level.SEVERE, "Error occur in FileHandler.", exception);
+        }
+         
+        LOGGER.finer("Finest example on LOGGER handler completed.");*/
     }
     
     // Здесь инициализируем подключение к базе данных!!!
@@ -597,6 +673,7 @@ public class CLPSMain extends Application
 				            		    		          }
 				            		    		          catch (Exception e) 
 				            		    		          {
+				            		    		        	  CMainController.fxTxtArLogs.setText(e.getMessage());
 				            		    		        	  e.printStackTrace();
 				            		    		        	  trayIcon.displayMessage(
 				            		    		        			  	CStrings.m_APP_ERROR,
@@ -628,6 +705,7 @@ public class CLPSMain extends Application
 			            					});
 			            				    if(CMainController.MyGoogleMap == null)
 			            		            {
+			            				    	CMainController.fxTxtArLogs.setText("Ошибка инициализации map!!!");
 			            				    	/*CMyToast.makeText(CLPSMain.stage, 
 			            				    			"Ошибка инициализации map!", 
 			            				    			CMyToast.TOAST_SHORT, CMyToast.TOAST_WARN);*/
@@ -646,11 +724,13 @@ public class CLPSMain extends Application
 								}
 					            catch (Exception ex)
 					            {
+					            	CMainController.fxTxtArLogs.setText(ex.getMessage());
 					            	ex.getStackTrace();
 								}
 							} 
 							catch (Exception ex) 
 							{
+								CMainController.fxTxtArLogs.setText(ex.getMessage());
 								ex.getStackTrace();
 							}
 						}
@@ -658,6 +738,7 @@ public class CLPSMain extends Application
 						@Override
 						public void onCancelled(DatabaseError arg0)
 						{
+							CMainController.fxTxtArLogs.setText(arg0.getMessage());
 							System.out.println(arg0.getMessage());
 							
 						}
@@ -665,6 +746,7 @@ public class CLPSMain extends Application
 				} 
 				catch (Exception ex) 
 				{
+					CMainController.fxTxtArLogs.setText(ex.getMessage());
 					ex.getStackTrace();
 				}
 			//}
@@ -932,6 +1014,7 @@ public class CLPSMain extends Application
         } 
         catch (java.awt.AWTException | IOException e) 
         {
+        	//CMainController.fxTxtArLogs.setText(e.getMessage());
         	InputStream is = null;
 			try 
 			{
@@ -949,17 +1032,21 @@ public class CLPSMain extends Application
 			} 
 			catch (FileNotFoundException e1) 
 			{
+				CMainController.fxTxtArLogs.setText(e1.getLocalizedMessage());
 				e1.printStackTrace();
 			}
 			catch (IOException e1) 
 			{
+				CMainController.fxTxtArLogs.setText(e1.getLocalizedMessage());
 				e1.printStackTrace();
 			}
 			catch (AWTException e1)
 			{
+				CMainController.fxTxtArLogs.setText(e1.getLocalizedMessage());
 				e1.printStackTrace();
 			}
             System.out.println("Unable to init system tray");
+            CMainController.fxTxtArLogs.setText(e.getMessage());
             e.printStackTrace();
         }
     }

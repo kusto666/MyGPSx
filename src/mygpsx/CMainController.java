@@ -229,6 +229,9 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private Button btnPlaceObject;// Кнопка установки стоянки(остановки)
     ///////////////////////////////////////////////////////////////////////////////////////////////
+	@FXML
+	public static TextArea fxTxtArLogs;
+    
     
     //Open list of window with SysUsers -- >> FrameSettingsSysUserEdit
     @FXML
