@@ -1117,18 +1117,28 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         		// Пишем прямо здесь в базу сразу!!!
             	InputStream targetStream = new FileInputStream(fFile);
         		Bucket bucket = CLPSMain.MyGoogleStorage.get(("mygpsone-kusto1.appspot.com"));
-				com.google.cloud.storage.Blob blob = bucket.create(CMAINCONSTANTS.PATH_NAME_UPLOADS_MAIN + fFile.getName(), targetStream,"image/jpg");
+				com.google.cloud.storage.Blob blob = bucket.create(CMAINCONSTANTS.PATH_NAME_UPLOADS_MAIN + fFile.getName(), targetStream/*,"image/jpg"*/);
 				
-				System.out.println(blob.getSelfLink());
+				//System.out.println(blob.get);
 				System.out.println(blob.getMediaLink());
 				System.out.println(blob.getEtag());
 				
-				m_stMediaLink = blob.getMediaLink();
-				Hyperlink hltempFilelink = new Hyperlink(m_stMediaLink);
+				//m_stMediaLink = blob.getMediaLink();
+				//Hyperlink hltempFilelink = new Hyperlink(m_stMediaLink);
 				
 				HostServices services = CLPSMain.getInstance().getHostServices();
 				
-				fxHlinkDoc.setText("https://firebasestorage.googleapis.com/v0/b/mygpsone-kusto1.appspot.com/o/uploads%2Forig.jpg?alt=media&token=a6248977-f176-4d33-a2b0-9ffbd8c9a8b6");
+				String stTempReplaceBlobName = blob.getName();
+				// Доделаем ссылку URL 1 завтра!!!
+				String img_url = "https://firebasestorage.googleapis.com/v0/b/" + blob.getBucket() + "/o/"
+						+ stTempReplaceBlobName.replaceAll("/", "%2F")
+						+ "?alt=media";
+						//+ blob.getMetadata().get("");
+
+				System.out.println("URL = " + img_url);
+				fxHlinkDoc.setText(img_url);
+				
+				//fxHlinkDoc.setText("https://firebasestorage.googleapis.com/v0/b/mygpsone-kusto1.appspot.com/o/uploads%2Forig.jpg?alt=media&token=a6248977-f176-4d33-a2b0-9ffbd8c9a8b6");
 				
 				
 				fxHlinkDoc.setOnAction(new EventHandler<ActionEvent>() {
@@ -1184,13 +1194,13 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				
 								
 				
-				// Доделаем ссылку URL 1 завтра!!!
+				/*// Доделаем ссылку URL 1 завтра!!!
 				String img_url = "https://firebasestorage.googleapis.com/v0/b/" + blob.getBucket() + "/o/"
 						+ blob.getName()
 						+ "?alt=media&token=";
 						//+ blob.getMetadata().get("");
 
-				System.out.println("URL = " + img_url);
+				System.out.println("URL = " + img_url);*/
 				
 				
 				
@@ -1203,8 +1213,9 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				Upload upload;// Объект для загрузки в realbase!!!
                // Uri downloadUri = task.getResult();
                 upload = new Upload(fFile.getName(),
-                		blob.getSelfLink(),
-                		blob.getMediaLink());
+                		/*blob.getSelfLink(),*/
+                		blob.getMediaLink(),
+                		fxHlinkDoc.getText());
                            //* taskSnapshot.getUploadSessionUri().toString());*//*
 
                 //adding an upload to firebase database
