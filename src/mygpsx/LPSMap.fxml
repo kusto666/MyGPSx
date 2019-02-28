@@ -47,11 +47,13 @@
                      <children>
                         <Label alignment="CENTER" contentDisplay="TOP" layoutX="9.0" layoutY="14.0" prefHeight="28.0" prefWidth="130.0" text="Входящее сообщение" textAlignment="CENTER" textFill="#f51212" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="10.199999999999989" />
                         <TextArea fx:id="mymsg" layoutX="9.0" layoutY="42.0" prefHeight="68.0" prefWidth="204.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="10.199999999999989" />
-                        <TextArea fx:id="taOutMsg" layoutX="9.0" layoutY="184.0" prefHeight="38.0" prefWidth="150.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="10.199999999999989" />
+                        <TextArea fx:id="taOutMsg" layoutX="37.6" layoutY="148.6" prefHeight="103.0" prefWidth="166.0" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="139.0" />
                         <Button layoutX="9.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleSendMsg" prefHeight="30.0" prefWidth="97.0" text="Отправить" textAlignment="CENTER" textFill="#e10c0c" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="125.19999999999999" />
                         <Button fx:id="fxBtnCkearMessages" layoutX="9.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnClearMessages" text="Очистить сообщения" textFill="#4e26c6" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="10.199999999999989" />
                         <Button layoutX="130.0" layoutY="230.0" mnemonicParsing="false" onAction="#btnLoadFileToMsg" prefHeight="30.0" prefWidth="83.0" text="Файл" AnchorPane.rightAnchor="10.0" />
                         <Label fx:id="fxLbNameFileSelect" alignment="CENTER" layoutX="9.0" layoutY="269.0" prefHeight="20.0" prefWidth="200.0" style="-fx-border-color: blue;" text="Выберите файл..." AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="10.199999999999989" />
+                        <ListView fx:id="fxListUsersMsg" layoutX="20.0" layoutY="294.0" prefHeight="166.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="285.0" />
+                        <Hyperlink fx:id="fxHlinkDoc" layoutX="24.0" layoutY="149.0" prefHeight="23.0" prefWidth="175.0" />
                      </children>
                   </AnchorPane>
             </content>

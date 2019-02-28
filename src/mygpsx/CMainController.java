@@ -76,6 +76,7 @@ import javafx.scene.control.Accordion;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -97,6 +98,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import netscape.javascript.JSObject;
+import javafx.application.Application;
+import javafx.application.HostServices;
 
 /**
  *
@@ -104,6 +107,12 @@ import netscape.javascript.JSObject;
  */
 public class CMainController implements Initializable, MapComponentInitializedListener
 {
+	// Строка-ссылка на скачивание файла MediaLink
+	
+	@FXML
+	private Hyperlink fxHlinkDoc;
+	private String m_stMediaLink = "";
+	
 	@FXML
 	private Label idOfAnyControl;
 	@FXML
@@ -697,6 +706,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	mDatabaseRefSendMsg = FirebaseDatabase.getInstance().getReference().child("message_to_android");
     	 try 
     	 {
+    		 
     		 mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValueAsync(taOutMsg.getText().toString());
              taOutMsg.clear();
              System.out.println("Типа послали сообщение!!!");
@@ -1113,6 +1123,28 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				System.out.println(blob.getMediaLink());
 				System.out.println(blob.getEtag());
 				
+				m_stMediaLink = blob.getMediaLink();
+				Hyperlink hltempFilelink = new Hyperlink(m_stMediaLink);
+				
+				HostServices services = CLPSMain.getInstance().getHostServices();
+				
+				fxHlinkDoc.setText("https://firebasestorage.googleapis.com/v0/b/mygpsone-kusto1.appspot.com/o/uploads%2Forig.jpg?alt=media&token=a6248977-f176-4d33-a2b0-9ffbd8c9a8b6");
+				
+				
+				fxHlinkDoc.setOnAction(new EventHandler<ActionEvent>() {
+					 
+			            @Override
+			            public void handle(ActionEvent event) {
+			            	services.showDocument(fxHlinkDoc.getText());
+			            }
+			        });
+				 
+				 
+				
+				
+				String stTempOutMsg = taOutMsg.getText();
+				
+				//taOutMsg.setText(stTempOutMsg + "\n < " + hltempFilelink + " > ");
 				
 				// Print blob metadata
 				System.out.println("Bucket: " + blob.getBucket());
@@ -1128,7 +1160,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				System.out.println("Id: " + blob.getBlobId());
 				System.out.println("KmsKeyName: " + blob.getKmsKeyName());
 				System.out.println("Md5Hash: " + blob.getMd5());
-				System.out.println("MediaLink: " + blob.getMediaLink());
+				System.out.println("MediaLink: " + m_stMediaLink);
 				System.out.println("Metageneration: " + blob.getMetageneration());
 				System.out.println("Name: " + blob.getName());
 				System.out.println("Size: " + blob.getSize());
@@ -1149,6 +1181,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				  }
 				}
 				//System.out.println(blob2.to);
+				
+								
 				
 				// Доделаем ссылку URL 1 завтра!!!
 				String img_url = "https://firebasestorage.googleapis.com/v0/b/" + blob.getBucket() + "/o/"

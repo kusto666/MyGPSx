@@ -99,6 +99,8 @@ import javafx.util.Callback;
  */
 public class CLPSMain extends Application  
 {
+	private static CLPSMain mInstance;
+	
 	// Пока для тестов - надо реализовать!!!
 	private static final Logger LOGGER = Logger.getLogger(CLPSMain.class.getName());
 	
@@ -221,6 +223,10 @@ public class CLPSMain extends Application
 
 	@FXML
 	public static ListView<CStructUser> fxListView;
+	
+	@FXML
+	public static ListView<CStructUser> fxListUsersMsg;
+	
 	/*@FXML
 	private Button fxBtnInTabRefreshMap;*/
 	@FXML
@@ -439,6 +445,14 @@ public class CLPSMain extends Application
            // fxMessageWait.setVisible(true);
             MyEventListnerFireMessage();
     	}
+    }
+ 	
+ 	 public CLPSMain() {
+ 		mInstance = this;
+     }
+ 	
+ 	public static CLPSMain getInstance() {
+        return mInstance;
     }
     /**
      * @param args the command line arguments
