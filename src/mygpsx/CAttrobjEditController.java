@@ -45,7 +45,7 @@ public class CAttrobjEditController implements Initializable
 	@FXML
 	public static Stage m_stageAttrobjAdd = null;
 
-	 // Открытие окна добавление статуса задачи!!! 
+	 // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° РґРѕР±Р°РІР»РµРЅРёРµ СЃС‚Р°С‚СѓСЃР° Р·Р°РґР°С‡Рё!!! 
     @FXML
     private void FrameAddAttrobj(ActionEvent event) 
     {
@@ -55,7 +55,7 @@ public class CAttrobjEditController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAttrobjAdd));
             m_rootAttrobjAdd = (Parent)fxmlLoader.load();
             m_stageAttrobjAdd = new Stage();
-            m_stageAttrobjAdd.setTitle(CStrings.m_APP_NAME + "->Добавление атрибута объекта");
+            m_stageAttrobjAdd.setTitle(CStrings.m_APP_NAME + "->Р”РѕР±Р°РІР»РµРЅРёРµ Р°С‚СЂРёР±СѓС‚Р° РѕР±СЉРµРєС‚Р°");
             m_stageAttrobjAdd.setScene(new Scene(m_rootAttrobjAdd));  
             m_stageAttrobjAdd.setResizable(false);
             m_stageAttrobjAdd.initModality(Modality.WINDOW_MODAL);
@@ -92,7 +92,7 @@ public class CAttrobjEditController implements Initializable
 		                {
 			            	CStructAttrobj TempSP = structAttrobj.getValue(CStructAttrobj.class);
                         	System.out.println( "CStructAttrobj = "  + TempSP.getMyNameAttrobj());
-                        	m_alAttrobj.add(TempSP);// Заполнили массив!!!
+                        	m_alAttrobj.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 	                	}
 			            m_ObservableList = FXCollections.observableArrayList (m_alAttrobj);
 			            

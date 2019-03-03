@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 public class CFXPreviewTemplateCtrl implements Initializable{
 
 	@FXML
-	private AnchorPane fxAPaneTmplMain;// Она главная - на ней все и крепится(рисуется)!!!
+	private AnchorPane fxAPaneTmplMain;// СњРЅР° РіР»Р°РІРЅР°В¤ - РЅР° РЅРµР№ РІСЃРµ Рё РєСЂРµРїРёС‚СЃВ¤(СЂРёСЃСѓРµС‚СЃВ¤)!!!
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

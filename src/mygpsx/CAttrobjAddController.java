@@ -29,7 +29,7 @@ public class CAttrobjAddController implements Initializable{
 	@FXML
 	private TextField fxTxtNameAttrobj;
 	
-	 // Добавляем приоритет!!!
+	 // Р”РѕР±Р°РІР»СЏРµРј РїСЂРёРѕСЂРёС‚РµС‚!!!
     @FXML
     private void AddAttrobj(ActionEvent event) 
     {

@@ -43,12 +43,12 @@ public class CFXEditTemplateJobCtrl implements Initializable{
 	@FXML
 	private ListView<CStructAttrTmpl> fxListTmplJob;
 	
-	public static String m_stTempNameJob = "Временное название"; // Это чтобы потом меняли на нормальное название!!
+	public static String m_stTempNameJob = "Р’СЂРµРјРµРЅРЅРѕРµ РЅР°Р·РІР°РЅРёРµ"; // Р­С‚Рѕ С‡С‚РѕР±С‹ РїРѕС‚РѕРј РјРµРЅСЏР»Рё РЅР° РЅРѕСЂРјР°Р»СЊРЅРѕРµ РЅР°Р·РІР°РЅРёРµ!!
 
 	@FXML
 	private AnchorPane fxAPaneMain;
 	@FXML
-	private AnchorPane m_FXAPaneTemplateJobs;// Это панель в которой и находится сам лист с шаблоном!!!
+	private AnchorPane m_FXAPaneTemplateJobs;// Р­С‚Рѕ РїР°РЅРµР»СЊ РІ РєРѕС‚РѕСЂРѕР№ Рё РЅР°С…РѕРґРёС‚СЃСЏ СЃР°Рј Р»РёСЃС‚ СЃ С€Р°Р±Р»РѕРЅРѕРј!!!
 	@FXML
 	private AnchorPane fxAPaneEditTmpl;
 	
@@ -68,7 +68,7 @@ public class CFXEditTemplateJobCtrl implements Initializable{
     {
 		CCONSTANTS_EVENTS_JOB.OpenAnyFrame(CFXCreateTemplateJobCtrl.class, CMAINCONSTANTS.m_PathFXPreviewTemplate,
 											CLPSMain.m_rootFXPreviewTemplateJobs, CLPSMain.m_stageFXPreviewTemplateJobs,
-											"Предварительный просмотр шаблона...", false, true, false);
+											"РџСЂРµРґРІР°СЂРёС‚РµР»СЊРЅС‹Р№ РїСЂРѕСЃРјРѕС‚СЂ С€Р°Р±Р»РѕРЅР°...", false, true, false);
     }*/
 	
 	@FXML
@@ -76,27 +76,27 @@ public class CFXEditTemplateJobCtrl implements Initializable{
     {
 		 if(fxTxtNameTmplJob.getText().equals(m_stTempNameJob))
 		 {
-			 fxLbErrorSaveTmplJob.setText("<-СДЕЛАЙТЕ НАЗВАНИЕ ШАБЛОНА УНИКАЛЬНЫМ!");
+			 fxLbErrorSaveTmplJob.setText("<-РЎР”Р•Р›РђР™РўР• РќРђР—Р’РђРќРР• РЁРђР‘Р›РћРќРђ РЈРќРРљРђР›Р¬РќР«Рњ!");
 			 //System.out.println("CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();");
 			 //CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValue();
 		 }
-		 else// Здесь все сохраняем!!!
+		 else// Р—РґРµСЃСЊ РІСЃРµ СЃРѕС…СЂР°РЅСЏРµРј!!!
 		 {
-			 // Здесь все сохраняем!!!
+			 // Р—РґРµСЃСЊ РІСЃРµ СЃРѕС…СЂР°РЅСЏРµРј!!!
 			 CLPSMain.mDatabase = FirebaseDatabase.getInstance()
 						.getReference()
 						.child(CMAINCONSTANTS.FB_my_owner_settings)
 						.child(CMAINCONSTANTS.FB_my_templates);
 			 CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate).
 			 child("MyNameTemplate").setValueAsync(fxTxtNameTmplJob.getText());
-			 ((Stage)fxBtnCloseFrame.getScene().getWindow()).close();// И успешно закрываем окно!!!
+			 ((Stage)fxBtnCloseFrame.getScene().getWindow()).close();// Р СѓСЃРїРµС€РЅРѕ Р·Р°РєСЂС‹РІР°РµРј РѕРєРЅРѕ!!!
 			 //CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;
 		 }
 		
 
     }
 	@FXML
-    private void btnOpenFrameWithAttributes(ActionEvent event)// Открываем окно для добавления атрибутов!!!
+    private void btnOpenFrameWithAttributes(ActionEvent event)// РћС‚РєСЂС‹РІР°РµРј РѕРєРЅРѕ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ Р°С‚СЂРёР±СѓС‚РѕРІ!!!
     {
 		System.out.println("FrameSettingsAttrjobEdit!!!");
     	CCONSTANTS_EVENTS_JOB.SAMPLE_JOBING = "ADD_SHIP";
@@ -106,10 +106,10 @@ public class CFXEditTemplateJobCtrl implements Initializable{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAttrjobEdit));
             CLPSMain.m_rootAttrjobEdit = (Parent)fxmlLoader.load();
             CLPSMain.m_stageAttrjobEdit = new Stage();
-            CLPSMain.m_stageAttrjobEdit.setTitle(CStrings.m_APP_NAME + "->Добавление сущностей в шаблон");
+            CLPSMain.m_stageAttrjobEdit.setTitle(CStrings.m_APP_NAME + "->Р”РѕР±Р°РІР»РµРЅРёРµ СЃСѓС‰РЅРѕСЃС‚РµР№ РІ С€Р°Р±Р»РѕРЅ");
             CLPSMain.m_stageAttrjobEdit.setScene(new Scene(CLPSMain.m_rootAttrjobEdit));  
             CLPSMain.m_stageAttrjobEdit.setResizable(false);
-            CLPSMain.m_stageAttrjobEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageAttrjobEdit.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
             CLPSMain.m_stageAttrjobEdit.initOwner(CLPSMain.m_stageFXEditTemplateJobs);
             CLPSMain.m_stageAttrjobEdit.show();
         }
@@ -125,7 +125,7 @@ public class CFXEditTemplateJobCtrl implements Initializable{
 		try 
 		{
 			
-			// Добавим сразу в fxAPaneMain для шаблона файлик FXAPaneTemplateJobs.fxml
+			// Р”РѕР±Р°РІРёРј СЃСЂР°Р·Сѓ РІ fxAPaneMain РґР»СЏ С€Р°Р±Р»РѕРЅР° С„Р°Р№Р»РёРє FXAPaneTemplateJobs.fxml
 			m_FXAPaneTemplateJobs = FXMLLoader.load(getClass().getResource(CMAINCONSTANTS.m_PathFXAPaneTemplateJobs));
 			fxAPaneMain.getChildren().add(m_FXAPaneTemplateJobs);
 			fxAPaneMain.setTopAnchor(m_FXAPaneTemplateJobs, 70.0);
@@ -139,8 +139,8 @@ public class CFXEditTemplateJobCtrl implements Initializable{
 		}
 		
 		
-		fxTxtNameTmplJob.setText(m_stTempNameJob);// Это чтобы потом меняли на нормальное название!!
-		fxLbErrorSaveTmplJob.setText("ИЗМЕНИТЕ НАЗВАНИЕ ШАБЛОНА!");
+		fxTxtNameTmplJob.setText(m_stTempNameJob);// Р­С‚Рѕ С‡С‚РѕР±С‹ РїРѕС‚РѕРј РјРµРЅСЏР»Рё РЅР° РЅРѕСЂРјР°Р»СЊРЅРѕРµ РЅР°Р·РІР°РЅРёРµ!!
+		fxLbErrorSaveTmplJob.setText("РР—РњР•РќРРўР• РќРђР—Р’РђРќРР• РЁРђР‘Р›РћРќРђ!");
 		
 		/*CLPSMain.mDatabase = FirebaseDatabase.getInstance()
 				.getReference()
@@ -150,7 +150,7 @@ public class CFXEditTemplateJobCtrl implements Initializable{
 		CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child("MyIDUnique").setValueAsync(CMAINCONSTANTS.m_UniqueTempIDTempate);
 		CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).child("MyNameTemplate").setValueAsync(m_stTempNameJob);*/
 		
-		// Здесь инициализируем список сущностей(атрибутов добавленных в шаблон задачи)
+		// Р—РґРµСЃСЊ РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃРїРёСЃРѕРє СЃСѓС‰РЅРѕСЃС‚РµР№(Р°С‚СЂРёР±СѓС‚РѕРІ РґРѕР±Р°РІР»РµРЅРЅС‹С… РІ С€Р°Р±Р»РѕРЅ Р·Р°РґР°С‡Рё)
 		 Platform.runLater(
       			  () -> {
       				try
@@ -194,7 +194,7 @@ public class CFXEditTemplateJobCtrl implements Initializable{
       				                {
       					            	CStructAttrTmpl TempSP = structAttrjob.getValue(CStructAttrTmpl.class);
       		                        	System.out.println( "String CStructAttrTmpl = "  + TempSP);
-      		                        	CCONSTANTS_EVENTS_JOB.CFXEditTemplateJobCtrl_alAttrjob.add(TempSP);// Заполнили массив!!!
+      		                        	CCONSTANTS_EVENTS_JOB.CFXEditTemplateJobCtrl_alAttrjob.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
       			                	}
       					            m_ObservableList = FXCollections.observableArrayList (CCONSTANTS_EVENTS_JOB.CFXEditTemplateJobCtrl_alAttrjob);
 
@@ -202,7 +202,7 @@ public class CFXEditTemplateJobCtrl implements Initializable{
       					            {
       					            	Platform.runLater(
       			            			  () -> {
-      			            				  System.out.println("Попали в создание шаблона!!!");
+      			            				  System.out.println("РџРѕРїР°Р»Рё РІ СЃРѕР·РґР°РЅРёРµ С€Р°Р±Р»РѕРЅР°!!!");
 
       			            				  fxListTmplJob.setItems(m_ObservableList);
       			            				  fxListTmplJob.setCellFactory(new Callback<ListView<CStructAttrTmpl>, ListCell<CStructAttrTmpl>>() {

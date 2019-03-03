@@ -45,7 +45,7 @@ public class CAttrjobEditController implements Initializable
 	@FXML
 	public static Stage m_stageAttrjobAdd = null;
 
-	 // Открытие окна добавление статуса задачи!!! 
+	 // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° РґРѕР±Р°РІР»РµРЅРёРµ СЃС‚Р°С‚СѓСЃР° Р·Р°РґР°С‡Рё!!! 
     @FXML
     private void FrameAddAttrjob(ActionEvent event) 
     {
@@ -55,7 +55,7 @@ public class CAttrjobEditController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAttrjobAdd));
             m_rootAttrjobAdd = (Parent)fxmlLoader.load();
             m_stageAttrjobAdd = new Stage();
-            m_stageAttrjobAdd.setTitle(CStrings.m_APP_NAME + "->Добавление атрибута");
+            m_stageAttrjobAdd.setTitle(CStrings.m_APP_NAME + "->Р”РѕР±Р°РІР»РµРЅРёРµ Р°С‚СЂРёР±СѓС‚Р°");
             m_stageAttrjobAdd.setScene(new Scene(m_rootAttrjobAdd));  
             m_stageAttrjobAdd.setResizable(false);
             m_stageAttrjobAdd.initModality(Modality.WINDOW_MODAL);
@@ -92,7 +92,7 @@ public class CAttrjobEditController implements Initializable
 		                {
 			            	CStructAttrjob TempSP = structAttrjob.getValue(CStructAttrjob.class);
                         	System.out.println( "CStructStatus = "  + TempSP.getMyNameAttrjob());
-                        	m_alAttrjob.add(TempSP);// Заполнили массив!!!
+                        	m_alAttrjob.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 	                	}
 			            m_ObservableList = FXCollections.observableArrayList (m_alAttrjob);
 			            

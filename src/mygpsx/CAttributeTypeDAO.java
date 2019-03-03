@@ -9,24 +9,24 @@ import javafx.scene.control.ComboBox;
 
 public class CAttributeTypeDAO
 {
-	//public String m_stNumber = "Целое число"; // Целое число.
-	//public String m_stNumFraction = "Дробное число"; // Дробное число.
-	//public String m_stShortDesc = "Строка для заголовков."; // Строка для заголовков.
-	//public String m_stFullDesc = "Поле для описания"; // Строка для описания.
-	//public String m_stPosition = "Позиция на карте(координаты)"; // Позиция на карте(координаты)
-	//public String m_stTimeOfPlace = "Время в определенном месте"; // Время в определенном месте.
-	//public String m_stTimeOfRange = "Диапазон(промежуток) времени"; // Диапазон(промежуток) времени.
+	//public String m_stNumber = "Р¦РµР»РѕРµ С‡РёСЃР»Рѕ"; // Р¦РµР»РѕРµ С‡РёСЃР»Рѕ.
+	//public String m_stNumFraction = "Р”СЂРѕР±РЅРѕРµ С‡РёСЃР»Рѕ"; // Р”СЂРѕР±РЅРѕРµ С‡РёСЃР»Рѕ.
+	//public String m_stShortDesc = "РЎС‚СЂРѕРєР° РґР»СЏ Р·Р°РіРѕР»РѕРІРєРѕРІ."; // РЎС‚СЂРѕРєР° РґР»СЏ Р·Р°РіРѕР»РѕРІРєРѕРІ.
+	//public String m_stFullDesc = "РџРѕР»Рµ РґР»СЏ РѕРїРёСЃР°РЅРёСЏ"; // РЎС‚СЂРѕРєР° РґР»СЏ РѕРїРёСЃР°РЅРёСЏ.
+	//public String m_stPosition = "РџРѕР·РёС†РёСЏ РЅР° РєР°СЂС‚Рµ(РєРѕРѕСЂРґРёРЅР°С‚С‹)"; // РџРѕР·РёС†РёСЏ РЅР° РєР°СЂС‚Рµ(РєРѕРѕСЂРґРёРЅР°С‚С‹)
+	//public String m_stTimeOfPlace = "Р’СЂРµРјСЏ РІ РѕРїСЂРµРґРµР»РµРЅРЅРѕРј РјРµСЃС‚Рµ"; // Р’СЂРµРјСЏ РІ РѕРїСЂРµРґРµР»РµРЅРЅРѕРј РјРµСЃС‚Рµ.
+	//public String m_stTimeOfRange = "Р”РёР°РїР°Р·РѕРЅ(РїСЂРѕРјРµР¶СѓС‚РѕРє) РІСЂРµРјРµРЅРё"; // Р”РёР°РїР°Р·РѕРЅ(РїСЂРѕРјРµР¶СѓС‚РѕРє) РІСЂРµРјРµРЅРё.
 
 	public static ObservableList<CAttribute> getPlanetList() {
-		//CAttribute Group = new CAttribute("Group", "Группа");
-		CAttribute MyLabel = new CAttribute("Label", "Надпись");
-		CAttribute MyInteger = new CAttribute("Integer", "Целое число");
-		CAttribute MyNumDouble = new CAttribute("Double", "Дробное число");
-		CAttribute MyTextField = new CAttribute("TextField", "Одинарная строка");
-		CAttribute MyTextArea = new CAttribute("TextArea", "Многострочное описание");
-		CAttribute MyPosition = new CAttribute("MyPosition", "Позиция на карте(координаты)");
-		CAttribute MyTimeOfPlace = new CAttribute("MyTimeOfPlace", "Время в определенном месте");
-		CAttribute MyTimeOfRange = new CAttribute("MyTimeOfRange", "Диапазон(промежуток) времени");
+		//CAttribute Group = new CAttribute("Group", "Р“СЂСѓРїРїР°");
+		CAttribute MyLabel = new CAttribute("Label", "РќР°РґРїРёСЃСЊ");
+		CAttribute MyInteger = new CAttribute("Integer", "Р¦РµР»РѕРµ С‡РёСЃР»Рѕ");
+		CAttribute MyNumDouble = new CAttribute("Double", "Р”СЂРѕР±РЅРѕРµ С‡РёСЃР»Рѕ");
+		CAttribute MyTextField = new CAttribute("TextField", "РћРґРёРЅР°СЂРЅР°СЏ СЃС‚СЂРѕРєР°");
+		CAttribute MyTextArea = new CAttribute("TextArea", "РњРЅРѕРіРѕСЃС‚СЂРѕС‡РЅРѕРµ РѕРїРёСЃР°РЅРёРµ");
+		CAttribute MyPosition = new CAttribute("MyPosition", "РџРѕР·РёС†РёСЏ РЅР° РєР°СЂС‚Рµ(РєРѕРѕСЂРґРёРЅР°С‚С‹)");
+		CAttribute MyTimeOfPlace = new CAttribute("MyTimeOfPlace", "Р’СЂРµРјСЏ РІ РѕРїСЂРµРґРµР»РµРЅРЅРѕРј РјРµСЃС‚Рµ");
+		CAttribute MyTimeOfRange = new CAttribute("MyTimeOfRange", "Р”РёР°РїР°Р·РѕРЅ(РїСЂРѕРјРµР¶СѓС‚РѕРє) РІСЂРµРјРµРЅРё");
  
         ObservableList<CAttribute> list //
                 = FXCollections.observableArrayList(MyLabel, MyInteger, MyNumDouble, MyTextField, MyTextArea,

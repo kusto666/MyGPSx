@@ -58,7 +58,7 @@ public class CFXListTmplJobsCtrl implements Initializable{
 			            	CStructTmplJob TempSP = structTmplJob.getValue(CStructTmplJob.class);
 			            	//TempSP.setMyIDUnique(sttt);
 	                       	//System.out.println( "String CStructTmplJob = "  + TempSP);
-	                       	m_alTmplJob.add(TempSP);// Заполнили массив!!!
+	                       	m_alTmplJob.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 	                	}
 			            m_ObservableList = FXCollections.observableArrayList (m_alTmplJob);
 			            

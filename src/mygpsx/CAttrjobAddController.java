@@ -43,10 +43,10 @@ public class CAttrjobAddController implements Initializable{
 	private ComboBox<CAttribute> fxCboxTypeAttrs;
 	
 	
-	private String m_stAttributeClassName = null; // Это название контрола в интерфейсе для людей!!!
-	private String stAttributeCode = null;// Это название контрола в коде!!!
+	private String m_stAttributeClassName = null; // РЃС‚Рѕ РЅР°Р·РІР°РЅРёРµ РєРѕРЅС‚СЂРѕР»Р° РІ РёРЅС‚РµСЂС„РµР№СЃРµ РґР»В¤ Р»СЋРґРµР№!!!
+	private String stAttributeCode = null;// РЃС‚Рѕ РЅР°Р·РІР°РЅРёРµ РєРѕРЅС‚СЂРѕР»Р° РІ РєРѕРґРµ!!!
 	
-	 // Добавляем приоритет!!!
+	 // Ж’РѕР±Р°РІР»В¤РµРј РїСЂРёРѕСЂРёС‚РµС‚!!!
     @FXML
     private void AddAttrjob(ActionEvent event) 
     {
@@ -67,12 +67,12 @@ public class CAttrjobAddController implements Initializable{
 				.getReference()
 				.child(CMAINCONSTANTS.FB_my_owner_settings)
 				.child(CMAINCONSTANTS.FB_my_attrjob);
-		// Заполняем список нашими атрибутами!!!
+		// В«Р°РїРѕР»РЅВ¤РµРј СЃРїРёСЃРѕРє РЅР°С€РёРјРё Р°С‚СЂРёР±СѓС‚Р°РјРё!!!
 		ObservableList<CAttribute> list = CAttributeTypeDAO.getPlanetList();
 		fxCboxTypeAttrs.setItems(list);
 		fxCboxTypeAttrs.getSelectionModel().select(0);
 		
-		// Ставим по умолчанию из combobox первое название типа контрола!!!
+		// вЂ”С‚Р°РІРёРј РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РёР· combobox РїРµСЂРІРѕРµ РЅР°Р·РІР°РЅРёРµ С‚РёРїР° РєРѕРЅС‚СЂРѕР»Р°!!!
 		m_stAttributeClassName = ((CAttribute)fxCboxTypeAttrs.getSelectionModel().getSelectedItem()).getName();
 		fxTxtNumberAttrjob.setText(m_stAttributeClassName);
 		
@@ -140,7 +140,7 @@ public class CAttrjobAddController implements Initializable{
 				.getReference()
 				.child(CMAINCONSTANTS.FB_my_owner_settings)
 				.child(CMAINCONSTANTS.FB_my_attrjob);*/
-		// Здесь проверим количество записей для генерации MyAutoIncrement:
+		// В«РґРµСЃСЊ РїСЂРѕРІРµСЂРёРј РєРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РїРёСЃРµР№ РґР»В¤ РіРµРЅРµСЂР°С†РёРё MyAutoIncrement:
 		
 		DatabaseReference rootRef = FirebaseDatabase.getInstance()
 				.getReference()
@@ -166,7 +166,7 @@ public class CAttrjobAddController implements Initializable{
 		CLPSMain.mDatabase.child(uploadId).child("MyIDUnique").setValueAsync(uploadId);
 		
 		CLPSMain.mDatabase.child(uploadId).child("MyAutoIncrement")
-		.setValueAsync(Long.toString(m_lChildrenCount));// Здесь пишем MyAutoIncrement
+		.setValueAsync(Long.toString(m_lChildrenCount));// В«РґРµСЃСЊ РїРёС€РµРј MyAutoIncrement
 
 		CLPSMain.mDatabase.child(uploadId).child("MyCLassAttrjob").setValueAsync(fxTxtNumberAttrjob.getText());
 		CLPSMain.mDatabase.child(uploadId).child("MyNameAttrjob").
