@@ -25,7 +25,7 @@ public class CIntoTmplCtrl implements Initializable
 {
 	DatabaseReference mDatabaseCurrentTmpl;
 	//DatabaseReference mDatabaseCurrentTmpl;
-	////////////  ВСЕ ПО НОВОЙ!!!   ////////////////////////////////////////
+	////////////  Р’РЎР• РџРћ РќРћР’РћР™!!!   ////////////////////////////////////////
 	@FXML
 	Label fxLb1;
 	@FXML
@@ -70,7 +70,7 @@ public class CIntoTmplCtrl implements Initializable
 	CStructAttrTmpl m_TempAttrTmpl;
 
 	@FXML
-    private void BtnDeleteAttrjob(ActionEvent event)// Открываем окно для добавления атрибутов!!!
+    private void BtnDeleteAttrjob(ActionEvent event)// РћС‚РєСЂС‹РІР°РµРј РѕРєРЅРѕ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ Р°С‚СЂРёР±СѓС‚РѕРІ!!!
     {
 /*//		System.out.println("btnOpenFrameWithAttributes!!!");
 //		System.out.println("fxLbUniqueID.getText() = " + fxLbUniqueID.getText());
@@ -96,7 +96,7 @@ public class CIntoTmplCtrl implements Initializable
 				.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
 				.child(CMAINCONSTANTS.FB_my_adding_attr)
 				.child(fxLbUniqueID.getText()).setValueAsync(null);
-				// Попали в список атрибутов
+				// РџРѕРїР°Р»Рё РІ СЃРїРёСЃРѕРє Р°С‚СЂРёР±СѓС‚РѕРІ
 				mDatabaseCurrentTmpl = FirebaseDatabase.getInstance().getReference().child(CMAINCONSTANTS.FB_my_owner_settings)
 				.child(CMAINCONSTANTS.FB_my_templates)
 				.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)
@@ -176,17 +176,17 @@ public class CIntoTmplCtrl implements Initializable
 					mDatabaseCurrentTmpl.child("myAttrName").setValueAsync(fxTxtAPaneArea.getText());
 				}
 				
-				// Вот оно то самое, когда я создаю левый контрол и потом мне его надо найти
-				// по уникальному(придуманному мной) ID!!!!
-				// Вот здесь и будем проверять, что за контрол у нас и есть ли у него текстовое поле,
-				// точнее можно ли получить от него текст???!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				// Р’РѕС‚ РѕРЅРѕ С‚Рѕ СЃР°РјРѕРµ, РєРѕРіРґР° СЏ СЃРѕР·РґР°СЋ Р»РµРІС‹Р№ РєРѕРЅС‚СЂРѕР» Рё РїРѕС‚РѕРј РјРЅРµ РµРіРѕ РЅР°РґРѕ РЅР°Р№С‚Рё
+				// РїРѕ СѓРЅРёРєР°Р»СЊРЅРѕРјСѓ(РїСЂРёРґСѓРјР°РЅРЅРѕРјСѓ РјРЅРѕР№) ID!!!!
+				// Р’РѕС‚ Р·РґРµСЃСЊ Рё Р±СѓРґРµРј РїСЂРѕРІРµСЂСЏС‚СЊ, С‡С‚Рѕ Р·Р° РєРѕРЅС‚СЂРѕР» Сѓ РЅР°СЃ Рё РµСЃС‚СЊ Р»Рё Сѓ РЅРµРіРѕ С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ,
+				// С‚РѕС‡РЅРµРµ РјРѕР¶РЅРѕ Р»Рё РїРѕР»СѓС‡РёС‚СЊ РѕС‚ РЅРµРіРѕ С‚РµРєСЃС‚???!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				/*ObservableList<Node> tempNodes = fxCellPane.getChildren(); 
 				for(int i = 0; i < tempNodes.size(); i++)
 				{
 					String My_ID_IntoControl_Value = tempNodes.get(i).getId();
 					if(My_ID_IntoControl_Value == CUserCellIntoTmpl.m_stMyIDIntoControlValue)
 					{
-						// Получить пока можно из TextField и AreaField(Label - не в счет!!! он не меняется!!!)
+						// РџРѕР»СѓС‡РёС‚СЊ РїРѕРєР° РјРѕР¶РЅРѕ РёР· TextField Рё AreaField(Label - РЅРµ РІ СЃС‡РµС‚!!! РѕРЅ РЅРµ РјРµРЅСЏРµС‚СЃСЏ!!!)
 						System.out.println(My_ID_IntoControl_Value);
 						mDatabaseCurrentTmpl.child("MyAttrName").setValueAsync(((TextField)tempNodes.get(i)).getText());
 					}

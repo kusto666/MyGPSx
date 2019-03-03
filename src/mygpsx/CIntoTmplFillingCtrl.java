@@ -25,7 +25,7 @@ public class CIntoTmplFillingCtrl implements Initializable
 	private Label fxLbUniqueID;
 	
 	@FXML
-    private void BtnDeleteAttrjob(ActionEvent event)// Открываем окно для добавления атрибутов!!!
+    private void BtnDeleteAttrjob(ActionEvent event)// СњС‚РєСЂС‹РІР°РµРј РѕРєРЅРѕ РґР»В¤ РґРѕР±Р°РІР»РµРЅРёВ¤ Р°С‚СЂРёР±СѓС‚РѕРІ!!!
     {
 		System.out.println("btnOpenFrameWithAttributes!!!");
 		System.out.println("fxLbUniqueID.getText() = " + fxLbUniqueID.getText());

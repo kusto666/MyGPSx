@@ -39,8 +39,8 @@ public class CListCellSysUserController implements Initializable{
     private void BtnDeleteSysUser(ActionEvent event) 
     {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Удаление пользователя!");
-		alert.setHeaderText("Вы действительно хотите удалить пользователя?");
+		alert.setTitle("РЈРґР°Р»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ!");
+		alert.setHeaderText("Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ?");
 		alert.setContentText(CStrings.m_APP_NAME_CHOOSE);
 		ButtonType buttonTypeYes = new ButtonType(CStrings.m_APP_NAME_CHOOSE_YES);
 		ButtonType buttonTypeNo = new ButtonType(CStrings.m_APP_NAME_CHOOSE_NO);
@@ -56,7 +56,7 @@ public class CListCellSysUserController implements Initializable{
         		System.out.println("BtnDeleteSysUser(fxTxtEmail) = " + fxTxtEmail.getText());
 				FirebaseAuth.getInstance().deleteUser(fxLbUniqueID.getText());
 				
-				// Удаляем и из FB realtime:
+				// РЈРґР°Р»СЏРµРј Рё РёР· FB realtime:
 				FirebaseDatabase.getInstance()
 				.getReference()
 				.child(CMAINCONSTANTS.FB_my_sys_users_binding).child(fxLbUniqueID.getText()).setValueAsync(null);
@@ -69,7 +69,7 @@ public class CListCellSysUserController implements Initializable{
     		catch (FirebaseAuthException e)
     		{
     			CMyToast.makeText(CLPSMain.stage,
-    					"Ошибка удаления!!!",
+    					"РћС€РёР±РєР° СѓРґР°Р»РµРЅРёСЏ!!!",
     					CMyToast.TOAST_SHORT, CMyToast.TOAST_ERROR);
 				e.printStackTrace();
 			}
@@ -79,9 +79,9 @@ public class CListCellSysUserController implements Initializable{
 					.child(CMAINCONSTANTS.FB_my_owner_settings)
 					.child(CMAINCONSTANTS.FB_my_templates);
 			CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValueAsync();
-			//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
-			// шаблона, потому опять == 1.
-			CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // Обнуляем кол-во контролов.
+			//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Р’С‹С€Р»Рё РёР· СЃРѕР·РґР°РЅРёСЏ Рё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ
+			// С€Р°Р±Р»РѕРЅР°, РїРѕС‚РѕРјСѓ РѕРїСЏС‚СЊ == 1.
+			CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // РћР±РЅСѓР»СЏРµРј РєРѕР»-РІРѕ РєРѕРЅС‚СЂРѕР»РѕРІ.
 */			//break;
 		} 
 		else
@@ -103,21 +103,21 @@ public class CListCellSysUserController implements Initializable{
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_status);
     		
-    		Button btn = (Button)event.getSource();// Здесь получили кнопку!!!
+    		Button btn = (Button)event.getSource();// Р—РґРµСЃСЊ РїРѕР»СѓС‡РёР»Рё РєРЅРѕРїРєСѓ!!!
     		System.out.println("btn = " + btn.toString());
-    		AnchorPane ap = (AnchorPane)btn.getParent();// Здесь получили родительскую панель!!!
+    		AnchorPane ap = (AnchorPane)btn.getParent();// Р—РґРµСЃСЊ РїРѕР»СѓС‡РёР»Рё СЂРѕРґРёС‚РµР»СЊСЃРєСѓСЋ РїР°РЅРµР»СЊ!!!
     		System.out.println("ap = " + ap.toString());
     		
-    		ObservableList<Node> listNode = ap.getChildren();// Здесь получаем массив всех дочерних объектов родителя!!! 
-    		Label nodeOne = (Label)listNode.get(5);// Выбераем по ID(ID - это от 0 и т.д. выше!) объект(контролл)
-    		stUniqueIDStatus = nodeOne.getText();// Порядок можно посмотреть в Scene Biulder
+    		ObservableList<Node> listNode = ap.getChildren();// Р—РґРµСЃСЊ РїРѕР»СѓС‡Р°РµРј РјР°СЃСЃРёРІ РІСЃРµС… РґРѕС‡РµСЂРЅРёС… РѕР±СЉРµРєС‚РѕРІ СЂРѕРґРёС‚РµР»СЏ!!! 
+    		Label nodeOne = (Label)listNode.get(5);// Р’С‹Р±РµСЂР°РµРј РїРѕ ID(ID - СЌС‚Рѕ РѕС‚ 0 Рё С‚.Рґ. РІС‹С€Рµ!) РѕР±СЉРµРєС‚(РєРѕРЅС‚СЂРѕР»Р»)
+    		stUniqueIDStatus = nodeOne.getText();// РџРѕСЂСЏРґРѕРє РјРѕР¶РЅРѕ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РІ Scene Biulder
     		System.out.println("stUniqueIDStatus = " + stUniqueIDStatus);
     		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
     				.getReference()
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_status)
     				.child(stUniqueIDStatus);
-    		CLPSMain.mDatabase.setValueAsync(null);// Удаляем значение(объект) из базы!!!
+    		CLPSMain.mDatabase.setValueAsync(null);// РЈРґР°Р»СЏРµРј Р·РЅР°С‡РµРЅРёРµ(РѕР±СЉРµРєС‚) РёР· Р±Р°Р·С‹!!!
         }
 		catch(Exception e) 
 		{
@@ -137,8 +137,8 @@ public class CListCellSysUserController implements Initializable{
 				System.out.println("OnKeyInterPressed");
 				if (event.getCode().equals(KeyCode.ENTER))
 	            {
-					AnchorPane ap = (AnchorPane)fxTxtNameStatus.getParent();// Здесь получили родительскую панель!!!
-					ObservableList<Node> listNode = ap.getChildren();// Здесь получаем массив всех дочерних объектов родителя!!! 
+					AnchorPane ap = (AnchorPane)fxTxtNameStatus.getParent();// Р—РґРµСЃСЊ РїРѕР»СѓС‡РёР»Рё СЂРѕРґРёС‚РµР»СЊСЃРєСѓСЋ РїР°РЅРµР»СЊ!!!
+					ObservableList<Node> listNode = ap.getChildren();// Р—РґРµСЃСЊ РїРѕР»СѓС‡Р°РµРј РјР°СЃСЃРёРІ РІСЃРµС… РґРѕС‡РµСЂРЅРёС… РѕР±СЉРµРєС‚РѕРІ СЂРѕРґРёС‚РµР»СЏ!!! 
 		    		Label nodeOne = (Label)listNode.get(5);
 		    		stUniqueIDStatus = nodeOne.getText();
 		    		

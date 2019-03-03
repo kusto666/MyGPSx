@@ -60,21 +60,21 @@ public class CListCellAttrjobController implements Initializable{
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_attrjob);
     		
-    		Button btn = (Button)event.getSource();// Здесь получили кнопку!!!
+    		Button btn = (Button)event.getSource();// Р—РґРµСЃСЊ РїРѕР»СѓС‡РёР»Рё РєРЅРѕРїРєСѓ!!!
     		System.out.println("btn = " + btn.toString());
-    		AnchorPane ap = (AnchorPane)btn.getParent();// Здесь получили родительскую панель!!!
+    		AnchorPane ap = (AnchorPane)btn.getParent();// Р—РґРµСЃСЊ РїРѕР»СѓС‡РёР»Рё СЂРѕРґРёС‚РµР»СЊСЃРєСѓСЋ РїР°РЅРµР»СЊ!!!
     		System.out.println("ap = " + ap.toString());
     		
-    		ObservableList<Node> listNode = ap.getChildren();// Здесь получаем массив всех дочерних объектов родителя!!! 
-    		Label nodeOne = (Label)listNode.get(5);// Выбераем по ID(ID - это от 0 и т.д. выше!) объект(контролл)
-    		stUniqueIDAttrjob = nodeOne.getText();// Порядок можно посмотреть в Scene Biulder
+    		ObservableList<Node> listNode = ap.getChildren();// Р—РґРµСЃСЊ РїРѕР»СѓС‡Р°РµРј РјР°СЃСЃРёРІ РІСЃРµС… РґРѕС‡РµСЂРЅРёС… РѕР±СЉРµРєС‚РѕРІ СЂРѕРґРёС‚РµР»СЏ!!! 
+    		Label nodeOne = (Label)listNode.get(5);// Р’С‹Р±РµСЂР°РµРј РїРѕ ID(ID - СЌС‚Рѕ РѕС‚ 0 Рё С‚.Рґ. РІС‹С€Рµ!) РѕР±СЉРµРєС‚(РєРѕРЅС‚СЂРѕР»Р»)
+    		stUniqueIDAttrjob = nodeOne.getText();// РџРѕСЂСЏРґРѕРє РјРѕР¶РЅРѕ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РІ Scene Biulder
     		System.out.println("stUniqueIDAttrjob = " + stUniqueIDAttrjob);
     		mDatabase = FirebaseDatabase.getInstance()
     				.getReference()
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_attrjob)
     				.child(stUniqueIDAttrjob);
-    		mDatabase.setValueAsync(null);// Удаляем значение(объект) из базы!!!
+    		mDatabase.setValueAsync(null);// РЈРґР°Р»СЏРµРј Р·РЅР°С‡РµРЅРёРµ(РѕР±СЉРµРєС‚) РёР· Р±Р°Р·С‹!!!
         }
 		catch(Exception e) 
 		{
@@ -84,9 +84,9 @@ public class CListCellAttrjobController implements Initializable{
 	@FXML
     private void BtnAddAttrjobIntoTmpl(ActionEvent event) 
     {
-		// Это самая крутая кнопка! ))) 
-		// Самая рабочая, мы на нее еще вариант повесим для добавление сущностей в шаблон задачи
-		// открытый для редактирования!!!
+		// Р­С‚Рѕ СЃР°РјР°СЏ РєСЂСѓС‚Р°СЏ РєРЅРѕРїРєР°! ))) 
+		// РЎР°РјР°СЏ СЂР°Р±РѕС‡Р°СЏ, РјС‹ РЅР° РЅРµРµ РµС‰Рµ РІР°СЂРёР°РЅС‚ РїРѕРІРµСЃРёРј РґР»СЏ РґРѕР±Р°РІР»РµРЅРёРµ СЃСѓС‰РЅРѕСЃС‚РµР№ РІ С€Р°Р±Р»РѕРЅ Р·Р°РґР°С‡Рё
+		// РѕС‚РєСЂС‹С‚С‹Р№ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ!!!
 		CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL++;
 		mDatabase = FirebaseDatabase.getInstance()
 				.getReference()
@@ -96,7 +96,7 @@ public class CListCellAttrjobController implements Initializable{
 		
 		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD"))
 		{
-			// Это добавление в firebase real!!!
+			// Р­С‚Рѕ РґРѕР±Р°РІР»РµРЅРёРµ РІ firebase real!!!
 
 			mDatabase = FirebaseDatabase.getInstance()
 					.getReference()
@@ -106,7 +106,7 @@ public class CListCellAttrjobController implements Initializable{
 		}
 		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))
 		{
-			// Это добавление в firebase real!!!
+			// Р­С‚Рѕ РґРѕР±Р°РІР»РµРЅРёРµ РІ firebase real!!!
 			mDatabase = FirebaseDatabase.getInstance()
 					.getReference()
 					.child(CMAINCONSTANTS.FB_my_owner_settings)
@@ -114,7 +114,7 @@ public class CListCellAttrjobController implements Initializable{
 					.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate).child(CMAINCONSTANTS.FB_my_adding_attr);
 
 		}
-		// Здесь слушаем количество для сортировки
+		// Р—РґРµСЃСЊ СЃР»СѓС€Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё
 
 			mDatabase.addValueEventListener(new ValueEventListener() {
 				
@@ -164,8 +164,8 @@ public class CListCellAttrjobController implements Initializable{
 		}
 		if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD") || CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT")) 
 		{
-			// Здесь слушаем количество контролов для будущей сортировки//////////////////////
-			// Но надо проверить, какой шаблон слушаем: m_UniqueTempIDTempate or m_UniqueTempEditIDTempate
+			// Р—РґРµСЃСЊ СЃР»СѓС€Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕРЅС‚СЂРѕР»РѕРІ РґР»СЏ Р±СѓРґСѓС‰РµР№ СЃРѕСЂС‚РёСЂРѕРІРєРё//////////////////////
+			// РќРѕ РЅР°РґРѕ РїСЂРѕРІРµСЂРёС‚СЊ, РєР°РєРѕР№ С€Р°Р±Р»РѕРЅ СЃР»СѓС€Р°РµРј: m_UniqueTempIDTempate or m_UniqueTempEditIDTempate
 			if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("ADD"))// m_UniqueTempIDTempate
 			{
 				mDatabase = FirebaseDatabase.getInstance()
@@ -200,7 +200,7 @@ public class CListCellAttrjobController implements Initializable{
 				}
 				
 			});
-			////Здесь заканчиваем слушать количество контролов для будущей сортировки - END!!! /////////////////
+			////Р—РґРµСЃСЊ Р·Р°РєР°РЅС‡РёРІР°РµРј СЃР»СѓС€Р°С‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕРЅС‚СЂРѕР»РѕРІ РґР»СЏ Р±СѓРґСѓС‰РµР№ СЃРѕСЂС‚РёСЂРѕРІРєРё - END!!! /////////////////
 			
 			
 			fxBtnDeleteAttrjob.setVisible(false);
@@ -214,8 +214,8 @@ public class CListCellAttrjobController implements Initializable{
 				System.out.println("OnKeyInterPressed");
 				if (event.getCode().equals(KeyCode.ENTER))
 	            {
-					AnchorPane ap = (AnchorPane)fxTxtNameAttrjob.getParent();// Здесь получили родительскую панель!!!
-					ObservableList<Node> listNode = ap.getChildren();// Здесь получаем массив всех дочерних объектов родителя!!! 
+					AnchorPane ap = (AnchorPane)fxTxtNameAttrjob.getParent();// Р—РґРµСЃСЊ РїРѕР»СѓС‡РёР»Рё СЂРѕРґРёС‚РµР»СЊСЃРєСѓСЋ РїР°РЅРµР»СЊ!!!
+					ObservableList<Node> listNode = ap.getChildren();// Р—РґРµСЃСЊ РїРѕР»СѓС‡Р°РµРј РјР°СЃСЃРёРІ РІСЃРµС… РґРѕС‡РµСЂРЅРёС… РѕР±СЉРµРєС‚РѕРІ СЂРѕРґРёС‚РµР»СЏ!!! 
 		    		Label nodeOne = (Label)listNode.get(5);
 		    		stUniqueIDAttrjob = nodeOne.getText();
 		    		

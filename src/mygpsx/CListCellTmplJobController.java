@@ -52,7 +52,7 @@ public class CListCellTmplJobController implements Initializable{
     				.child(fxLbUniqueID.getText()).setValueAsync(null);
     		
     		
-    		//CLPSMain.mDatabase.setValueAsync(null);// Удаляем значение(объект) из базы!!!
+    		//CLPSMain.mDatabase.setValueAsync(null);// РЈРґР°Р»СЏРµРј Р·РЅР°С‡РµРЅРёРµ(РѕР±СЉРµРєС‚) РёР· Р±Р°Р·С‹!!!
         }
 		catch(Exception e) 
 		{
@@ -67,10 +67,10 @@ public class CListCellTmplJobController implements Initializable{
     		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXEditTemplate));
              CLPSMain.m_rootFXEditTemplateJobs = (Parent)fxmlLoader.load();
              CLPSMain.m_stageFXEditTemplateJobs = new Stage();
-             CLPSMain.m_stageFXEditTemplateJobs.setTitle(CStrings.m_APP_NAME + "->Редактирование шаблона задачи");
+             CLPSMain.m_stageFXEditTemplateJobs.setTitle(CStrings.m_APP_NAME + "->Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ С€Р°Р±Р»РѕРЅР° Р·Р°РґР°С‡Рё");
              CLPSMain.m_stageFXEditTemplateJobs.setScene(new Scene(CLPSMain.m_rootFXEditTemplateJobs));  
              CLPSMain.m_stageFXEditTemplateJobs.setResizable(false);
-             CLPSMain.m_stageFXEditTemplateJobs.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+             CLPSMain.m_stageFXEditTemplateJobs.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
              CLPSMain.m_stageFXEditTemplateJobs.initOwner(CLPSMain.stage);
              CLPSMain.m_stageFXEditTemplateJobs.show();
     		 System.out.println("BtnEditTmplJob - open FXEditTemplateJobs!!!");
