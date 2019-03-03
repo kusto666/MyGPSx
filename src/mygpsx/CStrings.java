@@ -1,12 +1,12 @@
 package mygpsx;
 
 public class CStrings {
-	public static String m_APP_NAME = "LPS - Координатор";
-	public static String m_APP_NAME_QUESTION_EXIT = "Вы действительно хотите выйти из LPS - Координатор?";
-	public static String m_APP_NAME_CHOOSE = "Ваш выбор";
-	public static String m_APP_NAME_CHOOSE_YES = "Да";
-	public static String m_APP_NAME_CHOOSE_NO = "Нет";
+	public static String m_APP_NAME = "MyGPSx";
+	public static String m_APP_NAME_QUESTION_EXIT = "Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ РІС‹Р№С‚Рё РёР· MyGPSx?";
+	public static String m_APP_NAME_CHOOSE = "Р’Р°С€ РІС‹Р±РѕСЂ";
+	public static String m_APP_NAME_CHOOSE_YES = "Р”Р°";
+	public static String m_APP_NAME_CHOOSE_NO = "РќРµС‚";
 	
-	public static String m_APP_ERROR = "#Ошибка!";
-	public static String m_EMPTY_SEL_USER = "Без пользователя...";
+	public static String m_APP_ERROR = "#РћРЁРР‘РљРђ!";
+	public static String m_EMPTY_SEL_USER = "РџСЂРёРІРµС‚...";
 }

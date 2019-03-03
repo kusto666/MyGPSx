@@ -107,7 +107,7 @@ import javafx.application.HostServices;
  */
 public class CMainController implements Initializable, MapComponentInitializedListener
 {
-	// Строка-ссылка на скачивание файла MediaLink
+	// РЎС‚СЂРѕРєР°-СЃСЃС‹Р»РєР° РЅР° СЃРєР°С‡РёРІР°РЅРёРµ С„Р°Р№Р»Р° MediaLink
 	
 	@FXML
 	private Hyperlink fxHlinkDoc;
@@ -116,8 +116,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	@FXML
 	private Label idOfAnyControl;
 	@FXML
-	private TextField fxTxtFastSearch;// Быстрый поиск объекта по совпадению в...
-	// Правый и левый меню аккордионы:
+	private TextField fxTxtFastSearch;// Р‘С‹СЃС‚СЂС‹Р№ РїРѕРёСЃРє РѕР±СЉРµРєС‚Р° РїРѕ СЃРѕРІРїР°РґРµРЅРёСЋ РІ...
+	// РџСЂР°РІС‹Р№ Рё Р»РµРІС‹Р№ РјРµРЅСЋ Р°РєРєРѕСЂРґРёРѕРЅС‹:
 	@FXML
 	private Accordion fxAccordRightMain;
 	@FXML
@@ -127,8 +127,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	@FXML
 	private TitledPane fxTPaneRight3;
 	
-	// Левый!!
-	// Правый и левый меню аккордионы:
+	// Р›РµРІС‹Р№!!
+	// РџСЂР°РІС‹Р№ Рё Р»РµРІС‹Р№ РјРµРЅСЋ Р°РєРєРѕСЂРґРёРѕРЅС‹:
 	@FXML
 	private Accordion fxAccordLeftMain;
 	@FXML
@@ -138,7 +138,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	@FXML
 	private TitledPane fxTPaneLeft3;
 	
-	////////////////////// Здесь работа с TabPane!!! START///////////////////////////////////////////
+	////////////////////// Р—РґРµСЃСЊ СЂР°Р±РѕС‚Р° СЃ TabPane!!! START///////////////////////////////////////////
 	@FXML
 	private TabPane fxTabPaneMain;
 	@FXML
@@ -154,19 +154,19 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	
 	private javafx.scene.control.SingleSelectionModel<Tab> m_MainTabsSelectionModel;
 	@FXML
-	private AnchorPane m_FXAPaneTemplateJobs;// Это панель в которой и находится сам лист с шаблоном!!!
+	private AnchorPane m_FXAPaneTemplateJobs;// Р­С‚Рѕ РїР°РЅРµР»СЊ РІ РєРѕС‚РѕСЂРѕР№ Рё РЅР°С…РѕРґРёС‚СЃСЏ СЃР°Рј Р»РёСЃС‚ СЃ С€Р°Р±Р»РѕРЅРѕРј!!!
 	@FXML
 	private ListView<CStructAttrTmplFilling> fxListTmplJob;
-	////////////////////// Для вкладки настроек!!! START///////////////////////////////////////////
+	////////////////////// Р”Р»СЏ РІРєР»Р°РґРєРё РЅР°СЃС‚СЂРѕРµРє!!! START///////////////////////////////////////////
 	 @FXML
 	 Button btnSettingsPriorityEdit;
-	//////////////////////Для вкладки настроек!!! END///////////////////////////////////////////
+	//////////////////////Р”Р»СЏ РІРєР»Р°РґРєРё РЅР°СЃС‚СЂРѕРµРє!!! END///////////////////////////////////////////
 	
-	// Смотри btnLoadFileToMsg(ActionEvent event), там есть фан openFile(File file)
+	// РЎРјРѕС‚СЂРё btnLoadFileToMsg(ActionEvent event), С‚Р°Рј РµСЃС‚СЊ С„Р°РЅ openFile(File file)
 	private Desktop desktop = Desktop.getDesktop();
 	private File m_FileSelectedOne; // 
-	@FXML
-    private Label fxLbNameFileSelect;
+	//@FXML
+    //private Label fxLbNameFileSelect;
 
 	@FXML
 	ListView<CStructUser> fxListView;
@@ -178,8 +178,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private Label label2;
 
 	//Popup popWindow;
-	// Позиция для 
-	// Координаты для CAddShipController //////////////////////////////
+	// РџРѕР·РёС†РёСЏ РґР»СЏ 
+	// РљРѕРѕСЂРґРёРЅР°С‚С‹ РґР»СЏ CAddShipController //////////////////////////////
 	public static LatLong m_LocationTempForCAddShipController = null;
 	@FXML
 	public static Label fxLbLatitudeText;
@@ -192,7 +192,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	
 	private static DatabaseReference mDatabaseRefSendMsg;
 
-	// Это для тестовой проверки(temp) координат на карте!!!
+	// Р­С‚Рѕ РґР»СЏ С‚РµСЃС‚РѕРІРѕР№ РїСЂРѕРІРµСЂРєРё(temp) РєРѕРѕСЂРґРёРЅР°С‚ РЅР° РєР°СЂС‚Рµ!!!
 	static LatLong LocationTemp = null;
 	MarkerOptions markerOptionsTemp = null;
 	Marker MarkerTemp = null;
@@ -200,18 +200,18 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	InfoWindow fredWilkeInfoWindowTemp = null;
 	////////////////////////////////////////////////////////
 	
-	// Первый лист с кораблями!!!
+	// РџРµСЂРІС‹Р№ Р»РёСЃС‚ СЃ РєРѕСЂР°Р±Р»СЏРјРё!!!
 	//@FXML
 	//ListView<String> m_lvAllUsers;
 	@FXML
 	VBox fxvBoxUsersAll;
 	
-	//Массив маркеров!!!
+	//РњР°СЃСЃРёРІ РјР°СЂРєРµСЂРѕРІ!!!
 	static String m_SELECTED_MARKER = null;
 	@FXML
-	public static Map<Marker, Boolean> markerMap = new HashMap<>();// Для перемещения!!!
-	//Map<String, String> markerMapIDKey = new HashMap<>();// Для изменения данных в firebase по ID
-	// А это переменная отвечает: двигать или не двигать маркер!!!
+	public static Map<Marker, Boolean> markerMap = new HashMap<>();// Р”Р»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ!!!
+	//Map<String, String> markerMapIDKey = new HashMap<>();// Р”Р»СЏ РёР·РјРµРЅРµРЅРёСЏ РґР°РЅРЅС‹С… РІ firebase РїРѕ ID
+	// Рђ СЌС‚Рѕ РїРµСЂРµРјРµРЅРЅР°СЏ РѕС‚РІРµС‡Р°РµС‚: РґРІРёРіР°С‚СЊ РёР»Рё РЅРµ РґРІРёРіР°С‚СЊ РјР°СЂРєРµСЂ!!!
 	private boolean m_bIsMuveMarker = false;
 
     @FXML 
@@ -234,9 +234,9 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private GeocodingService geocodingService;
     ///////////////////////////////////////////////////////////////////////////////////////////////
     @FXML
-    private Button btnSampleObject;// Кнопка окна простого объекта
+    private Button btnSampleObject;// РљРЅРѕРїРєР° РѕРєРЅР° РїСЂРѕСЃС‚РѕРіРѕ РѕР±СЉРµРєС‚Р°
     @FXML
-    private Button btnPlaceObject;// Кнопка установки стоянки(остановки)
+    private Button btnPlaceObject;// РљРЅРѕРїРєР° СѓСЃС‚Р°РЅРѕРІРєРё СЃС‚РѕСЏРЅРєРё(РѕСЃС‚Р°РЅРѕРІРєРё)
     ///////////////////////////////////////////////////////////////////////////////////////////////
 	@FXML
 	public static TextArea fxTxtArLogs;
@@ -253,10 +253,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXSysUserEdit));
             CLPSMain.m_rootFXSysUserEdit = (Parent)fxmlLoader.load();
             CLPSMain.m_stageFXSysUserEdit = new Stage();
-            CLPSMain.m_stageFXSysUserEdit.setTitle(CStrings.m_APP_NAME + "-> Список аккаунтов");
+            CLPSMain.m_stageFXSysUserEdit.setTitle(CStrings.m_APP_NAME + "-> РЎРїРёСЃРѕРє Р°РєРєР°СѓРЅС‚РѕРІ");
             CLPSMain.m_stageFXSysUserEdit.setScene(new Scene(CLPSMain.m_rootFXSysUserEdit));  
             CLPSMain.m_stageFXSysUserEdit.setResizable(false);
-            CLPSMain.m_stageFXSysUserEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageFXSysUserEdit.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
             CLPSMain.m_stageFXSysUserEdit.initOwner(CLPSMain.stage);
             CLPSMain.m_stageFXSysUserEdit.show();
         }
@@ -265,7 +265,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
            e.printStackTrace();
         }
     }
-    // Открытие окна для создания нового шаблона ОТЧЕТА!!!
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ С€Р°Р±Р»РѕРЅР° РћРўР§Р•РўРђ!!!
     @FXML
     private void FrameSettingsFXCreateTmplOrders(ActionEvent event) 
     {
@@ -273,14 +273,14 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	CMyToast.makeText(CLPSMain.stage, "System.out.println(\"FrameSettingsFXCreateTmplOrders!!!\");", CMyToast.TOAST_SHORT, CMyToast.TOAST_WARN);
     }
     
-    // Открытие окна со списком готовых шаблонов ОТЧЕТОВ для редактирования!!!
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° СЃРѕ СЃРїРёСЃРєРѕРј РіРѕС‚РѕРІС‹С… С€Р°Р±Р»РѕРЅРѕРІ РћРўР§Р•РўРћР’ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ!!!
     @FXML
     private void FrameSettingsFXListOrders(ActionEvent event) 
     {
     	System.out.println("FrameSettingsFXListOrders!!!");
     	CMyToast.makeText(CLPSMain.stage, "System.out.println(\"FrameSettingsFXCreateTmplOrders!!!\");", CMyToast.TOAST_LONG, CMyToast.TOAST_SUCCESS);
     }
-    // Открытие окна для создания нового шаблона задачи!!!
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ С€Р°Р±Р»РѕРЅР° Р·Р°РґР°С‡Рё!!!
     @FXML
     private void FrameSettingsFXCreateTemplate(ActionEvent event) 
     {
@@ -291,24 +291,24 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXCreateTemplate));
             CLPSMain.m_rootFXCreateTemplateJobs = (Parent)fxmlLoader.load();
             CLPSMain.m_stageFXCreateTemplateJobs = new Stage();
-            CLPSMain.m_stageFXCreateTemplateJobs.setTitle(CStrings.m_APP_NAME + "->Создание нового шаблона задачи");
+            CLPSMain.m_stageFXCreateTemplateJobs.setTitle(CStrings.m_APP_NAME + "->РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ С€Р°Р±Р»РѕРЅР° Р·Р°РґР°С‡Рё");
             CLPSMain.m_stageFXCreateTemplateJobs.setScene(new Scene(CLPSMain.m_rootFXCreateTemplateJobs));  
             CLPSMain.m_stageFXCreateTemplateJobs.setResizable(false);
-            CLPSMain.m_stageFXCreateTemplateJobs.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageFXCreateTemplateJobs.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
             CLPSMain.m_stageFXCreateTemplateJobs.initOwner(CLPSMain.stage);
             CLPSMain.m_stageFXCreateTemplateJobs.show();
             
             CLPSMain.m_stageFXCreateTemplateJobs.setOnCloseRequest(new EventHandler<WindowEvent>() 
     		{
               
-            	// Здесь перед закрытием окна по крестику проверим изменилось ли название шаблона!!!
+            	// Р—РґРµСЃСЊ РїРµСЂРµРґ Р·Р°РєСЂС‹С‚РёРµРј РѕРєРЅР° РїРѕ РєСЂРµСЃС‚РёРєСѓ РїСЂРѕРІРµСЂРёРј РёР·РјРµРЅРёР»РѕСЃСЊ Р»Рё РЅР°Р·РІР°РЅРёРµ С€Р°Р±Р»РѕРЅР°!!!
     			@Override
     			public void handle(WindowEvent arg0) 
     			{
-            		// Здесь перед выходом смотрим меняли ли что-то в темповом, открытом шаблоне,
-            		// типа название или что-то уже в шаблон добавляли!!!
-            		// Пока проверим только изменение названия!!! потом добавим отслеживание
-            		// других изменений!!!
+            		// Р—РґРµСЃСЊ РїРµСЂРµРґ РІС‹С…РѕРґРѕРј СЃРјРѕС‚СЂРёРј РјРµРЅСЏР»Рё Р»Рё С‡С‚Рѕ-С‚Рѕ РІ С‚РµРјРїРѕРІРѕРј, РѕС‚РєСЂС‹С‚РѕРј С€Р°Р±Р»РѕРЅРµ,
+            		// С‚РёРїР° РЅР°Р·РІР°РЅРёРµ РёР»Рё С‡С‚Рѕ-С‚Рѕ СѓР¶Рµ РІ С€Р°Р±Р»РѕРЅ РґРѕР±Р°РІР»СЏР»Рё!!!
+            		// РџРѕРєР° РїСЂРѕРІРµСЂРёРј С‚РѕР»СЊРєРѕ РёР·РјРµРЅРµРЅРёРµ РЅР°Р·РІР°РЅРёСЏ!!! РїРѕС‚РѕРј РґРѕР±Р°РІРёРј РѕС‚СЃР»РµР¶РёРІР°РЅРёРµ
+            		// РґСЂСѓРіРёС… РёР·РјРµРЅРµРЅРёР№!!!
     				for (Node node : CLPSMain.m_rootFXCreateTemplateJobs.getChildrenUnmodifiable()) 
     				{
     					
@@ -318,30 +318,30 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 						
 						try
 						{
-							if(stTempID.equals("fxTxtNameTmplJob"))// Получили нужный "node" с названием задачи и проверяем на изменение онной!!!
+							if(stTempID.equals("fxTxtNameTmplJob"))// РџРѕР»СѓС‡РёР»Рё РЅСѓР¶РЅС‹Р№ "node" СЃ РЅР°Р·РІР°РЅРёРµРј Р·Р°РґР°С‡Рё Рё РїСЂРѕРІРµСЂСЏРµРј РЅР° РёР·РјРµРЅРµРЅРёРµ РѕРЅРЅРѕР№!!!
 							{
-								// Здесь еще нужно убедиться, что пользователь уже(еще) не наляпал в шаблон контролов,
-								// а то пиздец как не удобно перед ним выйдет)))
+								// Р—РґРµСЃСЊ РµС‰Рµ РЅСѓР¶РЅРѕ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ СѓР¶Рµ(РµС‰Рµ) РЅРµ РЅР°Р»СЏРїР°Р» РІ С€Р°Р±Р»РѕРЅ РєРѕРЅС‚СЂРѕР»РѕРІ,
+								// Р° С‚Рѕ РїРёР·РґРµС† РєР°Рє РЅРµ СѓРґРѕР±РЅРѕ РїРµСЂРµРґ РЅРёРј РІС‹Р№РґРµС‚)))
 								
 								TextField txtFldTemp = (TextField)node;
 								if(txtFldTemp.getText().equals(CFXCreateTemplateJobCtrl.m_stTempNameJob) 
 										/*$$ =:))*/&& CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL == 0)
 								{
-									System.out.println("Значит изменений не было и мы просто закрываем окно создания шаблона задачи!!!");
+									System.out.println("Р—РЅР°С‡РёС‚ РёР·РјРµРЅРµРЅРёР№ РЅРµ Р±С‹Р»Рѕ Рё РјС‹ РїСЂРѕСЃС‚Рѕ Р·Р°РєСЂС‹РІР°РµРј РѕРєРЅРѕ СЃРѕР·РґР°РЅРёСЏ С€Р°Р±Р»РѕРЅР° Р·Р°РґР°С‡Рё!!!");
 									CLPSMain.mDatabase = FirebaseDatabase.getInstance()
 											.getReference()
 											.child(CMAINCONSTANTS.FB_my_owner_settings)
 											.child(CMAINCONSTANTS.FB_my_templates);
 									CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValueAsync();
-									//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
-									CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // Обнуляем кол-во контролов.
-	    							// шаблона, потому опять == 1.
+									//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Р’С‹С€Р»Рё РёР· СЃРѕР·РґР°РЅРёСЏ Рё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ
+									CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // РћР±РЅСѓР»СЏРµРј РєРѕР»-РІРѕ РєРѕРЅС‚СЂРѕР»РѕРІ.
+	    							// С€Р°Р±Р»РѕРЅР°, РїРѕС‚РѕРјСѓ РѕРїСЏС‚СЊ == 1.
 								}
-								else// Однако они были, тогда предлагаем выбор!!!
+								else// РћРґРЅР°РєРѕ РѕРЅРё Р±С‹Р»Рё, С‚РѕРіРґР° РїСЂРµРґР»Р°РіР°РµРј РІС‹Р±РѕСЂ!!!
 								{
 									Alert alert = new Alert(AlertType.CONFIRMATION);
-				            		alert.setTitle("Закрыть шаблон без сохранения!");
-				            		alert.setHeaderText("Вы действительно хотите закрыть шаблон без сохранения?");
+				            		alert.setTitle("Р—Р°РєСЂС‹С‚СЊ С€Р°Р±Р»РѕРЅ Р±РµР· СЃРѕС…СЂР°РЅРµРЅРёСЏ!");
+				            		alert.setHeaderText("Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ Р·Р°РєСЂС‹С‚СЊ С€Р°Р±Р»РѕРЅ Р±РµР· СЃРѕС…СЂР°РЅРµРЅРёСЏ?");
 				            		alert.setContentText(CStrings.m_APP_NAME_CHOOSE);
 				            		ButtonType buttonTypeYes = new ButtonType(CStrings.m_APP_NAME_CHOOSE_YES);
 				            		ButtonType buttonTypeNo = new ButtonType(CStrings.m_APP_NAME_CHOOSE_NO);
@@ -356,14 +356,14 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		    									.child(CMAINCONSTANTS.FB_my_owner_settings)
 		    									.child(CMAINCONSTANTS.FB_my_templates);
 		    							CLPSMain.mDatabase.child(CMAINCONSTANTS.m_UniqueTempIDTempate).removeValueAsync();
-		    							//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Вышли из создания и редактирования
-		    							// шаблона, потому опять == 1.
-		    							CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // Обнуляем кол-во контролов.
+		    							//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Р’С‹С€Р»Рё РёР· СЃРѕР·РґР°РЅРёСЏ Рё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ
+		    							// С€Р°Р±Р»РѕРЅР°, РїРѕС‚РѕРјСѓ РѕРїСЏС‚СЊ == 1.
+		    							CCONSTANTS_EVENTS_JOB.TEMP_COUNT_ADDING_CONTROLS_IN_TMPL = 0; // РћР±РЅСѓР»СЏРµРј РєРѕР»-РІРѕ РєРѕРЅС‚СЂРѕР»РѕРІ.
 		    							break;
 				            		} 
 				            		else
 				            		{
-				            			arg0.consume();// Отмена выхода из программы!!!
+				            			arg0.consume();// РћС‚РјРµРЅР° РІС‹С…РѕРґР° РёР· РїСЂРѕРіСЂР°РјРјС‹!!!
 				            			break;
 				            		}
 								}
@@ -381,7 +381,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         }
     }
     
-    // Открытие окна со списком готовых шаблонов ЗАДАЧ для редактирования!!!
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° СЃРѕ СЃРїРёСЃРєРѕРј РіРѕС‚РѕРІС‹С… С€Р°Р±Р»РѕРЅРѕРІ Р—РђР”РђР§ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ!!!
     @FXML
     private void FrameSettingsFXListTemplates(ActionEvent event) 
     {
@@ -392,10 +392,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListTemplatesJobs));
             CLPSMain.m_rootFXListTemplates = (Parent)fxmlLoader.load();
             CLPSMain.m_stageFXListTemplates = new Stage();
-            CLPSMain.m_stageFXListTemplates.setTitle(CStrings.m_APP_NAME + "->Список шаблонов");
+            CLPSMain.m_stageFXListTemplates.setTitle(CStrings.m_APP_NAME + "->РЎРїРёСЃРѕРє С€Р°Р±Р»РѕРЅРѕРІ");
             CLPSMain.m_stageFXListTemplates.setScene(new Scene(CLPSMain.m_rootFXListTemplates));  
             CLPSMain.m_stageFXListTemplates.setResizable(false);
-            CLPSMain.m_stageFXListTemplates.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageFXListTemplates.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
             CLPSMain.m_stageFXListTemplates.initOwner(CLPSMain.stage);
             CLPSMain.m_stageFXListTemplates.show();
         }
@@ -405,7 +405,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         }
     }
     
-    // Открытие окна редактирования типов объектов!!!
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ С‚РёРїРѕРІ РѕР±СЉРµРєС‚РѕРІ!!!
     @FXML
     private void FrameSettingsTypeobjEdit(ActionEvent event) 
     {
@@ -416,10 +416,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXTypeobjEdit));
             CLPSMain.m_rootTypeobjEdit = (Parent)fxmlLoader.load();
             CLPSMain.m_stageTypeobjEdit = new Stage();
-            CLPSMain.m_stageTypeobjEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование типов объектов");
+            CLPSMain.m_stageTypeobjEdit.setTitle(CStrings.m_APP_NAME + "->Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ С‚РёРїРѕРІ РѕР±СЉРµРєС‚РѕРІ");
             CLPSMain.m_stageTypeobjEdit.setScene(new Scene(CLPSMain.m_rootTypeobjEdit));  
             CLPSMain.m_stageTypeobjEdit.setResizable(false);
-            CLPSMain.m_stageTypeobjEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageTypeobjEdit.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
             CLPSMain.m_stageTypeobjEdit.initOwner(CLPSMain.stage);
             CLPSMain.m_stageTypeobjEdit.show();
         }
@@ -429,7 +429,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         }
     }
     
-    // Открытие окна редактирования атрибутов объектов!!!
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ Р°С‚СЂРёР±СѓС‚РѕРІ РѕР±СЉРµРєС‚РѕРІ!!!
     @FXML
     private void FrameSettingsAttrobjEdit(ActionEvent event) 
     {
@@ -440,10 +440,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAttrobjEdit));
             CLPSMain.m_rootAttrobjEdit = (Parent)fxmlLoader.load();
             CLPSMain.m_stageAttrobjEdit = new Stage();
-            CLPSMain.m_stageAttrobjEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование атрибутов объектов");
+            CLPSMain.m_stageAttrobjEdit.setTitle(CStrings.m_APP_NAME + "->Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р°С‚СЂРёР±СѓС‚РѕРІ РѕР±СЉРµРєС‚РѕРІ");
             CLPSMain.m_stageAttrobjEdit.setScene(new Scene(CLPSMain.m_rootAttrobjEdit));  
             CLPSMain.m_stageAttrobjEdit.setResizable(false);
-            CLPSMain.m_stageAttrobjEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageAttrobjEdit.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
             CLPSMain.m_stageAttrobjEdit.initOwner(CLPSMain.stage);
             CLPSMain.m_stageAttrobjEdit.show();
         }
@@ -453,7 +453,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         }
     }
     
-    // Открытие окна редактирования типовых описаний работ!!!
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ С‚РёРїРѕРІС‹С… РѕРїРёСЃР°РЅРёР№ СЂР°Р±РѕС‚!!!
     @FXML
     private void FrameSettingsTypedescjobEdit(ActionEvent event) 
     {
@@ -464,10 +464,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXTypedescjobEdit));
             CLPSMain.m_rootTypedescjobEdit = (Parent)fxmlLoader.load();
             CLPSMain.m_stageTypedescjobEdit = new Stage();
-            CLPSMain.m_stageTypedescjobEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование типовых описаний задач");
+            CLPSMain.m_stageTypedescjobEdit.setTitle(CStrings.m_APP_NAME + "->Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ С‚РёРїРѕРІС‹С… РѕРїРёСЃР°РЅРёР№ Р·Р°РґР°С‡");
             CLPSMain.m_stageTypedescjobEdit.setScene(new Scene(CLPSMain.m_rootTypedescjobEdit));  
             CLPSMain.m_stageTypedescjobEdit.setResizable(false);
-            CLPSMain.m_stageTypedescjobEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageTypedescjobEdit.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
             CLPSMain.m_stageTypedescjobEdit.initOwner(CLPSMain.stage);
             CLPSMain.m_stageTypedescjobEdit.show();
         }
@@ -477,7 +477,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         }
     }
     
-    // Открытие окна редактирования атрибутов работ!!!
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ Р°С‚СЂРёР±СѓС‚РѕРІ СЂР°Р±РѕС‚!!!
     @FXML
     private void FrameSettingsAttrjobEdit(ActionEvent event) 
     {
@@ -489,10 +489,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAttrjobEdit));
             CLPSMain.m_rootAttrjobEdit = (Parent)fxmlLoader.load();
             CLPSMain.m_stageAttrjobEdit = new Stage();
-            CLPSMain.m_stageAttrjobEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование атрибутов задач");
+            CLPSMain.m_stageAttrjobEdit.setTitle(CStrings.m_APP_NAME + "->Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р°С‚СЂРёР±СѓС‚РѕРІ Р·Р°РґР°С‡");
             CLPSMain.m_stageAttrjobEdit.setScene(new Scene(CLPSMain.m_rootAttrjobEdit));  
             CLPSMain.m_stageAttrjobEdit.setResizable(false);
-            CLPSMain.m_stageAttrjobEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageAttrjobEdit.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
             CLPSMain.m_stageAttrjobEdit.initOwner(CLPSMain.stage);
             CLPSMain.m_stageAttrjobEdit.show();
         }
@@ -502,7 +502,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         }
     }
     
-    // Открытие окна редактирования типов работ!!!
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ С‚РёРїРѕРІ СЂР°Р±РѕС‚!!!
     @FXML
     private void FrameSettingsTypejobEdit(ActionEvent event) 
     {
@@ -513,10 +513,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXTypejobEdit));
             CLPSMain.m_rootTypejobEdit = (Parent)fxmlLoader.load();
             CLPSMain.m_stageTypejobEdit = new Stage();
-            CLPSMain.m_stageTypejobEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование типов задач");
+            CLPSMain.m_stageTypejobEdit.setTitle(CStrings.m_APP_NAME + "->Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ С‚РёРїРѕРІ Р·Р°РґР°С‡");
             CLPSMain.m_stageTypejobEdit.setScene(new Scene(CLPSMain.m_rootTypejobEdit));  
             CLPSMain.m_stageTypejobEdit.setResizable(false);
-            CLPSMain.m_stageTypejobEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageTypejobEdit.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
             CLPSMain.m_stageTypejobEdit.initOwner(CLPSMain.stage);
             CLPSMain.m_stageTypejobEdit.show();
         }
@@ -526,7 +526,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         }
     }
 
-    // Открытие окна редактирования приоритетов!!!
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РїСЂРёРѕСЂРёС‚РµС‚РѕРІ!!!
     @FXML
     private void FrameSettingsStatusEdit(ActionEvent event) 
     {
@@ -537,10 +537,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXStatusEdit));
             CLPSMain.m_rootStatusEdit = (Parent)fxmlLoader.load();
             CLPSMain.m_stageStatusEdit = new Stage();
-            CLPSMain.m_stageStatusEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование статусов задач");
+            CLPSMain.m_stageStatusEdit.setTitle(CStrings.m_APP_NAME + "->Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЃС‚Р°С‚СѓСЃРѕРІ Р·Р°РґР°С‡");
             CLPSMain.m_stageStatusEdit.setScene(new Scene(CLPSMain.m_rootStatusEdit));  
             CLPSMain.m_stageStatusEdit.setResizable(false);
-            CLPSMain.m_stageStatusEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stageStatusEdit.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
             CLPSMain.m_stageStatusEdit.initOwner(CLPSMain.stage);
             CLPSMain.m_stageStatusEdit.show();
         }
@@ -549,7 +549,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
            e.printStackTrace();
         }
     }
-    // Открытие окна редактирования приоритетов!!!
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РїСЂРёРѕСЂРёС‚РµС‚РѕРІ!!!
     @FXML
     private void FrameSettingsPrioritetsEdit(ActionEvent event) 
     {
@@ -560,10 +560,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPriorityEdit));
             CLPSMain.m_rootPriorityEdit = (Parent)fxmlLoader.load();
             CLPSMain.m_stagePriorityEdit = new Stage();
-            CLPSMain.m_stagePriorityEdit.setTitle(CStrings.m_APP_NAME + "->Редактирование приоритетов задач");
+            CLPSMain.m_stagePriorityEdit.setTitle(CStrings.m_APP_NAME + "->Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїСЂРёРѕСЂРёС‚РµС‚РѕРІ Р·Р°РґР°С‡");
             CLPSMain.m_stagePriorityEdit.setScene(new Scene(CLPSMain.m_rootPriorityEdit));  
             CLPSMain.m_stagePriorityEdit.setResizable(false);
-            CLPSMain.m_stagePriorityEdit.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
+            CLPSMain.m_stagePriorityEdit.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
             CLPSMain.m_stagePriorityEdit.initOwner(CLPSMain.stage);
             CLPSMain.m_stagePriorityEdit.show();
         }
@@ -572,7 +572,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
            e.printStackTrace();
         }
     }
-    // Открытие окна типа Добавить новый объект(типа пока судно!!!)
+    // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° С‚РёРїР° Р”РѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ РѕР±СЉРµРєС‚(С‚РёРїР° РїРѕРєР° СЃСѓРґРЅРѕ!!!)
     @FXML
     private void FrameAddShip(ActionEvent event) {
     	System.out.println("btnAddShip!!!");
@@ -582,11 +582,11 @@ public class CMainController implements Initializable, MapComponentInitializedLi
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXAddShipFxml));
             CLPSMain.m_rootAddShip = (Parent)fxmlLoader.load();
             CLPSMain.m_stageAddShip = new Stage();
-            CLPSMain.m_stageAddShip.setTitle(CStrings.m_APP_NAME + "->Добавление судна");
+            CLPSMain.m_stageAddShip.setTitle(CStrings.m_APP_NAME + "->Р”РѕР±Р°РІР»РµРЅРёРµ СЃСѓРґРЅР°");
             CLPSMain.m_stageAddShip.setScene(new Scene(CLPSMain.m_rootAddShip));  
             CLPSMain.m_stageAddShip.setResizable(false);
-           // CLPSMain.m_stageAddShip.initModality(Modality.WINDOW_MODAL);// Было , кода думал, что так лучше))) Но так не выбрать координаты!!!
-            CLPSMain.m_stageAddShip.setAlwaysOnTop(true); // А так ВЫБРАТЬ!!!
+           // CLPSMain.m_stageAddShip.initModality(Modality.WINDOW_MODAL);// Р‘С‹Р»Рѕ , РєРѕРґР° РґСѓРјР°Р», С‡С‚Рѕ С‚Р°Рє Р»СѓС‡С€Рµ))) РќРѕ С‚Р°Рє РЅРµ РІС‹Р±СЂР°С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹!!!
+            CLPSMain.m_stageAddShip.setAlwaysOnTop(true); // Рђ С‚Р°Рє Р’Р«Р‘Р РђРўР¬!!!
             CLPSMain.m_stageAddShip.initOwner(CLPSMain.stage);
             CLPSMain.m_stageAddShip.show();
             
@@ -611,7 +611,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	if(MyGoogleMap != null)
     	{
     		MyGoogleMap.clearMarkers();
-        	System.out.println("Удалить все маркеры!!!");
+        	System.out.println("РЈРґР°Р»РёС‚СЊ РІСЃРµ РјР°СЂРєРµСЂС‹!!!");
     	}
     	else
     	{
@@ -620,12 +620,12 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	
     }
     @FXML
-    private void btnRefreshMapMod(ActionEvent event) throws IOException// Обновить карту вручную!!!
+    private void btnRefreshMapMod(ActionEvent event) throws IOException// РћР±РЅРѕРІРёС‚СЊ РєР°СЂС‚Сѓ РІСЂСѓС‡РЅСѓСЋ!!!
     {
     	/*	Alert alert = new Alert(AlertType.CONFIRMATION);
     		alert.setTitle(CStrings.m_APP_NAME);
-    		alert.setHeaderText("КОСЯК!!!");
-    		alert.setContentText("Что-то пошло не так)))\nМожет перегрузим карту???");
+    		alert.setHeaderText("РљРћРЎРЇРљ!!!");
+    		alert.setContentText("Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє)))\nРњРѕР¶РµС‚ РїРµСЂРµРіСЂСѓР·РёРј РєР°СЂС‚Сѓ???");
     		ButtonType buttonTypeYes = new ButtonType(CStrings.m_APP_NAME_CHOOSE_YES);
     		ButtonType buttonTypeNo = new ButtonType(CStrings.m_APP_NAME_CHOOSE_NO);
     		
@@ -644,12 +644,12 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		}*/
      }
     @FXML
-    private void btnRefreshMap(ActionEvent event) throws IOException// Обновить карту вручную!!!
+    private void btnRefreshMap(ActionEvent event) throws IOException// РћР±РЅРѕРІРёС‚СЊ РєР°СЂС‚Сѓ РІСЂСѓС‡РЅСѓСЋ!!!
     {
     		/*Alert alert = new Alert(AlertType.CONFIRMATION);
     		alert.setTitle(CStrings.m_APP_NAME);
-    		alert.setHeaderText("КОСЯК!!!");
-    		alert.setContentText("Что-то пошло не так)))\nМожет перегрузим карту???");
+    		alert.setHeaderText("РљРћРЎРЇРљ!!!");
+    		alert.setContentText("Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє)))\nРњРѕР¶РµС‚ РїРµСЂРµРіСЂСѓР·РёРј РєР°СЂС‚Сѓ???");
     		ButtonType buttonTypeYes = new ButtonType(CStrings.m_APP_NAME_CHOOSE_YES);
     		ButtonType buttonTypeNo = new ButtonType(CStrings.m_APP_NAME_CHOOSE_NO);
     		
@@ -671,26 +671,26 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void btnLoadFileToMsg(ActionEvent event) 
     {
     	FileChooser fileChooser = new FileChooser();
-    	fileChooser.setTitle("Выберите документ");
+    	fileChooser.setTitle("Р’С‹Р±РµСЂРёС‚Рµ РґРѕРєСѓРјРµРЅС‚С‹ РґР»СЏ РїРµСЂРµСЃС‹Р»РєРё");
     	//fileChooser.showOpenDialog(CLPSMain.stage);
     	m_FileSelectedOne = fileChooser.showOpenDialog(CLPSMain.stage);
         if (m_FileSelectedOne != null)
         {
         	try 
         	{
-            	fxLbNameFileSelect.setText(m_FileSelectedOne.getName());
+            	//fxLbNameFileSelect.setText(m_FileSelectedOne.getName());
             	uploadImage(m_FileSelectedOne);
-                //openFile(file); - Эта фан нужна если мы хотим файл открыть для просмотра на компе программой просмотра!!!
+                //openFile(file); - Р­С‚Р° С„Р°РЅ РЅСѓР¶РЅР° РµСЃР»Рё РјС‹ С…РѕС‚РёРј С„Р°Р№Р» РѕС‚РєСЂС‹С‚СЊ РґР»СЏ РїСЂРѕСЃРјРѕС‚СЂР° РЅР° РєРѕРјРїРµ РїСЂРѕРіСЂР°РјРјРѕР№ РїСЂРѕСЃРјРѕС‚СЂР°!!!
 			} 
         	catch (Exception e)
         	{
-				// TODO: handle exception
+				e.printStackTrace();
 			}
         	
         }
 
     }
-    //openFile(file); - Эта фан нужна если мы хотим файл открыть для просмотра на компе программой просмотра!!!
+    //openFile(file); - Р­С‚Р° С„Р°РЅ РЅСѓР¶РЅР° РµСЃР»Рё РјС‹ С…РѕС‚РёРј С„Р°Р№Р» РѕС‚РєСЂС‹С‚СЊ РґР»СЏ РїСЂРѕСЃРјРѕС‚СЂР° РЅР° РєРѕРјРїРµ РїСЂРѕРіСЂР°РјРјРѕР№ РїСЂРѕСЃРјРѕС‚СЂР°!!!
     private void openFile(File file) {
         try {
             desktop.open(file);
@@ -709,7 +709,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		 
     		 mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValueAsync(taOutMsg.getText().toString());
              taOutMsg.clear();
-             System.out.println("Типа послали сообщение!!!");
+             System.out.println("РўРёРїР° РїРѕСЃР»Р°Р»Рё СЃРѕРѕР±С‰РµРЅРёРµ!!!");
          } 
     	 catch (Exception e) 
     	 {
@@ -745,11 +745,11 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                 markerMap.put(MyMarker, false);
 
                 InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-                infoWindowOptions.content("<h4>Имя судна:</h4>" + 
+                infoWindowOptions.content("<h4>РРјСЏ СЃСѓРґРЅР°:</h4>" + 
 										"<u style=\"color: blue;\"><h4>" + us.getMyNameShip() + "</h4></u>" +
-										"<h4>Капитан:</h4>" + 
+										"<h4>РљР°РїРёС‚Р°РЅ:</h4>" + 
 										"<u style=\"color: blue;\"><h4>" + us.getMyDirectorShip() + "</h4></u>" +
-										"<h4>Описание судна:</h4>" + 
+										"<h4>РћРїРёСЃР°РЅРёРµ СЃСѓРґРЅР°:</h4>" + 
 										"<u style=\"color: blue;\"><h4>" + us.getMyShortDescriptionShip() + "</h4></u>");
 
                 InfoWindow MyInfoWindow = new InfoWindow(infoWindowOptions);
@@ -776,15 +776,15 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         		System.out.println("us.getMyPhoneID() == " + us.getMyPhoneID());
         	}
 
-        	System.out.println("Показать все маркеры!!!");
+        	System.out.println("РџРѕРєР°Р·Р°С‚СЊ РІСЃРµ РјР°СЂРєРµСЂС‹!!!");
 		}
     	catch (Exception ex) 
     	{
     		bRet = false;
 			/*Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle(CStrings.m_APP_NAME);
-			alert.setHeaderText("Нажмите кнопку:");
-			alert.setContentText("Обновить все маркеры");
+			alert.setHeaderText("РќР°Р¶РјРёС‚Рµ РєРЅРѕРїРєСѓ:");
+			alert.setContentText("РћР±РЅРѕРІРёС‚СЊ РІСЃРµ РјР°СЂРєРµСЂС‹");
 			alert.showAndWait();*/
 		}
     	return bRet;
@@ -799,12 +799,12 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		
     	if(!ShowAllMarkersAfterRefresh())
     	{
-    		System.out.println("btnRefreshAllMarkers(); - а потом показываем!!!");
+    		System.out.println("btnRefreshAllMarkers(); - Р° РїРѕС‚РѕРј РїРѕРєР°Р·С‹РІР°РµРј!!!");
     		//btnRefreshAllMarkers();
     	}
     	else
     	{
-    		System.out.println("Сразу показываем, так как уже обновили!!!");
+    		System.out.println("РЎСЂР°Р·Сѓ РїРѕРєР°Р·С‹РІР°РµРј, С‚Р°Рє РєР°Рє СѓР¶Рµ РѕР±РЅРѕРІРёР»Рё!!!");
     	}
     }
     
@@ -814,7 +814,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	try
     	{
         	mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        	// Временно загружаем маркеры и проверяем здесь!!!    	
+        	// Р’СЂРµРјРµРЅРЅРѕ Р·Р°РіСЂСѓР¶Р°РµРј РјР°СЂРєРµСЂС‹ Рё РїСЂРѕРІРµСЂСЏРµРј Р·РґРµСЃСЊ!!!    	
             mDatabase.addValueEventListener(new ValueEventListener() 
             {
             	@Override
@@ -832,11 +832,11 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                         Iterable<DataSnapshot> contactChildren = usersSnapshot.getChildren();
                         
                         //System.out.println("usersSnapshot.getChildrenCount() = " + usersSnapshot.getChildrenCount());
-                     // Здесь перебераем все устройства, свое по phoneID игнорируем, а по другим
-                        // выставляем маркеры!!! Как то так))))
+                     // Р—РґРµСЃСЊ РїРµСЂРµР±РµСЂР°РµРј РІСЃРµ СѓСЃС‚СЂРѕР№СЃС‚РІР°, СЃРІРѕРµ РїРѕ phoneID РёРіРЅРѕСЂРёСЂСѓРµРј, Р° РїРѕ РґСЂСѓРіРёРј
+                        // РІС‹СЃС‚Р°РІР»СЏРµРј РјР°СЂРєРµСЂС‹!!! РљР°Рє С‚Рѕ С‚Р°Рє))))
                         for (DataSnapshot arg : contactChildren)
                         {
-                        	System.out.println( "----------Начало маркера!!!-------------" );
+                        	System.out.println( "----------РќР°С‡Р°Р»Рѕ РјР°СЂРєРµСЂР°!!!-------------" );
                         	System.out.println(" for (DataSnapshot arg : contactChildren)");
                         	CStructUser user = arg.getValue(CStructUser.class);
                         	System.out.println( ">>>>>>>>>user.getMyPhoneID() =  " + user.getMyPhoneID() + "<<<<<<<<<<<<");
@@ -848,7 +848,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                             tempTransport = new CStructUser(user.getMyPhoneID(), user.getMyLatitude(), user.getMyLongitude(), "",
                             		user.getMyNameShip(), user.getMyDirectorShip(), user.getMyShortDescriptionShip(), user.getMyIsUserSelected(), user.getMyPass());
                             CLPSMain.m_localAllMarkersUsersTempMain.add(tempTransport);
-                            System.out.println( "----------Конец маркера!!!-------------" );
+                            System.out.println( "----------РљРѕРЅРµС† РјР°СЂРєРµСЂР°!!!-------------" );
                             //break;
                         }
     				}
@@ -862,7 +862,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     			@Override
     			public void onCancelled(DatabaseError arg0) {
     				System.out.println(arg0.getMessage() );
-    				System.out.println( "Firebase - косяк!!!" );
+    				System.out.println( "Firebase - РєРѕСЃСЏРє!!!" );
     			}
     		});
 		} 
@@ -892,23 +892,23 @@ public class CMainController implements Initializable, MapComponentInitializedLi
  	                .zoom(12);
  	       System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapInitialized");
  	       
- 	       CCONSTANTS_EVENTS_JOB.LOAD_GOOGLEMAP_STEP++;// Первый этап инициализации пройден!!!
+ 	       CCONSTANTS_EVENTS_JOB.LOAD_GOOGLEMAP_STEP++;// РџРµСЂРІС‹Р№ СЌС‚Р°Рї РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РїСЂРѕР№РґРµРЅ!!!
  	       
  	       MyGoogleMap = mapView.createMap(mapOptions);
        
  	       mapReady(markerMap);
  	       
- 	       // Если оба этапа инициализации карты прошли:
+ 	       // Р•СЃР»Рё РѕР±Р° СЌС‚Р°РїР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РєР°СЂС‚С‹ РїСЂРѕС€Р»Рё:
  	       if(CCONSTANTS_EVENTS_JOB.LOAD_GOOGLEMAP_STEP == 2)
  	       {
  	    	  CMyToast.makeText(CLPSMain.stage, 
- 	    			  "Карта загружается!",
+ 	    			  "РљР°СЂС‚Р° Р·Р°РіСЂСѓР¶Р°РµС‚СЃСЏ!",
  	    			  CMyToast.TOAST_LONG, CMyToast.TOAST_SUCCESS);
  	       }
  	       else
  	       {
  	    	  CMyToast.makeText(CLPSMain.stage, 
- 	    			  "Ошибка загрузки карты - нажмите кнопку \"Обновить\"",
+ 	    			  "РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё РєР°СЂС‚С‹ - РЅР°Р¶РјРёС‚Рµ РєРЅРѕРїРєСѓ \"РћР±РЅРѕРІРёС‚СЊ\"",
  	    			  CMyToast.TOAST_LONG, CMyToast.TOAST_ERROR);
  	       }
 		} 
@@ -963,10 +963,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                            {
                         	   try 
                         	   {
-                             	  System.out.println("Правильный маркер)))");
+                             	  System.out.println("РџСЂР°РІРёР»СЊРЅС‹Р№ РјР°СЂРєРµСЂ)))");
                             	  Marker mkTemp = (Marker)tempMarkerSelected.getKey();
                             	  mkTemp.setPosition(ll);
-                            	  // Обновляем координаты в firebase!!!!
+                            	  // РћР±РЅРѕРІР»СЏРµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РІ firebase!!!!
                              	 mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child("MyPhoneID_" + m_SELECTED_MARKER);
                             	 try 
                             	 {
@@ -980,7 +980,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                             	 {
                                      e.printStackTrace();
                                  }
-                            	 //System.out.println("Типа послали сообщение!!!");
+                            	 //System.out.println("РўРёРїР° РїРѕСЃР»Р°Р»Рё СЃРѕРѕР±С‰РµРЅРёРµ!!!");
                         	   } 
                         	   catch (Exception ex)
                         	   {
@@ -997,7 +997,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                 	
                 }
             });
-    		CCONSTANTS_EVENTS_JOB.LOAD_GOOGLEMAP_STEP++;// Второй этап инициализации пройден!!!
+    		CCONSTANTS_EVENTS_JOB.LOAD_GOOGLEMAP_STEP++;// Р’С‚РѕСЂРѕР№ СЌС‚Р°Рї РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РїСЂРѕР№РґРµРЅ!!!
     		System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapReady");
 		}
     	catch (Exception ex) 
@@ -1008,23 +1008,23 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     }
     private void SetTooltipsButtons()
     {
-    	btnSampleObject.setTooltip(new Tooltip("Создание простого объекта.\n"
-    			+ "В него входит:\n"
-    			+ "#Заголовок.\n"
-    			+ "#Описание.\n"
-    			+ "#Координаты объекта."));
+    	btnSampleObject.setTooltip(new Tooltip("РЎРѕР·РґР°РЅРёРµ РїСЂРѕСЃС‚РѕРіРѕ РѕР±СЉРµРєС‚Р°.\n"
+    			+ "Р’ РЅРµРіРѕ РІС…РѕРґРёС‚:\n"
+    			+ "#Р—Р°РіРѕР»РѕРІРѕРє.\n"
+    			+ "#РћРїРёСЃР°РЅРёРµ.\n"
+    			+ "#РљРѕРѕСЂРґРёРЅР°С‚С‹ РѕР±СЉРµРєС‚Р°."));
     	//btnPlaceObject
-    	btnPlaceObject.setTooltip(new Tooltip("Знак указывающий на остановку по каким либо причинам.\n"
-    			+ "В него входит:\n"
-    			+ "#Заголовок.\n"
-    			+ "#Описание(причины) стоянки.\n"
-    			+ "#Координаты стоянки.\n"
-    			+ "Время(диапазон от и до)"));
+    	btnPlaceObject.setTooltip(new Tooltip("Р—РЅР°Рє СѓРєР°Р·С‹РІР°СЋС‰РёР№ РЅР° РѕСЃС‚Р°РЅРѕРІРєСѓ РїРѕ РєР°РєРёРј Р»РёР±Рѕ РїСЂРёС‡РёРЅР°Рј.\n"
+    			+ "Р’ РЅРµРіРѕ РІС…РѕРґРёС‚:\n"
+    			+ "#Р—Р°РіРѕР»РѕРІРѕРє.\n"
+    			+ "#РћРїРёСЃР°РЅРёРµ(РїСЂРёС‡РёРЅС‹) СЃС‚РѕСЏРЅРєРё.\n"
+    			+ "#РљРѕРѕСЂРґРёРЅР°С‚С‹ СЃС‚РѕСЏРЅРєРё.\n"
+    			+ "Р’СЂРµРјСЏ(РґРёР°РїР°Р·РѕРЅ РѕС‚ Рё РґРѕ)"));
     }
     @Override
     public synchronized void initialize(URL url, ResourceBundle rb)
     {
-    	// Установка tooltips(подсказок для кнопок!)
+    	// РЈСЃС‚Р°РЅРѕРІРєР° tooltips(РїРѕРґСЃРєР°Р·РѕРє РґР»СЏ РєРЅРѕРїРѕРє!)
     	SetTooltipsButtons();
     	
     	fxAccordLeftMain.setExpandedPane(fxTPaneLeft2);
@@ -1034,7 +1034,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		apPaneUsersAndJobs = FXMLLoader.load(getClass().getResource("LPSMapTUserAndJobs.fxml"));
     		fxTabPaneUsersAndJobs.setContent(apPaneUsersAndJobs);
     		
-    		// Добавим сразу в fxAPaneMain для шаблона файлик FXAPaneTemplateJobs.fxml
+    		// Р”РѕР±Р°РІРёРј СЃСЂР°Р·Сѓ РІ fxAPaneMain РґР»СЏ С€Р°Р±Р»РѕРЅР° С„Р°Р№Р»РёРє FXAPaneTemplateJobs.fxml
 			m_FXAPaneTemplateJobs = FXMLLoader.load(getClass().getResource(CMAINCONSTANTS.m_PathFXAPaneTemplateFilling));
 			apPaneUsersAndJobs.getChildren().add(m_FXAPaneTemplateJobs);
 			apPaneUsersAndJobs.setTopAnchor(m_FXAPaneTemplateJobs, 170.0);
@@ -1066,19 +1066,19 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 					{
 						
 						
-						if(CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME)// Проверим пришли ли по кнопке!!!
+						if(CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME)// РџСЂРѕРІРµСЂРёРј РїСЂРёС€Р»Рё Р»Рё РїРѕ РєРЅРѕРїРєРµ!!!
 						{
 							CLPSMain.m_CTUsersJobsController.RefreshSelectedUser(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
-							System.out.println("Пришли по кнопке!!!");
+							System.out.println("РџСЂРёС€Р»Рё РїРѕ РєРЅРѕРїРєРµ!!!");
 						}
 						else
 						{
 							CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP = null;
-							System.out.println("Пришли НЕ !!! по кнопке!!!");
+							System.out.println("РџСЂРёС€Р»Рё РќР• !!! РїРѕ РєРЅРѕРїРєРµ!!!");
 							CLPSMain.m_CTUsersJobsController.RefreshSelectedUser(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP);
 						}
-						CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME = false;// Вернем обратно, чтобы не запутаться, что мы заходили посредством
-						 // нажатия к нопки в судне "Добавить задачу".
+						CCONSTANTS_EVENTS_JOB.MY_CHANGE_TAB_TO_MY_TAB_1_NAME = false;// Р’РµСЂРЅРµРј РѕР±СЂР°С‚РЅРѕ, С‡С‚РѕР±С‹ РЅРµ Р·Р°РїСѓС‚Р°С‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ Р·Р°С…РѕРґРёР»Рё РїРѕСЃСЂРµРґСЃС‚РІРѕРј
+						 // РЅР°Р¶Р°С‚РёСЏ Рє РЅРѕРїРєРё РІ СЃСѓРґРЅРµ "Р”РѕР±Р°РІРёС‚СЊ Р·Р°РґР°С‡Сѓ".
 
 						
 					} 
@@ -1104,7 +1104,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		ex.getMessage();
 		}
     	
-    	// Здесь потом инициализируем поиск по вхождению!!! 
+    	// Р—РґРµСЃСЊ РїРѕС‚РѕРј РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РїРѕРёСЃРє РїРѕ РІС…РѕР¶РґРµРЅРёСЋ!!! 
 
     } 
     private void uploadImage(File fFile)
@@ -1114,7 +1114,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         	try 
         	{
         		//String ext = Files.getFileExtension(fFile.getName());
-        		// Пишем прямо здесь в базу сразу!!!
+        		// ГЏГЁГёГҐГ¬ ГЇГ°ГїГ¬Г® Г§Г¤ГҐГ±Гј Гў ГЎГ Г§Гі Г±Г°Г Г§Гі!!!
             	InputStream targetStream = new FileInputStream(fFile);
         		Bucket bucket = CLPSMain.MyGoogleStorage.get(("mygpsone-kusto1.appspot.com"));
 				com.google.cloud.storage.Blob blob = bucket.create(CMAINCONSTANTS.PATH_NAME_UPLOADS_MAIN + fFile.getName(), targetStream/*,"image/jpg"*/);
@@ -1129,7 +1129,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				HostServices services = CLPSMain.getInstance().getHostServices();
 				
 				String stTempReplaceBlobName = blob.getName();
-				// Доделаем ссылку URL 1 завтра!!!
+				// Г„Г®Г¤ГҐГ«Г ГҐГ¬ Г±Г±Г»Г«ГЄГі URL 1 Г§Г ГўГІГ°Г !!!
 				String img_url = "https://firebasestorage.googleapis.com/v0/b/" + blob.getBucket() + "/o/"
 						+ stTempReplaceBlobName.replaceAll("/", "%2F")
 						+ "?alt=media";
@@ -1138,7 +1138,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				System.out.println("URL = " + img_url);
 				fxHlinkDoc.setText(img_url);
 				
-				//fxHlinkDoc.setText("https://firebasestorage.googleapis.com/v0/b/mygpsone-kusto1.appspot.com/o/uploads%2Forig.jpg?alt=media&token=a6248977-f176-4d33-a2b0-9ffbd8c9a8b6");
+				fxHlinkDoc.setText("https://firebasestorage.googleapis.com/v0/b/mygpsone-kusto1.appspot.com/o/uploads%2Forig.jpg?alt=media&token=a6248977-f176-4d33-a2b0-9ffbd8c9a8b6");
 				
 				
 				fxHlinkDoc.setOnAction(new EventHandler<ActionEvent>() {
@@ -1194,12 +1194,11 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				
 								
 				
-				/*// Доделаем ссылку URL 1 завтра!!!
+				/*// Г„Г®Г¤ГҐГ«Г ГҐГ¬ Г±Г±Г»Г«ГЄГі URL 1 Г§Г ГўГІГ°Г !!!
 				String img_url = "https://firebasestorage.googleapis.com/v0/b/" + blob.getBucket() + "/o/"
 						+ blob.getName()
 						+ "?alt=media&token=";
 						//+ blob.getMetadata().get("");
-
 				System.out.println("URL = " + img_url);*/
 				
 				
@@ -1210,7 +1209,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				//CLPSMain.MyGoogleStorage.
 				
 				
-				Upload upload;// Объект для загрузки в realbase!!!
+				Upload upload;// ГЋГЎГєГҐГЄГІ Г¤Г«Гї Г§Г ГЈГ°ГіГ§ГЄГЁ Гў realbase!!!
                // Uri downloadUri = task.getResult();
                 upload = new Upload(fFile.getName(),
                 		/*blob.getSelfLink(),*/
@@ -1224,7 +1223,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                 mDatabase.child("my_files").child(uploadId).setValueAsync(upload);
                 
                 //progressDialog.dismiss();
-                //Toast.makeText(getActivity().getApplicationContext(), "Файл отправлен!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), "Г”Г Г©Г« Г®ГІГЇГ°Г ГўГ«ГҐГ­!", Toast.LENGTH_SHORT).show();
 				//System.out.println(blob2.);
 			}
         	catch (Exception ex)
