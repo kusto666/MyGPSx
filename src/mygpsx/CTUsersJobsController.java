@@ -45,7 +45,7 @@ public class CTUsersJobsController implements Initializable
 	@FXML
 	private AnchorPane fxAPaneMain;
 	@FXML
-	private ComboBox<CStructUser> fxCbSelectUser;// Здесь список "обычных" пользователей!!!
+	private ComboBox<CStructUser> fxCbSelectUser;// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!
 	@FXML
 	private ComboBox<CStructTmplJob> fxCbSelectTemplateJob; // List of templates!!!
 	@FXML
@@ -53,8 +53,8 @@ public class CTUsersJobsController implements Initializable
 	
 	private DatabaseReference mDatabaseUsers;
 	private DatabaseReference mDatabaseAddingJob;
-	private DatabaseReference mDatabaseListenSelectUser;// Здесь слушаем выбранного пользователя!!!
-	private DatabaseReference mDatabasePriorityJobs;// Это для приоритетов!!!
+	private DatabaseReference mDatabaseListenSelectUser;// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!
+	private DatabaseReference mDatabasePriorityJobs;// пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!
 	private DatabaseReference mDatabaseUpdateSelectedUsersTmpls;
 	
 	private DatabaseReference mDatabaseTamplates;
@@ -70,11 +70,11 @@ public class CTUsersJobsController implements Initializable
 	
 	
 	
-	private String m_stNameShip = null; // Это название судна в интерфейсе для людей!!!
-	private String m_stUsersUniqueID = null;// Это UniqueID User в коде!!!
+	private String m_stNameShip = null; // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ!!!
+	private String m_stUsersUniqueID = null;// пїЅпїЅпїЅ UniqueID User пїЅ пїЅпїЅпїЅпїЅ!!!
 	
-	private String m_stNameTmpl = null; // Это название шаблона в интерфейсе для людей!!!
-	private String m_stTmplUniqueID = null;// Это UniqueID шаблона в коде!!!
+	private String m_stNameTmpl = null; // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ!!!
+	private String m_stTmplUniqueID = null;// пїЅпїЅпїЅ UniqueID пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ!!!
 	
 	private int my_i = 0;
 	
@@ -101,17 +101,17 @@ public class CTUsersJobsController implements Initializable
 				if(cStructUser.getMyPhoneID().equals(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP))
 				{
 					fxCbSelectUser.setValue(CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser.get(m_iTemp));
-					System.out.println("RefreshSelectedUser = " + cStructUser.getMyDirectorShip() + " - номер - " + Integer.toString(m_iTemp));
+					System.out.println("RefreshSelectedUser = " + cStructUser.getMyDirectorShip() + " - пїЅпїЅпїЅпїЅпїЅ - " + Integer.toString(m_iTemp));
 				}
 			} 
 			catch (Exception e) 
 			{
-				e.printStackTrace();// Чтобы не ругался на первый элемент ComboBox - он только фиктивен и не для выбора вообще!!!
+				e.printStackTrace();// Р­С‚Рѕ РѕС€РёР±РєР° ComboBox - пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!!!
 			}
 			m_iTemp++;
 		} 
     }  
-	// Добавление новой задачи!!!
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!!!
     @FXML
     private void BtnAddingJobNew(ActionEvent event) 
     {
@@ -122,31 +122,31 @@ public class CTUsersJobsController implements Initializable
     		if(fxCbSelectPriorityJob.getSelectionModel().getSelectedIndex() != 0)
     		{
     			
-    			String uploadIdTask = CLPSMain.mDatabase.push().getKey();// Здесь генериться уникальный ключ задачи!!!
+    			String uploadIdTask = CLPSMain.mDatabase.push().getKey();// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!!!
     			
-    			// Тут надо будет сделать проверки , что правильно выбрали пользователя!!!
-    			if(CMAINCONSTANTS.NoFB_MyIDSysUserSelected == null)// - это типа вообще только начало, только запустили и не понимаем)))
+    			// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ , пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!
+    			if(CMAINCONSTANTS.NoFB_MyIDSysUserSelected == null)// - пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)))
     			{
     				CMyToast.makeText(CLPSMain.stage, 
-        	    			  "Как раз доделать без привязки пользователя к задаче!!!",
+        	    			  "пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!!!",
         	    			  CMyToast.TOAST_LONG, CMyToast.TOAST_ERROR);
       				return;
     			}
-    			if(CMAINCONSTANTS.NoFB_MyIDSysUserSelected.equals(CCONSTANTS_EVENTS_JOB.MYNONE))// Это типа без пользователя SysUser!!!
+    			if(CMAINCONSTANTS.NoFB_MyIDSysUserSelected.equals(CCONSTANTS_EVENTS_JOB.MYNONE))// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ SysUser!!!
     			{
     				CMyToast.makeText(CLPSMain.stage, 
-      	    			  "К судну не привязан пользователь!",
+      	    			  "пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!",
       	    			  CMyToast.TOAST_LONG, CMyToast.TOAST_ERROR);
     				return;
     			}
-    			// Перед началом привязки задачи(Task-Job) проверим нет ли уже текущей задачи у выбранного SysUser`a
+    			// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ(Task-Job) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ SysUser`a
     			DatabaseReference mDatabaseSysUsers = FirebaseDatabase.getInstance().getReference()
     					.child(CMAINCONSTANTS.FB_my_sys_users_binding)/*
     					.child(CMAINCONSTANTS.NoFB_MyIDSysUserSelected)*/;
     			mDatabaseSysUsers.addListenerForSingleValueEvent(new ValueEventListener()
     			 {
     				
-//// ЧТО ЗА ХУЙНЯ???? - ГДЕ ДАННЫЕ?????????????????????? - ЗАРАБОТАЛО!!!!!!!!!!!!!!!
+//// пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ???? - пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ?????????????????????? - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!!!!!!!
 					@Override
 					public void onDataChange(DataSnapshot arg0) 
 					{
@@ -158,16 +158,16 @@ public class CTUsersJobsController implements Initializable
 							
 							suTemp = structCStructSysUser.getValue(CStructSysUser.class);
 		                 	System.out.println( "suTemp.getMyCurrentTaskID( = "  + suTemp.getMyCurrentTaskID());
-		                 	// Певое проверим вообще выбранного пользователя!!!
+		                 	// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!
 		                 	if(CMAINCONSTANTS.NoFB_MyIDSysUserSelected.equals(suTemp.getMyIDSysUser()))
                  			{
-		                 		// Вот тогда и уже и смотрим есть ли привязанная задача!!!
+		                 		// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!!!
 			                 	if(!suTemp.getMyCurrentTaskID().equals(CCONSTANTS_EVENTS_JOB.MYNONE))
 								{
 			                 		Platform.runLater(
 									() -> {
 									CMyToast.makeText(CLPSMain.stage, 
-					      	    			  "У пользователя уже есть привязанная задача!",
+					      	    			  "пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!",
 					      	    			  CMyToast.TOAST_LONG, CMyToast.TOAST_ERROR);
 									
 									});
@@ -175,20 +175,20 @@ public class CTUsersJobsController implements Initializable
 								}
 			                 	else
 			                 	{
-			                 	// Здесь добавляем задачу в общую ветку - "my_users_jobs".
+			                 	// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - "my_users_jobs".
 			            			FirebaseDatabase.getInstance().getReference()
 			        				.child(CMAINCONSTANTS.FB_my_users_jobs)
 			        				.child(CMAINCONSTANTS.NoFB_MyIDSysUserSelected)
 			        				.child(uploadIdTask).child("MyTemplateJob").setValueAsync(CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
 			            			
-			            			// Далее, если выбран пользователь(SysUser) то в "my_sys_users_binding" также изменим
-			            			// "myCurrentTaskID" с "none" -  на "uploadId"
+			            			// пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ(SysUser) пїЅпїЅ пїЅ "my_sys_users_binding" пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+			            			// "myCurrentTaskID" пїЅ "none" -  пїЅпїЅ "uploadId"
 			            			FirebaseDatabase.getInstance().getReference()
 			        				.child(CMAINCONSTANTS.FB_my_sys_users_binding)
 			        				.child(CMAINCONSTANTS.NoFB_MyIDSysUserSelected)
 			        				.child("myCurrentTaskID").setValueAsync(uploadIdTask);
 			            			
-			                		 //Это старый вариант с привязкой по ID телефона!!!
+			                		 //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ID пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!
 			                		/* FirebaseDatabase.getInstance().getReference()
 			                				.child(CMAINCONSTANTS.FB_my_users_jobs)
 			                				.child(CMAINCONSTANTS.MyPhoneID_ + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_SHIP)
@@ -196,7 +196,7 @@ public class CTUsersJobsController implements Initializable
 			            			Platform.runLater(
 											() -> {
 						            			 CMyToast.makeText(CLPSMain.stage, 
-						            	    			  "Задача успешно добавлена!",
+						            	    			  "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!",
 						            	    			  CMyToast.TOAST_LONG, CMyToast.TOAST_SUCCESS);
 											});
 			                		System.out.println("BtnAddingJobNew!!!");
@@ -231,9 +231,9 @@ public class CTUsersJobsController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		CLPSMain.m_CTUsersJobsController = this;// Инициализация статического контроллера для доступа из вне(других контроллов)
+		CLPSMain.m_CTUsersJobsController = this;// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ(пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 		CMAINCONSTANTS.NoFB_MyIDSysUserSelected = "MyIDSysUserSelected";
-		System.out.println("Проверка при инициализации CMAINCONSTANTS.NoFB_MyIDSysUserSelected = " + CMAINCONSTANTS.NoFB_MyIDSysUserSelected);
+		System.out.println("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ CMAINCONSTANTS.NoFB_MyIDSysUserSelected = " + CMAINCONSTANTS.NoFB_MyIDSysUserSelected);
 			
 			fxLbErrorSelectPriority.setVisible(false);
 			mDatabaseUsers = FirebaseDatabase.getInstance().getReference()
@@ -249,8 +249,8 @@ public class CTUsersJobsController implements Initializable
 
 						m_alUsers = new ArrayList<CStructUser>();
 						
-						CStructUser TempSP = new CStructUser();// Создадим пустого пользователя для первого элемента списка!!!
-						TempSP.setMyFreeNameFirst("Выбор судна(необязательно)");
+						CStructUser TempSP = new CStructUser();// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!!!
+						TempSP.setMyFreeNameFirst("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ(пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)");
 						TempSP.setMyPhoneID("facking_id");
 						m_alUsers.add(TempSP);
 						
@@ -258,7 +258,7 @@ public class CTUsersJobsController implements Initializable
 		                {
 							TempSP = structCStructUser.getValue(CStructUser.class);
 		                 	System.out.println( "structCStructUser = "  + TempSP.getMyDirectorShip());
-		                 	m_alUsers.add(TempSP);// Заполнили массив!!!
+		                 	m_alUsers.add(TempSP);// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!!!
 	                	}
 						 m_ObservableList = FXCollections.observableArrayList (m_alUsers);
 				            CCONSTANTS_EVENTS_JOB.MAIN_ObservableListUser = m_ObservableList;
@@ -330,15 +330,15 @@ public class CTUsersJobsController implements Initializable
 					
 					m_aTmpl = new ArrayList<CStructTmplJob>();
 					
-					CStructTmplJob TempSP = new CStructTmplJob();// Создадим пустой шаблон для первого элемента списка!!!
-					TempSP.setMyNameTemplate("Выберите шаблон...");
+					CStructTmplJob TempSP = new CStructTmplJob();// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!!!
+					TempSP.setMyNameTemplate("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ...");
 					m_aTmpl.add(TempSP);
 					
 					for (DataSnapshot structTmplJob : contactChildren)
 	                {
 						TempSP = structTmplJob.getValue(CStructTmplJob.class);
 	                 	System.out.println( "structTmplJob = "  + TempSP.getMyNameTemplate());
-	                 	m_aTmpl.add(TempSP);// Заполнили массив!!!
+	                 	m_aTmpl.add(TempSP);// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!!!
                 	}
 					Platform.runLater(
 			    			  () -> {
@@ -368,7 +368,7 @@ public class CTUsersJobsController implements Initializable
 			{
 				if(newValue != oldValue)
 				{
-					System.out.println("Что-то изменилось - типа выбрали другой шаблон!!!");
+					System.out.println("пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!!!");
 				}
 				m_stNameTmpl =  ((CStructTmplJob)newValue).getMyNameTemplate();
 				m_stTmplUniqueID =  ((CStructTmplJob)newValue).getMyIDUnique();
@@ -397,14 +397,14 @@ public class CTUsersJobsController implements Initializable
 					m_alPriority = new ArrayList<CStructPriority>();
 					
 					CStructPriority TempSPFirstValue = new CStructPriority();
-					TempSPFirstValue.setMyNamePriority("Выберите приоритет задачи...");
+					TempSPFirstValue.setMyNamePriority("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ...");
 					
 					m_alPriority.add(TempSPFirstValue);
 					for (DataSnapshot structPriorityr : contactChildren)
 	                {
 						CStructPriority TempSP = structPriorityr.getValue(CStructPriority.class);
 	                 	System.out.println( "TempSP = "  + TempSP.getMyNamePriority());
-	                 	m_alPriority.add(TempSP);// Заполнили массив!!!
+	                 	m_alPriority.add(TempSP);// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!!!
                 	}
 					Platform.runLater(() ->
 					{
@@ -427,7 +427,7 @@ public class CTUsersJobsController implements Initializable
 					{
 						if(newValue != oldValue)
 						{
-							//System.out.println("Что-то изменилось!!!");
+							//System.out.println("пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!");
 						}
 						if(fxLbErrorSelectPriority.isVisible()) 
 						{
