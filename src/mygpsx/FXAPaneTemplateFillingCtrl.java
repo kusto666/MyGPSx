@@ -46,7 +46,7 @@ public class FXAPaneTemplateFillingCtrl implements Initializable{
 				CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL = (String) arg0.getValue();
 				System.out.println( "Listen FXAPaneTemplateFillingCtrl  = " + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
 				
-				// Здесь инициализируем список сущностей(атрибутов добавленных в шаблон задачи)
+				// Р—РґРµСЃСЊ РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃРїРёСЃРѕРє СЃСѓС‰РЅРѕСЃС‚РµР№(Р°С‚СЂРёР±СѓС‚РѕРІ РґРѕР±Р°РІР»РµРЅРЅС‹С… РІ С€Р°Р±Р»РѕРЅ Р·Р°РґР°С‡Рё)
 				try
 				{
 					Query mDatabaseCurrentTmpl = FirebaseDatabase.getInstance().getReference()
@@ -70,7 +70,7 @@ public class FXAPaneTemplateFillingCtrl implements Initializable{
 				                {
 					            	CStructAttrTmplFilling TempSP = structAttrjob.getValue(CStructAttrTmplFilling.class);
 		                        	//System.out.println( "String CStructAttrTmpl = "  + TempSP);
-		                        	m_alAttrjob.add(TempSP);// Заполнили массив!!!
+		                        	m_alAttrjob.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 			                	}
 					            m_ObservableList = FXCollections.observableArrayList (m_alAttrjob);
 					            
@@ -79,7 +79,7 @@ public class FXAPaneTemplateFillingCtrl implements Initializable{
 					            {
 					            	Platform.runLater(
 			            			  () -> {
-			            				  System.out.println("FXAPaneTemplateFillingCtrl: Попали в наполнение шаблона!!!");
+			            				  System.out.println("FXAPaneTemplateFillingCtrl: РџРѕРїР°Р»Рё РІ РЅР°РїРѕР»РЅРµРЅРёРµ С€Р°Р±Р»РѕРЅР°!!!");
 			            				  fxListTmplJob.setItems(m_ObservableList);
 			            				  fxListTmplJob.setCellFactory(new Callback<ListView<CStructAttrTmplFilling>, ListCell<CStructAttrTmplFilling>>()
 			            				  {
@@ -136,7 +136,7 @@ public class FXAPaneTemplateFillingCtrl implements Initializable{
 					{*/
 						try 
 						{
-							//System.out.println("Попали в................ - i = " + Integer.toString(i));
+							//System.out.println("РџРѕРїР°Р»Рё РІ................ - i = " + Integer.toString(i));
 
 							
 							Platform.runLater(() ->

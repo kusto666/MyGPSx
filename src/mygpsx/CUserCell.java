@@ -50,7 +50,7 @@ public class CUserCell  extends ListCell<CStructUser>
                 lbMyNameShip = (Label)mLLoader.getNamespace().get("lbMyNameShip");
                 fxBtnViewJobs = (Button)mLLoader.getNamespace().get("fxBtnViewJobs");
                 
-                // Здесь проверим есть ли текущая задача, если есть, то пишем "Текущая задача" или "Задачи нет".
+                // Р—РґРµСЃСЊ РїСЂРѕРІРµСЂРёРј РµСЃС‚СЊ Р»Рё С‚РµРєСѓС‰Р°СЏ Р·Р°РґР°С‡Р°, РµСЃР»Рё РµСЃС‚СЊ, С‚Рѕ РїРёС€РµРј "РўРµРєСѓС‰Р°СЏ Р·Р°РґР°С‡Р°" РёР»Рё "Р—Р°РґР°С‡Рё РЅРµС‚".
                 // .......................
                 lbMyDirectorShip = (Label)mLLoader.getNamespace().get("lbMyDirectorShip");
                 fxLbBindingEmail = (Label)mLLoader.getNamespace().get("fxLbBindingEmail");

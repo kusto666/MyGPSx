@@ -45,7 +45,7 @@ public class CTypedescjobEditController implements Initializable
 	@FXML
 	public static Stage m_stageTypedescjobAdd = null;
 
-	 // Открытие окна добавление статуса задачи!!! 
+	 // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° РґРѕР±Р°РІР»РµРЅРёРµ СЃС‚Р°С‚СѓСЃР° Р·Р°РґР°С‡Рё!!! 
     @FXML
     private void FrameAddTypedescjob(ActionEvent event) 
     {
@@ -55,7 +55,7 @@ public class CTypedescjobEditController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXTypedescjobAdd));
             m_rootTypedescjobAdd = (Parent)fxmlLoader.load();
             m_stageTypedescjobAdd = new Stage();
-            m_stageTypedescjobAdd.setTitle(CStrings.m_APP_NAME + "->Добавление типового описания");
+            m_stageTypedescjobAdd.setTitle(CStrings.m_APP_NAME + "->Р”РѕР±Р°РІР»РµРЅРёРµ С‚РёРїРѕРІРѕРіРѕ РѕРїРёСЃР°РЅРёСЏ");
             m_stageTypedescjobAdd.setScene(new Scene(m_rootTypedescjobAdd));  
             m_stageTypedescjobAdd.setResizable(false);
             m_stageTypedescjobAdd.initModality(Modality.WINDOW_MODAL);
@@ -92,7 +92,7 @@ public class CTypedescjobEditController implements Initializable
 		                {
 			            	CStructTypedescjob TempSP = structAttrjob.getValue(CStructTypedescjob.class);
                         	System.out.println( "CStructTypedescjob = "  + TempSP.getMyNameTypedescjob());
-                        	m_alTypedescjob.add(TempSP);// Заполнили массив!!!
+                        	m_alTypedescjob.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 	                	}
 			            m_ObservableList = FXCollections.observableArrayList (m_alTypedescjob);
 			            

@@ -21,7 +21,7 @@ import javafx.util.Callback;
 
 public class CUserCellIntoTmplFilling  extends ListCell<CStructAttrTmplFilling>
 {
-	////////////ВСЕ ПО НОВОЙ!!!   ////////////////////////////////////////
+	////////////Р’РЎР• РџРћ РќРћР’РћР™!!!   ////////////////////////////////////////
 	@FXML
 	Label fxLb1;
 	@FXML
@@ -30,7 +30,7 @@ public class CUserCellIntoTmplFilling  extends ListCell<CStructAttrTmplFilling>
 	Label fxLbUniqueID;
 	
 	//@FXML
-	//AnchorPane fxCellPane; // Самая главная панель!!!
+	//AnchorPane fxCellPane; // РЎР°РјР°СЏ РіР»Р°РІРЅР°СЏ РїР°РЅРµР»СЊ!!!
 	@FXML
 	AnchorPane fxAPaneLabel;
 	@FXML
@@ -87,8 +87,8 @@ public class CUserCellIntoTmplFilling  extends ListCell<CStructAttrTmplFilling>
         		{
         			Platform.runLater( () -> {
 	  				  //m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
-	  				  // Теперь попробуем вывести что-нибудь из интерфейса,
-	  				  // из ветки my_templates->UniqueID->my_adding_attr->UniqueID
+	  				  // РўРµРїРµСЂСЊ РїРѕРїСЂРѕР±СѓРµРј РІС‹РІРµСЃС‚Рё С‡С‚Рѕ-РЅРёР±СѓРґСЊ РёР· РёРЅС‚РµСЂС„РµР№СЃР°,
+	  				  // РёР· РІРµС‚РєРё my_templates->UniqueID->my_adding_attr->UniqueID
 	  				  //AnchorPane.setTopAnchor(fxAPaneControls, dAnchorTop);
 	  				  if(((CStructAttrTmplFilling)item).getMyAttrType().equals("Label"))
 	  				  {
@@ -104,7 +104,7 @@ public class CUserCellIntoTmplFilling  extends ListCell<CStructAttrTmplFilling>
 	  					  
 	  					  fxAPaneLabel.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
 	  					  fxAPaneLabel.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
-	  					  // Здесь данные контрола и позиция с размерами!!!
+	  					  // Р—РґРµСЃСЊ РґР°РЅРЅС‹Рµ РєРѕРЅС‚СЂРѕР»Р° Рё РїРѕР·РёС†РёСЏ СЃ СЂР°Р·РјРµСЂР°РјРё!!!
 	  					  fxLbAPaneLabel.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
 	  					  fxLbAPaneLabel.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
 	  					  fxLbAPaneLabel.setText(item.getMyAttrName());
@@ -124,7 +124,7 @@ public class CUserCellIntoTmplFilling  extends ListCell<CStructAttrTmplFilling>
 	  					  fxAPaneTextField.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
 	  					  fxAPaneTextField.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
 	  					  
-	  					  // Здесь данные контрола и позиция с размерами!!!
+	  					  // Р—РґРµСЃСЊ РґР°РЅРЅС‹Рµ РєРѕРЅС‚СЂРѕР»Р° Рё РїРѕР·РёС†РёСЏ СЃ СЂР°Р·РјРµСЂР°РјРё!!!
 	  					  fxTxtAPaneField.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
 	  					  fxTxtAPaneField.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
 	  					  fxTxtAPaneField.setText(item.getMyAttrName());
@@ -144,7 +144,7 @@ public class CUserCellIntoTmplFilling  extends ListCell<CStructAttrTmplFilling>
 	  					  fxAPaneTextArea.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
 	  					  fxAPaneTextArea.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
 	  					  
-	  					// Здесь данные контрола и позиция с размерами!!!
+	  					// Р—РґРµСЃСЊ РґР°РЅРЅС‹Рµ РєРѕРЅС‚СЂРѕР»Р° Рё РїРѕР·РёС†РёСЏ СЃ СЂР°Р·РјРµСЂР°РјРё!!!
 	  					  fxTxtAPaneArea.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
 	  					  fxTxtAPaneArea.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
 	  					  fxTxtAPaneArea.setText(item.getMyAttrName());

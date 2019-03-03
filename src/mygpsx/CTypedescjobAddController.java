@@ -29,7 +29,7 @@ public class CTypedescjobAddController implements Initializable{
 	@FXML
 	private TextField fxTxtNameTypedescjob;
 	
-	 // Добавляем приоритет!!!
+	 // Р”РѕР±Р°РІР»СЏРµРј РїСЂРёРѕСЂРёС‚РµС‚!!!
     @FXML
     private void AddTypedescjob(ActionEvent event) 
     {

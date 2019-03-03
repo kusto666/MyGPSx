@@ -29,7 +29,7 @@ public class CTypeobjAddController implements Initializable{
 	@FXML
 	private TextField fxTxtNameTypeobj;
 	
-	 // Добавляем приоритет!!!
+	 // Р”РѕР±Р°РІР»СЏРµРј РїСЂРёРѕСЂРёС‚РµС‚!!!
     @FXML
     private void AddTypeobj(ActionEvent event) 
     {

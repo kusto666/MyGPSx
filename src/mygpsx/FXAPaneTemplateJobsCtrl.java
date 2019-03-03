@@ -45,7 +45,7 @@ public class FXAPaneTemplateJobsCtrl implements Initializable{
 				CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL = (String) arg0.getValue();
 				System.out.println( "Listen FXAPaneTemplateJobsCtrl  = " + CCONSTANTS_EVENTS_JOB.MAIN_SELECTED_TMPL);
 				
-				// Здесь инициализируем список сущностей(атрибутов добавленных в шаблон задачи)
+				// Р—РґРµСЃСЊ РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃРїРёСЃРѕРє СЃСѓС‰РЅРѕСЃС‚РµР№(Р°С‚СЂРёР±СѓС‚РѕРІ РґРѕР±Р°РІР»РµРЅРЅС‹С… РІ С€Р°Р±Р»РѕРЅ Р·Р°РґР°С‡Рё)
 				try
 				{
 					mDatabaseCurrentTmpl = (DatabaseReference) FirebaseDatabase.getInstance().getReference()
@@ -72,7 +72,7 @@ public class FXAPaneTemplateJobsCtrl implements Initializable{
 				                {
 					            	CStructAttrTmpl TempSP = structAttrjob.getValue(CStructAttrTmpl.class);
 		                        	System.out.println( "String CStructAttrTmpl = "  + TempSP);
-		                        	m_alAttrjob.add(TempSP);// Заполнили массив!!!
+		                        	m_alAttrjob.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 			                	}
 					            m_ObservableList = FXCollections.observableArrayList (m_alAttrjob);
 					            
@@ -81,7 +81,7 @@ public class FXAPaneTemplateJobsCtrl implements Initializable{
 					            {
 					            	Platform.runLater(
 			            			  () -> {
-			            				  System.out.println("FXAPaneTemplateJobs: Попали в создание шаблона!!!");
+			            				  System.out.println("FXAPaneTemplateJobs: РџРѕРїР°Р»Рё РІ СЃРѕР·РґР°РЅРёРµ С€Р°Р±Р»РѕРЅР°!!!");
 			            				  fxListTmplJob.setItems(m_ObservableList);
 			            				  fxListTmplJob.setCellFactory(new Callback<ListView<CStructAttrTmpl>, ListCell<CStructAttrTmpl>>()
 			            				  {
@@ -146,7 +146,7 @@ public class FXAPaneTemplateJobsCtrl implements Initializable{
 					{*/
 						try 
 						{
-							//System.out.println("Попали в................ - i = " + Integer.toString(i));
+							//System.out.println("РџРѕРїР°Р»Рё РІ................ - i = " + Integer.toString(i));
 
 							
 							Platform.runLater(() ->
@@ -169,21 +169,5 @@ public class FXAPaneTemplateJobsCtrl implements Initializable{
 		
 			}
 		 });
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 	}
-
 }

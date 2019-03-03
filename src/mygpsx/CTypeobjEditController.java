@@ -45,7 +45,7 @@ public class CTypeobjEditController implements Initializable
 	@FXML
 	public static Stage m_stageTypeobjAdd = null;
 
-	 // Открытие окна добавление статуса задачи!!! 
+	 // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° РґРѕР±Р°РІР»РµРЅРёРµ СЃС‚Р°С‚СѓСЃР° Р·Р°РґР°С‡Рё!!! 
     @FXML
     private void FrameAddTypeobj(ActionEvent event) 
     {
@@ -55,7 +55,7 @@ public class CTypeobjEditController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXTypeobjAdd));
             m_rootTypeobjAdd = (Parent)fxmlLoader.load();
             m_stageTypeobjAdd = new Stage();
-            m_stageTypeobjAdd.setTitle(CStrings.m_APP_NAME + "->Добавление типа объекта");
+            m_stageTypeobjAdd.setTitle(CStrings.m_APP_NAME + "->Р”РѕР±Р°РІР»РµРЅРёРµ С‚РёРїР° РѕР±СЉРµРєС‚Р°");
             m_stageTypeobjAdd.setScene(new Scene(m_rootTypeobjAdd));  
             m_stageTypeobjAdd.setResizable(false);
             m_stageTypeobjAdd.initModality(Modality.WINDOW_MODAL);
@@ -92,7 +92,7 @@ public class CTypeobjEditController implements Initializable
 		                {
 			            	CStructTypeobj TempSP = structTypeobj.getValue(CStructTypeobj.class);
                         	System.out.println( "CStructTypeobj = "  + TempSP.getMyNameTypeobj());
-                        	m_alTypeobj.add(TempSP);// Заполнили массив!!!
+                        	m_alTypeobj.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 	                	}
 			            m_ObservableList = FXCollections.observableArrayList (m_alTypeobj);
 			            

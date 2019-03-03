@@ -45,7 +45,7 @@ public class CTypejobEditController implements Initializable
 	@FXML
 	public static Stage m_stageTypejobAdd = null;
 
-	 // Открытие окна добавление статуса задачи!!! 
+	 // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° РґРѕР±Р°РІР»РµРЅРёРµ СЃС‚Р°С‚СѓСЃР° Р·Р°РґР°С‡Рё!!! 
     @FXML
     private void FrameAddTypejob(ActionEvent event) 
     {
@@ -55,7 +55,7 @@ public class CTypejobEditController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXTypejobAdd));
             m_rootTypejobAdd = (Parent)fxmlLoader.load();
             m_stageTypejobAdd = new Stage();
-            m_stageTypejobAdd.setTitle(CStrings.m_APP_NAME + "->Добавление типа задачи");
+            m_stageTypejobAdd.setTitle(CStrings.m_APP_NAME + "->Р”РѕР±Р°РІР»РµРЅРёРµ С‚РёРїР° Р·Р°РґР°С‡Рё");
             m_stageTypejobAdd.setScene(new Scene(m_rootTypejobAdd));  
             m_stageTypejobAdd.setResizable(false);
             m_stageTypejobAdd.initModality(Modality.WINDOW_MODAL);
@@ -92,7 +92,7 @@ public class CTypejobEditController implements Initializable
 		                {
 			            	CStructTypejob TempSP = structTypejob.getValue(CStructTypejob.class);
                         	System.out.println( "CStructTypejob = "  + TempSP.getMyNameTypejob());
-                        	m_alTypejob.add(TempSP);// Заполнили массив!!!
+                        	m_alTypejob.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 	                	}
 			            m_ObservableList = FXCollections.observableArrayList (m_alTypejob);
 			            

@@ -28,7 +28,7 @@ import javafx.util.Callback;
 
 public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 {
-	////////////  ВСЕ ПО НОВОЙ!!!   ////////////////////////////////////////
+	////////////  Р’РЎР• РџРћ РќРћР’РћР™!!!   ////////////////////////////////////////
 	@FXML
 	private Label fxLb1;
 	@FXML
@@ -37,7 +37,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 	private Label fxLbUniqueID;
 	
 	//@FXML
-	//AnchorPane fxCellPane; // Самая главная панель!!!
+	//AnchorPane fxCellPane; // РЎР°РјР°СЏ РіР»Р°РІРЅР°СЏ РїР°РЅРµР»СЊ!!!
 	@FXML
 	private AnchorPane fxAPaneLabel;
 	@FXML
@@ -107,7 +107,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
             mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXCellIntoTmpl));
             try 
             {
-            	// Смотрим откуда пришли сюда: из редактирования или из создания шаблона!!!
+            	// РЎРјРѕС‚СЂРёРј РѕС‚РєСѓРґР° РїСЂРёС€Р»Рё СЃСЋРґР°: РёР· СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РёР»Рё РёР· СЃРѕР·РґР°РЅРёСЏ С€Р°Р±Р»РѕРЅР°!!!
             	if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY == "ADD")
             	{
             		m_stGetForUniqueNodeEditOrAddTemplate = CMAINCONSTANTS.m_UniqueTempIDTempate;
@@ -155,7 +155,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 						}*/
 						//if(CCONSTANTS_EVENTS_JOB.SAMPLE_ANY_OR_ANY.equals("EDIT"))// Delete attr!
 						//{
-							// Проверим - если порядок сортировки элемента последний, то просто удаляем и ничего более!!!
+							// РџСЂРѕРІРµСЂРёРј - РµСЃР»Рё РїРѕСЂСЏРґРѕРє СЃРѕСЂС‚РёСЂРѕРІРєРё СЌР»РµРјРµРЅС‚Р° РїРѕСЃР»РµРґРЅРёР№, С‚Рѕ РїСЂРѕСЃС‚Рѕ СѓРґР°Р»СЏРµРј Рё РЅРёС‡РµРіРѕ Р±РѕР»РµРµ!!!
 							if(item.getMyAttrOrder() == (CCONSTANTS_EVENTS_JOB.COUNT_ATTRIBUTES_IN_my_adding_attr - 1))
 							{
 								FirebaseDatabase.getInstance()
@@ -224,7 +224,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 					}
 				});
                 
-                /////////////// - Здесь кнопки вверх и вниз!!! - /////////////////////////////////////////////
+                /////////////// - Р—РґРµСЃСЊ РєРЅРѕРїРєРё РІРІРµСЂС… Рё РІРЅРёР·!!! - /////////////////////////////////////////////
                 
                 fxBtnMoveUp = (Button)mLLoader.getNamespace().get("fxBtnMoveUp");
                 fxBtnMoveUp.setOnMouseClicked(new EventHandler<MouseEvent>() 
@@ -243,9 +243,9 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 							.child(m_stGetForUniqueNodeEditOrAddTemplate)
 							/*.child(CMAINCONSTANTS.m_UniqueTempEditIDTempate)*/
 							.child(CMAINCONSTANTS.FB_my_adding_attr)
-							.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValueAsync(iTempAttrOrder);// Опускаем контролл!!!
+							.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValueAsync(iTempAttrOrder);// РћРїСѓСЃРєР°РµРј РєРѕРЅС‚СЂРѕР»Р»!!!
 
-							item.setMyAttrOrder(iTempAttrOrder - 1);// Поднимаем поднимаем .
+							item.setMyAttrOrder(iTempAttrOrder - 1);// РџРѕРґРЅРёРјР°РµРј РїРѕРґРЅРёРјР°РµРј .
 							FirebaseDatabase.getInstance().getReference()
 							.child(CMAINCONSTANTS.FB_my_owner_settings)
 							.child(CMAINCONSTANTS.FB_my_templates)
@@ -255,7 +255,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 						}
 						else
 						{
-							System.out.println("CUserCellIntoTmpl - что-то пошло не так с переещением кнопки!!!");
+							System.out.println("CUserCellIntoTmpl - С‡С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє СЃ РїРµСЂРµРµС‰РµРЅРёРµРј РєРЅРѕРїРєРё!!!");
 						}
 					}
 				});
@@ -281,9 +281,9 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 							.child(CMAINCONSTANTS.FB_my_templates)
 							.child(m_stGetForUniqueNodeEditOrAddTemplate)
 							.child(CMAINCONSTANTS.FB_my_adding_attr)
-							.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValueAsync(iTempAttrOrder);// Опускаем контролл!!!
+							.child(m_TempAttrTmpl.getMyIDUnique()).child("myAttrOrder").setValueAsync(iTempAttrOrder);// РћРїСѓСЃРєР°РµРј РєРѕРЅС‚СЂРѕР»Р»!!!
 
-							item.setMyAttrOrder(iTempAttrOrder + 1);// Опускаем.
+							item.setMyAttrOrder(iTempAttrOrder + 1);// РћРїСѓСЃРєР°РµРј.
 							FirebaseDatabase.getInstance().getReference()
 							.child(CMAINCONSTANTS.FB_my_owner_settings)
 							.child(CMAINCONSTANTS.FB_my_templates)
@@ -293,7 +293,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
 						}
 						else
 						{
-							System.out.println("CUserCellIntoTmpl - что-то пошло не так с переещением кнопки!!!");
+							System.out.println("CUserCellIntoTmpl - С‡С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє СЃ РїРµСЂРµРµС‰РµРЅРёРµРј РєРЅРѕРїРєРё!!!");
 						}
 					}
 				});
@@ -308,14 +308,14 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
                 fxLbUniqueID.setVisible(false);
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
 
-        		// Используем поток создания листа!!!
+        		// РСЃРїРѕР»СЊР·СѓРµРј РїРѕС‚РѕРє СЃРѕР·РґР°РЅРёСЏ Р»РёСЃС‚Р°!!!
         		try 
         		{
         			
         			Platform.runLater( () -> {
         				  //m_Pane.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
-        				  // Теперь попробуем вывести что-нибудь из интерфейса,
-        				  // из ветки my_templates->UniqueID->my_adding_attr->UniqueID
+        				  // РўРµРїРµСЂСЊ РїРѕРїСЂРѕР±СѓРµРј РІС‹РІРµСЃС‚Рё С‡С‚Рѕ-РЅРёР±СѓРґСЊ РёР· РёРЅС‚РµСЂС„РµР№СЃР°,
+        				  // РёР· РІРµС‚РєРё my_templates->UniqueID->my_adding_attr->UniqueID
         				  AnchorPane.setTopAnchor(fxAPaneControls, dAnchorTop);
         				  if(((CStructAttrTmpl)item).getMyAttrType().equals("Label"))
         				  {
@@ -331,7 +331,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
         					  
         					  fxAPaneLabel.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
         					  fxAPaneLabel.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
-        					  // Здесь данные контрола и позиция с размерами!!!
+        					  // Р—РґРµСЃСЊ РґР°РЅРЅС‹Рµ РєРѕРЅС‚СЂРѕР»Р° Рё РїРѕР·РёС†РёСЏ СЃ СЂР°Р·РјРµСЂР°РјРё!!!
         					  fxLbAPaneLabel.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
         					  fxLbAPaneLabel.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
         					  fxLbAPaneLabel.setText(item.getMyAttrName());
@@ -352,7 +352,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
         					  fxAPaneTextField.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
         					  fxAPaneTextField.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
         					  
-        					  // Здесь данные контрола и позиция с размерами!!!
+        					  // Р—РґРµСЃСЊ РґР°РЅРЅС‹Рµ РєРѕРЅС‚СЂРѕР»Р° Рё РїРѕР·РёС†РёСЏ СЃ СЂР°Р·РјРµСЂР°РјРё!!!
         					  fxTxtAPaneField.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
         					  fxTxtAPaneField.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
         					  fxTxtAPaneField.setText(item.getMyAttrName());
@@ -372,7 +372,7 @@ public class CUserCellIntoTmpl  extends ListCell<CStructAttrTmpl>
         					  fxAPaneTextArea.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
         					  fxAPaneTextArea.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
         					  
-        					// Здесь данные контрола и позиция с размерами!!!
+        					// Р—РґРµСЃСЊ РґР°РЅРЅС‹Рµ РєРѕРЅС‚СЂРѕР»Р° Рё РїРѕР·РёС†РёСЏ СЃ СЂР°Р·РјРµСЂР°РјРё!!!
         					  fxTxtAPaneArea.setPrefWidth(Double.parseDouble(item.getMyAttrWidth()));
         					  fxTxtAPaneArea.setPrefHeight(Double.parseDouble(item.getMyAttrHeight()));
         					  fxTxtAPaneArea.setText(item.getMyAttrName());
