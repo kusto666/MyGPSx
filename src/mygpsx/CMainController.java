@@ -1194,7 +1194,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				
 								
 				
-				/*// Äîäåëàåì ññûëêó URL 1 çàâòðà!!!
+				/*// Здесь пример формирования URL для скачивания(отображения в браузере)!!!
 				String img_url = "https://firebasestorage.googleapis.com/v0/b/" + blob.getBucket() + "/o/"
 						+ blob.getName()
 						+ "?alt=media&token=";
@@ -1209,7 +1209,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				//CLPSMain.MyGoogleStorage.
 				
 				
-				Upload upload;// Îáúåêò äëÿ çàãðóçêè â realbase!!!
+				Upload upload;// Скачивание файла from realbase!!!
                // Uri downloadUri = task.getResult();
                 upload = new Upload(fFile.getName(),
                 		/*blob.getSelfLink(),*/
