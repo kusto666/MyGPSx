@@ -1,16 +1,16 @@
 package mygpsx;
 
-//Ñòğóêòóğà òèïîâ çàäà÷!!!
+//Ğ¡Ñ‚Ñ€ÑƒĞºÑ‚ÑƒÑ€Ğ° Ñ‚Ğ¸Ğ¿Ğ¾Ğ² Ğ·Ğ°Ğ´Ğ°Ñ‡!!!
 public class CStructAttrTmplFilling {
 	private String MyIDUnique;
-	private String MyAttrID;// ID àòğèáóòà èç óçëà "my_owner_settings"->"my_attrjob"
+	private String MyAttrID;// ID Ğ°Ñ‚Ñ€Ğ¸Ğ±ÑƒÑ‚Ğ° Ğ¸Ğ· ÑƒĞ·Ğ»Ğ° "my_owner_settings"->"my_attrjob"
 	private String MyAttrName;
 	private String MyAttrType;
 	private String MyAttrHeight;
 	private String MyAttrWidth;
 	private long MyAttrOrder;
 	
-	public CStructAttrTmplFilling() {// ÎÁßÇÀÒÅËÜÍÎ ÓÊÀÇÛÂÀÅÌ, À ÒÎ ÁÓÄÅÒ ÎØÈÁÊÀ ÒÈÏÀ ÊÀÊ ÇÄÅÑÜ ÁÛËÎ:
+	public CStructAttrTmplFilling() {// ĞĞ‘Ğ¯Ğ—ĞĞ¢Ğ•Ğ›Ğ¬ĞĞ Ğ£ĞšĞĞ—Ğ«Ğ’ĞĞ•Ğœ, Ğ Ğ¢Ğ Ğ‘Ğ£Ğ”Ğ•Ğ¢ ĞĞ¨Ğ˜Ğ‘ĞšĞ Ğ¢Ğ˜ĞŸĞ ĞšĞĞš Ğ—Ğ”Ğ•Ğ¡Ğ¬ Ğ‘Ğ«Ğ›Ğ:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
 	
 	public CStructAttrTmplFilling(

@@ -1,13 +1,13 @@
 package mygpsx;
 
-// Ñòğóêòóğà ñòàòóñîâ çàäà÷!!!
+// Ğ¡Ñ‚Ñ€ÑƒĞºÑ‚ÑƒÑ€Ğ° ÑÑ‚Ğ°Ñ‚ÑƒÑĞ¾Ğ² Ğ·Ğ°Ğ´Ğ°Ñ‡!!!
 public class CStructStatus 
 {
 	private String MyIDUnique;
 	private String MyCLassStatus;
 	private String MyNameStatus;
 	
-	public CStructStatus() {// ÎÁßÇÀÒÅËÜÍÎ ÓÊÀÇÛÂÀÅÌ, À ÒÎ ÁÓÄÅÒ ÎØÈÁÊÀ ÒÈÏÀ ÊÀÊ ÇÄÅÑÜ ÁÛËÎ:
+	public CStructStatus() {// ĞĞ‘Ğ¯Ğ—ĞĞ¢Ğ•Ğ›Ğ¬ĞĞ Ğ£ĞšĞĞ—Ğ«Ğ’ĞĞ•Ğœ, Ğ Ğ¢Ğ Ğ‘Ğ£Ğ”Ğ•Ğ¢ ĞĞ¨Ğ˜Ğ‘ĞšĞ Ğ¢Ğ˜ĞŸĞ ĞšĞĞš Ğ—Ğ”Ğ•Ğ¡Ğ¬ Ğ‘Ğ«Ğ›Ğ:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
 	
 	public CStructStatus(String MyIDUnique, String MyCLassStatus, String MyNameStatus) 

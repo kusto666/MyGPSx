@@ -59,11 +59,11 @@ public class CListCellUserController implements Initializable{
 		// TODO Auto-generated method stub
 		
 	}
-	// Удаление объекта.
+	// вЂќРґР°Р»РµРЅРёРµ РѕР±СЉРµРєС‚Р°.
 	@FXML
     private void eventDeleteObject() 
     {
-		// Ищем сразу привязку к сист. пользователю
+		// В»С‰РµРј СЃСЂР°Р·Сѓ РїСЂРёРІВ¤Р·РєСѓ Рє СЃРёСЃС‚. РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ
 
 		DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
 		 .child(CMAINCONSTANTS.FB_users).child(CMAINCONSTANTS.MyPhoneID_ + fxLbUniqueID.getText()).getRef();
@@ -78,19 +78,19 @@ public class CListCellUserController implements Initializable{
 				Platform.runLater(
 			  			  () -> {
 						Alert alert = new Alert(AlertType.CONFIRMATION);
-						alert.setTitle("Удаление судна!");
+						alert.setTitle("вЂќРґР°Р»РµРЅРёРµ СЃСѓРґРЅР°!");
 						
 						if(m_tempStructUser.getMySysUserBinding() == null)
 						{
-							m_tempStructUser.setMySysUserBinding("none");// Это для старых тестируемых пользователей!!!
+							m_tempStructUser.setMySysUserBinding("none");// РЃС‚Рѕ РґР»В¤ СЃС‚Р°СЂС‹С… С‚РµСЃС‚РёСЂСѓРµРјС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№!!!
 						}
 						if(m_tempStructUser.getMySysUserBinding().equals("none"))
 						{
-							alert.setHeaderText("Вы действительно хотите удалить судно ?");
+							alert.setHeaderText("В¬С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ СЃСѓРґРЅРѕ ?");
 						}
 						else
 						{
-							alert.setHeaderText("Вы действительно хотите удалить судно,\nпривязанное к пользователю:\n" + 
+							alert.setHeaderText("В¬С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ СЃСѓРґРЅРѕ,\nРїСЂРёРІВ¤Р·Р°РЅРЅРѕРµ Рє РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ:\n" + 
 									m_tempStructUser.getMyEmail() + " ?");
 						}
 						
@@ -105,13 +105,13 @@ public class CListCellUserController implements Initializable{
 						{
 							try
 							{
-								// Первое: удаление судна из "users"
+								// С•РµСЂРІРѕРµ: СѓРґР°Р»РµРЅРёРµ СЃСѓРґРЅР° РёР· "users"
 								FirebaseDatabase.getInstance().getReference()
 								 .child(CMAINCONSTANTS.FB_users)
 								 .child(CMAINCONSTANTS.MyPhoneID_ + fxLbUniqueID.getText())
 								 .setValueAsync(null);
 								
-								// Второе: unbinding from my_sys_users_binding id of ship
+								// В¬С‚РѕСЂРѕРµ: unbinding from my_sys_users_binding id of ship
 								if(!m_tempStructUser.getMySysUserBinding().equals("none"))
 								{
 									FirebaseDatabase.getInstance().getReference()
@@ -120,9 +120,9 @@ public class CListCellUserController implements Initializable{
 									 .setValueAsync("none");
 								}
 								
-								System.out.println("Удаление судна.");
+								System.out.println("вЂќРґР°Р»РµРЅРёРµ СЃСѓРґРЅР°.");
 								CMyToast.makeText(CLPSMain.stage,
-										"Судно успешно удалено!",
+										"вЂ”СѓРґРЅРѕ СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅРѕ!",
 										CMyToast.TOAST_SHORT, CMyToast.TOAST_SUCCESS);
 							}
 							catch (Exception e)
@@ -148,7 +148,7 @@ public class CListCellUserController implements Initializable{
 		
 
     }
-	// Редактирование объекта.
+	// вЂ“РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РѕР±СЉРµРєС‚Р°.
 	@FXML
     private void eventEditObject() 
     {
@@ -160,10 +160,10 @@ public class CListCellUserController implements Initializable{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXEditShipFxml));
             CLPSMain.m_rootEditShip = (Parent)fxmlLoader.load();
             CLPSMain.m_stageEditShip = new Stage();
-            CLPSMain.m_stageEditShip.setTitle(CStrings.m_APP_NAME + "->Редактирование ship");
+            CLPSMain.m_stageEditShip.setTitle(CStrings.m_APP_NAME + "->вЂ“РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ ship");
             CLPSMain.m_stageEditShip.setScene(new Scene(CLPSMain.m_rootEditShip));  
             CLPSMain.m_stageEditShip.setResizable(false);
-            CLPSMain.m_stageEditShip.setAlwaysOnTop(true); // А так ВЫБИРАТЬ КООРДИНАТЫ УДОБНЕЙ!!!
+            CLPSMain.m_stageEditShip.setAlwaysOnTop(true); // С С‚Р°Рє В¬СџР…В»вЂ“СвЂњв„– В СњСњвЂ“Ж’В»РЊСвЂњСџ вЂќЖ’СњР…РЊв‰€вЂ¦!!!
             CLPSMain.m_stageEditShip.initOwner(CLPSMain.stage);
             CLPSMain.m_stageEditShip.show();
             

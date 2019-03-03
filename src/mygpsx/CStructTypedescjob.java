@@ -1,12 +1,12 @@
 package mygpsx;
 
-//Ñòğóêòóğà òèïîâ çàäà÷!!!
+//Ğ¡Ñ‚Ñ€ÑƒĞºÑ‚ÑƒÑ€Ğ° Ñ‚Ğ¸Ğ¿Ğ¾Ğ² Ğ·Ğ°Ğ´Ğ°Ñ‡!!!
 public class CStructTypedescjob {
 	private String MyIDUnique;
 	private String MyCLassTypedescjob;
 	private String MyNameTypedescjob;
 	
-	public CStructTypedescjob() {// ÎÁßÇÀÒÅËÜÍÎ ÓÊÀÇÛÂÀÅÌ, À ÒÎ ÁÓÄÅÒ ÎØÈÁÊÀ ÒÈÏÀ ÊÀÊ ÇÄÅÑÜ ÁÛËÎ:
+	public CStructTypedescjob() {// ĞĞ‘Ğ¯Ğ—ĞĞ¢Ğ•Ğ›Ğ¬ĞĞ Ğ£ĞšĞĞ—Ğ«Ğ’ĞĞ•Ğœ, Ğ Ğ¢Ğ Ğ‘Ğ£Ğ”Ğ•Ğ¢ ĞĞ¨Ğ˜Ğ‘ĞšĞ Ğ¢Ğ˜ĞŸĞ ĞšĞĞš Ğ—Ğ”Ğ•Ğ¡Ğ¬ Ğ‘Ğ«Ğ›Ğ:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
 	
 	public CStructTypedescjob(String MyIDUnique, String MyCLassTypedescjob, String MyNameTypedescjob) 

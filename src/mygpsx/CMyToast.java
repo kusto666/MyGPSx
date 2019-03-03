@@ -14,11 +14,11 @@ import javafx.util.Duration;
 
 public final class CMyToast
 {
-	// Стили тоста!!!
+	// РЎС‚РёР»Рё С‚РѕСЃС‚Р°!!!
 	public static final int TOAST_SUCCESS = 11; // GREEN
     public static final int TOAST_WARN = 12; // YELLOW
     public static final int TOAST_ERROR = 13;// RED
-    // Еще стили только короткий тост или долгий
+    // Р•С‰Рµ СЃС‚РёР»Рё С‚РѕР»СЊРєРѕ РєРѕСЂРѕС‚РєРёР№ С‚РѕСЃС‚ РёР»Рё РґРѕР»РіРёР№
     public static final int TOAST_SHORT = 0; // GREEN
     public static final int TOAST_LONG = 1;
     
@@ -31,7 +31,7 @@ public final class CMyToast
     {
     	toastDelay = 0;
     	
-    	// Установка короткого или длинного тоста!!!
+    	// РЈСЃС‚Р°РЅРѕРІРєР° РєРѕСЂРѕС‚РєРѕРіРѕ РёР»Рё РґР»РёРЅРЅРѕРіРѕ С‚РѕСЃС‚Р°!!!
     	switch (toastTime)
     	{
 	        case TOAST_SHORT:
@@ -53,7 +53,7 @@ public final class CMyToast
         Text text = new Text(toastMsg);
         text.setFont(Font.font("Verdana", 20));
  
-     // Установка стиля информации!!!
+     // РЈСЃС‚Р°РЅРѕРІРєР° СЃС‚РёР»СЏ РёРЅС„РѕСЂРјР°С†РёРё!!!
     	switch (toastInfoStyle)
     	{
 	        case TOAST_SUCCESS:
@@ -100,7 +100,7 @@ public final class CMyToast
         }); 
         fadeInTimeline.play();
     }
-    // ЭТО БЫЛО ИЗНАЧАЛЬНО!!!
+    // Р­РўРћ Р‘Р«Р›Рћ РР—РќРђР§РђР›Р¬РќРћ!!!
    /* public static void makeText(Stage ownerStage, String toastMsg, int toastDelay, int fadeInDelay, int fadeOutDelay)
     {
         Stage toastStage=new Stage();

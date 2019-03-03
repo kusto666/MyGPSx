@@ -65,7 +65,7 @@ public class CSysUserEditController implements Initializable
 		//Stage stage = (Stage) fxApaneMain.getScene().getWindow();
 		return (Stage)fxApaneMain.getScene().getWindow();
 	}
-	 // Открытие окна добавление статуса задачи!!! 
+	 // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° РґРѕР±Р°РІР»РµРЅРёРµ СЃС‚Р°С‚СѓСЃР° Р·Р°РґР°С‡Рё!!! 
     @FXML
     private void FrameAddSysUser(ActionEvent event) 
     {
@@ -75,7 +75,7 @@ public class CSysUserEditController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXSysUserAdd));
             m_rootSysUserAdd = (Parent)fxmlLoader.load();
             m_stageSysUserAdd = new Stage();
-            m_stageSysUserAdd.setTitle(CStrings.m_APP_NAME + "->Добавление SysUser");
+            m_stageSysUserAdd.setTitle(CStrings.m_APP_NAME + "->Р”РѕР±Р°РІР»РµРЅРёРµ SysUser");
             m_stageSysUserAdd.setScene(new Scene(m_rootSysUserAdd));  
             m_stageSysUserAdd.setResizable(false);
             m_stageSysUserAdd.initModality(Modality.WINDOW_MODAL);
@@ -87,7 +87,7 @@ public class CSysUserEditController implements Initializable
                 @Override
                 public void handle(WindowEvent t)
                 {
-                	// так просто)))
+                	// С‚Р°Рє РїСЂРѕСЃС‚Рѕ)))
                 }
             });
         }
@@ -103,7 +103,7 @@ public class CSysUserEditController implements Initializable
 	{
 		System.out.println("CSysUserEditController - initialize!!!");
 		//m_Stage = (Stage) fxApaneMain.getScene().getWindow();
-		// Это как вытаскивать реальных юзеров, а не самодельных из базы!!!
+		// Р­С‚Рѕ РєР°Рє РІС‹С‚Р°СЃРєРёРІР°С‚СЊ СЂРµР°Р»СЊРЅС‹С… СЋР·РµСЂРѕРІ, Р° РЅРµ СЃР°РјРѕРґРµР»СЊРЅС‹С… РёР· Р±Р°Р·С‹!!!
 		// Start listing users from the beginning, 1000 at a time.
 		///////////////////////////////////////////////////////////////////
 /*		CStructSysUser SysUser = null;
@@ -131,7 +131,7 @@ public class CSysUserEditController implements Initializable
 		  }
 		  page = page.getNextPage();
 		}*/
-		// Это как вытаскивать реальных юзеров, а не самодельных из базы!!!
+		// Р­С‚Рѕ РєР°Рє РІС‹С‚Р°СЃРєРёРІР°С‚СЊ СЂРµР°Р»СЊРЅС‹С… СЋР·РµСЂРѕРІ, Р° РЅРµ СЃР°РјРѕРґРµР»СЊРЅС‹С… РёР· Р±Р°Р·С‹!!!
 		// ENDING!!! ------   Start listing users from the beginning, 1000 at a time.
 		///////////////////////////////////////////////////////////////////
 		
@@ -160,7 +160,7 @@ public class CSysUserEditController implements Initializable
 		                {
 			            	CStructSysUser TempSP = structSysUser.getValue(CStructSysUser.class);
                         	System.out.println( "CStructStatus = "  + TempSP.getMyEmail());
-                        	m_alSysUser.add(TempSP);// Заполнили массив!!!
+                        	m_alSysUser.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 	                	}
 			            m_ObservableList = FXCollections.observableArrayList(m_alSysUser);
 			            
@@ -257,7 +257,7 @@ public class CSysUserEditController implements Initializable
 		                {
 			            	CStructStatus TempSP = structStatus.getValue(CStructStatus.class);
                         	System.out.println( "CStructStatus = "  + TempSP.getMyNameStatus());
-                        	m_alStatus.add(TempSP);// Заполнили массив!!!
+                        	m_alStatus.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 	                	}
 			            m_ObservableList = FXCollections.observableArrayList (m_alStatus);
 			            

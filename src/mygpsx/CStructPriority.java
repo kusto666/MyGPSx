@@ -1,13 +1,13 @@
 package mygpsx;
 
-// Структура приоритетов задач!!!
+// РЎС‚СЂСѓРєС‚СѓСЂР° РїСЂРёРѕСЂРёС‚РµС‚РѕРІ Р·Р°РґР°С‡!!!
 public class CStructPriority 
 {
 	private String MyIDUnique;
 	private String MyCLassPriority;
 	private String MyNamePriority;
 	
-	public CStructPriority() {// ОБЯЗАТЕЛЬНО УКАЗЫВАЕМ, А ТО БУДЕТ ОШИБКА ТИПА КАК ЗДЕСЬ БЫЛО:
+	public CStructPriority() {// РћР‘РЇР—РђРўР•Р›Р¬РќРћ РЈРљРђР—Р«Р’РђР•Рњ, Рђ РўРћ Р‘РЈР”Р•Рў РћРЁРР‘РљРђ РўРРџРђ РљРђРљ Р—Р”Р•РЎР¬ Р‘Р«Р›Рћ:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
 	
 	public CStructPriority(String MyIDUnique, String MyCLassPriority, String MyNamePriority) 

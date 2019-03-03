@@ -2,13 +2,13 @@ package mygpsx;
 
 //import java.util.HashMap;
 
-//Ñòğóêòóğà òèïîâ çàäà÷!!!
+//Ğ¡Ñ‚Ñ€ÑƒĞºÑ‚ÑƒÑ€Ğ° Ñ‚Ğ¸Ğ¿Ğ¾Ğ² Ğ·Ğ°Ğ´Ğ°Ñ‡!!!
 public class CStructTmplJob {
 	private String MyIDUnique;
 	private String MyNameTemplate;
 	//private String my_adding_attr;
 	
-	public CStructTmplJob() {// ÎÁßÇÀÒÅËÜÍÎ ÓÊÀÇÛÂÀÅÌ, À ÒÎ ÁÓÄÅÒ ÎØÈÁÊÀ ÒÈÏÀ ÊÀÊ ÇÄÅÑÜ ÁÛËÎ:
+	public CStructTmplJob() {// ĞĞ‘Ğ¯Ğ—ĞĞ¢Ğ•Ğ›Ğ¬ĞĞ Ğ£ĞšĞĞ—Ğ«Ğ’ĞĞ•Ğœ, Ğ Ğ¢Ğ Ğ‘Ğ£Ğ”Ğ•Ğ¢ ĞĞ¨Ğ˜Ğ‘ĞšĞ Ğ¢Ğ˜ĞŸĞ ĞšĞĞš Ğ—Ğ”Ğ•Ğ¡Ğ¬ Ğ‘Ğ«Ğ›Ğ:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
 	
 	/*public CStructTmplJob(String MyIDUnique, String MyNameTemplate, HashMap my_adding_attr) 

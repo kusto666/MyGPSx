@@ -1,12 +1,12 @@
 package mygpsx;
 
-//—труктура типов задач!!!
+//–°—В—А—Г–Ї—В—Г—А–∞ —В–Є–њ–Њ–≤ –Ј–∞–і–∞—З!!!
 public class CStructTypeobj {
 	private String MyIDUnique;
 	private String MyCLassTypeobj;
 	private String MyNameTypeobj;
 	
-	public CStructTypeobj() {// ќЅя«ј“≈Ћ№Ќќ ” ј«џ¬ј≈ћ, ј “ќ Ѕ”ƒ≈“ ќЎ»Ѕ ј “»ѕј  ј  «ƒ≈—№ ЅџЋќ:
+	public CStructTypeobj() {// –Ю–С–ѓ–Ч–Р–Ґ–Х–Ы–ђ–Э–Ю –£–Ъ–Р–Ч–Ђ–Т–Р–Х–Ь, –Р –Ґ–Ю –С–£–Ф–Х–Ґ –Ю–®–Ш–С–Ъ–Р –Ґ–Ш–Я–Р –Ъ–Р–Ъ –Ч–Ф–Х–°–ђ –С–Ђ–Ы–Ю:
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
 	
 	public CStructTypeobj(String MyIDUnique, String MyCLassTypeobj, String MyNameTypeobj) 

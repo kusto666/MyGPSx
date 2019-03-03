@@ -29,7 +29,7 @@ public class CStatusAddController implements Initializable{
 	@FXML
 	private TextField fxTxtNameStatus;
 	
-	 // Добавляем приоритет!!!
+	 // Р”РѕР±Р°РІР»СЏРµРј РїСЂРёРѕСЂРёС‚РµС‚!!!
     @FXML
     private void AddStatus(ActionEvent event) 
     {

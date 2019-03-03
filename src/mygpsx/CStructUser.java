@@ -9,7 +9,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class CStructUser 
 {
-	private String MyFreeNameFirst;// Первое имя(название) в свободной форме - пригодиться, например для первых пустых строк(ComboBox`ов)
+	private String MyFreeNameFirst;// РџРµСЂРІРѕРµ РёРјСЏ(РЅР°Р·РІР°РЅРёРµ) РІ СЃРІРѕР±РѕРґРЅРѕР№ С„РѕСЂРјРµ - РїСЂРёРіРѕРґРёС‚СЊСЃСЏ, РЅР°РїСЂРёРјРµСЂ РґР»СЏ РїРµСЂРІС‹С… РїСѓСЃС‚С‹С… СЃС‚СЂРѕРє(ComboBox`РѕРІ)
 	private String MyPhoneID;
 	private String MyLatitude;
 	private String MyLongitude;
@@ -20,9 +20,9 @@ public class CStructUser
     private String MyDirectorShip;
     private String MyShortDescriptionShip;
     
-    private String MyIsUserSelected; // Переменная отвечает за то что обект выбран - true, и наоборот - false!!!
+    private String MyIsUserSelected; // РџРµСЂРµРјРµРЅРЅР°СЏ РѕС‚РІРµС‡Р°РµС‚ Р·Р° С‚Рѕ С‡С‚Рѕ РѕР±РµРєС‚ РІС‹Р±СЂР°РЅ - true, Рё РЅР°РѕР±РѕСЂРѕС‚ - false!!!
 	private String MyPass;
-	private String mySysUserBinding;// Показывает связано ли судно с сисемным пользователем!!!
+	private String mySysUserBinding;// РџРѕРєР°Р·С‹РІР°РµС‚ СЃРІСЏР·Р°РЅРѕ Р»Рё СЃСѓРґРЅРѕ СЃ СЃРёСЃРµРјРЅС‹Рј РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј!!!
    
     
     enum GENDER {
@@ -161,7 +161,7 @@ public class CStructUser
     }
     @Override
     /*public String toString()  {
-        return ("Капитан: '" + this.getMyDirectorShip() + "', Судно: '" + this.getMyNameShip() + "'");
+        return ("РљР°РїРёС‚Р°РЅ: '" + this.getMyDirectorShip() + "', РЎСѓРґРЅРѕ: '" + this.getMyNameShip() + "'");
     }*/
     public String toString()  {
         return (this.getMyFreeNameFirst());

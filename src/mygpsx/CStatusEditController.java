@@ -45,7 +45,7 @@ public class CStatusEditController implements Initializable
 	@FXML
 	public static Stage m_stageStatusAdd = null;
 
-	 // Открытие окна добавление статуса задачи!!! 
+	 // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° РґРѕР±Р°РІР»РµРЅРёРµ СЃС‚Р°С‚СѓСЃР° Р·Р°РґР°С‡Рё!!! 
     @FXML
     private void FrameAddStatus(ActionEvent event) 
     {
@@ -55,7 +55,7 @@ public class CStatusEditController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXStatusAdd));
             m_rootStatusAdd = (Parent)fxmlLoader.load();
             m_stageStatusAdd = new Stage();
-            m_stageStatusAdd.setTitle(CStrings.m_APP_NAME + "->Добавление статуса");
+            m_stageStatusAdd.setTitle(CStrings.m_APP_NAME + "->Р”РѕР±Р°РІР»РµРЅРёРµ СЃС‚Р°С‚СѓСЃР°");
             m_stageStatusAdd.setScene(new Scene(m_rootStatusAdd));  
             m_stageStatusAdd.setResizable(false);
             m_stageStatusAdd.initModality(Modality.WINDOW_MODAL);
@@ -92,7 +92,7 @@ public class CStatusEditController implements Initializable
 		                {
 			            	CStructStatus TempSP = structStatus.getValue(CStructStatus.class);
                         	System.out.println( "CStructStatus = "  + TempSP.getMyNameStatus());
-                        	m_alStatus.add(TempSP);// Заполнили массив!!!
+                        	m_alStatus.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 	                	}
 			            m_ObservableList = FXCollections.observableArrayList (m_alStatus);
 			            

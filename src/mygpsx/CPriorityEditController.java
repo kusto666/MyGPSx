@@ -64,7 +64,7 @@ public class CPriorityEditController implements Initializable
 	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPriorityAdd));
 	            m_rootPriorityAdd = (Parent)fxmlLoader.load();
 	            m_stagePriorityAdd = new Stage();
-	            m_stagePriorityAdd.setTitle(CStrings.m_APP_NAME + "->Добавление приоритета");
+	            m_stagePriorityAdd.setTitle(CStrings.m_APP_NAME + "->Р”РѕР±Р°РІР»РµРЅРёРµ РїСЂРёРѕСЂРёС‚РµС‚Р°");
 	            m_stagePriorityAdd.setScene(new Scene(m_rootPriorityAdd));  
 	            m_stagePriorityAdd.setResizable(false);
 	            m_stagePriorityAdd.initModality(Modality.WINDOW_MODAL);
@@ -77,7 +77,7 @@ public class CPriorityEditController implements Initializable
                e.printStackTrace();
             }
     }*/
-	 // Открытие окна добавление приоритета задачи!!! 
+	 // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° РґРѕР±Р°РІР»РµРЅРёРµ РїСЂРёРѕСЂРёС‚РµС‚Р° Р·Р°РґР°С‡Рё!!! 
     @FXML
     private void FrameAddPriority(ActionEvent event) 
     {
@@ -87,7 +87,7 @@ public class CPriorityEditController implements Initializable
 	            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXPriorityAdd));
 	            m_rootPriorityAdd = (Parent)fxmlLoader.load();
 	            m_stagePriorityAdd = new Stage();
-	            m_stagePriorityAdd.setTitle(CStrings.m_APP_NAME + "->Добавление приоритета");
+	            m_stagePriorityAdd.setTitle(CStrings.m_APP_NAME + "->Р”РѕР±Р°РІР»РµРЅРёРµ РїСЂРёРѕСЂРёС‚РµС‚Р°");
 	            m_stagePriorityAdd.setScene(new Scene(m_rootPriorityAdd));  
 	            m_stagePriorityAdd.setResizable(false);
 	            m_stagePriorityAdd.initModality(Modality.WINDOW_MODAL);
@@ -125,7 +125,7 @@ public class CPriorityEditController implements Initializable
 		                {
 			            	CStructPriority TempSP = structPriority.getValue(CStructPriority.class);
                         	System.out.println( "CStructPriority = "  + TempSP.getMyNamePriority());
-                        	m_alPriority.add(TempSP);// Заполнили массив!!!
+                        	m_alPriority.add(TempSP);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 	                	}
 			            m_ObservableList = FXCollections.observableArrayList (m_alPriority);
 			            

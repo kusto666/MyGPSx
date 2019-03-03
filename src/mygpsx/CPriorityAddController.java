@@ -29,7 +29,7 @@ public class CPriorityAddController implements Initializable{
 	@FXML
 	private TextField fxTxtNamePriority;
 	
-	 // Добавляем приоритет!!!
+	 // Р”РѕР±Р°РІР»СЏРµРј РїСЂРёРѕСЂРёС‚РµС‚!!!
     @FXML
     private void AddPriority(ActionEvent event) 
     {

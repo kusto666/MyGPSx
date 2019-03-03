@@ -4,99 +4,105 @@ public class CMAINCONSTANTS {
 	
 	public static String m_UniqueTempIDTempate = "";
 	public static String m_UniqueTempEditIDTempate = "";
-	// Всекие пути к файлам окошек программы!!!
-	public static String m_PathMainFxml = "LPSMap.fxml";// Самое главное окно!!!
+	// Р’СЃРµРєРёРµ РїСѓС‚Рё Рє С„Р°Р№Р»Р°Рј РѕРєРѕС€РµРє РїСЂРѕРіСЂР°РјРјС‹!!!
+	public static String m_PathMainFxml = "LPSMap.fxml";// РЎР°РјРѕРµ РіР»Р°РІРЅРѕРµ РѕРєРЅРѕ!!!
+	
+	// РўСѓС‚ РІСЃРµ РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ Рё СЃРѕРѕР±С‰РµРЅРёР№!!!
+	//public static String m_PathFXAddShipFxml = "FXAddShip.fxml";
+	//public static String m_PathFXEditShipFxml = "FXEditShip.fxml";
+	public static String m_PathFXListCellUserMsgFxml = "ListCellUserMsg.fxml";
+	
 	
 	public static String m_PathFXAddShipFxml = "FXAddShip.fxml";
 	public static String m_PathFXEditShipFxml = "FXEditShip.fxml";
 	public static String m_PathFXListCellFxml = "ListCellUser.fxml";
 	
-	// Тут приоритеты!!!
+	// РўСѓС‚ РїСЂРёРѕСЂРёС‚РµС‚С‹!!!
 	public static String m_PathFXPriorityEdit = "FXPriorityEdit.fxml";
 	public static String m_PathFXPriorityAdd = "FXPriorityAdd.fxml";
 	public static String m_PathFXListCellPriority = "ListCellPriority.fxml";
-	// Тут статусы!!!
+	// РўСѓС‚ СЃС‚Р°С‚СѓСЃС‹!!!
 	public static String m_PathFXStatusEdit = "FXStatusEdit.fxml";
 	public static String m_PathFXStatusAdd = "FXStatusAdd.fxml";
 	public static String m_PathFXListCellStatus = "ListCellStatus.fxml";
 	
-	// Тут типы работ!!!
+	// РўСѓС‚ С‚РёРїС‹ СЂР°Р±РѕС‚!!!
 	public static String m_PathFXTypejobEdit = "FXTypejobEdit.fxml";
 	public static String m_PathFXTypejobAdd = "FXTypejobAdd.fxml";
 	public static String m_PathFXListCellTypejob = "ListCellTypejob.fxml";
 	
-	// Тут атрибуты работ!!!
+	// РўСѓС‚ Р°С‚СЂРёР±СѓС‚С‹ СЂР°Р±РѕС‚!!!
 	public static String m_PathFXAttrjobEdit = "FXAttrjobEdit.fxml";
 	public static String m_PathFXAttrjobAdd = "FXAttrjobAdd.fxml";
 	public static String m_PathFXListCellAttrjob = "ListCellAttrjob.fxml";
 	
-	// Тут типовые описания работ!!!
+	// РўСѓС‚ С‚РёРїРѕРІС‹Рµ РѕРїРёСЃР°РЅРёСЏ СЂР°Р±РѕС‚!!!
 	public static String m_PathFXTypedescjobEdit = "FXTypedescjobEdit.fxml";
 	public static String m_PathFXTypedescjobAdd = "FXTypedescjobAdd.fxml";
 	public static String m_PathFXListCellTypedescjob = "ListCellTypedescjob.fxml";
 	
-	// Тут атрибуты объектов!!!
+	// РўСѓС‚ Р°С‚СЂРёР±СѓС‚С‹ РѕР±СЉРµРєС‚РѕРІ!!!
 	public static String m_PathFXAttrobjEdit = "FXAttrobjEdit.fxml";
 	public static String m_PathFXAttrobjAdd = "FXAttrobjAdd.fxml";
 	public static String m_PathFXListCellAttrobj = "ListCellAttrobj.fxml";
 	
-	// Тут типы объектов!!!
+	// РўСѓС‚ С‚РёРїС‹ РѕР±СЉРµРєС‚РѕРІ!!!
 	public static String m_PathFXTypeobjEdit = "FXTypeobjEdit.fxml";
 	public static String m_PathFXTypeobjAdd = "FXTypeobjAdd.fxml";
 	public static String m_PathFXListCellTypeobj = "ListCellTypeobj.fxml";
 	
-	// Тут все для списка шаблонов!!!
+	// РўСѓС‚ РІСЃРµ РґР»СЏ СЃРїРёСЃРєР° С€Р°Р±Р»РѕРЅРѕРІ!!!
 	public static String m_PathFXListTemplatesJobs = "FXListTemplatesJobs.fxml";
 	//public static String m_PathFXAttrobjAdd = "FXAttrobjAdd.fxml";
 	
-	// Это для системных пользователей SysUser!!!
+	// Р­С‚Рѕ РґР»СЏ СЃРёСЃС‚РµРјРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ SysUser!!!
 	public static String m_PathFXSysUserEdit = "FXSysUserEdit.fxml";
 	public static String m_PathFXSysUserAdd = "FXSysUserAdd.fxml";
 	public static String m_PathFXListCellSysUser = "ListCellSysUser.fxml";
 	
-	// Тут все для создания шаблона!!!
+	// РўСѓС‚ РІСЃРµ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ С€Р°Р±Р»РѕРЅР°!!!
 	public static String m_PathFXCreateTemplate = "FXCreateTemplateJobs.fxml";
 	public static String m_PathFXCellIntoTmpl = "FXCellIntoTmplJobs.fxml";
-	// Это ячейка для заполненя во вкладке(Tab) "Сотрудники-Задачи"
+	// Р­С‚Рѕ СЏС‡РµР№РєР° РґР»СЏ Р·Р°РїРѕР»РЅРµРЅСЏ РІРѕ РІРєР»Р°РґРєРµ(Tab) "РЎРѕС‚СЂСѓРґРЅРёРєРё-Р—Р°РґР°С‡Рё"
 	public static String m_PathFXCellIntoTmplFilling = "FXCellIntoTmplFilling.fxml";
-	// Тут все для редактирования шаблона!!!
+	// РўСѓС‚ РІСЃРµ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ С€Р°Р±Р»РѕРЅР°!!!
 	public static String m_PathFXEditTemplate = "FXEditTemplateJobs.fxml";
 	
-	// Здесь пути к файлам для окна просмотра шаблона!!!
-	public static String m_PathFXPreviewTemplate = "FXPreviewTemplateJob.fxml";// Основное окно просмотра!!! 
+	// Р—РґРµСЃСЊ РїСѓС‚Рё Рє С„Р°Р№Р»Р°Рј РґР»СЏ РѕРєРЅР° РїСЂРѕСЃРјРѕС‚СЂР° С€Р°Р±Р»РѕРЅР°!!!
+	public static String m_PathFXPreviewTemplate = "FXPreviewTemplateJob.fxml";// РћСЃРЅРѕРІРЅРѕРµ РѕРєРЅРѕ РїСЂРѕСЃРјРѕС‚СЂР°!!! 
 	public static String m_PathFXListCellTmplJob = "ListCellTmplJob.fxml";
 	
-	// Основной лист для отображения шаблона задания при редактировании и наполнении!!!
-	// Наверно всетаки надо ДВА РАЗНЫХ!!!
+	// РћСЃРЅРѕРІРЅРѕР№ Р»РёСЃС‚ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° Р·Р°РґР°РЅРёСЏ РїСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё Рё РЅР°РїРѕР»РЅРµРЅРёРё!!!
+	// РќР°РІРµСЂРЅРѕ РІСЃРµС‚Р°РєРё РЅР°РґРѕ Р”Р’Рђ Р РђР—РќР«РҐ!!!
 	public static String m_PathFXAPaneTemplateJobs = "FXAPaneTemplateJobs.fxml";
-	// Это в главном окне во втором табе "Сотрудники-Задачи"
+	// Р­С‚Рѕ РІ РіР»Р°РІРЅРѕРј РѕРєРЅРµ РІРѕ РІС‚РѕСЂРѕРј С‚Р°Р±Рµ "РЎРѕС‚СЂСѓРґРЅРёРєРё-Р—Р°РґР°С‡Рё"
 	public static String m_PathFXAPaneTemplateFilling = "FXAPaneTemplateFilling.fxml";
 	
 	public static String m_PathFXMessageWaitFxml = "MessageWait.fxml";
 
-	// Основной-корневой путь у файлам в firebase storage cloud!!!
+	// РћСЃРЅРѕРІРЅРѕР№-РєРѕСЂРЅРµРІРѕР№ РїСѓС‚СЊ Сѓ С„Р°Р№Р»Р°Рј РІ firebase storage cloud!!!
 	public static String PATH_NAME_UPLOADS_MAIN = "uploads/";
 	
-	// Название таблиц(веток JSON) в realtime database:
+	// РќР°Р·РІР°РЅРёРµ С‚Р°Р±Р»РёС†(РІРµС‚РѕРє JSON) РІ realtime database:
 	public static String FB_users = "users";
 	public static String FB_my_users_jobs = "my_users_jobs";
 	
-	// Основной узел настроек для всего и шаблонов и всяких там объктов и вообще настроек!!!
+	// РћСЃРЅРѕРІРЅРѕР№ СѓР·РµР» РЅР°СЃС‚СЂРѕРµРє РґР»СЏ РІСЃРµРіРѕ Рё С€Р°Р±Р»РѕРЅРѕРІ Рё РІСЃСЏРєРёС… С‚Р°Рј РѕР±СЉРєС‚РѕРІ Рё РІРѕРѕР±С‰Рµ РЅР°СЃС‚СЂРѕРµРє!!!
 	public static String FB_my_owner_settings = "my_owner_settings";
 	
 		
 	
-	// Значения высоты ячейки списка шаблона и ширины контрола в этой ячейки
-	// по умолчанию!!!
+	// Р—РЅР°С‡РµРЅРёСЏ РІС‹СЃРѕС‚С‹ СЏС‡РµР№РєРё СЃРїРёСЃРєР° С€Р°Р±Р»РѕРЅР° Рё С€РёСЂРёРЅС‹ РєРѕРЅС‚СЂРѕР»Р° РІ СЌС‚РѕР№ СЏС‡РµР№РєРё
+	// РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ!!!
 	public static String Height_cell_start = "25";
 	public static String Width_control_start = "200";
 	
 	
-	// Это все сущности-атрибуты!!!
-	public static String MyPhoneID_ = "MyPhoneID_";// Это название-приставка к основному объекту User!!!
-	public static String NoFB_MyIDSysUserSelected = "MyIDSysUserSelected";// Это запомнили временно ID SysUser , когда нажимаем кнопку "Задачи"!!!
-	public static String FB_MyIDUserSelected = "MyIDUserSelected";// Это слушаем, кто выбран, когда нажимаем кнопку "Задачи"!!!
-	public static String FB_MyIDTmplSelected = "MyIDTmplSelected";// Это слушаем(это шаблон!), кто выбран, когда нажимаем кнопку "Задачи"!!!
+	// Р­С‚Рѕ РІСЃРµ СЃСѓС‰РЅРѕСЃС‚Рё-Р°С‚СЂРёР±СѓС‚С‹!!!
+	public static String MyPhoneID_ = "MyPhoneID_";// Р­С‚Рѕ РЅР°Р·РІР°РЅРёРµ-РїСЂРёСЃС‚Р°РІРєР° Рє РѕСЃРЅРѕРІРЅРѕРјСѓ РѕР±СЉРµРєС‚Сѓ User!!!
+	public static String NoFB_MyIDSysUserSelected = "MyIDSysUserSelected";// Р­С‚Рѕ Р·Р°РїРѕРјРЅРёР»Рё РІСЂРµРјРµРЅРЅРѕ ID SysUser , РєРѕРіРґР° РЅР°Р¶РёРјР°РµРј РєРЅРѕРїРєСѓ "Р—Р°РґР°С‡Рё"!!!
+	public static String FB_MyIDUserSelected = "MyIDUserSelected";// Р­С‚Рѕ СЃР»СѓС€Р°РµРј, РєС‚Рѕ РІС‹Р±СЂР°РЅ, РєРѕРіРґР° РЅР°Р¶РёРјР°РµРј РєРЅРѕРїРєСѓ "Р—Р°РґР°С‡Рё"!!!
+	public static String FB_MyIDTmplSelected = "MyIDTmplSelected";// Р­С‚Рѕ СЃР»СѓС€Р°РµРј(СЌС‚Рѕ С€Р°Р±Р»РѕРЅ!), РєС‚Рѕ РІС‹Р±СЂР°РЅ, РєРѕРіРґР° РЅР°Р¶РёРјР°РµРј РєРЅРѕРїРєСѓ "Р—Р°РґР°С‡Рё"!!!
 
 	public static String FB_my_priority = "my_priority";
 	public static String FB_my_status = "my_status";

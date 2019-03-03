@@ -42,7 +42,7 @@ public class CSysUserAddController implements Initializable{
 	private PasswordField fxTxtPassToo;
 	@FXML
 	private Button fxBtnAddSysUser;
-	 // Добавляем приоритет!!!
+	 // Р”РѕР±Р°РІР»СЏРµРј РїСЂРёРѕСЂРёС‚РµС‚!!!
     @FXML
     private void AddSysUser(ActionEvent event) 
     {
@@ -50,9 +50,9 @@ public class CSysUserAddController implements Initializable{
     	{
     		if(!fxTxtPass.getText().equals(fxTxtPassToo.getText()))
     		{
-    			System.out.println("Пароли не совпадают!");
+    			System.out.println("РџР°СЂРѕР»Рё РЅРµ СЃРѕРІРїР°РґР°СЋС‚!");
     			CMyToast.makeText(CLPSMain.stage,
-    					"Пароли не совпадают!",
+    					"РџР°СЂРѕР»Рё РЅРµ СЃРѕРІРїР°РґР°СЋС‚!",
     					CMyToast.TOAST_SHORT, CMyToast.TOAST_ERROR);
     			return;
     		}
@@ -63,7 +63,7 @@ public class CSysUserAddController implements Initializable{
     		UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
     		System.out.println("Successfully created new user: " + userRecord.getUid());
     		
-    		// Здесь добавим запись в my_sys_users_binding
+    		// Р—РґРµСЃСЊ РґРѕР±Р°РІРёРј Р·Р°РїРёСЃСЊ РІ my_sys_users_binding
     		CStructSysUser tempSysUser = new CStructSysUser(userRecord.getUid(),
     														userRecord.getEmail(), 
     														fxTxtPass.getText(),
@@ -76,15 +76,15 @@ public class CSysUserAddController implements Initializable{
     		///////////////////////////////////////////////////////////
     		//Parent root = FXMLLoader.load(getClass().getResource("FXSysUserEdit.fxml"));
     		CMyToast.makeText(CLPSMain.m_stageFXSysUserEdit,
-    				"Успешное создание sysuser: " + userRecord.getUid(),
+    				"РЈСЃРїРµС€РЅРѕРµ СЃРѕР·РґР°РЅРёРµ sysuser: " + userRecord.getUid(),
 					CMyToast.TOAST_SHORT, CMyToast.TOAST_SUCCESS);
             // [END create_user_with_email]
-    		((Stage)fxBtnAddSysUser.getScene().getWindow()).close();// И успешно закрываем окно!!!
+    		((Stage)fxBtnAddSysUser.getScene().getWindow()).close();// Р СѓСЃРїРµС€РЅРѕ Р·Р°РєСЂС‹РІР°РµРј РѕРєРЅРѕ!!!
         }
 		catch(Exception e) 
 		{
 			CMyToast.makeText(CLPSMain.stage,
-					"Ошибка создания пользователя: " + e.getMessage(),
+					"РћС€РёР±РєР° СЃРѕР·РґР°РЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ: " + e.getMessage(),
 					CMyToast.TOAST_SHORT, CMyToast.TOAST_ERROR);
            e.printStackTrace();
         }

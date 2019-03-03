@@ -1,18 +1,18 @@
 package mygpsx;
 
-//Структура типов задач!!!
+//вЂ”С‚СЂСѓРєС‚СѓСЂР° С‚РёРїРѕРІ Р·Р°РґР°С‡!!!
 public class CStructAttrjob 
 {
 	private String MyAutoIncrement;
-	private String MyIDPrevNode;// ID узда в котором находимся!!!(это или корень или группа в корне)!!!
+	private String MyIDPrevNode;// ID СѓР·РґР° РІ РєРѕС‚РѕСЂРѕРј РЅР°С…РѕРґРёРјСЃВ¤!!!(СЌС‚Рѕ РёР»Рё РєРѕСЂРµРЅСЊ РёР»Рё РіСЂСѓРїРїР° РІ РєРѕСЂРЅРµ)!!!
 	private String MyIDUnique;
 	private String MyCLassAttrjob;
 	private String MyNameAttrjob;
-	private String MyTypeAttrjob; // Тип атрибута(его сущность на экране и в логике программы сущность)
+	private String MyTypeAttrjob; // вЂњРёРї Р°С‚СЂРёР±СѓС‚Р°(РµРіРѕ СЃСѓС‰РЅРѕСЃС‚СЊ РЅР° СЌРєСЂР°РЅРµ Рё РІ Р»РѕРіРёРєРµ РїСЂРѕРіСЂР°РјРјС‹ СЃСѓС‰РЅРѕСЃС‚СЊ)
 	private String MyHeight;
 	private String MyWidth;
 	
-	public CStructAttrjob() {// ОБЯЗАТЕЛЬНО УКАЗЫВАЕМ, А ТО БУДЕТ ОШИБКА ТИПА КАК ЗДЕСЬ БЫЛО:
+	public CStructAttrjob() {
     }// Class mygpsx.CStructPriority is missing a constructor with no arguments !!!!!!!!!!!!!!!!!!
 	
 	public CStructAttrjob(

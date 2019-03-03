@@ -33,7 +33,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class CTUsersJobsController implements Initializable
 {
-	//
+	// 
 	//public static int m_iChangeIndex = 0;
 	//private IntegerProperty index = new SimpleIntegerProperty(-1);
 	@FXML

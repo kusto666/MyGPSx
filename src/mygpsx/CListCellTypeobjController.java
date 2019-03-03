@@ -37,21 +37,21 @@ public class CListCellTypeobjController implements Initializable{
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_typeobj);
     		
-    		Button btn = (Button)event.getSource();// Здесь получили кнопку!!!
+    		Button btn = (Button)event.getSource();// Р—РґРµСЃСЊ РїРѕР»СѓС‡РёР»Рё РєРЅРѕРїРєСѓ!!!
     		System.out.println("btn = " + btn.toString());
-    		AnchorPane ap = (AnchorPane)btn.getParent();// Здесь получили родительскую панель!!!
+    		AnchorPane ap = (AnchorPane)btn.getParent();// Р—РґРµСЃСЊ РїРѕР»СѓС‡РёР»Рё СЂРѕРґРёС‚РµР»СЊСЃРєСѓСЋ РїР°РЅРµР»СЊ!!!
     		System.out.println("ap = " + ap.toString());
     		
-    		ObservableList<Node> listNode = ap.getChildren();// Здесь получаем массив всех дочерних объектов родителя!!! 
-    		Label nodeOne = (Label)listNode.get(5);// Выбераем по ID(ID - это от 0 и т.д. выше!) объект(контролл)
-    		stUniqueIDTypeobj = nodeOne.getText();// Порядок можно посмотреть в Scene Biulder
+    		ObservableList<Node> listNode = ap.getChildren();// Р—РґРµСЃСЊ РїРѕР»СѓС‡Р°РµРј РјР°СЃСЃРёРІ РІСЃРµС… РґРѕС‡РµСЂРЅРёС… РѕР±СЉРµРєС‚РѕРІ СЂРѕРґРёС‚РµР»СЏ!!! 
+    		Label nodeOne = (Label)listNode.get(5);// Р’С‹Р±РµСЂР°РµРј РїРѕ ID(ID - СЌС‚Рѕ РѕС‚ 0 Рё С‚.Рґ. РІС‹С€Рµ!) РѕР±СЉРµРєС‚(РєРѕРЅС‚СЂРѕР»Р»)
+    		stUniqueIDTypeobj = nodeOne.getText();// РџРѕСЂСЏРґРѕРє РјРѕР¶РЅРѕ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РІ Scene Biulder
     		System.out.println("stUniqueIDTypeobj = " + stUniqueIDTypeobj);
     		CLPSMain.mDatabase = FirebaseDatabase.getInstance()
     				.getReference()
     				.child(CMAINCONSTANTS.FB_my_owner_settings)
     				.child(CMAINCONSTANTS.FB_my_typeobj)
     				.child(stUniqueIDTypeobj);
-    		CLPSMain.mDatabase.setValueAsync(null);// Удаляем значение(объект) из базы!!!
+    		CLPSMain.mDatabase.setValueAsync(null);// РЈРґР°Р»СЏРµРј Р·РЅР°С‡РµРЅРёРµ(РѕР±СЉРµРєС‚) РёР· Р±Р°Р·С‹!!!
         }
 		catch(Exception e) 
 		{
@@ -70,8 +70,8 @@ public class CListCellTypeobjController implements Initializable{
 				System.out.println("OnKeyInterPressed");
 				if (event.getCode().equals(KeyCode.ENTER))
 	            {
-					AnchorPane ap = (AnchorPane)fxTxtNameTypeobj.getParent();// Здесь получили родительскую панель!!!
-					ObservableList<Node> listNode = ap.getChildren();// Здесь получаем массив всех дочерних объектов родителя!!! 
+					AnchorPane ap = (AnchorPane)fxTxtNameTypeobj.getParent();// Р—РґРµСЃСЊ РїРѕР»СѓС‡РёР»Рё СЂРѕРґРёС‚РµР»СЊСЃРєСѓСЋ РїР°РЅРµР»СЊ!!!
+					ObservableList<Node> listNode = ap.getChildren();// Р—РґРµСЃСЊ РїРѕР»СѓС‡Р°РµРј РјР°СЃСЃРёРІ РІСЃРµС… РґРѕС‡РµСЂРЅРёС… РѕР±СЉРµРєС‚РѕРІ СЂРѕРґРёС‚РµР»СЏ!!! 
 		    		Label nodeOne = (Label)listNode.get(5);
 		    		stUniqueIDTypeobj = nodeOne.getText();
 		    		

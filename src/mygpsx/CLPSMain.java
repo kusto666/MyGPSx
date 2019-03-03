@@ -101,7 +101,7 @@ public class CLPSMain extends Application
 {
 	private static CLPSMain mInstance;
 	
-	// Пока для тестов - надо реализовать!!!
+	// РџРѕРєР° РґР»СЏ С‚РµСЃС‚РѕРІ - РЅР°РґРѕ СЂРµР°Р»РёР·РѕРІР°С‚СЊ!!!
 	private static final Logger LOGGER = Logger.getLogger(CLPSMain.class.getName());
 	
 	public static FirebaseApp defaultApp;
@@ -109,20 +109,20 @@ public class CLPSMain extends Application
 	public static DatabaseReference mDatabase;
 	public static DatabaseReference mDatabaseRef;
 	public static DatabaseReference mDatabaseRefUsers;
-	 //Firebase - потом обобщим  здесь не оставим!!!
+	 //Firebase - РїРѕС‚РѕРј РѕР±РѕР±С‰РёРј  Р·РґРµСЃСЊ РЅРµ РѕСЃС‚Р°РІРёРј!!!
 	StorageReference storageReference;
 	FirebaseStorage firebasestorage;
 	public static Storage MyGoogleStorage;
 	
 	public static ArrayList<CStructUser> m_localAllMarkersUsersTempMain = null;
 	
-	// Это окно добавления кораблей!!!
+	// Р­С‚Рѕ РѕРєРЅРѕ РґРѕР±Р°РІР»РµРЅРёСЏ РєРѕСЂР°Р±Р»РµР№!!!
 	@FXML
 	public static Parent m_rootAddShip = null;
 	@FXML
 	public static Stage m_stageAddShip = null;
 	
-	// Это окно редактирования кораблей!!!
+	// Р­С‚Рѕ РѕРєРЅРѕ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РєРѕСЂР°Р±Р»РµР№!!!
 	@FXML
 	public static Parent m_rootEditShip = null;
 	@FXML
@@ -200,6 +200,7 @@ public class CLPSMain extends Application
 	@FXML
 	public static Stage m_stageFXSysUserEdit = null;
 
+
 	@FXML
 	TextArea mymsg;
 	@FXML
@@ -234,10 +235,10 @@ public class CLPSMain extends Application
 	@FXML
 	public static FXMLLoader m_Loader;
 
-	// Иконки для информирования удачного или неудачного соединения с инетом!!!
+	// РРєРѕРЅРєРё РґР»СЏ РёРЅС„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ СѓРґР°С‡РЅРѕРіРѕ РёР»Рё РЅРµСѓРґР°С‡РЅРѕРіРѕ СЃРѕРµРґРёРЅРµРЅРёСЏ СЃ РёРЅРµС‚РѕРј!!!
     private static final String MyIconSuccessConn = "src/MyIconSuccessConn.png";
     private static final String MyIconErrorConn = "src/MyIconErrorConn.png";
-    // Строка для проверки инета, проверяем в месте создания MyIconSuccessConn!!!
+    // РЎС‚СЂРѕРєР° РґР»СЏ РїСЂРѕРІРµСЂРєРё РёРЅРµС‚Р°, РїСЂРѕРІРµСЂСЏРµРј РІ РјРµСЃС‚Рµ СЃРѕР·РґР°РЅРёСЏ MyIconSuccessConn!!!
     private static final String MyIsConnectionInet = "http://www.google.com";
     
     // a timer allowing the tray icon to provide a periodic notification event.
@@ -247,17 +248,17 @@ public class CLPSMain extends Application
     public static java.awt.TrayIcon trayIcon;
 
 	@FXML
-    public static CTUsersJobsController m_CTUsersJobsController;// Контроллер отвечает за обмен данными с вкладкой "Сотрудники --> Задачи"
+    public static CTUsersJobsController m_CTUsersJobsController;// РљРѕРЅС‚СЂРѕР»Р»РµСЂ РѕС‚РІРµС‡Р°РµС‚ Р·Р° РѕР±РјРµРЅ РґР°РЅРЅС‹РјРё СЃ РІРєР»Р°РґРєРѕР№ "РЎРѕС‚СЂСѓРґРЅРёРєРё --> Р—Р°РґР°С‡Рё"
 	
 
-	// или Tab #1.
+	// РёР»Рё Tab #1.
 	
-	// Самый главный старт!!!!
+	// РЎР°РјС‹Р№ РіР»Р°РІРЅС‹Р№ СЃС‚Р°СЂС‚!!!!
     @SuppressWarnings("unchecked")
 	@Override
     public void start(Stage st) throws Exception
     {
-    	// Для тестов - надо реализовать!!!!!!!!!!!!!!!!
+    	// Р”Р»СЏ С‚РµСЃС‚РѕРІ - РЅР°РґРѕ СЂРµР°Р»РёР·РѕРІР°С‚СЊ!!!!!!!!!!!!!!!!
     	 Handler consoleHandler = null;
          Handler fileHandler  = null;
          try{
@@ -288,10 +289,10 @@ public class CLPSMain extends Application
     	//LOGGER.info("Logger Name: "+LOGGER.getName());
         
         //LOGGER.warning("Can cause ArrayIndexOutOfBoundsException");
-    	//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Изначально все шаблоны готовы к заполнению!!!
+    	//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// РР·РЅР°С‡Р°Р»СЊРЅРѕ РІСЃРµ С€Р°Р±Р»РѕРЅС‹ РіРѕС‚РѕРІС‹ Рє Р·Р°РїРѕР»РЅРµРЅРёСЋ!!!
     	if(!InitFireBase())
     	{
-    		System.out.println("InitFireBase() - ошибка инициализации!!!");
+    		System.out.println("InitFireBase() - РѕС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё!!!");
     		
     	}
     	else
@@ -300,12 +301,12 @@ public class CLPSMain extends Application
             MyEventListnerFireUsers();
         	root = null;
         	stage = st;
-        	stage.setY(0);// Прикрепили к верху - для удобства отладки снизу)))
+        	stage.setY(0);// РџСЂРёРєСЂРµРїРёР»Рё Рє РІРµСЂС…Сѓ - РґР»СЏ СѓРґРѕР±СЃС‚РІР° РѕС‚Р»Р°РґРєРё СЃРЅРёР·Сѓ)))
         	// sets up the tray icon (using awt code run on the swing thread).
             javax.swing.SwingUtilities.invokeLater(this::addAppToTray);
         	try 
         	{
-        		// Инициализация всех внутренних контролов!!!
+        		// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РІСЃРµС… РІРЅСѓС‚СЂРµРЅРЅРёС… РєРѕРЅС‚СЂРѕР»РѕРІ!!!
         		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
         		root = m_Loader.load();
         		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
@@ -359,14 +360,14 @@ public class CLPSMain extends Application
             		java.util.Optional<ButtonType> result = alert.showAndWait();
             		if (result.get() == buttonTypeYes)
             		{
-            			// Здесь все подчищаем и выходим!!!
+            			// Р—РґРµСЃСЊ РІСЃРµ РїРѕРґС‡РёС‰Р°РµРј Рё РІС‹С…РѕРґРёРј!!!
             			Platform.exit();
                 		System.out.println("Exit!!!");
                 		System.exit(0);
             		} 
             		else
             		{
-            			t.consume();// Отмена выхода из программы!!!
+            			t.consume();// РћС‚РјРµРЅР° РІС‹С…РѕРґР° РёР· РїСЂРѕРіСЂР°РјРјС‹!!!
             		}
                 }
             });
@@ -377,13 +378,13 @@ public class CLPSMain extends Application
 
     }
     
-    // вызываем в контроллере!!! - btnRefreshMap
+    // РІС‹Р·С‹РІР°РµРј РІ РєРѕРЅС‚СЂРѕР»Р»РµСЂРµ!!! - btnRefreshMap
  	@SuppressWarnings("unchecked")
 	public void reload() throws IOException
     {
     	if(!InitFireBase())
     	{
-    		System.out.println("InitFireBase() - ошибка инициализации!!!");
+    		System.out.println("InitFireBase() - РѕС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё!!!");
     	}
     	else
     	{
@@ -430,14 +431,14 @@ public class CLPSMain extends Application
             		java.util.Optional<ButtonType> result = alert.showAndWait();
             		if (result.get() == buttonTypeYes)
             		{
-            			// Здесь все подчищаем и выходим!!!
+            			// Р—РґРµСЃСЊ РІСЃРµ РїРѕРґС‡РёС‰Р°РµРј Рё РІС‹С…РѕРґРёРј!!!
             			Platform.exit();
                 		System.out.println("Exit!!!");
                 		System.exit(0);
             		} 
             		else
             		{
-            			t.consume();// Отмена выхода из программы!!!
+            			t.consume();// РћС‚РјРµРЅР° РІС‹С…РѕРґР° РёР· РїСЂРѕРіСЂР°РјРјС‹!!!
             		}
                 }
             });
@@ -494,7 +495,7 @@ public class CLPSMain extends Application
         LOGGER.finer("Finest example on LOGGER handler completed.");*/
     }
     
-    // Здесь инициализируем подключение к базе данных!!!
+    // Р—РґРµСЃСЊ РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…!!!
     @FXML
     private boolean InitFireBase()
     {
@@ -528,7 +529,7 @@ public class CLPSMain extends Application
 
 				FirebaseAuth.getInstance();
 				FirebaseDatabase.getInstance();
-//////////////////////////Что-то интересное - пока просто написасал)))//////////////////////////////////////////
+//////////////////////////Р§С‚Рѕ-С‚Рѕ РёРЅС‚РµСЂРµСЃРЅРѕРµ - РїРѕРєР° РїСЂРѕСЃС‚Рѕ РЅР°РїРёСЃР°СЃР°Р»)))//////////////////////////////////////////
 				System.out.println("START FirebaseStorage>>>");
 				/*BigQuery bigquery = BigQueryOptions.newBuilder().setProjectId("mygpsone-kusto1")
 			            .setCredentials(
@@ -569,9 +570,9 @@ public class CLPSMain extends Application
 				}
 				
 				//ServiceAccount saccount = MyGoogleStorage.getServiceAccount("mygpsone-kusto1");
-				//System.out.println(saccount.getEmail());// Так для теста!!!
+				//System.out.println(saccount.getEmail());// РўР°Рє РґР»СЏ С‚РµСЃС‚Р°!!!
 				//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				// Это типа была проверка записи в базу!!!
+				// Р­С‚Рѕ С‚РёРїР° Р±С‹Р»Р° РїСЂРѕРІРµСЂРєР° Р·Р°РїРёСЃРё РІ Р±Р°Р·Сѓ!!!
 				////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				/*BlobId blobId = BlobId.of("mygpsone-kusto1.appspot.com", "uploads/test");
 				BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("text/plain").build();
@@ -584,13 +585,13 @@ public class CLPSMain extends Application
 				Bucket bucket = MyGoogleStorage.get(("mygpsone-kusto1.appspot.com"));
 				com.google.cloud.storage.Blob blob2 = bucket.create("uploads/jjjpppggg.jpg", targetStream,"image/jpg");*/
 				//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				// Это типа была проверка записи в базу!!! - конец проверки!!!
+				// Р­С‚Рѕ С‚РёРїР° Р±С‹Р»Р° РїСЂРѕРІРµСЂРєР° Р·Р°РїРёСЃРё РІ Р±Р°Р·Сѓ!!! - РєРѕРЅРµС† РїСЂРѕРІРµСЂРєРё!!!
 				////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			}
 			else
 			{
-				System.out.println("ОШИБОК СОЗДАНИЯ defaultApp.getName() НЕТ!!!");
+				System.out.println("РћРЁРР‘РћРљ РЎРћР—Р”РђРќРРЇ defaultApp.getName() РќР•Рў!!!");
 			}
 		} 
     	catch (Exception ex) 
@@ -621,7 +622,7 @@ public class CLPSMain extends Application
 						{
 							try
 							{
-								// Выбираем , что слушать, какую ветку данных!!!
+								// Р’С‹Р±РёСЂР°РµРј , С‡С‚Рѕ СЃР»СѓС€Р°С‚СЊ, РєР°РєСѓСЋ РІРµС‚РєСѓ РґР°РЅРЅС‹С…!!!
 					            Iterable<DataSnapshot> contactChildren = arg0.getChildren();
 	
 					            m_alUsersAll = new ArrayList<CStructUser>();
@@ -631,7 +632,7 @@ public class CLPSMain extends Application
 				                {
 					            	CStructUser user = Users.getValue(CStructUser.class);
 		                        	System.out.println( "CUser user = " + user.getMyNameShip());
-		                        	m_alUsersAll.add(user);// Заполнили массив!!!
+		                        	m_alUsersAll.add(user);// Р—Р°РїРѕР»РЅРёР»Рё РјР°СЃСЃРёРІ!!!
 			                	}
 					            m_ObservableListUsers = FXCollections.observableArrayList (m_alUsersAll);
 					            System.out.println( "m_ObservableListUsers.size() = " + m_ObservableListUsers.size());
@@ -682,7 +683,7 @@ public class CLPSMain extends Application
 				            		    		          LatLong ll = new LatLong(dLat,dLong); 
 				            		    		          try 
 				            		    		          {
-				            		    		        	  //CMainController.map = null; // - это для теста ошибки и всплывающего окна в трее!!!
+				            		    		        	  //CMainController.map = null; // - СЌС‚Рѕ РґР»СЏ С‚РµСЃС‚Р° РѕС€РёР±РєРё Рё РІСЃРїР»С‹РІР°СЋС‰РµРіРѕ РѕРєРЅР° РІ С‚СЂРµРµ!!!
 				            		    		        	  CMainController.MyGoogleMap.setCenter(ll);
 				            		    		          }
 				            		    		          catch (Exception e) 
@@ -691,18 +692,18 @@ public class CLPSMain extends Application
 				            		    		        	  e.printStackTrace();
 				            		    		        	  trayIcon.displayMessage(
 				            		    		        			  	CStrings.m_APP_ERROR,
-				            	                                        "Ошибка инициализации карты ->\n перезапустите программу!",
+				            	                                        "РћС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РєР°СЂС‚С‹ ->\n РїРµСЂРµР·Р°РїСѓСЃС‚РёС‚Рµ РїСЂРѕРіСЂР°РјРјСѓ!",
 				            	                                        java.awt.TrayIcon.MessageType.INFO
 				            	                                );
 														  }
 				            		    		         
 			            		    		          
 			            		    		          InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-			            		    		          infoWindowOptions.content("<h4>Имя судна:</h4>" + 
+			            		    		          infoWindowOptions.content("<h4>РРјСЏ СЃСѓРґРЅР°:</h4>" + 
 			          										"<u style=\"color: blue;\"><h4>" + us.getMyNameShip() + "</h4></u>" +
-			          										"<h4>Капитан:</h4>" + 
+			          										"<h4>РљР°РїРёС‚Р°РЅ:</h4>" + 
 			          										"<u style=\"color: blue;\"><h4>" + us.getMyDirectorShip() + "</h4></u>" +
-			          										"<h4>Описание судна:</h4>" + 
+			          										"<h4>РћРїРёСЃР°РЅРёРµ СЃСѓРґРЅР°:</h4>" + 
 			          										"<u style=\"color: blue;\"><h4>" + us.getMyShortDescriptionShip() + "</h4></u>");
 			            		    		          MyInfoWindow = new InfoWindow(infoWindowOptions);
 			            		    		          
@@ -719,12 +720,12 @@ public class CLPSMain extends Application
 			            					});
 			            				    if(CMainController.MyGoogleMap == null)
 			            		            {
-			            				    	CMainController.fxTxtArLogs.setText("Ошибка инициализации map!!!");
+			            				    	CMainController.fxTxtArLogs.setText("РћС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё map!!!");
 			            				    	/*CMyToast.makeText(CLPSMain.stage, 
-			            				    			"Ошибка инициализации map!", 
+			            				    			"РћС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё map!", 
 			            				    			CMyToast.TOAST_SHORT, CMyToast.TOAST_WARN);*/
-			            		            	System.out.println("Ошибка инициализации map!!!");
-			            		            	//CLPSMain.fxLbMessage.setText("Ошибка инициализации\nкарты!\nПерегрузите карту,\nнажимте кнопку:\n\"Обновить карту\"");
+			            		            	System.out.println("РћС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё map!!!");
+			            		            	//CLPSMain.fxLbMessage.setText("РћС€РёР±РєР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё\nРєР°СЂС‚С‹!\nРџРµСЂРµРіСЂСѓР·РёС‚Рµ РєР°СЂС‚Сѓ,\nРЅР°Р¶РёРјС‚Рµ РєРЅРѕРїРєСѓ:\n\"РћР±РЅРѕРІРёС‚СЊ РєР°СЂС‚Сѓ\"");
 			            		            	//CLPSMain.btnRestartMod.setVisible(true);
 			            		            }
 			            		            else
@@ -767,6 +768,12 @@ public class CLPSMain extends Application
 		//});
     }
     
+    // Р—РґРµСЃСЊ Р·Р°РіСЂСѓР¶Р°РµРј СЃРїРёСЃРѕРє РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РІРѕ РІРєР»Р°РґРєСѓ "СЃРѕРѕР±С‰РµРЅРёСЏ"
+    private void MyLoadAndListenUserMsg()
+    {
+    	
+    }
+    
     
     @FXML
     private void MyEventListnerFireMessage()
@@ -789,7 +796,7 @@ public class CLPSMain extends Application
 						{
 							try
 							{
-								// Выбираем , что слушать, какую ветку данных!!!
+								// Р’С‹Р±РёСЂР°РµРј , С‡С‚Рѕ СЃР»СѓС€Р°С‚СЊ, РєР°РєСѓСЋ РІРµС‚РєСѓ РґР°РЅРЅС‹С…!!!
 								DataSnapshot messagesSnapshot = arg0;
 					            Iterable<DataSnapshot> messageChildren = messagesSnapshot.getChildren();
 					            //System.out.println("arg0 = " + arg0.getChildrenCount());
@@ -839,7 +846,7 @@ public class CLPSMain extends Application
     	try
     	{
         	mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        	// Временно загружаем маркеры и проверяем здесь!!!    	
+        	// Р’СЂРµРјРµРЅРЅРѕ Р·Р°РіСЂСѓР¶Р°РµРј РјР°СЂРєРµСЂС‹ Рё РїСЂРѕРІРµСЂСЏРµРј Р·РґРµСЃСЊ!!!    	
             mDatabase.addValueEventListener(new ValueEventListener() 
             {
             	@Override
@@ -853,11 +860,11 @@ public class CLPSMain extends Application
         				DataSnapshot usersSnapshot = arg0;
                         Iterable<DataSnapshot> contactChildren = usersSnapshot.getChildren();
 
-                     // Здесь перебераем все устройства, свое по phoneID игнорируем, а по другим
-                        // выставляем маркеры!!! Как то так))))
+                     // Р—РґРµСЃСЊ РїРµСЂРµР±РµСЂР°РµРј РІСЃРµ СѓСЃС‚СЂРѕР№СЃС‚РІР°, СЃРІРѕРµ РїРѕ phoneID РёРіРЅРѕСЂРёСЂСѓРµРј, Р° РїРѕ РґСЂСѓРіРёРј
+                        // РІС‹СЃС‚Р°РІР»СЏРµРј РјР°СЂРєРµСЂС‹!!! РљР°Рє С‚Рѕ С‚Р°Рє))))
                         for (DataSnapshot arg : contactChildren)
                         {
-                        	System.out.println( "----------Начало маркера!!!-------------" );
+                        	System.out.println( "----------РќР°С‡Р°Р»Рѕ РјР°СЂРєРµСЂР°!!!-------------" );
                         	try 
                         	{
                         		System.out.println(" for (DataSnapshot arg : contactChildren)");
@@ -887,7 +894,7 @@ public class CLPSMain extends Application
 								e.printStackTrace();
 							}
 
-                            System.out.println( "----------Конец маркера!!!-------------" );
+                            System.out.println( "----------РљРѕРЅРµС† РјР°СЂРєРµСЂР°!!!-------------" );
                         }
     				}
             		catch (Exception ex)
@@ -900,7 +907,7 @@ public class CLPSMain extends Application
     			@Override
     			public void onCancelled(DatabaseError arg0) {
     				System.out.println(arg0.getMessage() );
-    				System.out.println( "Firebase - косяк!!!" );
+    				System.out.println( "Firebase - РєРѕСЃСЏРє!!!" );
     			}
     		});
 		} 
@@ -951,7 +958,7 @@ public class CLPSMain extends Application
             is = new BufferedInputStream(new FileInputStream(MyIconSuccessConn));
   
             
-            // Проверка инета!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // РџСЂРѕРІРµСЂРєР° РёРЅРµС‚Р°!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             URL urlTestInet = new URL(MyIsConnectionInet);
             URLConnection conn = urlTestInet.openConnection();
             conn.connect();
@@ -984,11 +991,11 @@ public class CLPSMain extends Application
             	int dialogResult = JOptionPane.showConfirmDialog(null, CStrings.m_APP_NAME_QUESTION_EXIT, CStrings.m_APP_NAME, JOptionPane.YES_NO_OPTION);
 
             	if (dialogResult == JOptionPane.YES_OPTION) {
-            		// Здесь все подчищаем и выходим!!!
+            		// Р—РґРµСЃСЊ РІСЃРµ РїРѕРґС‡РёС‰Р°РµРј Рё РІС‹С…РѕРґРёРј!!!
         			notificationTimer.cancel();
         			Platform.exit();
         			tray.remove(trayIcon);
-            		System.out.println("Выход->");
+            		System.out.println("Р’С‹С…РѕРґ->");
             		System.exit(0);
             	}
             });
@@ -1008,7 +1015,7 @@ public class CLPSMain extends Application
                             javax.swing.SwingUtilities.invokeLater(() ->
                                 trayIcon.displayMessage(
                                         CStrings.m_APP_NAME,
-                                        "Я - время): " + timeFormat.format(new Date()),
+                                        "РЇ - РІСЂРµРјСЏ): " + timeFormat.format(new Date()),
                                         java.awt.TrayIcon.MessageType.INFO
                                 )
                             );
@@ -1022,7 +1029,7 @@ public class CLPSMain extends Application
             tray.add(trayIcon);
             trayIcon.displayMessage(
                     CStrings.m_APP_NAME,
-                    "Я - время): " + timeFormat.format(new Date()),
+                    "РЇ - РІСЂРµРјСЏ): " + timeFormat.format(new Date()),
                     java.awt.TrayIcon.MessageType.INFO
             );
         } 
@@ -1040,7 +1047,7 @@ public class CLPSMain extends Application
 	        	tray.add(trayIcon);
 	        	trayIcon.displayMessage(
 	                    CStrings.m_APP_NAME,
-	                    "Проверьте подключение!",
+	                    "РџСЂРѕРІРµСЂСЊС‚Рµ РїРѕРґРєР»СЋС‡РµРЅРёРµ!",
 	                    java.awt.TrayIcon.MessageType.ERROR
 	            );
 			} 
