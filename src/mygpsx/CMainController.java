@@ -1138,7 +1138,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				System.out.println("URL = " + img_url);
 				fxHlinkDoc.setText(img_url);
 				
-				fxHlinkDoc.setText("https://firebasestorage.googleapis.com/v0/b/mygpsone-kusto1.appspot.com/o/uploads%2Forig.jpg?alt=media&token=a6248977-f176-4d33-a2b0-9ffbd8c9a8b6");
+				//fxHlinkDoc.setText("https://firebasestorage.googleapis.com/v0/b/mygpsone-kusto1.appspot.com/o/uploads%2Forig.jpg?alt=media&token=a6248977-f176-4d33-a2b0-9ffbd8c9a8b6");
 				
 				
 				fxHlinkDoc.setOnAction(new EventHandler<ActionEvent>() {
