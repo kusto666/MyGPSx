@@ -2,36 +2,36 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2019-03-04T22:27:08</date>
-  <millis>1551727628740</millis>
+  <date>2019-03-05T12:25:28</date>
+  <millis>1551777928678</millis>
   <sequence>0</sequence>
   <logger>mygpsx.CLPSMain</logger>
   <level>CONFIG</level>
   <class>mygpsx.CLPSMain</class>
   <method>start</method>
-  <thread>12</thread>
+  <thread>13</thread>
   <message>Configuration done.</message>
 </record>
 <record>
-  <date>2019-03-04T22:27:08</date>
-  <millis>1551727628765</millis>
+  <date>2019-03-05T12:25:28</date>
+  <millis>1551777928682</millis>
   <sequence>1</sequence>
   <logger>mygpsx.CLPSMain</logger>
   <level>FINE</level>
   <class>mygpsx.CLPSMain</class>
   <method>start</method>
-  <thread>12</thread>
+  <thread>13</thread>
   <message>Finer logged</message>
 </record>
 <record>
-  <date>2019-03-04T22:27:08</date>
-  <millis>1551727628765</millis>
+  <date>2019-03-05T12:25:28</date>
+  <millis>1551777928682</millis>
   <sequence>2</sequence>
   <logger>mygpsx.CLPSMain</logger>
   <level>FINER</level>
   <class>mygpsx.CLPSMain</class>
   <method>start</method>
-  <thread>12</thread>
+  <thread>13</thread>
   <message>Finest example on LOGGER handler completed.</message>
 </record>
 </log>
