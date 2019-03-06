@@ -258,6 +258,10 @@ public class CLPSMain extends Application
 	@Override
     public void start(Stage st) throws Exception
     {
+    	CDateTime MyTestTime = new CDateTime();
+    	
+    	
+    	
     	// Для тестов - надо реализовать!!!!!!!!!!!!!!!!
     	 Handler consoleHandler = null;
          Handler fileHandler  = null;
@@ -466,6 +470,9 @@ public class CLPSMain extends Application
         System.setProperty("http.proxyUserName","user");
         System.setProperty("http.proxyPassword","pass");
         System.setProperty("http.proxySet","true");
+        
+        
+        
        /* Handler consoleHandler = null;
         Handler fileHandler  = null;
         try{
