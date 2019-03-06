@@ -5,6 +5,7 @@ public class CMessages
 	public String msg_title;
 	public String msg_body;
 	public String msg_time;
+	public String msg_text_time;
 	private String MyFileUrl;
 	public String msg_status;
 	
@@ -30,6 +31,7 @@ public class CMessages
     {
     	this.MyFileUrl = MyFileUrl;
     }
+    
    /* public String GetTitle()
     {
     	return msg_title;

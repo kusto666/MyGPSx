@@ -16,24 +16,28 @@ public class CDateTime
 	{
 		m_MyDate = new Date();
 		m_MyLongTime = System.currentTimeMillis()/* / 1000L*/;
-		System.out.println("UNIX m_MyLongTime = " + m_MyLongTime.toString());
+		//System.out.println("UNIX m_MyLongTime = " + m_MyLongTime.toString());
 		
-		m_MyDate = new Date(m_MyLongTime);
-        System.out.println(m_MyDate);  
+		//m_MyDate = new Date(m_MyLongTime);
+        //System.out.println(m_MyDate);  
         
         //SimpleDateFormat df1 = new SimpleDateFormat("dd/MM/yy");
-        SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
-        String dateText = format.format(m_MyDate);
-        System.out.println(dateText);
+        //SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
+        //SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
+        //String dateText = format.format(m_MyDate);
+        //System.out.println(dateText);
         
 	}
 	
-	public Long GetLongTime()
+	public Long GetCurrLongTime()
 	{
 		return m_MyLongTime;
 	}
-	/*public String GetPrintTime()
+	// Вызывается для конвертации текущего UNIX-времени в удобочитаемый формат
+	public static String GetPrintTime(Long lTime)
 	{
-		
-	}*/
+		Date dDate = new Date(lTime);
+		SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
+		return format.format(dDate);
+	}
 }

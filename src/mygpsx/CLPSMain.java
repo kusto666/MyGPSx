@@ -259,8 +259,10 @@ public class CLPSMain extends Application
     public void start(Stage st) throws Exception
     {
     	CDateTime MyTestTime = new CDateTime();
+    	System.out.println("GetCurrLongTime = " + MyTestTime.GetCurrLongTime());
     	
-    	
+    	//MyTestTime.GetPrintTime(MyTestTime.GetCurrLongTime());
+    	System.out.println("GetPrintTime = " + MyTestTime.GetPrintTime(MyTestTime.GetCurrLongTime()));
     	
     	// Для тестов - надо реализовать!!!!!!!!!!!!!!!!
     	 Handler consoleHandler = null;

@@ -706,8 +706,16 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	mDatabaseRefSendMsg = FirebaseDatabase.getInstance().getReference().child("message_to_android");
     	 try 
     	 {
+    		 CMessages newMsgToUserAndroid = new CMessages();// Новое сообщение!!!
+    		 CDateTime newCurrDate = new CDateTime(); // Берем текущее время для записи в базу!!!
+    		 
     		 
     		 mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValueAsync(taOutMsg.getText().toString());
+    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_status").setValueAsync("no_read");
+    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_time").
+    		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
+    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
+    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_title").setValueAsync(taOutMsg.getText().toString());
              taOutMsg.clear();
              System.out.println("Типа послали сообщение!!!");
          } 
