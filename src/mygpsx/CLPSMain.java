@@ -109,6 +109,7 @@ public class CLPSMain extends Application
 	public static DatabaseReference mDatabase;
 	public static DatabaseReference mDatabaseRef;
 	public static DatabaseReference mDatabaseRefUsers;
+	public static DatabaseReference mDatabaseRefUsersMsg;
 	 //Firebase - потом обобщим  здесь не оставим!!!
 	StorageReference storageReference;
 	FirebaseStorage firebasestorage;
@@ -205,6 +206,8 @@ public class CLPSMain extends Application
 	TextArea mymsg;
 	@FXML
 	static ListView<CStructUser> m_lvAllUsers;
+	@FXML
+	static ListView<CStructUser> m_lvAllUsersMsg;
 	 /*@FXML
 	 public static AnchorPane fxMessageWait;*/
 	 @FXML
@@ -218,13 +221,18 @@ public class CLPSMain extends Application
 	@FXML
 	public static Stage stage;
 	
+	// Это для отображения кораблей(судов) в левой колонке - "Флот(Осн. объекты)" ///////////////////////////
 	public static ObservableList<CStructUser> m_ObservableListUsers;
 	@FXML
 	static ArrayList<CStructUser> m_alUsersAll = null;
-
 	@FXML
 	public static ListView<CStructUser> fxListView;
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	// Здесь будем отображать пользователейв переписке!!!
+	public static ObservableList<CStructUser> m_ObservableListUsersMsg;
+	@FXML
+	static ArrayList<CStructUser> m_alUsersAllMsg = null;
 	@FXML
 	public static ListView<CStructUser> fxListUsersMsg;
 	
@@ -305,6 +313,7 @@ public class CLPSMain extends Application
     	{
     		btnRefreshAllMarkers();
             MyEventListnerFireUsers();
+            MyLoadAndListenUserMsg();
         	root = null;
         	stage = st;
         	stage.setY(0);// Прикрепили к верху - для удобства отладки снизу)))
@@ -317,6 +326,7 @@ public class CLPSMain extends Application
         		root = m_Loader.load();
         		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
         		fxListView = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListView");
+        		fxListUsersMsg = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListUsersMsg");
         		//fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
         		fxLbMessage = (Label)m_Loader.getNamespace().get("fxLbMessage");
         		btnRestartMod = (Button)m_Loader.getNamespace().get("btnRestartMod");
@@ -397,6 +407,7 @@ public class CLPSMain extends Application
     		//fxMessageWait.setVisible(false);
     		btnRefreshAllMarkers();
             MyEventListnerFireUsers();
+            MyLoadAndListenUserMsg();
         	root = null;
 
         	try 
@@ -611,10 +622,9 @@ public class CLPSMain extends Application
     	return bRet;
     }
     
-
+    // Это для отображения кораблей(судов) в левой колонке - "Флот(Осн. объекты)" ///////////////////////////
     public static void MyEventListnerFireUsers()
     {
-    	
 		//EventQueue.invokeLater(new Runnable()
     	//Platform.setImplicitExit(false);
     	//Platform.runLater(new Runnable()
@@ -780,7 +790,158 @@ public class CLPSMain extends Application
     // Здесь загружаем список пользователей во вкладку "сообщения"
     private void MyLoadAndListenUserMsg()
     {
-    	
+				try
+				{
+					 mDatabaseRefUsersMsg = FirebaseDatabase.getInstance().getReference().child(CMAINCONSTANTS.FB_users);
+					 mDatabaseRefUsersMsg.addValueEventListener(new ValueEventListener()
+					 {
+						@Override
+						public void onDataChange(DataSnapshot arg0)
+						{
+							try
+							{
+								// Выбираем , что слушать, какую ветку данных!!!
+					            Iterable<DataSnapshot> contactChildren = arg0.getChildren();
+	
+					            m_alUsersAllMsg = new ArrayList<CStructUser>();
+				            	m_lvAllUsersMsg = new ListView<CStructUser>();
+				            	
+					            for (DataSnapshot Users : contactChildren)
+				                {
+					            	CStructUser user = Users.getValue(CStructUser.class);
+		                        	System.out.println( "CUser user = " + user.getMyNameShip());
+		                        	m_alUsersAllMsg.add(user);// Заполнили массив!!!
+			                	}
+					            m_ObservableListUsersMsg = FXCollections.observableArrayList (m_alUsersAllMsg);
+					            System.out.println( "m_ObservableListUsersMsg.size() = " + m_ObservableListUsersMsg.size());
+					            
+								if(fxListUsersMsg == null)
+								{
+									fxListUsersMsg = new ListView<CStructUser>();
+								}
+					            
+					            System.out.println( "fxListUsersMsg.getItems().size() = " + fxListUsersMsg.getItems().size());
+					            try 
+					            {
+				/*	            	Platform.runLater(
+			            			  () -> {
+			            				  fxListView.setItems(m_ObservableListUsers);
+			            				 fxListView.setPrefSize(200, 500);
+			            				 fxListView.setCellFactory(new Callback<ListView<CStructUser>, ListCell<CStructUser>>() 
+			            				 {
+											
+											@Override
+											public ListCell<CStructUser> call(ListView<CStructUser> param) 
+											{
+												System.out.println("return new CUserCell();");
+												return new CUserCell();
+											}
+										});
+			            				 
+			            				  fxListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			            		    			@Override
+			            		    			public void handle(MouseEvent click)
+			            		    			{
+			            		    				Marker MyMarker = null;
+			            		    				InfoWindow MyInfoWindow = null;
+			            		    				MarkerOptions markerOptions;
+			            		    				
+			            		    				 
+			            		    				
+			            		    		        if (click.getClickCount() == 2) 
+			            		    		        {
+			            		    		        	TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
+			            		    		    		javafx.scene.control.SingleSelectionModel<Tab> selectionModel = tb.getSelectionModel();
+			            		    		    		selectionModel.select(0);
+			            		    		    		
+				            		    		          CStructUser us = fxListView.getSelectionModel().getSelectedItem();
+				            		    		          System.out.println("tempUser = " + us.getMyNameShip());
+				            		    		          double dLat = Double.parseDouble(us.getMyLatitude());
+				            		    		          double dLong = Double.parseDouble(us.getMyLongitude());
+				            		    		          LatLong ll = new LatLong(dLat,dLong); 
+				            		    		          try 
+				            		    		          {
+				            		    		        	  //CMainController.map = null; // - это для теста ошибки и всплывающего окна в трее!!!
+				            		    		        	  CMainController.MyGoogleMap.setCenter(ll);
+				            		    		          }
+				            		    		          catch (Exception e) 
+				            		    		          {
+				            		    		        	  CMainController.fxTxtArLogs.setText(e.getMessage());
+				            		    		        	  e.printStackTrace();
+				            		    		        	  trayIcon.displayMessage(
+				            		    		        			  	CStrings.m_APP_ERROR,
+				            	                                        "Ошибка инициализации карты ->\n перезапустите программу!",
+				            	                                        java.awt.TrayIcon.MessageType.INFO
+				            	                                );
+														  }
+				            		    		         
+			            		    		          
+			            		    		          InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+			            		    		          infoWindowOptions.content("<h4>Имя судна:</h4>" + 
+			          										"<u style=\"color: blue;\"><h4>" + us.getMyNameShip() + "</h4></u>" +
+			          										"<h4>Капитан:</h4>" + 
+			          										"<u style=\"color: blue;\"><h4>" + us.getMyDirectorShip() + "</h4></u>" +
+			          										"<h4>Описание судна:</h4>" + 
+			          										"<u style=\"color: blue;\"><h4>" + us.getMyShortDescriptionShip() + "</h4></u>");
+			            		    		          MyInfoWindow = new InfoWindow(infoWindowOptions);
+			            		    		          
+			            		    		          markerOptions = new MarkerOptions();
+
+														markerOptions.position(ll);
+														MyMarker = new Marker(markerOptions);
+														CMainController.MyGoogleMap.addMarker( MyMarker );
+														CMainController.markerMap.put(MyMarker, false);
+														MyInfoWindow.open(CMainController.MyGoogleMap, MyMarker);
+													    CMainController.markerMap.put(MyMarker, true);
+			            		    		        }
+			            		    		    }
+			            					});
+			            				    if(CMainController.MyGoogleMap == null)
+			            		            {
+			            				    	CMainController.fxTxtArLogs.setText("Ошибка инициализации map!!!");
+			            				    	CMyToast.makeText(CLPSMain.stage, 
+			            				    			"Ошибка инициализации map!", 
+			            				    			CMyToast.TOAST_SHORT, CMyToast.TOAST_WARN);
+			            		            	System.out.println("Ошибка инициализации map!!!");
+			            		            	//CLPSMain.fxLbMessage.setText("Ошибка инициализации\nкарты!\nПерегрузите карту,\nнажимте кнопку:\n\"Обновить карту\"");
+			            		            	//CLPSMain.btnRestartMod.setVisible(true);
+			            		            }
+			            		            else
+			            		            {
+			            		            	//CLPSMain.fxMessageWait.setVisible(false);
+			            		            	//CLPSMain.btnRestartMod.setVisible(false);
+			            		            }
+			            			  }
+			            			);*/
+					            	
+								}
+					            catch (Exception ex)
+					            {
+					            	CMainController.fxTxtArLogs.setText(ex.getMessage());
+					            	ex.getStackTrace();
+								}
+							} 
+							catch (Exception ex) 
+							{
+								CMainController.fxTxtArLogs.setText(ex.getMessage());
+								ex.getStackTrace();
+							}
+						}
+						
+						@Override
+						public void onCancelled(DatabaseError arg0)
+						{
+							CMainController.fxTxtArLogs.setText(arg0.getMessage());
+							System.out.println(arg0.getMessage());
+							
+						}
+					});
+				} 
+				catch (Exception ex) 
+				{
+					CMainController.fxTxtArLogs.setText(ex.getMessage());
+					ex.getStackTrace();
+				}
     }
     
     

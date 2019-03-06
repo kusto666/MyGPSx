@@ -15,7 +15,7 @@ public class CMAINCONSTANTS {
 	
 	public static String m_PathFXAddShipFxml = "FXAddShip.fxml";
 	public static String m_PathFXEditShipFxml = "FXEditShip.fxml";
-	public static String m_PathFXListCellFxml = "ListCellUser.fxml";
+	public static String m_PathFXListCellFxml = "ListCellUser.fxml";// Это карточка судна для списка в TAB-"Флот(Осн. объекты)"
 	
 	// Тут приоритеты!!!
 	public static String m_PathFXPriorityEdit = "FXPriorityEdit.fxml";
