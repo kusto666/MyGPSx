@@ -8,7 +8,7 @@ public class CDateTime
 {
 	private Date m_MyDate;
 	private String m_MyTime;
-	private Long m_MyLongTime;
+	private Long m_MyLongTime; 
 	//private String m_MyDate;
 	
 	
