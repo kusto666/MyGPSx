@@ -14,6 +14,6 @@
          </font></Label>
       <Label layoutX="-6.0" layoutY="27.0" text="КАПИТАН СУДНА(ФИО):" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
       <Label fx:id="lbMyDirectorShip" layoutX="-11.0" layoutY="43.0" prefHeight="15.0" prefWidth="180.0" text="Label" textFill="#ed160c" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0" />
-      <Label fx:id="fxLbUniqueID" text="Label" />
+      <Label fx:id="fxLbUniqueID" layoutX="125.0" prefHeight="17.0" prefWidth="120.0" text="Label" />
    </children>
 </AnchorPane>

@@ -241,7 +241,7 @@ public class CLPSMain extends Application
 	@FXML
 	Parent root;
 	@FXML
-	public static FXMLLoader m_Loader;
+	private FXMLLoader m_Loader;
 
 	// Иконки для информирования удачного или неудачного соединения с инетом!!!
     private static final String MyIconSuccessConn = "src/MyIconSuccessConn.png";
@@ -258,6 +258,34 @@ public class CLPSMain extends Application
 	@FXML
     public static CTUsersJobsController m_CTUsersJobsController;// Контроллер отвечает за обмен данными с вкладкой "Сотрудники --> Задачи"
 	
+	public void INIT_ALL_CONTROLS() throws IOException
+	{
+		// Инициализация всех внутренних контролов!!!
+		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
+		root = m_Loader.load();
+		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
+		fxListView = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListView");
+		fxListUsersMsg = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListUsersMsg");
+		//fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
+		fxLbMessage = (Label)m_Loader.getNamespace().get("fxLbMessage");
+		btnRestartMod = (Button)m_Loader.getNamespace().get("btnRestartMod");
+		
+		CMainController.fxTxtArLogs = (TextArea)m_Loader.getNamespace().get("fxTxtArLogs");
+		CMainController.fxTxtArLogs.setText("start(Stage st) throws Exception");
+		
+		
+		//fxBtnInTabRefreshMap = (Button)m_Loader.getNamespace().get("fxBtnInTabRefreshMap");
+		/*fxBtnInTabRefreshMap.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event)
+			{
+
+				System.out.println("START - fxBtnInTabRefreshMap.setOnMouseClicked");
+				System.out.println("END - fxBtnInTabRefreshMap.setOnMouseClicked");
+			}
+		});*/
+	}
 
 	// или Tab #1.
 	
@@ -275,7 +303,8 @@ public class CLPSMain extends Application
     	// Для тестов - надо реализовать!!!!!!!!!!!!!!!!
     	 Handler consoleHandler = null;
          Handler fileHandler  = null;
-         try{
+         try
+         {
              //Creating consoleHandler and fileHandler
              consoleHandler = new ConsoleHandler();
              fileHandler  = new FileHandler("./mygpsx_log.log");
@@ -295,14 +324,16 @@ public class CLPSMain extends Application
              LOGGER.removeHandler(consoleHandler);
               
              LOGGER.log(Level.FINE, "Finer logged");
-         }catch(IOException exception){
+         }
+         catch(IOException exception)
+         {
              LOGGER.log(Level.SEVERE, "Error occur in FileHandler.", exception);
          }
           
          LOGGER.finer("Finest example on LOGGER handler completed.");
     	//LOGGER.info("Logger Name: "+LOGGER.getName());
-        
         //LOGGER.warning("Can cause ArrayIndexOutOfBoundsException");
+         
     	//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Изначально все шаблоны готовы к заполнению!!!
     	if(!InitFireBase())
     	{
@@ -321,31 +352,7 @@ public class CLPSMain extends Application
             javax.swing.SwingUtilities.invokeLater(this::addAppToTray);
         	try 
         	{
-        		// Инициализация всех внутренних контролов!!!
-        		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
-        		root = m_Loader.load();
-        		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
-        		fxListView = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListView");
-        		fxListUsersMsg = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListUsersMsg");
-        		//fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
-        		fxLbMessage = (Label)m_Loader.getNamespace().get("fxLbMessage");
-        		btnRestartMod = (Button)m_Loader.getNamespace().get("btnRestartMod");
-        		
-        		CMainController.fxTxtArLogs = (TextArea)m_Loader.getNamespace().get("fxTxtArLogs");
-        		CMainController.fxTxtArLogs.setText("start(Stage st) throws Exception");
-        		
-        		
-        		//fxBtnInTabRefreshMap = (Button)m_Loader.getNamespace().get("fxBtnInTabRefreshMap");
-        		/*fxBtnInTabRefreshMap.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-					@Override
-					public void handle(MouseEvent event)
-					{
-
-						System.out.println("START - fxBtnInTabRefreshMap.setOnMouseClicked");
-						System.out.println("END - fxBtnInTabRefreshMap.setOnMouseClicked");
-					}
-				});*/
+        		INIT_ALL_CONTROLS();
     		} 
         	catch (Exception ex) 
         	{
@@ -412,13 +419,7 @@ public class CLPSMain extends Application
 
         	try 
         	{
-        		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
-        		root = m_Loader.load();
-        		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
-        		fxListView = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListView");
-        		//fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
-        		fxLbMessage = (Label)m_Loader.getNamespace().get("fxLbMessage");
-        		btnRestartMod = (Button)m_Loader.getNamespace().get("btnRestartMod");
+        		INIT_ALL_CONTROLS();
     		} 
         	catch (Exception ex) 
         	{
@@ -823,21 +824,21 @@ public class CLPSMain extends Application
 					            System.out.println( "fxListUsersMsg.getItems().size() = " + fxListUsersMsg.getItems().size());
 					            try 
 					            {
-				/*	            	Platform.runLater(
+					            	Platform.runLater(
 			            			  () -> {
-			            				  fxListView.setItems(m_ObservableListUsers);
-			            				 fxListView.setPrefSize(200, 500);
-			            				 fxListView.setCellFactory(new Callback<ListView<CStructUser>, ListCell<CStructUser>>() 
+			            				  fxListUsersMsg.setItems(m_ObservableListUsersMsg);
+			            				  fxListUsersMsg.setPrefSize(200, 500);
+			            				  fxListUsersMsg.setCellFactory(new Callback<ListView<CStructUser>, ListCell<CStructUser>>() 
 			            				 {
 											
 											@Override
 											public ListCell<CStructUser> call(ListView<CStructUser> param) 
 											{
 												System.out.println("return new CUserCell();");
-												return new CUserCell();
+												return new CUserCellMsg();
 											}
 										});
-			            				 
+			            			/*	 
 			            				  fxListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			            		    			@Override
 			            		    			public void handle(MouseEvent click)
@@ -895,8 +896,8 @@ public class CLPSMain extends Application
 													    CMainController.markerMap.put(MyMarker, true);
 			            		    		        }
 			            		    		    }
-			            					});
-			            				    if(CMainController.MyGoogleMap == null)
+			            					});*/
+			            				   /* if(CMainController.MyGoogleMap == null)
 			            		            {
 			            				    	CMainController.fxTxtArLogs.setText("Ошибка инициализации map!!!");
 			            				    	CMyToast.makeText(CLPSMain.stage, 
@@ -910,9 +911,9 @@ public class CLPSMain extends Application
 			            		            {
 			            		            	//CLPSMain.fxMessageWait.setVisible(false);
 			            		            	//CLPSMain.btnRestartMod.setVisible(false);
-			            		            }
+			            		            }*/
 			            			  }
-			            			);*/
+			            			);
 					            	
 								}
 					            catch (Exception ex)
