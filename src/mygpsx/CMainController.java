@@ -701,23 +701,46 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                 );
         }
     }
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Здесь отсылаем сообщение, делаем формат вывода: IDusers(%%*%%)curUNIXTime (пример: 'MyPhoneID_bkvfbxuwvds(%%*%%)155187544173' )
+    // (%%*%%) - это разделитель ID-пользователя от текущего UNIX-времени оy объявлен в CCONSTANTS_EVENTS_JOB!!!
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @FXML
-    private void handleSendMsg(ActionEvent event) {
+    private void handleSendMsg(ActionEvent event) 
+    {
     	mDatabaseRefSendMsg = FirebaseDatabase.getInstance().getReference().child("message_to_android");
     	 try 
     	 {
     		 CMessages newMsgToUserAndroid = new CMessages();// Новое сообщение!!!
     		 CDateTime newCurrDate = new CDateTime(); // Берем текущее время для записи в базу!!!
     		 
-    		 
-    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValueAsync(taOutMsg.getText().toString());
-    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_status").setValueAsync("no_read");
-    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_time").
-    		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
-    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
-    		 mDatabaseRefSendMsg.child("msg_555555").child("msg_title").setValueAsync(taOutMsg.getText().toString());
-             taOutMsg.clear();
-             System.out.println("Типа послали сообщение!!!");
+    		 if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG != null)// Проверяем что выбранный пользователь для сообщения не NULL
+    		 {
+    			 // Формируем идентификатор сообщения!!!
+        		 String stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
+        				 					CCONSTANTS_EVENTS_JOB.MY_SEPARATOR_MSG + newCurrDate.GetCurrLongTime();
+        		 System.out.println("stFINISH_ID_MSG = " + stFINISH_ID_MSG);
+        		 
+        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_body").setValueAsync(taOutMsg.getText().toString());
+        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_status").setValueAsync("no_read");
+        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_time").
+        		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
+        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
+        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_title").setValueAsync(taOutMsg.getText().toString());
+                 taOutMsg.clear();
+        		 
+        		 /* Старый тестовый вариант!!! - больше не нужен!!!
+        		  * mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValueAsync(taOutMsg.getText().toString());
+        		 mDatabaseRefSendMsg.child("msg_555555").child("msg_status").setValueAsync("no_read");
+        		 mDatabaseRefSendMsg.child("msg_555555").child("msg_time").
+        		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
+        		 mDatabaseRefSendMsg.child("msg_555555").child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
+        		 mDatabaseRefSendMsg.child("msg_555555").child("msg_title").setValueAsync(taOutMsg.getText().toString());
+                 taOutMsg.clear();*/
+                 System.out.println("Типа послали сообщение!!!");
+    		 }
+    		
          } 
     	 catch (Exception e) 
     	 {

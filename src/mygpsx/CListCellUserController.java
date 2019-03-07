@@ -56,10 +56,10 @@ public class CListCellUserController implements Initializable{
 	CStructUser m_tempStructUser = null;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+
 		
 	}
-	// ”даление объекта.
+	// Удаление объекта.
 	@FXML
     private void eventDeleteObject() 
     {

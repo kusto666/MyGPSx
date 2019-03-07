@@ -838,8 +838,8 @@ public class CLPSMain extends Application
 												return new CUserCellMsg();
 											}
 										});
-			            			/*	 
-			            				  fxListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			            				 
+			            				  fxListUsersMsg.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			            		    			@Override
 			            		    			public void handle(MouseEvent click)
 			            		    			{
@@ -847,11 +847,22 @@ public class CLPSMain extends Application
 			            		    				InfoWindow MyInfoWindow = null;
 			            		    				MarkerOptions markerOptions;
 			            		    				
+			            		    				if (click.getClickCount() == 1) 
+			            		    		        {
+			            		    					CStructUser TempUserForMsg = fxListUsersMsg.getSelectionModel().getSelectedItem();
+			            		    					
+			            		    					// Присваеваем в CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG выбранного пользователя для
+			            		    					// передачи сообщения ему!!!
+			            		    					CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG = 
+			            		    							CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_PREFIX + TempUserForMsg.getMyPhoneID();
+			            		    							
+			            		    					System.out.println("tempUserMsgForSending = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
+			            		    		        }
 			            		    				 
-			            		    				
+			            		    				// Здесь пока ничего не придумали по двойному клику по пользователю для переписки!!!
 			            		    		        if (click.getClickCount() == 2) 
 			            		    		        {
-			            		    		        	TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
+			            		    		        	/*TabPane tb = (TabPane)CLPSMain.scene.lookup("#fxTabPaneMain");
 			            		    		    		javafx.scene.control.SingleSelectionModel<Tab> selectionModel = tb.getSelectionModel();
 			            		    		    		selectionModel.select(0);
 			            		    		    		
@@ -893,10 +904,10 @@ public class CLPSMain extends Application
 														CMainController.MyGoogleMap.addMarker( MyMarker );
 														CMainController.markerMap.put(MyMarker, false);
 														MyInfoWindow.open(CMainController.MyGoogleMap, MyMarker);
-													    CMainController.markerMap.put(MyMarker, true);
+													    CMainController.markerMap.put(MyMarker, true);*/
 			            		    		        }
 			            		    		    }
-			            					});*/
+			            					});
 			            				   /* if(CMainController.MyGoogleMap == null)
 			            		            {
 			            				    	CMainController.fxTxtArLogs.setText("Ошибка инициализации map!!!");
