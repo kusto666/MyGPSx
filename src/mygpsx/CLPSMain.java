@@ -1086,7 +1086,50 @@ public class CLPSMain extends Application
 							
 							
 						}
-					});/*()
+					});
+					 mDatabaseRef.addValueEventListener(new ValueEventListener() {
+						
+						@Override
+						public void onDataChange(DataSnapshot arg0) {
+							try
+							{
+								
+								// Выбираем , что слушать, какую ветку данных!!!
+								//DataSnapshot messagesSnapshot = arg0;
+					            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
+					            //System.out.println("arg0 = " + arg0.getChildrenCount());
+					            for (DataSnapshot message : messageChildren)
+				                {
+					            	System.out.println( "message!!!" );
+				                    CMessages MyMsg = message.getValue(CMessages.class);
+
+				                	if(mymsg != null)
+				                	{
+				                		System.out.println( ">>>>>>>>>User MyMsg msg_title : " + MyMsg.msg_title );
+					                	System.out.println( ">>>>>>>>>User MyMsg msg_body : " + MyMsg.msg_body );
+				                		mymsg.appendText("\n");
+				                		mymsg.appendText(MyMsg.msg_body);
+				                	}
+	
+				                	System.out.println( ">>>>>>>>>User MyMsg msg_time : " + MyMsg.msg_time );
+				                	System.out.println( ">>>>>>>>>User MyMsg msg_status : " + MyMsg.msg_status );
+				                }
+							} 
+							catch (Exception ex) 
+							{
+								ex.getMessage();
+							}
+							
+						}
+						
+						@Override
+						public void onCancelled(DatabaseError arg0) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+					 
+					 /*()
 					 {
 						@Override
 						public void onDataChange(DataSnapshot arg0)
