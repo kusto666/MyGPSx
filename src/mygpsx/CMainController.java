@@ -739,6 +739,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         		 mDatabaseRefSendMsg.child("msg_555555").child("msg_title").setValueAsync(taOutMsg.getText().toString());
                  taOutMsg.clear();*/
                  System.out.println("Типа послали сообщение!!!");
+                 //mymsg.clear();
     		 }
     		
          } 

@@ -2,8 +2,8 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2019-03-07T09:37:04</date>
-  <millis>1551940624564</millis>
+  <date>2019-03-07T12:12:15</date>
+  <millis>1551949935347</millis>
   <sequence>0</sequence>
   <logger>mygpsx.CLPSMain</logger>
   <level>CONFIG</level>
@@ -13,8 +13,8 @@
   <message>Configuration done.</message>
 </record>
 <record>
-  <date>2019-03-07T09:37:04</date>
-  <millis>1551940624568</millis>
+  <date>2019-03-07T12:12:15</date>
+  <millis>1551949935351</millis>
   <sequence>1</sequence>
   <logger>mygpsx.CLPSMain</logger>
   <level>FINE</level>
@@ -24,8 +24,8 @@
   <message>Finer logged</message>
 </record>
 <record>
-  <date>2019-03-07T09:37:04</date>
-  <millis>1551940624568</millis>
+  <date>2019-03-07T12:12:15</date>
+  <millis>1551949935351</millis>
   <sequence>2</sequence>
   <logger>mygpsx.CLPSMain</logger>
   <level>FINER</level>

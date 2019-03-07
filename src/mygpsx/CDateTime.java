@@ -28,7 +28,10 @@ public class CDateTime
         //System.out.println(dateText);
         
 	}
-	
+	public void SetCurrLongTime(Long CurrLongTime)
+	{
+		this.m_MyLongTime = CurrLongTime;
+	}
 	public Long GetCurrLongTime()
 	{
 		return m_MyLongTime;

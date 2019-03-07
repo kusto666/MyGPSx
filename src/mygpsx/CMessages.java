@@ -32,6 +32,10 @@ public class CMessages
     	this.MyFileUrl = MyFileUrl;
     }
     
+    public void SetUnixTime()
+    {
+    	
+    }
    /* public String GetTitle()
     {
     	return msg_title;
