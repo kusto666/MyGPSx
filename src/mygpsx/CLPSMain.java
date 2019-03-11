@@ -109,6 +109,7 @@ public class CLPSMain extends Application
 	
 	public static DatabaseReference mDatabase;
 	public static DatabaseReference mDatabaseRef;
+	public static DatabaseReference mDatabaseRefSingle;
 	public static DatabaseReference mDatabaseRefUsers;
 	public static DatabaseReference mDatabaseRefUsersMsg;
 	 //Firebase - потом обобщим  здесь не оставим!!!
@@ -961,224 +962,141 @@ public class CLPSMain extends Application
     @FXML
     private void MyEventListnerFireMessage()
     {
-		//EventQueue.invokeLater(new Runnable()
-    	//Platform.runLater(new Runnable()
-		//{
-		//	public void run() 
-			//{
-				try
-				{
+		try
+		{
+			System.out.println( "MyEventListnerFireMessage()!!!");
+			mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("message_to_android");
+			 mDatabaseRef.addChildEventListener(new ChildEventListener() {
+				
+				@Override
+				public void onChildRemoved(DataSnapshot arg0) {
+					System.out.println( "onChildRemoved" );
 					
-					//mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("messages");
-					mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("message_to_android");
-
-					 //System.out.println(mDatabaseRef.toString());
-					// System.out.println( "-----------------------------------" );
-					 mDatabaseRef.addChildEventListener(new ChildEventListener() {
-						
-						@Override
-						public void onChildRemoved(DataSnapshot arg0) {
-							System.out.println( "onChildRemoved" );
-							
-						}
-						
-						@Override
-						public void onChildMoved(DataSnapshot arg0, String arg1) {
-							System.out.println( "onChildMoved" );
-							
-						}
-						
-						@Override
-						public void onChildChanged(DataSnapshot arg0, String arg1) {
-							try
-							{
-								// Выбираем , что слушать, какую ветку данных!!!
-					            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
-
-					            for (DataSnapshot message : messageChildren)
-				                {
-					            	/*String stMyMsg = null;
-					            	String className = message.getValue().getClass().getSimpleName();
-					            	System.out.println( "className = " + className);
-					            	if(className.equals("String"))// Здесь проверка на тип класса, дабы не получить исключение типов!!!
-					            	{
-					            		stMyMsg = (String) message.getValue();
-					            		System.out.println( "message555!!! = " + stMyMsg);
-					            	}
-					            	if(className.equals("Long"))
-					            	{
-					            		stMyMsg = Long.toString((Long) message.getValue());
-					            		System.out.println( "message555!!! = " + stMyMsg);
-					            	}*/
-				                	/*if(mymsg != null)
-				                	{
-				                		System.out.println( ">>>>>>>>>User MyMsg msg_title : " + MyMsg.msg_title );
-					                	System.out.println( ">>>>>>>>>User MyMsg msg_body : " + MyMsg.msg_body );
-				                		mymsg.appendText("\n");
-				                		mymsg.appendText(MyMsg.msg_body);
-				                	}
-				                	else
-				                	{
-				                		System.out.println( "mymsg = null" );
-				                	}
-	
-				                	System.out.println( ">>>>>>>>>User MyMsg msg_time : " + MyMsg.msg_time );
-				                	System.out.println( ">>>>>>>>>User MyMsg msg_status : " + MyMsg.msg_status );*/
-				                }
-							} 
-							catch (Exception ex) 
-							{
-								ex.printStackTrace();
-							}
-						}
-						
-						@Override
-						public void onChildAdded(DataSnapshot arg0, String arg1) {
-							System.out.println( "onChildAdded" );
-							 String ref= arg0.getKey();
-							 System.out.println( "arg0.getKey() = " + arg0.getKey());
-							 
-							try
-							{
-								// Выбираем , что слушать, какую ветку данных!!!
-					            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
-
-					            for (DataSnapshot message : messageChildren)
-				                {
-					            	String stMyMsg = null;
-					            	String className = message.getValue().getClass().getSimpleName();
-					            	System.out.println( "className = " + className);
-					            	if(className.equals("String"))// Здесь проверка на тип класса, дабы не получить исключение типов!!!
-					            	{
-					            		stMyMsg = (String) message.getValue();
-					            		System.out.println( "message555!!! = " + stMyMsg);
-					            	}
-					            	if(className.equals("Long"))
-					            	{
-					            		stMyMsg = Long.toString((Long) message.getValue());
-					            		System.out.println( "message555!!! = " + stMyMsg);
-					            	}
-				                	/*if(mymsg != null)
-				                	{
-				                		System.out.println( ">>>>>>>>>User MyMsg msg_title : " + MyMsg.msg_title );
-					                	System.out.println( ">>>>>>>>>User MyMsg msg_body : " + MyMsg.msg_body );
-				                		mymsg.appendText("\n");
-				                		mymsg.appendText(MyMsg.msg_body);
-				                	}
-				                	else
-				                	{
-				                		System.out.println( "mymsg = null" );
-				                	}
-	
-				                	System.out.println( ">>>>>>>>>User MyMsg msg_time : " + MyMsg.msg_time );
-				                	System.out.println( ">>>>>>>>>User MyMsg msg_status : " + MyMsg.msg_status );*/
-				                }
-							} 
-							catch (Exception ex) 
-							{
-								ex.printStackTrace();
-							}
-						}
-						
-						@Override
-						public void onCancelled(DatabaseError arg0) {
-							System.out.println( "onCancelled" );
-							
-							
-						}
-					});
-					 mDatabaseRef.addValueEventListener(new ValueEventListener() {
-						
-						@Override
-						public void onDataChange(DataSnapshot arg0) {
-							try
-							{
-								
-								// Выбираем , что слушать, какую ветку данных!!!
-								//DataSnapshot messagesSnapshot = arg0;
-					            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
-					            //System.out.println("arg0 = " + arg0.getChildrenCount());
-					            for (DataSnapshot message : messageChildren)
-				                {
-					            	System.out.println( "message!!!" );
-				                    CMessages MyMsg = message.getValue(CMessages.class);
-
-				                	if(mymsg != null)
-				                	{
-				                		System.out.println( ">>>>>>>>>User MyMsg msg_title : " + MyMsg.msg_title );
-					                	System.out.println( ">>>>>>>>>User MyMsg msg_body : " + MyMsg.msg_body );
-				                		mymsg.appendText("\n");
-				                		mymsg.appendText(MyMsg.msg_body);
-				                	}
-	
-				                	System.out.println( ">>>>>>>>>User MyMsg msg_time : " + MyMsg.msg_time );
-				                	System.out.println( ">>>>>>>>>User MyMsg msg_status : " + MyMsg.msg_status );
-				                }
-							} 
-							catch (Exception ex) 
-							{
-								ex.getMessage();
-							}
-							
-						}
-						
-						@Override
-						public void onCancelled(DatabaseError arg0) {
-							// TODO Auto-generated method stub
-							
-						}
-					});
-					 
-					 /*()
-					 {
-						@Override
-						public void onDataChange(DataSnapshot arg0)
-						{
-							try
-							{
-								
-								// Выбираем , что слушать, какую ветку данных!!!
-								//DataSnapshot messagesSnapshot = arg0;
-					            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
-					            //System.out.println("arg0 = " + arg0.getChildrenCount());
-					            for (DataSnapshot message : messageChildren)
-				                {
-					            	System.out.println( "message!!!" );
-				                    CMessages MyMsg = message.getValue(CMessages.class);
-
-				                	if(mymsg != null)
-				                	{
-				                		System.out.println( ">>>>>>>>>User MyMsg msg_title : " + MyMsg.msg_title );
-					                	System.out.println( ">>>>>>>>>User MyMsg msg_body : " + MyMsg.msg_body );
-				                		mymsg.appendText("\n");
-				                		mymsg.appendText(MyMsg.msg_body);
-				                	}
-	
-				                	System.out.println( ">>>>>>>>>User MyMsg msg_time : " + MyMsg.msg_time );
-				                	System.out.println( ">>>>>>>>>User MyMsg msg_status : " + MyMsg.msg_status );
-				                }
-							} 
-							catch (Exception ex) 
-							{
-								ex.getMessage();
-							}
-						}
-						
-						@Override
-						public void onCancelled(DatabaseError arg0)
-						{
-							System.out.println( arg0.getMessage() );
-							
-						}
-					});*/
-				} 
-				catch (Exception ex) 
-				{
-					ex.printStackTrace();
 				}
-		//	}
-		//});
+				
+				@Override
+				public void onChildMoved(DataSnapshot arg0, String arg1) {
+					System.out.println( "onChildMoved" );
+					
+				}
+				
+				@Override
+				public void onChildChanged(DataSnapshot arg0, String arg1) {
+					try
+					{
+						// Выбираем , что слушать, какую ветку данных!!!
+/*					            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
+					            for (DataSnapshot message : messageChildren)
+				                {
+				                }*/
+					} 
+					catch (Exception ex) 
+					{
+						ex.printStackTrace();
+					}
+				}
+				
+				@Override
+				public void onChildAdded(DataSnapshot arg0, String arg1) {
+					System.out.println( "onChildAdded" );
+					 String ref= arg0.getKey();
+					 System.out.println( "arg0.getKey() = " + arg0.getKey());
+					 
+					try
+					{
+						// Выбираем , что слушать, какую ветку данных!!!
+			            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
 
+			            for (DataSnapshot message : messageChildren)
+		                {
+			            	String stMyMsg = null;
+			            	String className = message.getValue().getClass().getSimpleName();
+			            	System.out.println( "className = " + className);
+			            	if(className.equals("String"))// Здесь проверка на тип класса, дабы не получить исключение типов!!!
+			            	{
+			            		// Передаем тело сообщения!!!
+			            		if(message.getKey().equals("msg_body"))
+			            		{
+			            			stMyMsg = (String) message.getValue();
+			            			mymsg.appendText(stMyMsg);
+			            			mymsg.appendText("\n");
+			            		}
+			            		//msg_time - передаем время сообщения в нормальном виде!!!
+			            		if(message.getKey().equals("msg_time"))
+			            		{
+			            			stMyMsg = (String) message.getValue();
+			            			mymsg.appendText(stMyMsg);
+			            			mymsg.appendText("\n");
+			            		}
+			            		/*stMyMsg = (String) message.getValue();
+			            		System.out.println( "message555!!! = " + stMyMsg);
+			            		mymsg.appendText("\n");
+		                		mymsg.appendText(stMyMsg);*/
+			            	}
+			            	if(className.equals("Long"))
+			            	{
+			            		/*stMyMsg = Long.toString((Long) message.getValue());
+			            		System.out.println( "message555!!! = " + stMyMsg);
+			            		
+		                		mymsg.appendText(stMyMsg);
+		                		mymsg.appendText("\n");*/
+			            	}
+		                }
+					} 
+					catch (Exception ex) 
+					{
+						ex.printStackTrace();
+					}
+				}
+				
+				@Override
+				public void onCancelled(DatabaseError arg0) {
+					System.out.println( "onCancelled" );
+				}
+			});
+			 mDatabaseRefSingle = FirebaseDatabase.getInstance().getReference().child("message_to_android");
+			 mDatabaseRefSingle.addListenerForSingleValueEvent(new ValueEventListener() {// Здесь ветка слушается один раз при загрузке программы!!!
+			 //mDatabaseRef.addValueEventListener(new ValueEventListener() {// Это старый вариант - здесь слушается ветка все время!!!
+				@Override
+				public void onDataChange(DataSnapshot arg0) {
+					try
+					{
+						// Выбираем , что слушать, какую ветку данных!!!
+			            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
+			            for (DataSnapshot message : messageChildren)
+		                {
+			            /*	System.out.println( "message!!!" );
+		                    CMessages MyMsg = message.getValue(CMessages.class);
+
+		                	if(mymsg != null)
+		                	{
+		                		System.out.println( ">>>>>>>>>User MyMsg msg_title : " + MyMsg.msg_title );
+			                	System.out.println( ">>>>>>>>>User MyMsg msg_body : " + MyMsg.msg_body );
+		                		mymsg.appendText("\n");
+		                		mymsg.appendText(MyMsg.msg_body);
+		                	}
+
+		                	System.out.println( ">>>>>>>>>User MyMsg msg_time : " + MyMsg.msg_time );
+		                	System.out.println( ">>>>>>>>>User MyMsg msg_status : " + MyMsg.msg_status );*/
+		                }
+					} 
+					catch (Exception ex) 
+					{
+						ex.getMessage();
+					}
+					
+				}
+				
+				@Override
+				public void onCancelled(DatabaseError arg0) {
+					System.out.println( "onCancelled" );
+				}
+			});
+		} 
+		catch (Exception ex) 
+		{
+			ex.printStackTrace();
+		}
     }
     
 //    @FXML 

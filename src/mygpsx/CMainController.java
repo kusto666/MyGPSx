@@ -721,15 +721,17 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         		 String stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
         				 					CCONSTANTS_EVENTS_JOB.MY_SEPARATOR_MSG + newCurrDate.GetCurrLongTime();
         		 System.out.println("stFINISH_ID_MSG = " + stFINISH_ID_MSG);
-        		 
-        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_body").setValueAsync(taOutMsg.getText().toString());
+        		/* mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_time").
+        		 setValue(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()), null);*/
+        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_body").setValue(taOutMsg.getText().toString(), null);
         		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_status").setValueAsync("no_read");
         		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_time").
-        		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
+        		 setValue(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()), null);
         		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
         		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_title").setValueAsync(taOutMsg.getText().toString());
                  taOutMsg.clear();
-        		 
+                 mymsg.appendText(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
+     			 mymsg.appendText("\n");
         		 /* Старый тестовый вариант!!! - больше не нужен!!!
         		  * mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValueAsync(taOutMsg.getText().toString());
         		 mDatabaseRefSendMsg.child("msg_555555").child("msg_status").setValueAsync("no_read");
@@ -749,7 +751,9 @@ public class CMainController implements Initializable, MapComponentInitializedLi
          }
     }
     @FXML
-    private void btnClearMessages(ActionEvent event) {
+    private void btnClearMessages(ActionEvent event)
+    {
+    	System.out.println("mymsg.clear();!!");
     	mymsg.clear();
     }
     
