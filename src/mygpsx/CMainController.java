@@ -214,8 +214,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	// А это переменная отвечает: двигать или не двигать маркер!!!
 	private boolean m_bIsMuveMarker = false;
 
+	
+	public static String m_stFINISH_ID_MSG = null;
     @FXML 
-    private TextArea mymsg;
+    public static TextArea mymsg;
     @FXML
     private Label label;
     @FXML
@@ -718,20 +720,20 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		 if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG != null)// Проверяем что выбранный пользователь для сообщения не NULL
     		 {
     			 // Формируем идентификатор сообщения!!!
-        		 String stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
+    			 m_stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
         				 					CCONSTANTS_EVENTS_JOB.MY_SEPARATOR_MSG + newCurrDate.GetCurrLongTime();
-        		 System.out.println("stFINISH_ID_MSG = " + stFINISH_ID_MSG);
+        		 System.out.println("stFINISH_ID_MSG = " + m_stFINISH_ID_MSG);
         		/* mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_time").
         		 setValue(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()), null);*/
-        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_body").setValue(taOutMsg.getText().toString(), null);
-        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_status").setValueAsync("no_read");
-        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_time").
-        		 setValue(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()), null);
-        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
-        		 mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_title").setValueAsync(taOutMsg.getText().toString());
+        		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_body").setValueAsync(taOutMsg.getText().toString());
+        		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_status").setValueAsync("no_read");
+        		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_time").
+        		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
+        		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
+        		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_title").setValueAsync(taOutMsg.getText().toString());
                  taOutMsg.clear();
-                 mymsg.appendText(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
-     			 mymsg.appendText("\n");
+                 //mymsg.appendText(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
+     			 //mymsg.appendText("\n");
         		 /* Старый тестовый вариант!!! - больше не нужен!!!
         		  * mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValueAsync(taOutMsg.getText().toString());
         		 mDatabaseRefSendMsg.child("msg_555555").child("msg_status").setValueAsync("no_read");

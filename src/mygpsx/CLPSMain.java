@@ -204,8 +204,8 @@ public class CLPSMain extends Application
 	public static Stage m_stageFXSysUserEdit = null;
 
 
-	@FXML
-	private TextArea mymsg;
+	//@FXML
+	//private TextArea mymsg;
 	@FXML
 	static ListView<CStructUser> m_lvAllUsers;
 	@FXML
@@ -265,7 +265,7 @@ public class CLPSMain extends Application
 		// Инициализация всех внутренних контролов!!!
 		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
 		root = m_Loader.load();
-		mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
+		CMainController.mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
 		fxListView = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListView");
 		fxListUsersMsg = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListUsersMsg");
 		//fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
@@ -966,7 +966,8 @@ public class CLPSMain extends Application
 		{
 			System.out.println( "MyEventListnerFireMessage()!!!");
 			mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("message_to_android");
-			 mDatabaseRef.addChildEventListener(new ChildEventListener() {
+			mDatabaseRef.orderByChild("msg_unix_time").addChildEventListener(new ChildEventListener() {
+			// mDatabaseRef.addChildEventListener(new ChildEventListener() {
 				
 				@Override
 				public void onChildRemoved(DataSnapshot arg0) {
@@ -977,7 +978,64 @@ public class CLPSMain extends Application
 				@Override
 				public void onChildMoved(DataSnapshot arg0, String arg1) {
 					System.out.println( "onChildMoved" );
+					try
+					{
+						 System.out.println( "onChildAdded" );
+						 String ref= arg0.getKey();
+						 System.out.println( "arg0.getKey() = " + arg0.getKey());
+						 CMessages myMessage = arg0.getValue(CMessages.class);
+						 System.out.println( "arg0.myMessage.... = " + myMessage.msg_body);
+						 System.out.println( "arg0.myMessage msg_time.... = " + myMessage.msg_time);
+						 
+						 CMainController.mymsg.appendText(myMessage.msg_time);
+						 CMainController.mymsg.appendText("\n");
+						 CMainController.mymsg.appendText(myMessage.msg_body);
+						 CMainController.mymsg.appendText("\n");
+						 CMainController.mymsg.appendText("--------------------\n");
 					
+						// Выбираем , что слушать, какую ветку данных!!!
+/*			            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
+
+			            for (DataSnapshot message : messageChildren)
+		                {
+			            	String stMyMsg = null;
+			            	String className = message.getValue().getClass().getSimpleName();
+			            	System.out.println( "className = " + className);
+			            	if(className.equals("String"))// Здесь проверка на тип класса, дабы не получить исключение типов!!!
+			            	{
+			            		// Передаем тело сообщения!!!
+			            		if(message.getKey().equals("msg_body"))
+			            		{
+			            			stMyMsg = (String) message.getValue();
+			            			CMainController.mymsg.appendText(stMyMsg);
+			            			CMainController.mymsg.appendText("\n");
+			            		}
+			            		//msg_time - передаем время сообщения в нормальном виде!!!
+			            		if(message.getKey().equals("msg_time"))
+			            		{
+			            			stMyMsg = (String) message.getValue();
+			            			CMainController.mymsg.appendText(stMyMsg);
+			            			CMainController.mymsg.appendText("\n");
+			            		}
+			            		stMyMsg = (String) message.getValue();
+			            		System.out.println( "message555!!! = " + stMyMsg);
+			            		mymsg.appendText("\n");
+		                		mymsg.appendText(stMyMsg);
+			            	}
+			            	if(className.equals("Long"))
+			            	{
+			            		stMyMsg = Long.toString((Long) message.getValue());
+			            		System.out.println( "message555!!! = " + stMyMsg);
+			            		
+		                		mymsg.appendText(stMyMsg);
+		                		mymsg.appendText("\n");
+			            	}
+		                }*/
+					} 
+					catch (Exception ex) 
+					{
+						ex.printStackTrace();
+					}
 				}
 				
 				@Override
@@ -997,15 +1055,25 @@ public class CLPSMain extends Application
 				}
 				
 				@Override
-				public void onChildAdded(DataSnapshot arg0, String arg1) {
-					System.out.println( "onChildAdded" );
-					 String ref= arg0.getKey();
-					 System.out.println( "arg0.getKey() = " + arg0.getKey());
-					 
+				public void onChildAdded(DataSnapshot arg0, String arg1) 
+				{
 					try
 					{
+						 /*System.out.println( "onChildAdded" );
+						 String ref= arg0.getKey();
+						 System.out.println( "arg0.getKey() = " + arg0.getKey());
+						 CMessages myMessage = arg0.getValue(CMessages.class);
+						 System.out.println( "arg0.myMessage.... = " + myMessage.msg_body);
+						 System.out.println( "arg0.myMessage msg_time.... = " + myMessage.msg_time);
+						 
+						 CMainController.mymsg.appendText(myMessage.msg_time);
+						 CMainController.mymsg.appendText("\n");
+						 CMainController.mymsg.appendText(myMessage.msg_body);
+						 CMainController.mymsg.appendText("\n");
+						 CMainController.mymsg.appendText("--------------------\n");*/
+					
 						// Выбираем , что слушать, какую ветку данных!!!
-			            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
+/*			            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
 
 			            for (DataSnapshot message : messageChildren)
 		                {
@@ -1018,30 +1086,30 @@ public class CLPSMain extends Application
 			            		if(message.getKey().equals("msg_body"))
 			            		{
 			            			stMyMsg = (String) message.getValue();
-			            			mymsg.appendText(stMyMsg);
-			            			mymsg.appendText("\n");
+			            			CMainController.mymsg.appendText(stMyMsg);
+			            			CMainController.mymsg.appendText("\n");
 			            		}
 			            		//msg_time - передаем время сообщения в нормальном виде!!!
 			            		if(message.getKey().equals("msg_time"))
 			            		{
 			            			stMyMsg = (String) message.getValue();
-			            			mymsg.appendText(stMyMsg);
-			            			mymsg.appendText("\n");
+			            			CMainController.mymsg.appendText(stMyMsg);
+			            			CMainController.mymsg.appendText("\n");
 			            		}
-			            		/*stMyMsg = (String) message.getValue();
+			            		stMyMsg = (String) message.getValue();
 			            		System.out.println( "message555!!! = " + stMyMsg);
 			            		mymsg.appendText("\n");
-		                		mymsg.appendText(stMyMsg);*/
+		                		mymsg.appendText(stMyMsg);
 			            	}
 			            	if(className.equals("Long"))
 			            	{
-			            		/*stMyMsg = Long.toString((Long) message.getValue());
+			            		stMyMsg = Long.toString((Long) message.getValue());
 			            		System.out.println( "message555!!! = " + stMyMsg);
 			            		
 		                		mymsg.appendText(stMyMsg);
-		                		mymsg.appendText("\n");*/
+		                		mymsg.appendText("\n");
 			            	}
-		                }
+		                }*/
 					} 
 					catch (Exception ex) 
 					{
@@ -1065,19 +1133,23 @@ public class CLPSMain extends Application
 			            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
 			            for (DataSnapshot message : messageChildren)
 		                {
-			            /*	System.out.println( "message!!!" );
+			            	//System.out.println( "message!!!" );
 		                    CMessages MyMsg = message.getValue(CMessages.class);
 
-		                	if(mymsg != null)
+		                	if(CMainController.mymsg != null)
 		                	{
-		                		System.out.println( ">>>>>>>>>User MyMsg msg_title : " + MyMsg.msg_title );
-			                	System.out.println( ">>>>>>>>>User MyMsg msg_body : " + MyMsg.msg_body );
-		                		mymsg.appendText("\n");
-		                		mymsg.appendText(MyMsg.msg_body);
+		                		//System.out.println( ">>>>>>>>>User MyMsg msg_title : " + MyMsg.msg_title );
+			                	//System.out.println( ">>>>>>>>>User MyMsg msg_body : " + MyMsg.msg_body );
+			                	//CMainController.mymsg.appendText("\n");
+		                		CMainController.mymsg.appendText(MyMsg.msg_time);
+			                	CMainController.mymsg.appendText("\n");
+			                	CMainController.mymsg.appendText(MyMsg.msg_body);
+			                	CMainController.mymsg.appendText("\n");
+			                	CMainController.mymsg.appendText("--------------------\n");
 		                	}
 
-		                	System.out.println( ">>>>>>>>>User MyMsg msg_time : " + MyMsg.msg_time );
-		                	System.out.println( ">>>>>>>>>User MyMsg msg_status : " + MyMsg.msg_status );*/
+		                	//System.out.println( ">>>>>>>>>User MyMsg msg_time : " + MyMsg.msg_time );
+		                	//System.out.println( ">>>>>>>>>User MyMsg msg_status : " + MyMsg.msg_status );
 		                }
 					} 
 					catch (Exception ex) 
