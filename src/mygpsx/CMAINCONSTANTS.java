@@ -11,6 +11,7 @@ public class CMAINCONSTANTS {
 	//public static String m_PathFXAddShipFxml = "FXAddShip.fxml";
 	//public static String m_PathFXEditShipFxml = "FXEditShip.fxml";
 	public static String m_PathFXListCellUserMsgFxml = "ListCellUserMsg.fxml";
+	public static String m_PathFXListCellUserMsgSendingFxml = "ListCellUserMsgSending.fxml";// Это ячейка сообщения или файла сообщения...
 	
 	
 	public static String m_PathFXAddShipFxml = "FXAddShip.fxml";

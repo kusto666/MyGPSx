@@ -41,7 +41,7 @@ public class CUserCellMsg  extends ListCell<CStructUser>
         } 
         else
         {
-        	System.out.println("mLLoader = new FXMLLoader(getClass().getResource(CLPSMain.m_PathFXListCellUserMsgFxml));");
+        	System.out.println("mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListCellUserMsgFxml));");
             mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListCellUserMsgFxml));
             try 
             {

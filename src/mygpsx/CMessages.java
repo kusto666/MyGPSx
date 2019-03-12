@@ -15,13 +15,13 @@ public class CMessages
 	
 	public CMessages()	{ }
 
-    public CMessages(String stTitleMsg, String stTitleBody, String stTitleTime, String stStatus) 
+    /*public CMessages(String stTitleMsg, String stTitleBody, String stTitleTime, String stStatus) 
     {
         this.msg_title = stTitleMsg;
         this.msg_body = stTitleBody;
         this.msg_time = stTitleTime;
         this.msg_status = stStatus;
-    }
+    }*/
     public String getMyFileUrl()
     {
     	return msg_url_file;

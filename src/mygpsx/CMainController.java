@@ -992,7 +992,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				} 
                 catch (Exception e) 
                 {
-					// TODO: handle exception
+					e.printStackTrace();
 				}
                 
                 
