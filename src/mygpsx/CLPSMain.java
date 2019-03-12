@@ -857,8 +857,10 @@ public class CLPSMain extends Application
 			            		    					// передачи сообщения ему!!!
 			            		    					CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG = 
 			            		    							CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_PREFIX + TempUserForMsg.getMyPhoneID();
+			            		    					CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_SHIP_FOR_MSG = TempUserForMsg.getMyNameShip();	
 			            		    							
 			            		    					System.out.println("tempUserMsgForSending = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
+			            		    					System.out.println("MY_CURRENT_TEMP_USER_SHIP_FOR_MSG = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_SHIP_FOR_MSG);
 			            		    		        }
 			            		    				 
 			            		    				// Здесь пока ничего не придумали по двойному клику по пользователю для переписки!!!

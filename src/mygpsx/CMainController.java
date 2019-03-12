@@ -711,20 +711,19 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     @FXML
     private void handleSendMsg(ActionEvent event) 
     {
-    	mDatabaseRefSendMsg = FirebaseDatabase.getInstance().getReference().child("message_to_android");
     	 try 
     	 {
-    		 CMessages newMsgToUserAndroid = new CMessages();// Новое сообщение!!!
+    		 mDatabaseRefSendMsg = FirebaseDatabase.getInstance().getReference().child("message_to_android");
+    		 //CMessages newMsgToUserAndroid = new CMessages();// Новое сообщение!!!
     		 CDateTime newCurrDate = new CDateTime(); // Берем текущее время для записи в базу!!!
     		 
     		 if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG != null)// Проверяем что выбранный пользователь для сообщения не NULL
     		 {
     			 // Формируем идентификатор сообщения!!!
-    			 m_stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
+    			 SendingMsgOrFile(mDatabaseRefSendMsg, newCurrDate,taOutMsg.getText().toString(),"no_read",taOutMsg.getText().toString());
+/*    			 m_stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
         				 					CCONSTANTS_EVENTS_JOB.MY_SEPARATOR_MSG + newCurrDate.GetCurrLongTime();
         		 System.out.println("stFINISH_ID_MSG = " + m_stFINISH_ID_MSG);
-        		/* mDatabaseRefSendMsg.child(stFINISH_ID_MSG).child("msg_time").
-        		 setValue(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()), null);*/
         		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_body").setValueAsync(taOutMsg.getText().toString());
         		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_status").setValueAsync("no_read");
         		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_time").
@@ -732,18 +731,12 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
         		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_title").setValueAsync(taOutMsg.getText().toString());
                  taOutMsg.clear();
-                 //mymsg.appendText(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
-     			 //mymsg.appendText("\n");
-        		 /* Старый тестовый вариант!!! - больше не нужен!!!
-        		  * mDatabaseRefSendMsg.child("msg_555555").child("msg_body").setValueAsync(taOutMsg.getText().toString());
-        		 mDatabaseRefSendMsg.child("msg_555555").child("msg_status").setValueAsync("no_read");
-        		 mDatabaseRefSendMsg.child("msg_555555").child("msg_time").
-        		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
-        		 mDatabaseRefSendMsg.child("msg_555555").child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
-        		 mDatabaseRefSendMsg.child("msg_555555").child("msg_title").setValueAsync(taOutMsg.getText().toString());
-                 taOutMsg.clear();*/
-                 System.out.println("Типа послали сообщение!!!");
-                 //mymsg.clear();
+                 System.out.println("Типа послали сообщение!!!");*/
+
+    		 }
+    		 else
+    		 {
+    			 //JOptionPane.showMessageDialog(null, "A basic JOptionPane message dialog");
     		 }
     		
          } 
@@ -751,6 +744,23 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	 {
              e.printStackTrace();
          }
+    }
+    // Функция отправки сообщения или ссылки на файл в сообщении!!!
+    private void SendingMsgOrFile(DatabaseReference mDatabaseTemp,CDateTime newCurrDate, String stMsgBody, String stMsgStatus,
+    		 String stMsgTitle)
+    {
+    	// Формируем идентификатор сообщения!!!
+		 m_stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
+				 					CCONSTANTS_EVENTS_JOB.MY_SEPARATOR_MSG + newCurrDate.GetCurrLongTime();
+		 System.out.println("stFINISH_ID_MSG = " + m_stFINISH_ID_MSG);
+		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_body").setValueAsync(stMsgBody);
+		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_status").setValueAsync(stMsgStatus);
+		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_time").
+		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
+		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
+		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_title").setValueAsync(stMsgBody);
+         taOutMsg.clear();
+         System.out.println("Типа послали сообщение!!!");
     }
     @FXML
     private void btnClearMessages(ActionEvent event)
@@ -1151,18 +1161,12 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         {
         	try 
         	{
-        		//String ext = Files.getFileExtension(fFile.getName());
-        		// Ïèøåì ïðÿìî çäåñü â áàçó ñðàçó!!!
             	InputStream targetStream = new FileInputStream(fFile);
         		Bucket bucket = CLPSMain.MyGoogleStorage.get(("mygpsone-kusto1.appspot.com"));
 				com.google.cloud.storage.Blob blob = bucket.create(CMAINCONSTANTS.PATH_NAME_UPLOADS_MAIN + fFile.getName(), targetStream/*,"image/jpg"*/);
 				
-				//System.out.println(blob.get);
 				System.out.println(blob.getMediaLink());
 				System.out.println(blob.getEtag());
-				
-				//m_stMediaLink = blob.getMediaLink();
-				//Hyperlink hltempFilelink = new Hyperlink(m_stMediaLink);
 				
 				HostServices services = CLPSMain.getInstance().getHostServices();
 				
@@ -1175,10 +1179,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 
 				System.out.println("URL = " + img_url);
 				fxHlinkDoc.setText(img_url);
-				
-				//fxHlinkDoc.setText("https://firebasestorage.googleapis.com/v0/b/mygpsone-kusto1.appspot.com/o/uploads%2Forig.jpg?alt=media&token=a6248977-f176-4d33-a2b0-9ffbd8c9a8b6");
-				
-				
+
 				fxHlinkDoc.setOnAction(new EventHandler<ActionEvent>() {
 					 
 			            @Override
@@ -1186,13 +1187,6 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 			            	services.showDocument(fxHlinkDoc.getText());
 			            }
 			        });
-				 
-				 
-				
-				
-				String stTempOutMsg = taOutMsg.getText();
-				
-				//taOutMsg.setText(stTempOutMsg + "\n < " + hltempFilelink + " > ");
 				
 				// Print blob metadata
 				System.out.println("Bucket: " + blob.getBucket());
@@ -1228,45 +1222,26 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				    System.out.println(userMetadata.getKey() + "=" + userMetadata.getValue());
 				  }
 				}
-				//System.out.println(blob2.to);
-				
-								
-				
-				/*// Здесь пример формирования URL для скачивания(отображения в браузере)!!!
-				String img_url = "https://firebasestorage.googleapis.com/v0/b/" + blob.getBucket() + "/o/"
-						+ blob.getName()
-						+ "?alt=media&token=";
-						//+ blob.getMetadata().get("");
-				System.out.println("URL = " + img_url);*/
-				
-				
-				
-				// Create a reference with an initial file path and name
-				//var storage = firebase.storage();
-				//var pathReference = storage.ref('images/stars.jpg');
-				//CLPSMain.MyGoogleStorage.
-				
-				
-				Upload upload;// Скачивание файла from realbase!!!
-               // Uri downloadUri = task.getResult();
-                upload = new Upload(fFile.getName(),
-                		/*blob.getSelfLink(),*/
-                		blob.getMediaLink(),
-                		fxHlinkDoc.getText());
-                           //* taskSnapshot.getUploadSessionUri().toString());*//*
 
-                //adding an upload to firebase database
-                mDatabase = FirebaseDatabase.getInstance().getReference();
-                String uploadId = mDatabase.push().getKey();
-                mDatabase.child("my_files").child(uploadId).setValueAsync(upload);
-                
-                //progressDialog.dismiss();
-                //Toast.makeText(getActivity().getApplicationContext(), "Ôàéë îòïðàâëåí!", Toast.LENGTH_SHORT).show();
-				//System.out.println(blob2.);
+				Upload upload;// Скачивание файла from realbase!!!
+                upload = new Upload(fFile.getName(), blob.getMediaLink(), fxHlinkDoc.getText());
+
+                // Добавим ссылку для скачивания в ветку "message_to_android"
+	             if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG != null)// Проверяем что выбранный пользователь для сообщения не NULL
+	       		 {
+	                //adding an upload to firebase database
+	                mDatabase = FirebaseDatabase.getInstance().getReference();
+	                String uploadId = mDatabase.push().getKey();
+	                mDatabase.child("my_files").child(uploadId).setValueAsync(upload);
+	                // Здесь добавим ссылку скачивания в ветку "message_to_android"
+	                mDatabaseRefSendMsg = FirebaseDatabase.getInstance().getReference().child("message_to_android");
+	                CDateTime newCurrDate = new CDateTime(); // Берем текущее время для записи в базу!!!
+	                SendingMsgOrFile(mDatabaseRefSendMsg, newCurrDate,img_url,"no_read",fFile.getName());
+	       		 }
 			}
         	catch (Exception ex)
         	{
-				ex.getMessage();
+				ex.printStackTrace();
 			}
         }
         else

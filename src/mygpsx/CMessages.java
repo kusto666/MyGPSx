@@ -6,8 +6,9 @@ public class CMessages
 	public String msg_body;
 	public String msg_time;
 	public String msg_text_time;
-	private String MyFileUrl;
+	public String msg_url_file;
 	public String msg_status;
+	public String msg_from_user;
 	
 	public CMessages() 
 	{
@@ -25,11 +26,11 @@ public class CMessages
     }
     public String getMyFileUrl()
     {
-    	return MyFileUrl;
+    	return msg_url_file;
     }
     public void setMyFileUrl(String MyFileUrl)
     {
-    	this.MyFileUrl = MyFileUrl;
+    	this.msg_url_file = MyFileUrl;
     }
     
     public void SetUnixTime()

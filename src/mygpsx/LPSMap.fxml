@@ -45,7 +45,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="434.0" prefWidth="222.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="TOP" layoutX="24.6" layoutY="19.6" prefHeight="20.0" prefWidth="138.0" text="Переписка" textAlignment="CENTER" textFill="#f51212" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="fxLbSelectedUser" contentDisplay="TOP" layoutX="24.6" layoutY="19.6" prefHeight="20.0" prefWidth="138.0" text="Переписка" textAlignment="CENTER" textFill="#f51212" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="0.0" />
                         <Hyperlink fx:id="fxHlinkDoc" layoutX="24.0" layoutY="19.6" prefHeight="23.0" prefWidth="135.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0" />
                         <TextArea fx:id="mymsg" layoutX="23.6" layoutY="44.6" prefHeight="190.0" prefWidth="269.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0" />
                         <TextArea fx:id="taOutMsg" layoutX="51.6" layoutY="272.6" prefHeight="30.0" prefWidth="212.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="260.0" />

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 public class CCONSTANTS_EVENTS_JOB
 {
 	public static String MY_CURRENT_TEMP_USER_FOR_MSG = null;// Переменная хранит текущего пользователя выбранного для передачи сообщения
+	public static String MY_CURRENT_TEMP_USER_SHIP_FOR_MSG = null;// Это временное хранение названия судна.
 	// ему на планшет по его ID-users!!! 
 	public static String MY_CURRENT_TEMP_USER_PREFIX = "MyPhoneID_";// Это префикс, т.к. в firebase он используется в начале ID users!!!
 	public static String MY_SEPARATOR_MSG = "(%%*%%)"; // Разделитель в ID-сообщения!!!
