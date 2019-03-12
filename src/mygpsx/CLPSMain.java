@@ -52,6 +52,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -266,6 +267,7 @@ public class CLPSMain extends Application
 		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
 		root = m_Loader.load();
 		CMainController.mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
+		CMainController.fxLbSelectedUser = (Label)m_Loader.getNamespace().get("fxLbSelectedUser");
 		fxListView = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListView");
 		fxListUsersMsg = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListUsersMsg");
 		//fxMessageWait = (AnchorPane)m_Loader.getNamespace().get("fxMessageWait");
@@ -851,6 +853,10 @@ public class CLPSMain extends Application
 			            		    				
 			            		    				if (click.getClickCount() == 1) 
 			            		    		        {
+			            		    					if(CMainController.mymsg != null)
+            		    			                	{
+			            		    						CMainController.mymsg.clear();
+            		    			                	}
 			            		    					CStructUser TempUserForMsg = fxListUsersMsg.getSelectionModel().getSelectedItem();
 			            		    					
 			            		    					// Присваеваем в CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG выбранного пользователя для
@@ -861,6 +867,48 @@ public class CLPSMain extends Application
 			            		    							
 			            		    					System.out.println("tempUserMsgForSending = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
 			            		    					System.out.println("MY_CURRENT_TEMP_USER_SHIP_FOR_MSG = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_SHIP_FOR_MSG);
+			            		    					CMainController.fxLbSelectedUser.setText(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_SHIP_FOR_MSG);
+			            		    					
+			            		    					// Тут выводим после "клика" сообщения только для конкретного пользователя!!!
+			            		    					// т.е. по его "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG"
+			            		    					 Query mQueryRefSingle = FirebaseDatabase.getInstance().getReference()
+			            		    							 .child("message_to_android");//...
+			            		    							 //.equalTo(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG, "msg_to_user");
+			            		    							 
+			            		    					 mQueryRefSingle.addListenerForSingleValueEvent(new ValueEventListener() {// Здесь ветка слушается один раз при загрузке программы!!!
+			            		    					 //mDatabaseRef.addValueEventListener(new ValueEventListener() {// Это старый вариант - здесь слушается ветка все время!!!
+			            		    						@Override
+			            		    						public void onDataChange(DataSnapshot arg0) 
+			            		    						{
+			            		    							// Выбираем , что слушать, какую ветку данных!!!
+			            		    				            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
+			            		    				            for (DataSnapshot message : messageChildren)
+			            		    			                {
+			            		    			                    CMessages MyMsg = message.getValue(CMessages.class);
+
+			            		    			                	if(CMainController.mymsg != null)
+			            		    			                	{
+			            		    			                		if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG))
+			            		    			                		{
+			            		    			                			CMainController.mymsg.appendText(MyMsg.msg_time);
+				            		    				                	CMainController.mymsg.appendText("\n");
+				            		    				                	CMainController.mymsg.appendText(MyMsg.msg_body);
+				            		    				                	CMainController.mymsg.appendText("\n");
+				            		    				                	CMainController.mymsg.appendText("--------------------\n");
+			            		    			                		}
+			            		    			                		/*CMainController.mymsg.appendText(MyMsg.msg_time);
+			            		    				                	CMainController.mymsg.appendText("\n");
+			            		    				                	CMainController.mymsg.appendText(MyMsg.msg_body);
+			            		    				                	CMainController.mymsg.appendText("\n");
+			            		    				                	CMainController.mymsg.appendText("--------------------\n");*/
+			            		    			                	}
+			            		    			                }
+			            		    						}
+			            		    						public void onCancelled(DatabaseError arg0) 
+			            		    						{
+			            		    							
+			            		    						}; 
+			            		    						});
 			            		    		        }
 			            		    				 
 			            		    				// Здесь пока ничего не придумали по двойному клику по пользователю для переписки!!!
@@ -1156,7 +1204,7 @@ public class CLPSMain extends Application
 					} 
 					catch (Exception ex) 
 					{
-						ex.getMessage();
+						ex.printStackTrace();
 					}
 					
 				}

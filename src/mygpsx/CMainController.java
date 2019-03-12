@@ -216,6 +216,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 
 	
 	public static String m_stFINISH_ID_MSG = null;
+	@FXML
+	public static Label fxLbSelectedUser;// Показывает с кем идет переписка и обмен файлами!!!
     @FXML 
     public static TextArea mymsg;
     @FXML
@@ -736,6 +738,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		 }
     		 else
     		 {
+    			 fxLbSelectedUser.setText("Выберите пользователя!");
     			 //JOptionPane.showMessageDialog(null, "A basic JOptionPane message dialog");
     		 }
     		
@@ -759,6 +762,9 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
 		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
 		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_title").setValueAsync(stMsgBody);
+		 
+		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_to_user").setValueAsync(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
+		 
          taOutMsg.clear();
          System.out.println("Типа послали сообщение!!!");
     }
@@ -1238,6 +1244,10 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	                CDateTime newCurrDate = new CDateTime(); // Берем текущее время для записи в базу!!!
 	                SendingMsgOrFile(mDatabaseRefSendMsg, newCurrDate,img_url,"no_read",fFile.getName());
 	       		 }
+	             else
+	             {
+	            	 fxLbSelectedUser.setText("Выберите пользователя!");
+	             }
 			}
         	catch (Exception ex)
         	{
