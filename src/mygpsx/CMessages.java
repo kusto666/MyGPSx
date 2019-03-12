@@ -10,15 +10,10 @@ public class CMessages
 	public String msg_status;
 	public String msg_from_user;
 	public String msg_to_user;
-	//public Long msg_unix_time;
+	public Long msg_unix_time;
 	
 	
-	public CMessages() 
-	{
-/*		msg_title = null;
-		msg_body = null;
-		msg_time = null;*/
-    }
+	public CMessages()	{ }
 
     public CMessages(String stTitleMsg, String stTitleBody, String stTitleTime, String stStatus) 
     {
@@ -36,10 +31,14 @@ public class CMessages
     	this.msg_url_file = MyFileUrl;
     }
     
-   /* public void SetUnixTime(String msg_unix_time)
+    public void setUnixTime(Long msg_unix_time)
     {
     	this.msg_unix_time = msg_unix_time;
-    }*/
+    }
+    public Long getUnixTime()
+    {
+    	return this.msg_unix_time;
+    }
    /* public String GetTitle()
     {
     	return msg_title;

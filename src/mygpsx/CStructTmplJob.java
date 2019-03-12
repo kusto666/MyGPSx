@@ -30,9 +30,14 @@ public class CStructTmplJob {
     {
         return MyNameTemplate;
     }
-   /* public String getmy_adding_attr()
+    
+    /*public String getmy_adding_attr()
     {
         return my_adding_attr;
+    }
+    public void setmy_adding_attr(String my_adding_attr)
+    {
+    	this.my_adding_attr = my_adding_attr;
     }*/
     
     public void setMyIDUnique(String MyIDUnique)
