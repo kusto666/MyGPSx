@@ -1193,6 +1193,33 @@ public class CLPSMain extends Application
 						 String ref= arg0.getKey();
 						 System.out.println( "arg0.getKey() = " + arg0.getKey());
 						 CMessages myMessage = arg0.getValue(CMessages.class);
+						 
+						 
+						 
+						 m_alUsersAllMsgSending.add(myMessage);
+						// m_ObservableListUsersMsgSending.clear();
+				            m_ObservableListUsersMsgSending = FXCollections.observableArrayList (m_alUsersAllMsgSending);
+				            System.out.println( "m_ObservableListUsersMsgSending.size() = " + m_ObservableListUsersMsgSending.size());
+				            Platform.runLater(
+			            			  () -> {
+
+			            				  fxListUserViewOfMsg.setItems(m_ObservableListUsersMsgSending);
+			            				  fxListUserViewOfMsg.setPrefSize(200, 500);
+			            				  fxListUserViewOfMsg.setCellFactory(new Callback<ListView<CMessages>, ListCell<CMessages>>() 
+			            				 {
+											
+											@Override
+											public ListCell<CMessages> call(ListView<CMessages> param) 
+											{
+												System.out.println("return new CMessages();");
+												return new CUserCellMsgSending();
+											}
+										});
+			            			  });
+						 
+						 
+						 
+						 
 						 System.out.println( "arg0.myMessage.... = " + myMessage.msg_body);
 						 System.out.println( "arg0.myMessage msg_time.... = " + myMessage.msg_time);
 						 
