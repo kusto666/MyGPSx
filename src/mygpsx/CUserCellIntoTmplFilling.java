@@ -154,12 +154,11 @@ public class CUserCellIntoTmplFilling  extends ListCell<CStructAttrTmplFilling>
 	  				  
 	   	        	  fxLbUniqueID.setText(String.valueOf(item.getMyIDUnique()));
         			  
-        			}
-        		);
+        			});
 				} 
         		catch (Exception ex) 
         		{
-        			ex.getMessage();
+        			ex.printStackTrace();
 				}
             } 
             catch (IOException e) 
@@ -167,7 +166,7 @@ public class CUserCellIntoTmplFilling  extends ListCell<CStructAttrTmplFilling>
                 e.printStackTrace();
             }
 
-           // System.out.println(fxTxtNameAttrobj.getText());
+
             setText(null);
             setGraphic(m_Pane);
         }

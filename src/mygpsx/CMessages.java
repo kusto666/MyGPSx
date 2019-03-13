@@ -11,7 +11,7 @@ public class CMessages
 	public String msg_from_user;
 	public String msg_to_user;
 	public Long msg_unix_time;
-	public Boolean msg_is_text;// Если = true - то текст и никакой ссылки для скачивания файла!!
+	public String msg_is_text;// Если = true - то текст и никакой ссылки для скачивания файла!!
 	// Если = false - то наоборот!!!
 	
 	

@@ -723,18 +723,6 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		 {
     			 // Формируем идентификатор сообщения!!!
     			 SendingMsgOrFile(mDatabaseRefSendMsg, newCurrDate,taOutMsg.getText().toString(),"no_read",taOutMsg.getText().toString(), true);
-/*    			 m_stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
-        				 					CCONSTANTS_EVENTS_JOB.MY_SEPARATOR_MSG + newCurrDate.GetCurrLongTime();
-        		 System.out.println("stFINISH_ID_MSG = " + m_stFINISH_ID_MSG);
-        		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_body").setValueAsync(taOutMsg.getText().toString());
-        		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_status").setValueAsync("no_read");
-        		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_time").
-        		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
-        		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
-        		 mDatabaseRefSendMsg.child(m_stFINISH_ID_MSG).child("msg_title").setValueAsync(taOutMsg.getText().toString());
-                 taOutMsg.clear();
-                 System.out.println("Типа послали сообщение!!!");*/
-
     		 }
     		 else
     		 {
@@ -756,23 +744,43 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		 m_stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
 				 					CCONSTANTS_EVENTS_JOB.MY_SEPARATOR_MSG + newCurrDate.GetCurrLongTime();
 		 System.out.println("stFINISH_ID_MSG = " + m_stFINISH_ID_MSG);
-		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_body").setValueAsync(stMsgBody);
+		 
+		 CMessages bMessss = new CMessages();
+		 bMessss.msg_body = stMsgBody;
+		 if(bIsText)
+		 {
+			 bMessss.msg_is_text = "true";
+		 }
+		 else
+		 {
+			 bMessss.msg_is_text = "false";
+		 }
+		 bMessss.msg_status = stMsgStatus;
+		 bMessss.msg_time = newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime());
+		 bMessss.msg_title = stMsgTitle;
+		 bMessss.msg_to_user = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG;
+		 bMessss.msg_unix_time = newCurrDate.GetCurrLongTime();
+
+		 
+		 
+		/* mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_body").setValueAsync(stMsgBody);
 		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_status").setValueAsync(stMsgStatus);
 		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_time").
 		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
 		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
-		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_title").setValueAsync(stMsgBody);
+		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_title").setValueAsync(stMsgBody);*/
 		 
-		 if(bIsText)
+		 /*if(bIsText)
 		 {
-			 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_is_text").setValueAsync(true);
+			 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_is_text").setValueAsync("true");
 		 }
 		 else
 		 {
-			 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_is_text").setValueAsync(false);
-		 }
+			 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_is_text").setValueAsync("false");
+		 }*/
 		 
-		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_to_user").setValueAsync(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
+		 //mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_to_user").setValueAsync(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
+		 mDatabaseTemp.child(m_stFINISH_ID_MSG).setValueAsync(bMessss);
 		 
          taOutMsg.clear();
          System.out.println("Типа послали сообщение!!!");

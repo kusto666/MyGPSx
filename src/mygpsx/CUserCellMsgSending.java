@@ -2,6 +2,7 @@ package mygpsx;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,10 +30,11 @@ public class CUserCellMsgSending  extends ListCell<CMessages>
 	FXMLLoader mLLoader;
 	@FXML
 	AnchorPane m_Pane;
+	//@FXML
+	String mbIsText;
 	
-	Boolean mbIsText;
 	
-	
+	@SuppressWarnings("unused")
 	@Override
 	public void updateItem(CMessages item, boolean empty) 
 	{
@@ -45,23 +47,24 @@ public class CUserCellMsgSending  extends ListCell<CMessages>
         } 
         else
         {
-        	//System.out.println("mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListCellUserMsgSendingFxml));");
+        	
             mLLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXListCellUserMsgSendingFxml));
             try 
             {
+            	
                 mLLoader.load();
                 fxLbUniqueID = (Label)mLLoader.getNamespace().get("fxLbUniqueID");
                 fxLbTimeSending = (Label)mLLoader.getNamespace().get("fxLbTimeSending");
                 fxTxtAreaMsg = (TextArea)mLLoader.getNamespace().get("fxTxtAreaMsg");
                 fxHLUploadFile = (Hyperlink)mLLoader.getNamespace().get("fxHLUploadFile");
-        		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
+        		
         		
         		fxLbUniqueID.setText(String.valueOf(item.msg_status));
         		fxLbTimeSending.setText(String.valueOf(item.msg_time));
-        		mbIsText = Boolean.valueOf(item.msg_is_text);
-        		System.out.println("mbIsText ===============>>>> "  + mbIsText.toString());
-        		
-        		if(mbIsText)
+
+        		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
+        		mbIsText = String.valueOf(item.msg_is_text);
+        		if(mbIsText.equals("true"))
         		{
         			fxTxtAreaMsg.setWrapText(true);
         			fxTxtAreaMsg.setText(String.valueOf(item.msg_body));
@@ -77,63 +80,18 @@ public class CUserCellMsgSending  extends ListCell<CMessages>
 			            @Override
 			            public void handle(ActionEvent event) {
 			            	CLPSMain.m_myHostServicesLinks.showDocument(String.valueOf(item.msg_body));
-			            	//CLPSMain.m_myHostServicesLinks.showDocument(fxHLUploadFile.getText());
-			            	
 			            }
 			        });
         		}
-/*        		try // Будем проверять ссылка или не ссылка
-        		{
-        			// Проверим, что у нас в теле сообщения
-            		if(String.valueOf(item.msg_body).substring(0,36).equals("https://firebasestorage.googleapis.com"))
-            		{
-            			fxTxtAreaMsg.setWrapText(true);
-            			fxTxtAreaMsg.setPrefHeight(0.0d);
-            			fxHLUploadFile.setText(String.valueOf(item.msg_body));
-            		}
-            		else
-            		{
-            			//fxTxtAreaMsg.scro
-            			fxTxtAreaMsg.setPrefHeight(0.0d);
-            			//fxTxtAreaMsg.setText(String.valueOf(item.msg_body));
-            			
-            			
-            			fxHLUploadFile.setText("Ссылка для скачивания");
-            			//fxHLUploadFil
-            			//link.setTooltip(new Tooltip(path));
-            			fxHLUploadFile.setOnAction(new EventHandler<ActionEvent>() 
-            			{
-       					 
-    			            @Override
-    			            public void handle(ActionEvent event) {
-    			            	CLPSMain.m_myHostServicesLinks.showDocument(String.valueOf(item.msg_body));
-    			            	//CLPSMain.m_myHostServicesLinks.showDocument(fxHLUploadFile.getText());
-    			            	
-    			            }
-    			        });
-            			//fxHLUploadFile.setVisible(false);
-            		}
-				} 
-        		catch (Exception e)
-        		{
-        			fxTxtAreaMsg.setWrapText(true);
-        			fxTxtAreaMsg.setText(String.valueOf(item.msg_body));
-        			fxHLUploadFile.setVisible(false);
-        			
-				}*/
-        		
-        		
-        		
-        		
-        		
-                setText(null);
-                setGraphic(m_Pane);
+        		//});
             } 
             catch (IOException e) 
             {
                 e.printStackTrace();
             }
-
+            setText(null);
+            setGraphic(m_Pane);
         }
+        	
 	}
 }

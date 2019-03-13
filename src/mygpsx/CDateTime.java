@@ -37,7 +37,7 @@ public class CDateTime
 		return m_MyLongTime;
 	}
 	// Вызывается для конвертации текущего UNIX-времени в удобочитаемый формат
-	public static String GetPrintTime(Long lTime)
+	public String GetPrintTime(Long lTime)
 	{
 		Date dDate = new Date(lTime);
 		SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
