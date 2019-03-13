@@ -64,6 +64,7 @@ import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -234,6 +235,9 @@ public class CLPSMain extends Application
 	public static ListView<CStructUser> fxListView;
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	
+	public static HostServices m_myHostServicesLinks;// Сервис для работы с сылками для их открытия документов в браузере например...
+	
 	// Верняя и нижния панели AnchorPane для оображения сообщений:
 	@FXML
 	public static AnchorPane fxAPanMsgTop = null;
@@ -298,6 +302,8 @@ public class CLPSMain extends Application
 		
 		CMainController.fxTxtArLogs = (TextArea)m_Loader.getNamespace().get("fxTxtArLogs");
 		CMainController.fxTxtArLogs.setText("start(Stage st) throws Exception");
+		
+		m_myHostServicesLinks = CLPSMain.getInstance().getHostServices();
 		
 		
 		//fxBtnInTabRefreshMap = (Button)m_Loader.getNamespace().get("fxBtnInTabRefreshMap");
@@ -1098,8 +1104,6 @@ public class CLPSMain extends Application
 		            		    			                			Platform.runLater(
             		    						            			  () -> 
             		    						            			  {
-            		    						            				 
-            		    						            				//  MyLoadListUserViewOfMsg(MyMsg);// Это новое!!!
             		    						            				CMainController.mymsg.appendText(MyMsg.msg_time);
   				            		    				                	CMainController.mymsg.appendText("\n");
   				            		    				                	CMainController.mymsg.appendText(MyMsg.msg_body);

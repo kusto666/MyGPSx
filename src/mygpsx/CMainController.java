@@ -1174,7 +1174,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 				System.out.println(blob.getMediaLink());
 				System.out.println(blob.getEtag());
 				
-				HostServices services = CLPSMain.getInstance().getHostServices();
+				//CLPSMain.m_myHostServicesLinks = CLPSMain.getInstance().getHostServices();
 				
 				String stTempReplaceBlobName = blob.getName();
 				// Äîäåëàåì ññûëêó URL 1 çàâòðà!!!
@@ -1190,7 +1190,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 					 
 			            @Override
 			            public void handle(ActionEvent event) {
-			            	services.showDocument(fxHlinkDoc.getText());
+			            	CLPSMain.m_myHostServicesLinks.showDocument(fxHlinkDoc.getText());
 			            }
 			        });
 				

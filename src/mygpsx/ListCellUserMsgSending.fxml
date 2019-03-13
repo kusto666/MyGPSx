@@ -5,11 +5,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="fxCellPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #86ef0b;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CListCellUserController">
+<AnchorPane fx:id="fxCellPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CListCellUserController">
    <children>
-      <Label fx:id="fxLbTimeSending" layoutX="-6.0" layoutY="-3.0" prefHeight="14.0" prefWidth="161.0" text="TimeSending" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label fx:id="fxLbUniqueID" layoutX="125.0" prefHeight="17.0" prefWidth="120.0" text="Label" />
-      <TextArea fx:id="fxTxtAreaMsg" prefWidth="250.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
-      <Hyperlink fx:id="fxHLUploadFile" text="Hyperlink" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Label fx:id="fxLbTimeSending" layoutX="-6.0" layoutY="-3.0" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #86ef0b;" text="TimeSending" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="fxLbUniqueID" layoutX="125.0" maxHeight="14.0" maxWidth="100.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="100.0" text="Label" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <TextArea fx:id="fxTxtAreaMsg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+      <Hyperlink fx:id="fxHLUploadFile" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #6699ff;" text="Hyperlink" textFill="#2c0a0a" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>
