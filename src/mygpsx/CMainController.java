@@ -722,7 +722,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		 if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG != null)// Проверяем что выбранный пользователь для сообщения не NULL
     		 {
     			 // Формируем идентификатор сообщения!!!
-    			 SendingMsgOrFile(mDatabaseRefSendMsg, newCurrDate,taOutMsg.getText().toString(),"no_read",taOutMsg.getText().toString());
+    			 SendingMsgOrFile(mDatabaseRefSendMsg, newCurrDate,taOutMsg.getText().toString(),"no_read",taOutMsg.getText().toString(), true);
 /*    			 m_stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
         				 					CCONSTANTS_EVENTS_JOB.MY_SEPARATOR_MSG + newCurrDate.GetCurrLongTime();
         		 System.out.println("stFINISH_ID_MSG = " + m_stFINISH_ID_MSG);
@@ -750,7 +750,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     }
     // Функция отправки сообщения или ссылки на файл в сообщении!!!
     private void SendingMsgOrFile(DatabaseReference mDatabaseTemp,CDateTime newCurrDate, String stMsgBody, String stMsgStatus,
-    		 String stMsgTitle)
+    		 String stMsgTitle, Boolean bIsText)
     {
     	// Формируем идентификатор сообщения!!!
 		 m_stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
@@ -762,6 +762,15 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		 setValueAsync(newCurrDate.GetPrintTime(newCurrDate.GetCurrLongTime()));
 		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_unix_time").setValueAsync(newCurrDate.GetCurrLongTime());
 		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_title").setValueAsync(stMsgBody);
+		 
+		 if(bIsText)
+		 {
+			 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_is_text").setValueAsync(true);
+		 }
+		 else
+		 {
+			 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_is_text").setValueAsync(false);
+		 }
 		 
 		 mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_to_user").setValueAsync(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
 		 
@@ -1242,7 +1251,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 	                // Здесь добавим ссылку скачивания в ветку "message_to_android"
 	                mDatabaseRefSendMsg = FirebaseDatabase.getInstance().getReference().child("message_to_android");
 	                CDateTime newCurrDate = new CDateTime(); // Берем текущее время для записи в базу!!!
-	                SendingMsgOrFile(mDatabaseRefSendMsg, newCurrDate,img_url,"no_read",fFile.getName());
+	                SendingMsgOrFile(mDatabaseRefSendMsg, newCurrDate,img_url,"no_read",fFile.getName(), false);
 	       		 }
 	             else
 	             {

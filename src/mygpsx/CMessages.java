@@ -11,6 +11,8 @@ public class CMessages
 	public String msg_from_user;
 	public String msg_to_user;
 	public Long msg_unix_time;
+	public Boolean msg_is_text;// Если = true - то текст и никакой ссылки для скачивания файла!!
+	// Если = false - то наоборот!!!
 	
 	
 	public CMessages()	{ }
@@ -39,16 +41,4 @@ public class CMessages
     {
     	return this.msg_unix_time;
     }
-   /* public String GetTitle()
-    {
-    	return msg_title;
-    }
-    public String GetBody()
-    {
-    	return msg_body;
-    }
-    public String GetTime()
-    {
-    	return msg_time;
-    }*/
 }

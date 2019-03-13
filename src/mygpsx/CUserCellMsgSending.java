@@ -30,6 +30,8 @@ public class CUserCellMsgSending  extends ListCell<CMessages>
 	@FXML
 	AnchorPane m_Pane;
 	
+	Boolean mbIsText;
+	
 	
 	@Override
 	public void updateItem(CMessages item, boolean empty) 
@@ -56,8 +58,31 @@ public class CUserCellMsgSending  extends ListCell<CMessages>
         		
         		fxLbUniqueID.setText(String.valueOf(item.msg_status));
         		fxLbTimeSending.setText(String.valueOf(item.msg_time));
+        		mbIsText = Boolean.valueOf(item.msg_is_text);
+        		System.out.println("mbIsText ===============>>>> "  + mbIsText.toString());
         		
-        		try // Будем проверять ссылка или не ссылка
+        		if(mbIsText)
+        		{
+        			fxTxtAreaMsg.setWrapText(true);
+        			fxTxtAreaMsg.setText(String.valueOf(item.msg_body));
+        			fxHLUploadFile.setVisible(false);
+        		}
+        		else
+        		{
+        			fxTxtAreaMsg.setPrefHeight(0.0d);
+        			fxHLUploadFile.setText("Ссылка для скачивания");
+        			fxHLUploadFile.setOnAction(new EventHandler<ActionEvent>() 
+        			{
+   					 
+			            @Override
+			            public void handle(ActionEvent event) {
+			            	CLPSMain.m_myHostServicesLinks.showDocument(String.valueOf(item.msg_body));
+			            	//CLPSMain.m_myHostServicesLinks.showDocument(fxHLUploadFile.getText());
+			            	
+			            }
+			        });
+        		}
+/*        		try // Будем проверять ссылка или не ссылка
         		{
         			// Проверим, что у нас в теле сообщения
             		if(String.valueOf(item.msg_body).substring(0,36).equals("https://firebasestorage.googleapis.com"))
@@ -95,7 +120,7 @@ public class CUserCellMsgSending  extends ListCell<CMessages>
         			fxTxtAreaMsg.setText(String.valueOf(item.msg_body));
         			fxHLUploadFile.setVisible(false);
         			
-				}
+				}*/
         		
         		
         		
