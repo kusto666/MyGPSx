@@ -45,15 +45,27 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="434.0" prefWidth="222.0">
                      <children>
-                        <Label fx:id="fxLbSelectedUser" contentDisplay="TOP" layoutX="24.6" layoutY="19.6" prefHeight="20.0" prefWidth="138.0" text="Выберите судно" textAlignment="CENTER" textFill="#f51212" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="0.0" />
-                        <Hyperlink fx:id="fxHlinkDoc" layoutX="24.0" layoutY="19.6" prefHeight="23.0" prefWidth="135.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0" />
-                        <TextArea fx:id="mymsg" layoutX="32.6" layoutY="186.0" prefHeight="49.0" prefWidth="250.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="25.0" />
-                        <TextArea fx:id="taOutMsg" layoutX="51.6" layoutY="272.6" prefHeight="30.0" prefWidth="212.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="260.0" />
-                        <Button fx:id="fxBtnSendMsg" layoutX="34.0" layoutY="305.0" mnemonicParsing="false" onAction="#handleSendMsg" prefHeight="20.0" prefWidth="97.0" text="Отправить" textAlignment="CENTER" textFill="#e10c0c" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                        <Button fx:id="fxBtnCkearMessages" layoutX="14.0" layoutY="227.0" mnemonicParsing="false" onAction="#btnClearMessages" text="Очистить сообщения" textFill="GREEN" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="227.0" />
-                        <Button layoutX="24.0" layoutY="328.0" mnemonicParsing="false" onAction="#btnLoadFileToMsg" prefHeight="20.0" prefWidth="83.0" text="Отправка документов" textFill="BLUE" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="325.0" />
-                        <ListView fx:id="fxListUsersMsg" layoutX="20.0" layoutY="294.0" prefHeight="166.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="355.0" />
-                        <ListView fx:id="fxListUserViewOfMsg" layoutX="24.0" layoutY="33.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="250.0" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="20.0" />
+                        <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                          <items>
+                            <AnchorPane fx:id="fxAPanMsgTop" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <Label fx:id="fxLbSelectedUser" contentDisplay="TOP" prefHeight="20.0" prefWidth="138.0" text="Выберите судно" textAlignment="CENTER" textFill="#f51212" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="0.0" />
+                                    <Hyperlink fx:id="fxHlinkDoc" disable="true" prefHeight="23.0" prefWidth="135.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0" />
+                                    <TextArea fx:id="mymsg" prefHeight="50.0" prefWidth="250.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="170.0" />
+                                    <TextArea fx:id="taOutMsg" prefHeight="25.0" prefWidth="212.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="260.0" />
+                                    <Button fx:id="fxBtnSendMsg" mnemonicParsing="false" onAction="#handleSendMsg" prefHeight="20.0" prefWidth="97.0" text="Отправить" textAlignment="CENTER" textFill="#e10c0c" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="295.0" />
+                                    <Button fx:id="fxBtnCkearMessages" mnemonicParsing="false" onAction="#btnClearMessages" text="Очистить сообщения" textFill="GREEN" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="227.0" />
+                                    <Button mnemonicParsing="false" onAction="#btnLoadFileToMsg" prefHeight="20.0" prefWidth="83.0" text="Отправка документов" textFill="BLUE" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="325.0" />
+                                    <ListView fx:id="fxListUserViewOfMsg" maxHeight="150.0" maxWidth="-Infinity" minHeight="150.0" minWidth="-Infinity" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="20.0" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane fx:id="fxAPanMsgDown" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <ListView fx:id="fxListUsersMsg" prefHeight="166.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
                      </children>
                   </AnchorPane>
             </content>

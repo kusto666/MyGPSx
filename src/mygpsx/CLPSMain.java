@@ -234,6 +234,12 @@ public class CLPSMain extends Application
 	public static ListView<CStructUser> fxListView;
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	// Верняя и нижния панели AnchorPane для оображения сообщений:
+	@FXML
+	public static AnchorPane fxAPanMsgTop = null;
+	@FXML
+	public static AnchorPane fxAPanMsgDown = null;
+	
 	// Здесь будем отображать пользователей в переписке!!!
 	public static ObservableList<CStructUser> m_ObservableListUsersMsg;
 	@FXML
@@ -277,6 +283,10 @@ public class CLPSMain extends Application
 		// Инициализация всех внутренних контролов!!!
 		m_Loader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathMainFxml));
 		root = m_Loader.load();
+		
+		fxAPanMsgTop = (AnchorPane)m_Loader.getNamespace().get("fxAPanMsgTop");
+		fxAPanMsgDown = (AnchorPane)m_Loader.getNamespace().get("fxAPanMsgDown");
+		
 		CMainController.mymsg = (TextArea)m_Loader.getNamespace().get("mymsg");
 		CMainController.fxLbSelectedUser = (Label)m_Loader.getNamespace().get("fxLbSelectedUser");
 		fxListView = (ListView<CStructUser>)m_Loader.getNamespace().get("fxListView");
@@ -1196,26 +1206,24 @@ public class CLPSMain extends Application
 						 
 						 
 						 
-						 m_alUsersAllMsgSending.add(myMessage);
-						// m_ObservableListUsersMsgSending.clear();
+						 	m_alUsersAllMsgSending.add(myMessage);
 				            m_ObservableListUsersMsgSending = FXCollections.observableArrayList (m_alUsersAllMsgSending);
 				            System.out.println( "m_ObservableListUsersMsgSending.size() = " + m_ObservableListUsersMsgSending.size());
 				            Platform.runLater(
 			            			  () -> {
-
-			            				  fxListUserViewOfMsg.setItems(m_ObservableListUsersMsgSending);
-			            				  fxListUserViewOfMsg.setPrefSize(200, 500);
-			            				  fxListUserViewOfMsg.setCellFactory(new Callback<ListView<CMessages>, ListCell<CMessages>>() 
-			            				 {
-											
-											@Override
-											public ListCell<CMessages> call(ListView<CMessages> param) 
-											{
-												System.out.println("return new CMessages();");
-												return new CUserCellMsgSending();
-											}
-										});
-			            			  });
+	            				  fxListUserViewOfMsg.setItems(m_ObservableListUsersMsgSending);
+	            				  fxListUserViewOfMsg.setPrefSize(200, 500);
+	            				  fxListUserViewOfMsg.setCellFactory(new Callback<ListView<CMessages>, ListCell<CMessages>>() 
+	            				 {
+									
+									@Override
+									public ListCell<CMessages> call(ListView<CMessages> param) 
+									{
+										System.out.println("return new CMessages();");
+										return new CUserCellMsgSending();
+									}
+								});
+	            			  });
 						 
 						 
 						 
