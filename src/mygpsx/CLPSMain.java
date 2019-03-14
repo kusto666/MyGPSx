@@ -568,7 +568,25 @@ public class CLPSMain extends Application
          
         LOGGER.finer("Finest example on LOGGER handler completed.");*/
     }
-    
+    public void FirebaseEventProxy() {
+    	InputStream serviceAccount = this.getClass().getResourceAsStream("/555.json");
+    	  String firebaseLocation = "https://crackling-torch-392.firebaseio.com";
+    	  Map<String, Object> databaseAuthVariableOverride = new HashMap<String, Object>();
+    	  // uid and provider will have to match what you have in your firebase security rules
+    	  databaseAuthVariableOverride.put("uid", "gae-firebase-event-proxy");
+    	  databaseAuthVariableOverride.put("provider", "com.example");
+    	  try {
+    	    FirebaseOptions options = new FirebaseOptions.Builder()
+    	    		 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+    	        .setDatabaseUrl(firebaseLocation)
+    	        .setDatabaseAuthVariableOverride(databaseAuthVariableOverride).build();
+    	    FirebaseApp.initializeApp(options);
+    	  } catch (IOException e) {
+    	    throw new RuntimeException(
+    	        "Error reading firebase secrets from file: src/main/webapp/gae-firebase-secrets.json: "
+    	        + e.getMessage());
+    	  }
+    	}
     // Здесь инициализируем подключение к базе данных!!!
     @FXML
     private boolean InitFireBase()
@@ -584,12 +602,27 @@ public class CLPSMain extends Application
 			}
 					
 
-					FirebaseOptions options = new FirebaseOptions.Builder()// Это мой родной(изначальный рабочий вариант!!!)
+					/*FirebaseOptions options = new FirebaseOptions.Builder()// Это мой родной(изначальный рабочий вариант!!!)
 				    .setCredentials(GoogleCredentials.fromStream(serviceAccount))// Если что, то просто его раскамментить!!!
 				    .setDatabaseUrl("https://mygpsone-kusto1.firebaseio.com/")
-				    .build();
-			
-			
+				    .build();*/
+			FirebaseOptions options = null;
+					String firebaseLocation = "https://mygpsone-kusto1.firebaseio.com/";
+			    	  Map<String, Object> databaseAuthVariableOverride = new HashMap<String, Object>();
+			    	  // uid and provider will have to match what you have in your firebase security rules
+			    	  databaseAuthVariableOverride.put("uid", "gae-firebase-event-proxy");
+			    	  databaseAuthVariableOverride.put("provider", "192.168.32.9");
+			    	  try {
+			    	    options = new FirebaseOptions.Builder()
+			    	    		 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+			    	        .setDatabaseUrl(firebaseLocation)
+			    	        .setDatabaseAuthVariableOverride(databaseAuthVariableOverride).build();
+			    	    //FirebaseApp.initializeApp(options);
+			    	  } catch (IOException e) {
+			    	    throw new RuntimeException(
+			    	        "Error reading firebase secrets from file: src/main/webapp/gae-firebase-secrets.json: "
+			    	        + e.getMessage());
+			    	  }
 			
 			/*Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.32.9", 3128));
 			HttpTransport httpTransport = new NetHttpTransport.Builder().setProxy(proxy).build();
