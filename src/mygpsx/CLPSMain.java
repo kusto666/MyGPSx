@@ -2,6 +2,8 @@ package mygpsx;
 
 import java.util.*;
 import java.text.*;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.awt.AWTException;
@@ -26,6 +28,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 import com.google.api.Page;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.auth.http.HttpTransportFactory;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.bigquery.BigQuery;
@@ -45,6 +50,7 @@ import com.google.cloud.storage.StorageOptions;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseToken;
 import com.google.firebase.database.ChildEventListener;
 /*import com.google.firebase.auth.FirebaseCredential;
 import com.google.firebase.auth.FirebaseCredentials;*/
@@ -54,6 +60,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.lynden.gmapsfx.GoogleMapView;
@@ -325,7 +332,21 @@ public class CLPSMain extends Application
     @SuppressWarnings("unchecked")
 	@Override
     public void start(Stage st) throws Exception
-    {
+    {/*
+    	System.setProperty("https.proxyHost","192.168.32.9");
+         System.setProperty("https.proxyPort","3128");
+         System.setProperty("https.proxyUserName","DKustov");
+         System.setProperty("https.proxyPassword","761set31Potr");
+         System.setProperty("https.proxySet","true");*/
+    	
+    	/*System.setProperty("java.net.useSystemProxies","true");
+    	System.setProperty("https.proxyHost", "https://mygpsone-kusto1.firebaseio.com");
+    	System.setProperty("https.proxyPort", "3128");*/
+    	
+    	/*System.setProperty("java.net.useSystemProxies","true");
+    	System.setProperty("https.proxyHost", "192.168.32.9");
+    	System.setProperty("https.proxyPort", "3128");*/
+         
     	CDateTime MyTestTime = new CDateTime();
     	System.out.println("GetCurrLongTime = " + MyTestTime.GetCurrLongTime());
     	
@@ -511,11 +532,11 @@ public class CLPSMain extends Application
     public static void main(String[] args) 
     {
         launch(args);
-        System.setProperty("http.proxyHost","200.1.1.60");
+       /* System.setProperty("http.proxyHost","192.168.32.9");
         System.setProperty("http.proxyPort","3128");
-        System.setProperty("http.proxyUserName","user");
-        System.setProperty("http.proxyPassword","pass");
-        System.setProperty("http.proxySet","true");
+        System.setProperty("http.proxyUserName","DKustov");
+        System.setProperty("http.proxyPassword","761set31Potr");
+        System.setProperty("http.proxySet","true");*/
         
         
         
@@ -561,16 +582,43 @@ public class CLPSMain extends Application
 			{
 				System.out.println("Fucking!!!");
 			}
+					
 
-
-					FirebaseOptions options = new FirebaseOptions.Builder()
-				    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					FirebaseOptions options = new FirebaseOptions.Builder()// Это мой родной(изначальный рабочий вариант!!!)
+				    .setCredentials(GoogleCredentials.fromStream(serviceAccount))// Если что, то просто его раскамментить!!!
 				    .setDatabaseUrl("https://mygpsone-kusto1.firebaseio.com/")
 				    .build();
-			/*FirebaseOptions options = new FirebaseOptions.Builder()
-			  .setCredentials(credentials)(Credential.fromCertificate(serviceAccount))
-			  .setDatabaseUrl("https://mygpsone-kusto1.firebaseio.com/")
-			  .build();*/
+			
+			
+			
+			/*Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.32.9", 3128));
+			HttpTransport httpTransport = new NetHttpTransport.Builder().setProxy(proxy).build();
+
+			HttpTransportFactory httpTransportFactory = () -> httpTransport;
+
+			FirebaseOptions options = new FirebaseOptions.Builder()
+			   .setCredentials(GoogleCredentials.fromStream(serviceAccount, httpTransportFactory))
+			   .setDatabaseUrl("https://mygpsone-kusto1.firebaseio.com/")
+			   .setHttpTransport(httpTransport)
+			   .build();*/
+			//FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdTokenAsync(<token>).get();
+			
+			
+			
+			
+			
+			/*Map<String, Object> databaseAuthVariableOverride = new HashMap<String, Object>();
+			FirebaseOptions options =
+			          new FirebaseOptions.Builder()
+			          .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+			              .setDatabaseUrl("https://mygpsone-kusto1.firebaseio.com/")
+			              .setDatabaseAuthVariableOverride(databaseAuthVariableOverride)
+			              .build();*/
+			
+			
+			
+			
+
 
 			if(defaultApp == null)
 			{
@@ -582,6 +630,7 @@ public class CLPSMain extends Application
 
 				FirebaseAuth.getInstance();
 				FirebaseDatabase.getInstance();
+				
 //////////////////////////Что-то интересное - пока просто написасал)))//////////////////////////////////////////
 				System.out.println("START FirebaseStorage>>>");
 				/*BigQuery bigquery = BigQueryOptions.newBuilder().setProjectId("mygpsone-kusto1")
@@ -1239,7 +1288,6 @@ public class CLPSMain extends Application
 			            				  fxListUserViewOfMsg.setPrefSize(200, 500);
 			            				  fxListUserViewOfMsg.setCellFactory(new Callback<ListView<CMessages>, ListCell<CMessages>>() 
 			            				  {
-											
 											//@Override
 											public ListCell<CMessages> call(ListView<CMessages> param) 
 											{
