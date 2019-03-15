@@ -83,7 +83,6 @@ public class CUserCellMsgSending  extends ListCell<CMessages>
 			            }
 			        });
         		}
-        		//});
             } 
             catch (IOException e) 
             {

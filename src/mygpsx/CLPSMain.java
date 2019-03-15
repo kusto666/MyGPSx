@@ -23,6 +23,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -1166,37 +1167,7 @@ public class CLPSMain extends Application
 		            		    				            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
 		            		    				            
 		            		    				            m_alUsersAllMsgSending = new ArrayList<CMessages>();
-		            		    				            
-		            		    				            
-		            		    				            
-		            		    				            
-		            		    				            
-		            		    				            
-		            		    				            
-		            		    				            /*for (DataSnapshot message : messageChildren)
-		            		    			                {
-		            		    			                    CMessages MyMsg = message.getValue(CMessages.class);
-		            		    			                    
-		            		    			                    //////////////////////////////////////////////////////////////////////
-		            		    			                	if(CMainController.mymsg != null)
-		            		    			                	{
-		            		    			                		if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG))
-		            		    			                		{
-		            		    			                			 m_alUsersAllMsgSending.add(MyMsg);
-		            		    			                			Platform.runLater(
-            		    						            			  () -> 
-            		    						            			  {
-            		    						            				CMainController.mymsg.appendText(MyMsg.msg_time);
-  				            		    				                	CMainController.mymsg.appendText("\n");
-  				            		    				                	CMainController.mymsg.appendText(MyMsg.msg_body);
-  				            		    				                	CMainController.mymsg.appendText("\n");
-  				            		    				                	CMainController.mymsg.appendText("--------------------\n");
-            		    						            			  });
-		            		    			                		}
-		            		    			                	}
-		            		    			                	
-		            		    			                }*/
-//															///////////////////////////////////////////////////////////////
+
 		            		    				            for (DataSnapshot message : messageChildren)
 		            		    			                {
 		            		    				            	CMessages MyMsg = message.getValue(CMessages.class);
@@ -1297,40 +1268,98 @@ public class CLPSMain extends Application
 				}
 				
 				@Override
-				public void onChildChanged(DataSnapshot arg0, String arg1) {
-					System.out.println( "onChildChanged - MyEventListnerFireMessage" );
+				public void onChildChanged(DataSnapshot arg0, String arg1)
+				{
+					 mQueryRefSingle = FirebaseDatabase.getInstance().getReference()
+							 .child("message_to_android").child(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);//...
+							 //.equalTo(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG, "msg_to_user");
+							 
+					 mQueryRefSingle.addListenerForSingleValueEvent(new ValueEventListener() {// Здесь ветка слушается один раз при загрузке программы!!!
+					 //mDatabaseRef.addValueEventListener(new ValueEventListener() {// Это старый вариант - здесь слушается ветка все время!!!
+						@Override
+						public void onDataChange(DataSnapshot arg0) 
+						{
+							// Выбираем , что слушать, какую ветку данных!!!
+				            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
+				            
+				            m_alUsersAllMsgSending = new ArrayList<CMessages>();
+
+				            for (DataSnapshot message : messageChildren)
+			                {
+				            	CMessages MyMsg = message.getValue(CMessages.class);
+				            	if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG))
+		                		{
+		                			 m_alUsersAllMsgSending.add(MyMsg);
+		                		}
+			                }
+				            
+				            m_ObservableListUsersMsgSending = FXCollections.observableArrayList (m_alUsersAllMsgSending);
+				            System.out.println( "m_ObservableListUsersMsgSending.size() = " + m_ObservableListUsersMsgSending.size());
+				            Platform.runLater(
+			            			  () -> {
+
+			            				  fxListUserViewOfMsg.setItems(m_ObservableListUsersMsgSending);
+			            				  fxListUserViewOfMsg.setPrefSize(200, 500);
+			            				  fxListUserViewOfMsg.setCellFactory(new Callback<ListView<CMessages>, ListCell<CMessages>>() 
+			            				 {
+											
+											@Override
+											public ListCell<CMessages> call(ListView<CMessages> param) 
+											{
+												System.out.println("return new CMessages(); -- MyLoadAndListenUserMsg()");
+												return new CUserCellMsgSending();
+											}
+										});
+			            			  });
+						}
+						public void onCancelled(DatabaseError arg0) 
+						{
+							System.out.println("DATABASE ERROR - " + arg0.getCode());
+			                
+						}; 
+						});
+					
+					
+		/*			System.out.println( "onChildChanged - MyEventListnerFireMessage" );
 					try
 					{
 						 System.out.println( "arg0.getKey() = " + arg0.getKey());
 						 CMessages myMessage = arg0.child(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG).getValue(CMessages.class);
+						 m_alUsersAllMsgSending.add(myMessage);
+				         m_ObservableListUsersMsgSending = FXCollections.observableArrayList (m_alUsersAllMsgSending);
 						 
-						 
-						 
+				            
 						 Platform.runLater(
 		            			  () -> {
-										 	m_alUsersAllMsgSending.add(myMessage);
-								            m_ObservableListUsersMsgSending = FXCollections.observableArrayList (m_alUsersAllMsgSending);
-								            System.out.println( "m_ObservableListUsersMsgSending.size() = " + m_ObservableListUsersMsgSending.size());
+										 	
+								            //System.out.println( "m_ObservableListUsersMsgSending.size() = " + m_ObservableListUsersMsgSending.size());
 				            
 				            				  fxListUserViewOfMsg.setItems(m_ObservableListUsersMsgSending);
-				            				  fxListUserViewOfMsg.setPrefSize(200, 500);
+				            				  //fxListUserViewOfMsg.setPrefSize(200, 500);
 				            				  fxListUserViewOfMsg.setCellFactory(new Callback<ListView<CMessages>, ListCell<CMessages>>() 
 				            				  {
 												@Override
 												public ListCell<CMessages> call(ListView<CMessages> param) 
 												{
-													System.out.println("return new CMessages(); -  MyEventListnerFireMessage()");
+													//System.out.println("return new CMessages(); -  MyEventListnerFireMessage()");
 													return new CUserCellMsgSending();
 												}
 								});
 	            			  });
-
+						 //m_ObservableListUsersMsgSending.notifyAll();
+						    
+						 Platform.runLater(
+		            			  () -> {
+						 fxListUserViewOfMsg.refresh();
+		            			  });
 					} 
 					catch (Exception ex) 
 					{
 						System.out.println( "FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK - ex.printStackTrace();!!!");
 						ex.printStackTrace();
-					}
+					}*/
+					/*IntStream.range(0,1).forEach(
+		                    i -> fxListUsersMsg.onMouseClickedProperty().getValue().fire());*/
 				}
 				
 				@Override
@@ -1341,19 +1370,19 @@ public class CLPSMain extends Application
 					{
 						 System.out.println( "arg0.getKey() = " + arg0.getKey());
 						 CMessages myMessage = arg0.getValue(CMessages.class);
-						 
-						 
-						 Platform.runLater(
-		            			  () -> {
-						 	m_alUsersAllMsgSending.add(myMessage);
+						 m_alUsersAllMsgSending.add(myMessage);
 				            m_ObservableListUsersMsgSending = FXCollections.observableArrayList (m_alUsersAllMsgSending);
 				            System.out.println( "m_ObservableListUsersMsgSending.size() = " + m_ObservableListUsersMsgSending.size());
 				            
+						 
+						 Platform.runLater(
+		            			  () -> {
+						 	
 			            				  fxListUserViewOfMsg.setItems(m_ObservableListUsersMsgSending);
 			            				  fxListUserViewOfMsg.setPrefSize(200, 500);
 			            				  fxListUserViewOfMsg.setCellFactory(new Callback<ListView<CMessages>, ListCell<CMessages>>() 
 			            				  {
-											//@Override
+											@Override
 											public ListCell<CMessages> call(ListView<CMessages> param) 
 											{
 												System.out.println("return new CMessages(); -  MyEventListnerFireMessage()");
