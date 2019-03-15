@@ -1154,7 +1154,7 @@ public class CLPSMain extends Application
 		            		    					// Тут выводим после "клика" сообщения только для конкретного пользователя!!!
 		            		    					// т.е. по его "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG"
 		            		    					 mQueryRefSingle = FirebaseDatabase.getInstance().getReference()
-		            		    							 .child("message_to_android");//...
+		            		    							 .child("message_to_android").child(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);//...
 		            		    							 //.equalTo(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG, "msg_to_user");
 		            		    							 
 		            		    					 mQueryRefSingle.addListenerForSingleValueEvent(new ValueEventListener() {// Здесь ветка слушается один раз при загрузке программы!!!
@@ -1299,6 +1299,38 @@ public class CLPSMain extends Application
 				@Override
 				public void onChildChanged(DataSnapshot arg0, String arg1) {
 					System.out.println( "onChildChanged - MyEventListnerFireMessage" );
+					try
+					{
+						 System.out.println( "arg0.getKey() = " + arg0.getKey());
+						 CMessages myMessage = arg0.child(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG).getValue(CMessages.class);
+						 
+						 
+						 
+						 Platform.runLater(
+		            			  () -> {
+										 	m_alUsersAllMsgSending.add(myMessage);
+								            m_ObservableListUsersMsgSending = FXCollections.observableArrayList (m_alUsersAllMsgSending);
+								            System.out.println( "m_ObservableListUsersMsgSending.size() = " + m_ObservableListUsersMsgSending.size());
+				            
+				            				  fxListUserViewOfMsg.setItems(m_ObservableListUsersMsgSending);
+				            				  fxListUserViewOfMsg.setPrefSize(200, 500);
+				            				  fxListUserViewOfMsg.setCellFactory(new Callback<ListView<CMessages>, ListCell<CMessages>>() 
+				            				  {
+												@Override
+												public ListCell<CMessages> call(ListView<CMessages> param) 
+												{
+													System.out.println("return new CMessages(); -  MyEventListnerFireMessage()");
+													return new CUserCellMsgSending();
+												}
+								});
+	            			  });
+
+					} 
+					catch (Exception ex) 
+					{
+						System.out.println( "FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK - ex.printStackTrace();!!!");
+						ex.printStackTrace();
+					}
 				}
 				
 				@Override
@@ -1330,14 +1362,6 @@ public class CLPSMain extends Application
 								});
 	            			  });
 
-						/* System.out.println( "arg0.myMessage.... = " + myMessage.msg_body);
-						 System.out.println( "arg0.myMessage msg_time.... = " + myMessage.msg_time);
-						 */
-						/* CMainController.mymsg.appendText(myMessage.msg_time);
-						 CMainController.mymsg.appendText("\n");
-						 CMainController.mymsg.appendText(myMessage.msg_body);
-						 CMainController.mymsg.appendText("\n");
-						 CMainController.mymsg.appendText("--------------------\n");*/
 					} 
 					catch (Exception ex) 
 					{
@@ -1352,7 +1376,7 @@ public class CLPSMain extends Application
 				}
 			});
 			
-			 mDatabaseRefSingle = FirebaseDatabase.getInstance().getReference().child("message_to_android");
+/*			 mDatabaseRefSingle = FirebaseDatabase.getInstance().getReference().child("message_to_android");
 			 mDatabaseRefSingle.addListenerForSingleValueEvent(new ValueEventListener() {// Здесь ветка слушается один раз при загрузке программы!!!
 			 //mDatabaseRef.addValueEventListener(new ValueEventListener() {// Это старый вариант - здесь слушается ветка все время!!!
 				@Override
@@ -1367,11 +1391,11 @@ public class CLPSMain extends Application
 
 		                	//if(CMainController.mymsg != null)
 		                	//{
-		                		/*CMainController.mymsg.appendText(MyMsg.msg_time);
+		                		CMainController.mymsg.appendText(MyMsg.msg_time);
 			                	CMainController.mymsg.appendText("\n");
 			                	CMainController.mymsg.appendText(MyMsg.msg_body);
 			                	CMainController.mymsg.appendText("\n");
-			                	CMainController.mymsg.appendText("--------------------\n");*/
+			                	CMainController.mymsg.appendText("--------------------\n");
 		                	//}
 		                //}
 					} 
@@ -1387,7 +1411,7 @@ public class CLPSMain extends Application
 				public void onCancelled(DatabaseError arg0) {
 					System.out.println( "onCancelled" );
 				}
-			});
+			});*/
 		} 
 		catch (Exception ex) 
 		{

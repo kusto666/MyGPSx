@@ -780,7 +780,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		 }*/
 		 
 		 //mDatabaseTemp.child(m_stFINISH_ID_MSG).child("msg_to_user").setValueAsync(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
-		 mDatabaseTemp.child(m_stFINISH_ID_MSG).setValueAsync(bMessss);
+		 String uploadId = mDatabaseTemp.push().getKey();
+		 mDatabaseTemp.child(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG).child(uploadId).setValueAsync(bMessss);
 		 
          taOutMsg.clear();
          System.out.println("Типа послали сообщение!!!");
