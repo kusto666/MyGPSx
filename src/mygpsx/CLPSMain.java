@@ -277,14 +277,18 @@ public class CLPSMain extends Application
 	// Иконки для информирования удачного или неудачного соединения с инетом!!!
     private static final String MyIconSuccessConn = "src/MyIconSuccessConn.png";
     private static final String MyIconErrorConn = "src/MyIconErrorConn.png";
+    // Это для показа нового сообщения!!!
+    private static final String MyIconMyNewMsg = "src/MyNewMsg.png";
     // Строка для проверки инета, проверяем в месте создания MyIconSuccessConn!!!
     private static final String MyIsConnectionInet = "http://www.google.com";
     
     // a timer allowing the tray icon to provide a periodic notification event.
     private Timer notificationTimer = new Timer();
  // format used to display the current time in a tray icon notification.
-    private DateFormat timeFormat = SimpleDateFormat.getTimeInstance();
-    public static java.awt.TrayIcon trayIcon;
+    public static  DateFormat m_MyTimeFormat = SimpleDateFormat.getTimeInstance();
+    public static java.awt.TrayIcon m_MyTrayIcon;
+    public static java.awt.TrayIcon m_MyTrayIconMyNewMsg;
+    public static java.awt.SystemTray m_MytrayInfoDialog;
 
 	@FXML
     public static CTUsersJobsController m_CTUsersJobsController;// Контроллер отвечает за обмен данными с вкладкой "Сотрудники --> Задачи"
@@ -825,7 +829,7 @@ public class CLPSMain extends Application
 				            		    		          {
 				            		    		        	  CMainController.fxTxtArLogs.setText(e.getMessage());
 				            		    		        	  e.printStackTrace();
-				            		    		        	  trayIcon.displayMessage(
+				            		    		        	  m_MyTrayIcon.displayMessage(
 				            		    		        			  	CStrings.m_APP_ERROR,
 				            	                                        "Ошибка инициализации карты ->\n перезапустите программу!",
 				            	                                        java.awt.TrayIcon.MessageType.INFO
@@ -1141,6 +1145,10 @@ public class CLPSMain extends Application
 		            		    						CMainController.mymsg.clear();
         		    			                	}*/
 		            		    					CStructUser TempUserForMsg = fxListUsersMsg.getSelectionModel().getSelectedItem();
+		            		    					//int TempUserForMsg2 = fxListUsersMsg.getSelectionModel().getSelectedIndex();
+		            		    					//m_ObservableListUsersMsg.
+		            		    					//CUserCellMsg mmmm = TempUserForMsg.
+		            		    					//CUserCellMsg cell=(CUserCellMsg) fxListUsersMsg.getCell(fxListUsersMsg.getSelectionModel().getSelectedIndex());
 		            		    					
 		            		    					// Присваеваем в CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG выбранного пользователя для
 		            		    					// передачи сообщения ему!!!
@@ -1270,10 +1278,12 @@ public class CLPSMain extends Application
 				@Override
 				public void onChildChanged(DataSnapshot arg0, String arg1)
 				{
-					 mQueryRefSingle = FirebaseDatabase.getInstance().getReference()
-							 .child("message_to_android").child(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);//...
+					System.out.println( "onChildChanged - MyEventListnerFireMessage" );
+					 /*mQueryRefSingle = FirebaseDatabase.getInstance().getReference()
+							 .child("message_to_android").child(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);*/
+					
 							 //.equalTo(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG, "msg_to_user");
-							 
+					 System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);	 
 					 mQueryRefSingle.addListenerForSingleValueEvent(new ValueEventListener() {// Здесь ветка слушается один раз при загрузке программы!!!
 					 //mDatabaseRef.addValueEventListener(new ValueEventListener() {// Это старый вариант - здесь слушается ветка все время!!!
 						@Override
@@ -1287,8 +1297,12 @@ public class CLPSMain extends Application
 				            for (DataSnapshot message : messageChildren)
 			                {
 				            	CMessages MyMsg = message.getValue(CMessages.class);
+				            	CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = MyMsg.msg_to_user;
+				            	System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES);
+				            	
 				            	if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG))
 		                		{
+				            		
 		                			 m_alUsersAllMsgSending.add(MyMsg);
 		                		}
 			                }
@@ -1559,7 +1573,7 @@ public class CLPSMain extends Application
            
             
             // set up a system tray icon.
-            java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
+            m_MytrayInfoDialog = java.awt.SystemTray.getSystemTray();
             
             InputStream is = null;
             
@@ -1575,10 +1589,10 @@ public class CLPSMain extends Application
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             
             java.awt.Image image = ImageIO.read(is);
-            trayIcon = new java.awt.TrayIcon(image);
+            m_MyTrayIcon = new java.awt.TrayIcon(image);
 
             // if the user double-clicks on the tray icon, show the main app stage.
-            trayIcon.addActionListener(event -> Platform.runLater(this::showStage));
+            m_MyTrayIcon.addActionListener(event -> Platform.runLater(this::showStage));
 
             // if the user selects the default menu item (which includes the app name), 
             // show the main app stage.
@@ -1603,7 +1617,7 @@ public class CLPSMain extends Application
             		// Здесь все подчищаем и выходим!!!
         			notificationTimer.cancel();
         			Platform.exit();
-        			tray.remove(trayIcon);
+        			m_MytrayInfoDialog.remove(m_MyTrayIcon);
             		System.out.println("Выход->");
             		System.exit(0);
             	}
@@ -1614,7 +1628,7 @@ public class CLPSMain extends Application
             popup.add(openItem);
             popup.addSeparator();
             popup.add(exitItem);
-            trayIcon.setPopupMenu(popup);
+            m_MyTrayIcon.setPopupMenu(popup);
 
             // create a timer which periodically displays a notification message.
            /* notificationTimer.schedule(
@@ -1635,10 +1649,10 @@ public class CLPSMain extends Application
             );*/
            
             // add the application tray icon to the system tray.
-            tray.add(trayIcon);
-            trayIcon.displayMessage(
+            m_MytrayInfoDialog.add(m_MyTrayIcon);
+            m_MyTrayIcon.displayMessage(
                     CStrings.m_APP_NAME,
-                    "Я - время): " + timeFormat.format(new Date()),
+                    "Я - время): " + m_MyTimeFormat.format(new Date()),
                     java.awt.TrayIcon.MessageType.INFO
             );
         } 
@@ -1651,10 +1665,10 @@ public class CLPSMain extends Application
 				is = new BufferedInputStream(new FileInputStream(MyIconErrorConn));
 				//is = new BufferedInputStream(new FileInputStream("/src/MyIconErrorConn.png"));
 				java.awt.Image image = ImageIO.read(is);
-	        	trayIcon = new java.awt.TrayIcon(image);
+				m_MyTrayIcon = new java.awt.TrayIcon(image);
 	        	java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
-	        	tray.add(trayIcon);
-	        	trayIcon.displayMessage(
+	        	tray.add(m_MyTrayIcon);
+	        	m_MyTrayIcon.displayMessage(
 	                    CStrings.m_APP_NAME,
 	                    "Проверьте подключение!",
 	                    java.awt.TrayIcon.MessageType.ERROR
