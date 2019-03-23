@@ -1155,8 +1155,10 @@ public class CLPSMain extends Application
 		            		    					CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG = 
 		            		    							CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_PREFIX + TempUserForMsg.getMyPhoneID();
 		            		    					CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_SHIP_FOR_MSG = TempUserForMsg.getMyNameShip();	
+		            		    					CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG;
 		            		    							
-		            		    					System.out.println("tempUserMsgForSending = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
+		            		    					System.out.println("tempUserMsgForSending(Типа кликнули мышкой!!!) = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
+		            		    					System.out.println("MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES);
 		            		    					System.out.println("MY_CURRENT_TEMP_USER_SHIP_FOR_MSG = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_SHIP_FOR_MSG);
 		            		    					CMainController.fxLbSelectedUser.setText(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_SHIP_FOR_MSG);
 		            		    					
@@ -1331,56 +1333,64 @@ public class CLPSMain extends Application
 							System.out.println("DATABASE ERROR - " + arg0.getCode());
 			                
 						}; 
-						});
-					
-					
-		/*			System.out.println( "onChildChanged - MyEventListnerFireMessage" );
-					try
-					{
-						 System.out.println( "arg0.getKey() = " + arg0.getKey());
-						 CMessages myMessage = arg0.child(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG).getValue(CMessages.class);
-						 m_alUsersAllMsgSending.add(myMessage);
-				         m_ObservableListUsersMsgSending = FXCollections.observableArrayList (m_alUsersAllMsgSending);
-						 
-				            
-						 Platform.runLater(
-		            			  () -> {
-										 	
-								            //System.out.println( "m_ObservableListUsersMsgSending.size() = " + m_ObservableListUsersMsgSending.size());
-				            
-				            				  fxListUserViewOfMsg.setItems(m_ObservableListUsersMsgSending);
-				            				  //fxListUserViewOfMsg.setPrefSize(200, 500);
-				            				  fxListUserViewOfMsg.setCellFactory(new Callback<ListView<CMessages>, ListCell<CMessages>>() 
-				            				  {
-												@Override
-												public ListCell<CMessages> call(ListView<CMessages> param) 
-												{
-													//System.out.println("return new CMessages(); -  MyEventListnerFireMessage()");
-													return new CUserCellMsgSending();
-												}
-								});
-	            			  });
-						 //m_ObservableListUsersMsgSending.notifyAll();
-						    
-						 Platform.runLater(
-		            			  () -> {
-						 fxListUserViewOfMsg.refresh();
-		            			  });
-					} 
-					catch (Exception ex) 
-					{
-						System.out.println( "FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK - ex.printStackTrace();!!!");
-						ex.printStackTrace();
-					}*/
-					/*IntStream.range(0,1).forEach(
-		                    i -> fxListUsersMsg.onMouseClickedProperty().getValue().fire());*/
+					});
+
 				}
 				
 				@Override
 				public void onChildAdded(DataSnapshot arg0, String arg1) 
 				{
 					System.out.println( "onChildAdded - MyEventListnerFireMessage" );
-					try
+					 System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);	 
+					 mQueryRefSingle.addListenerForSingleValueEvent(new ValueEventListener() {// Здесь ветка слушается один раз при загрузке программы!!!
+					 //mDatabaseRef.addValueEventListener(new ValueEventListener() {// Это старый вариант - здесь слушается ветка все время!!!
+						@Override
+						public void onDataChange(DataSnapshot arg0) 
+						{
+							// Выбираем , что слушать, какую ветку данных!!!
+				            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
+				            
+				            m_alUsersAllMsgSending = new ArrayList<CMessages>();
+
+				            for (DataSnapshot message : messageChildren)
+			                {
+				            	CMessages MyMsg = message.getValue(CMessages.class);
+				            	CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = MyMsg.msg_to_user;
+				            	System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES);
+				            	
+				            	if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG))
+		                		{
+				            		
+		                			 m_alUsersAllMsgSending.add(MyMsg);
+		                		}
+			                }
+				            
+				            m_ObservableListUsersMsgSending = FXCollections.observableArrayList (m_alUsersAllMsgSending);
+				            System.out.println( "m_ObservableListUsersMsgSending.size() = " + m_ObservableListUsersMsgSending.size());
+				            Platform.runLater(
+			            			  () -> {
+
+			            				  fxListUserViewOfMsg.setItems(m_ObservableListUsersMsgSending);
+			            				  fxListUserViewOfMsg.setPrefSize(200, 500);
+			            				  fxListUserViewOfMsg.setCellFactory(new Callback<ListView<CMessages>, ListCell<CMessages>>() 
+			            				 {
+											
+											@Override
+											public ListCell<CMessages> call(ListView<CMessages> param) 
+											{
+												System.out.println("onChildAdded - return new CMessages(); -- MyLoadAndListenUserMsg()");
+												return new CUserCellMsgSending();
+											}
+										});
+			            			  });
+						}
+						public void onCancelled(DatabaseError arg0) 
+						{
+							System.out.println("DATABASE ERROR - " + arg0.getCode());
+			                
+						}; 
+					});
+	/*				try
 					{
 						 System.out.println( "arg0.getKey() = " + arg0.getKey());
 						 CMessages myMessage = arg0.getValue(CMessages.class);
@@ -1410,7 +1420,7 @@ public class CLPSMain extends Application
 					{
 						System.out.println( "FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK - ex.printStackTrace();!!!");
 						ex.printStackTrace();
-					}
+					}*/
 				}
 				
 				@Override

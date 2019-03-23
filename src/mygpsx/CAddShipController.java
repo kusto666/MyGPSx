@@ -108,7 +108,7 @@ public class CAddShipController implements Initializable{
 		System.out.println("lUnixTimeCreate = " + Long.toString(lUnixTimeCreate));
 		System.out.println("btnAddShip!!!");
 		
-		// Случайный уникальный ID устройства - к примуру!!!
+		// Случайный уникальный ID устройства - к примеру!!!
 		String symbols = "abcdefghijklmnopqrstuvwxyz";
 		String randomIDPhoneTest= new Random().ints(11, 0, symbols.length())
 		    .mapToObj(symbols::charAt)

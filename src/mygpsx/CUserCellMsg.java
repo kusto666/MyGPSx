@@ -3,6 +3,7 @@ package mygpsx;
 import java.io.IOException;
 import java.util.Date;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -106,19 +107,96 @@ public class CUserCellMsg  extends ListCell<CStructUser>
 		System.out.println("void OnMouseClicked()");
 	}
 	
-	
+	// Проверяем , что получили новое сообщение, а значит устанавливаем Label - fxLbAlarmNewMsg.setVisible(true);
 	void GetIsNotReadingMsg()
 	{
 		 mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("message_to_android");
 
 		// Attach a listener to read the data at our posts reference
-		 mDatabaseRef.addValueEventListener(new ValueEventListener() {
-			
+		 mDatabaseRef.addChildEventListener(new ChildEventListener() {
+
 			@Override
+			public void onCancelled(DatabaseError arg0) {
+				System.out.println( "onCancelled - GetIsNotReadingMsg()" );
+				
+			}
+
+			@Override
+			public void onChildAdded(DataSnapshot arg0, String arg1) {
+				System.out.println( "onChildAdded - GetIsNotReadingMsg()" );
+
+				if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES != null)
+				{
+					System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES != null");
+					if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_PREFIX + fxLbUniqueID.getText()))
+					{
+						System.out.println( "Проверка на то, что мы получили с андройда новое сообщение!!!");
+						Platform.runLater(
+			           			  () -> {
+			           				fxLbAlarmNewMsg.setVisible(true);
+			           			 CLPSMain.m_MyTrayIcon.displayMessage(
+			                             CStrings.m_APP_NAME,
+			                             "СУДНО - " + lbMyNameShip.getText() + "\nПОЛУЧЕНО НОВОЕ СООБЩЕНИЕ!!!\n" + CLPSMain.m_MyTimeFormat.format(new Date()),
+			                             java.awt.TrayIcon.MessageType.INFO
+			                     );
+			           			  });
+						
+						System.out.println("<<<<<<<<<<<<<<<  " + lbMyNameShip.getText() + "  >>>>>>>>>>>>>");
+					}
+				}
+				else
+				{
+					System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES == null - ПОЧЕМУ???" );
+				}
+			}
+
+			@Override
+			public void onChildChanged(DataSnapshot arg0, String arg1) {
+				System.out.println( "onChildChanged - GetIsNotReadingMsg()" );
+				if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES != null)
+				{
+					System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES != null");
+					if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_PREFIX + fxLbUniqueID.getText()))
+					{
+						System.out.println( "Проверка на то, что мы получили с андройда новое сообщение!!!");
+						Platform.runLater(
+			           			  () -> {
+			           				fxLbAlarmNewMsg.setVisible(true);
+			           			 CLPSMain.m_MyTrayIcon.displayMessage(
+			                             CStrings.m_APP_NAME,
+			                             "СУДНО - " + lbMyNameShip.getText() + "\nПОЛУЧЕНО НОВОЕ СООБЩЕНИЕ!!!\n" + CLPSMain.m_MyTimeFormat.format(new Date()),
+			                             java.awt.TrayIcon.MessageType.INFO
+			                     );
+			           			  });
+						
+						System.out.println("<<<<<<<<<<<<<<<  " + lbMyNameShip.getText() + "  >>>>>>>>>>>>>");
+					}
+				}
+				else
+				{
+					System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES == null - ПОЧЕМУ???" );
+				}
+
+			}
+
+			@Override
+			public void onChildMoved(DataSnapshot arg0, String arg1) {
+				System.out.println( "onChildMoved - GetIsNotReadingMsg()" );
+				
+			}
+
+			@Override
+			public void onChildRemoved(DataSnapshot arg0) {
+				System.out.println( "onChildRemoved - GetIsNotReadingMsg()" );
+				
+			}
+			
+/*			@Override
 			public void onDataChange(DataSnapshot arg0) {
 				
 				if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES != null)
 				{
+					System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES != null");
 					if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_PREFIX + fxLbUniqueID.getText()))
 					{
 						System.out.println( "Проверка на то, что мы получили с андройда новое сообщение!!!");
@@ -142,7 +220,7 @@ public class CUserCellMsg  extends ListCell<CStructUser>
 			@Override
 			public void onCancelled(DatabaseError arg0) {
 				System.out.println( "onCancelled" + arg0.getMessage());
-			}
+			}*/
 		});
 
 	}
