@@ -22,7 +22,6 @@ import javafx.scene.layout.AnchorPane;
 
 public class CUserCellMsg  extends ListCell<CStructUser>
 {
-	//fxLbUniqueID
 	@FXML
 	Label fxLbUniqueID;
 	@FXML
@@ -122,9 +121,10 @@ public class CUserCellMsg  extends ListCell<CStructUser>
 			}
 
 			@Override
-			public void onChildAdded(DataSnapshot arg0, String arg1) {
+			public void onChildAdded(DataSnapshot arg0, String arg1) 
+			{
 				System.out.println( "onChildAdded - GetIsNotReadingMsg()" );
-
+/*
 				if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES != null)
 				{
 					System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES != null");
@@ -147,22 +147,38 @@ public class CUserCellMsg  extends ListCell<CStructUser>
 				else
 				{
 					System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES == null - ПОЧЕМУ???" );
-				}
+				}*/
 			}
 
 			@Override
 			public void onChildChanged(DataSnapshot arg0, String arg1) {
 				System.out.println( "onChildChanged - GetIsNotReadingMsg()" );
+				
+				CMessages MyMsg = null;
+				
+				Iterable<DataSnapshot> messageChildren = arg0.getChildren();
+				for (DataSnapshot message : messageChildren)
+                {
+					MyMsg = message.getValue(CMessages.class);
+					System.out.println( "реальный планшет с ID = " + MyMsg.msg_to_user);
+                }
+				
+				
+				
+				
 				if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES != null)
 				{
 					System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES != null");
-					if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_PREFIX + fxLbUniqueID.getText()))
+					//CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = MyMsg.msg_to_user;
+					//if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_PREFIX + fxLbUniqueID.getText()))
+					//if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES.equals(MyMsg.msg_to_user))
+					if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_PREFIX + fxLbUniqueID.getText()))
 					{
 						System.out.println( "Проверка на то, что мы получили с андройда новое сообщение!!!");
 						Platform.runLater(
 			           			  () -> {
 			           				fxLbAlarmNewMsg.setVisible(true);
-			           			 CLPSMain.m_MyTrayIcon.displayMessage(
+			           				CLPSMain.m_MyTrayIcon.displayMessage(
 			                             CStrings.m_APP_NAME,
 			                             "СУДНО - " + lbMyNameShip.getText() + "\nПОЛУЧЕНО НОВОЕ СООБЩЕНИЕ!!!\n" + CLPSMain.m_MyTimeFormat.format(new Date()),
 			                             java.awt.TrayIcon.MessageType.INFO

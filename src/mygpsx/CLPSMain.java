@@ -921,162 +921,6 @@ public class CLPSMain extends Application
     	{
 			ex.printStackTrace();
 		}
-		/*try
-		{
-			 mDatabaseRefUsersMsg = FirebaseDatabase.getInstance().getReference().child(CMAINCONSTANTS.FB_users);
-			 mDatabaseRefUsersMsg.addValueEventListener(new ValueEventListener()
-			 {
-				@Override
-				public void onDataChange(DataSnapshot arg0)
-				{
-					try
-					{
-						// Выбираем , что слушать, какую ветку данных!!!
-			            Iterable<DataSnapshot> contactChildren = arg0.getChildren();
-
-			            m_alUsersAllMsg = new ArrayList<CStructUser>();
-		            	m_lvAllUsersMsg = new ListView<CStructUser>();
-		            	
-			            for (DataSnapshot Users : contactChildren)
-		                {
-			            	CStructUser user = Users.getValue(CStructUser.class);
-                        	System.out.println( "CUser user = " + user.getMyNameShip());
-                        	m_alUsersAllMsg.add(user);// Заполнили массив!!!
-	                	}
-			            m_ObservableListUsersMsg = FXCollections.observableArrayList (m_alUsersAllMsg);
-			            System.out.println( "m_ObservableListUsersMsg.size() = " + m_ObservableListUsersMsg.size());
-			            
-						if(fxListUsersMsg == null)
-						{
-							fxListUsersMsg = new ListView<CStructUser>();
-						}
-			            
-			            System.out.println( "fxListUsersMsg.getItems().size() = " + fxListUsersMsg.getItems().size());
-			            try 
-			            {
-			            	Platform.runLater(
-	            			  () -> {
-
-	            				  fxListUsersMsg.setItems(m_ObservableListUsersMsg);
-	            				  fxListUsersMsg.setPrefSize(200, 500);
-	            				  fxListUsersMsg.setCellFactory(new Callback<ListView<CStructUser>, ListCell<CStructUser>>() 
-	            				 {
-									
-									@Override
-									public ListCell<CStructUser> call(ListView<CStructUser> param) 
-									{
-										System.out.println("return new CUserCell();");
-										return new CUserCellMsg();
-									}
-								});
-	            				 
-	            				  fxListUsersMsg.setOnMouseClicked(new EventHandler<MouseEvent>() {
-	            		    			@Override
-	            		    			public void handle(MouseEvent click)
-	            		    			{
-	            		    				Marker MyMarker = null;
-	            		    				InfoWindow MyInfoWindow = null;
-	            		    				MarkerOptions markerOptions;
-	            		    				
-	            		    				if (click.getClickCount() == 1) 
-	            		    		        {
-	            		    					if(CMainController.mymsg != null)
-  		    			                	{
-	            		    						CMainController.mymsg.clear();
-  		    			                	}
-	            		    					CStructUser TempUserForMsg = fxListUsersMsg.getSelectionModel().getSelectedItem();
-	            		    					
-	            		    					// Присваеваем в CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG выбранного пользователя для
-	            		    					// передачи сообщения ему!!!
-	            		    					CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG = 
-	            		    							CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_PREFIX + TempUserForMsg.getMyPhoneID();
-	            		    					CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_SHIP_FOR_MSG = TempUserForMsg.getMyNameShip();	
-	            		    							
-	            		    					System.out.println("tempUserMsgForSending = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
-	            		    					System.out.println("MY_CURRENT_TEMP_USER_SHIP_FOR_MSG = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_SHIP_FOR_MSG);
-	            		    					CMainController.fxLbSelectedUser.setText(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_SHIP_FOR_MSG);
-	            		    					
-	            		    					// Тут выводим после "клика" сообщения только для конкретного пользователя!!!
-	            		    					// т.е. по его "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG"
-	            		    					 mQueryRefSingle = FirebaseDatabase.getInstance().getReference()
-	            		    							 .child("message_to_android");//...
-	            		    							 //.equalTo(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG, "msg_to_user");
-	            		    							 
-	            		    					 mQueryRefSingle.addListenerForSingleValueEvent(new ValueEventListener() {// Здесь ветка слушается один раз при загрузке программы!!!
-	            		    					 //mDatabaseRef.addValueEventListener(new ValueEventListener() {// Это старый вариант - здесь слушается ветка все время!!!
-	            		    						@Override
-	            		    						public void onDataChange(DataSnapshot arg0) 
-	            		    						{
-	            		    							// Выбираем , что слушать, какую ветку данных!!!
-	            		    				            Iterable<DataSnapshot> messageChildren = arg0.getChildren();
-	            		    				            for (DataSnapshot message : messageChildren)
-	            		    			                {
-	            		    			                    CMessages MyMsg = message.getValue(CMessages.class);
-
-	            		    			                	if(CMainController.mymsg != null)
-	            		    			                	{
-	            		    			                		if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG))
-	            		    			                		{
-	            		    			                			//System.out.println("tempUserMsgForSending = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);
-	            		    			                			Platform.runLater(
-	            		    						            			  () -> 
-	            		    						            			  {
-	            		    						            				CMainController.mymsg.appendText(MyMsg.msg_time);
-	  				            		    				                	CMainController.mymsg.appendText("\n");
-	  				            		    				                	CMainController.mymsg.appendText(MyMsg.msg_body);
-	  				            		    				                	CMainController.mymsg.appendText("\n");
-	  				            		    				                	CMainController.mymsg.appendText("--------------------\n");
-	            		    						            			  });
-	            		    			                			
-	            		    			                		}
-	            		    			                	}
-	            		    			                }
-	            		    						}
-	            		    						public void onCancelled(DatabaseError arg0) 
-	            		    						{
-	            		    							
-	            		    						}; 
-	            		    						});
-	            		    		        }
-	            		    				 
-	            		    				// Здесь пока ничего не придумали по двойному клику по пользователю для переписки!!!
-	            		    		        if (click.getClickCount() == 2) 
-	            		    		        {
-
-	            		    		        }
-	            		    		    }
-	            					});
-	            			  }
-	            			);
-			            	
-						}
-			            catch (Exception ex)
-			            {
-			            	//CMainController.fxTxtArLogs.setText(ex.getMessage());
-			            	ex.printStackTrace();
-						}
-					} 
-					catch (Exception ex) 
-					{
-						//CMainController.fxTxtArLogs.setText(ex.getMessage());
-						ex.printStackTrace();
-					}
-				}
-				
-				@Override
-				public void onCancelled(DatabaseError arg0)
-				{
-					//CMainController.fxTxtArLogs.setText(arg0.getMessage());
-					System.out.println(arg0.getMessage());
-					
-				}
-			});
-		} 
-		catch (Exception ex) 
-		{
-			//CMainController.fxTxtArLogs.setText(ex.getMessage());
-			ex.printStackTrace();
-		}*/
     }
     // Здесь загружаем список пользователей во вкладку "сообщения"
     private void MyLoadAndListenUserMsg()
@@ -1281,11 +1125,7 @@ public class CLPSMain extends Application
 				public void onChildChanged(DataSnapshot arg0, String arg1)
 				{
 					System.out.println( "onChildChanged - MyEventListnerFireMessage" );
-					 /*mQueryRefSingle = FirebaseDatabase.getInstance().getReference()
-							 .child("message_to_android").child(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);*/
-					
-							 //.equalTo(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG, "msg_to_user");
-					 System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);	 
+					 System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES);	 
 					 mQueryRefSingle.addListenerForSingleValueEvent(new ValueEventListener() {// Здесь ветка слушается один раз при загрузке программы!!!
 					 //mDatabaseRef.addValueEventListener(new ValueEventListener() {// Это старый вариант - здесь слушается ветка все время!!!
 						@Override
@@ -1302,7 +1142,7 @@ public class CLPSMain extends Application
 				            	CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = MyMsg.msg_to_user;
 				            	System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES);
 				            	
-				            	if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG))
+				            	if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES))
 		                		{
 				            		
 		                			 m_alUsersAllMsgSending.add(MyMsg);
@@ -1340,7 +1180,7 @@ public class CLPSMain extends Application
 				@Override
 				public void onChildAdded(DataSnapshot arg0, String arg1) 
 				{
-					System.out.println( "onChildAdded - MyEventListnerFireMessage" );
+/*					System.out.println( "onChildAdded - MyEventListnerFireMessage" );
 					 System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG);	 
 					 mQueryRefSingle.addListenerForSingleValueEvent(new ValueEventListener() {// Здесь ветка слушается один раз при загрузке программы!!!
 					 //mDatabaseRef.addValueEventListener(new ValueEventListener() {// Это старый вариант - здесь слушается ветка все время!!!
@@ -1389,38 +1229,7 @@ public class CLPSMain extends Application
 							System.out.println("DATABASE ERROR - " + arg0.getCode());
 			                
 						}; 
-					});
-	/*				try
-					{
-						 System.out.println( "arg0.getKey() = " + arg0.getKey());
-						 CMessages myMessage = arg0.getValue(CMessages.class);
-						 m_alUsersAllMsgSending.add(myMessage);
-				            m_ObservableListUsersMsgSending = FXCollections.observableArrayList (m_alUsersAllMsgSending);
-				            System.out.println( "m_ObservableListUsersMsgSending.size() = " + m_ObservableListUsersMsgSending.size());
-				            
-						 
-						 Platform.runLater(
-		            			  () -> {
-						 	
-			            				  fxListUserViewOfMsg.setItems(m_ObservableListUsersMsgSending);
-			            				  fxListUserViewOfMsg.setPrefSize(200, 500);
-			            				  fxListUserViewOfMsg.setCellFactory(new Callback<ListView<CMessages>, ListCell<CMessages>>() 
-			            				  {
-											@Override
-											public ListCell<CMessages> call(ListView<CMessages> param) 
-											{
-												System.out.println("return new CMessages(); -  MyEventListnerFireMessage()");
-												return new CUserCellMsgSending();
-											}
-								});
-	            			  });
-
-					} 
-					catch (Exception ex) 
-					{
-						System.out.println( "FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK - ex.printStackTrace();!!!");
-						ex.printStackTrace();
-					}*/
+					});*/
 				}
 				
 				@Override
@@ -1428,43 +1237,6 @@ public class CLPSMain extends Application
 					System.out.println( "onCancelled" );
 				}
 			});
-			
-/*			 mDatabaseRefSingle = FirebaseDatabase.getInstance().getReference().child("message_to_android");
-			 mDatabaseRefSingle.addListenerForSingleValueEvent(new ValueEventListener() {// Здесь ветка слушается один раз при загрузке программы!!!
-			 //mDatabaseRef.addValueEventListener(new ValueEventListener() {// Это старый вариант - здесь слушается ветка все время!!!
-				@Override
-				public void onDataChange(DataSnapshot arg0) {
-					try
-					{
-						// Выбираем , что слушать, какую ветку данных!!!
-			            //Iterable<DataSnapshot> messageChildren = arg0.getChildren();
-			            //for (DataSnapshot message : messageChildren)
-		                //{
-		                    //CMessages MyMsg = message.getValue(CMessages.class);
-
-		                	//if(CMainController.mymsg != null)
-		                	//{
-		                		CMainController.mymsg.appendText(MyMsg.msg_time);
-			                	CMainController.mymsg.appendText("\n");
-			                	CMainController.mymsg.appendText(MyMsg.msg_body);
-			                	CMainController.mymsg.appendText("\n");
-			                	CMainController.mymsg.appendText("--------------------\n");
-		                	//}
-		                //}
-					} 
-					catch (Exception ex) 
-					{
-						System.out.println( "FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK - ex.printStackTrace();!!!");
-						ex.printStackTrace();
-					}
-					
-				}
-				
-				@Override
-				public void onCancelled(DatabaseError arg0) {
-					System.out.println( "onCancelled" );
-				}
-			});*/
 		} 
 		catch (Exception ex) 
 		{
