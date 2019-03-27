@@ -22,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class CUserCellMsg  extends ListCell<CStructUser>
 {
+	
 	@FXML
 	Label fxLbUniqueID;
 	@FXML
