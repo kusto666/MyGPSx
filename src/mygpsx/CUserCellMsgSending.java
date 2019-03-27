@@ -58,6 +58,7 @@ public class CUserCellMsgSending  extends ListCell<CMessages>
                 fxTxtAreaMsg = (TextArea)mLLoader.getNamespace().get("fxTxtAreaMsg");
                 fxHLUploadFile = (Hyperlink)mLLoader.getNamespace().get("fxHLUploadFile");
         		
+                
         		
         		fxLbUniqueID.setText(String.valueOf(item.msg_status));
         		fxLbTimeSending.setText(String.valueOf(item.msg_time));
@@ -68,6 +69,12 @@ public class CUserCellMsgSending  extends ListCell<CMessages>
         		{
         			fxTxtAreaMsg.setWrapText(true);
         			fxTxtAreaMsg.setText(String.valueOf(item.msg_body));
+        			// Здесь делаем высоту по тексту!!!
+        			int iCountLineOfText = fxTxtAreaMsg.getText().split("\n").length;
+        			// Здесь отладка высоты TextView!!!
+                    System.out.println("Здесь отладка высоты TextView!!! кол-во сторок = " + Integer.toString(iCountLineOfText));
+        			
+        			
         			fxHLUploadFile.setVisible(false);
         		}
         		else
