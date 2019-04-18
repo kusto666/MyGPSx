@@ -1025,7 +1025,9 @@ public class CLPSMain extends Application
 		            		    				            for (DataSnapshot message : messageChildren)
 		            		    			                {
 		            		    				            	CMessages MyMsg = message.getValue(CMessages.class);
-		            		    				            	if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG))
+		            		    				            	//if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG))
+		            		    				            	if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG) ||
+		            		    				            			MyMsg.msg_from_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG))
 	            		    			                		{
 	            		    			                			 m_alUsersAllMsgSending.add(MyMsg);
 	            		    			                		}
@@ -1049,6 +1051,7 @@ public class CLPSMain extends Application
 		            		    											}
 		            		    										});
 		            		    			            			  });
+		            		    				            fxListUserViewOfMsg.scrollTo(m_alUsersAllMsgSending.size()-1);
 		            		    						}
 		            		    						public void onCancelled(DatabaseError arg0) 
 		            		    						{
@@ -1056,6 +1059,7 @@ public class CLPSMain extends Application
 		            		    			                
 		            		    						}; 
 		            		    						});
+		            		    					 
 		            		    		        }
 		            		    				 
 		            		    				// Здесь пока ничего не придумали по двойному клику по пользователю для переписки!!!
@@ -1142,11 +1146,12 @@ public class CLPSMain extends Application
 				            	CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = MyMsg.msg_to_user;
 				            	System.out.println( "CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES = " + CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES);
 				            	
-				            	if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES))
-		                		{
+				            	//if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES)) // Старый вариант!!!
+				            	//if(MyMsg.msg_to_user.equals(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG_FIREBASES))
+		                		//{
 				            		
 		                			 m_alUsersAllMsgSending.add(MyMsg);
-		                		}
+		                		//}
 			                }
 				            
 				            m_ObservableListUsersMsgSending = FXCollections.observableArrayList (m_alUsersAllMsgSending);
@@ -1167,6 +1172,7 @@ public class CLPSMain extends Application
 											}
 										});
 			            			  });
+				            fxListUserViewOfMsg.scrollTo(m_alUsersAllMsgSending.size()-1);
 						}
 						public void onCancelled(DatabaseError arg0) 
 						{

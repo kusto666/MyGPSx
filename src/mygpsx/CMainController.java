@@ -747,6 +747,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		 
 		 CMessages bMessss = new CMessages();
 		 bMessss.msg_body = stMsgBody;
+		 bMessss.msg_from_user = "disp777";
 		 if(bIsText)
 		 {
 			 bMessss.msg_is_text = "true";

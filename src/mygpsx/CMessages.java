@@ -8,8 +8,8 @@ public class CMessages
 	public String msg_text_time;
 	public String msg_url_file;
 	public String msg_status;
-	public String msg_from_user;
-	public String msg_to_user;
+	public String msg_from_user;// От кого пришло!!!
+	public String msg_to_user;// Соответственно КОМУ!!!!!!!!
 	public Long msg_unix_time;
 	public String msg_is_text;// Если = true - то текст и никакой ссылки для скачивания файла!!
 	// Если = false - то наоборот!!!

@@ -19,6 +19,18 @@
    <children>
                      <GoogleMapView fx:id="mapView" prefHeight="472.0" prefWidth="489.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
                         <Button fx:id="fxBtnInTabRefreshMap" mnemonicParsing="false" onAction="#btnRefreshMap" text="Обновить" />
+                        <AnchorPane fx:id="fxAPanMsgTop" minHeight="0.0" minWidth="0.0" prefHeight="501.0" prefWidth="415.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="26.0">
+                           <children>
+                              <Label fx:id="fxLbSelectedUser" contentDisplay="TOP" prefHeight="20.0" prefWidth="138.0" text="Выберите судно" textAlignment="CENTER" textFill="#f51212" visible="false" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="0.0" />
+                              <Hyperlink fx:id="fxHlinkDoc" disable="true" prefHeight="23.0" prefWidth="135.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0" />
+                              <TextArea fx:id="mymsg" prefHeight="50.0" prefWidth="250.0" visible="false" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="170.0" />
+                              <TextArea fx:id="taOutMsg" layoutX="5.0" layoutY="342.0" prefHeight="130.0" prefWidth="405.0" AnchorPane.bottomAnchor="94.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                              <Button fx:id="fxBtnSendMsg" layoutX="5.0" layoutY="417.0" mnemonicParsing="false" onAction="#handleSendMsg" prefHeight="20.0" prefWidth="97.0" text="Отправить текстовое ообщение" textAlignment="CENTER" textFill="GREEN" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                              <Button fx:id="fxBtnCkearMessages" layoutX="5.0" layoutY="477.0" mnemonicParsing="false" onAction="#btnClearMessages" text="Отправить сообщение всему флоту" textFill="GREEN" visible="false" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="477.0" />
+                              <Button layoutX="5.0" layoutY="447.0" mnemonicParsing="false" onAction="#btnLoadFileToMsg" prefHeight="20.0" prefWidth="83.0" text="Прикрепить и отправить файл" textFill="BLUE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                              <ListView fx:id="fxListUserViewOfMsg" layoutY="4.0" maxHeight="313.0" maxWidth="-Infinity" minHeight="150.0" minWidth="-Infinity" prefHeight="264.0" prefWidth="405.0" AnchorPane.bottomAnchor="233.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                           </children>
+                        </AnchorPane>
    </children>
 				  
 				  </AnchorPane>
@@ -45,20 +57,8 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="434.0" prefWidth="222.0">
                      <children>
-                        <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                        <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
                           <items>
-                            <AnchorPane fx:id="fxAPanMsgTop" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Label fx:id="fxLbSelectedUser" contentDisplay="TOP" prefHeight="20.0" prefWidth="138.0" text="Выберите судно" textAlignment="CENTER" textFill="#f51212" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="0.0" />
-                                    <Hyperlink fx:id="fxHlinkDoc" disable="true" prefHeight="23.0" prefWidth="135.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0" />
-                                    <TextArea fx:id="mymsg" prefHeight="50.0" prefWidth="250.0" visible="false" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="170.0" />
-                                    <TextArea fx:id="taOutMsg" prefHeight="65.0" prefWidth="212.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="220.0" />
-                                    <Button fx:id="fxBtnSendMsg" mnemonicParsing="false" onAction="#handleSendMsg" prefHeight="20.0" prefWidth="97.0" text="Отправить текстовое ообщение" textAlignment="CENTER" textFill="GREEN" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="295.0" />
-                                    <Button fx:id="fxBtnCkearMessages" mnemonicParsing="false" onAction="#btnClearMessages" text="Отправить сообщение всему флоту" textFill="GREEN" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="355.0" />
-                                    <Button mnemonicParsing="false" onAction="#btnLoadFileToMsg" prefHeight="20.0" prefWidth="83.0" text="Прикрепить и отправить файл" textFill="BLUE" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="325.0" />
-                                    <ListView fx:id="fxListUserViewOfMsg" maxHeight="190.0" maxWidth="-Infinity" minHeight="150.0" minWidth="-Infinity" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="20.0" />
-                                 </children>
-                              </AnchorPane>
                             <AnchorPane fx:id="fxAPanMsgDown" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
                                     <ListView fx:id="fxListUsersMsg" prefHeight="166.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
