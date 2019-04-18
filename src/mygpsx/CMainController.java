@@ -1100,7 +1100,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     	// Установка tooltips(подсказок для кнопок!)
     	SetTooltipsButtons();
     	
-    	fxAccordLeftMain.setExpandedPane(fxTPaneLeft2);
+    	fxAccordLeftMain.setExpandedPane(fxTPaneLeft1);
     	fxAccordRightMain.setExpandedPane(fxTPaneRight1);
     	try 
     	{

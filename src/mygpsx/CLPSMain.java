@@ -313,7 +313,7 @@ public class CLPSMain extends Application
 		btnRestartMod = (Button)m_Loader.getNamespace().get("btnRestartMod");
 		
 		CMainController.fxTxtArLogs = (TextArea)m_Loader.getNamespace().get("fxTxtArLogs");
-		CMainController.fxTxtArLogs.setText("start(Stage st) throws Exception");
+		CMainController.fxTxtArLogs.setText("ЛОГИРОВАНИЕ В РАЗРАБОТКАЕ...");
 		
 		m_myHostServicesLinks = CLPSMain.getInstance().getHostServices();
 		

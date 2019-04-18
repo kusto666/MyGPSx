@@ -59,8 +59,16 @@ public class CUserCellMsgSending  extends ListCell<CMessages>
                 fxHLUploadFile = (Hyperlink)mLLoader.getNamespace().get("fxHLUploadFile");
         		
                 
-        		
-        		fxLbUniqueID.setText(String.valueOf(item.msg_status));
+        		// Здесь определям какое сообщение входящее или исходящее!!!
+                if(item.msg_to_user.equals("disp777"))
+                {
+                	fxLbUniqueID.setText("ВХОДЯЩЕЕ <<<<<");
+                }
+                else
+                {
+                	fxLbUniqueID.setText("ИСХОДЯЩЕЕ >>>>>");
+                }
+        		//fxLbUniqueID.setText(String.valueOf(item.msg_status));
         		fxLbTimeSending.setText(String.valueOf(item.msg_time));
 
         		m_Pane = (AnchorPane)mLLoader.getNamespace().get("fxCellPane");
@@ -71,16 +79,17 @@ public class CUserCellMsgSending  extends ListCell<CMessages>
         			fxTxtAreaMsg.setText(String.valueOf(item.msg_body));
         			// Здесь делаем высоту по тексту!!!
         			int iCountLineOfText = fxTxtAreaMsg.getText().split("\n").length;
+        			//int iCountLineOfText = fxTxtAreaMsg.get
         			// Здесь отладка высоты TextView!!!
                     System.out.println("Здесь отладка высоты TextView!!! кол-во сторок = " + Integer.toString(iCountLineOfText));
-        			
+                    fxTxtAreaMsg.setPrefHeight( iCountLineOfText * 21 );
         			
         			fxHLUploadFile.setVisible(false);
         		}
         		else
         		{
         			fxTxtAreaMsg.setPrefHeight(0.0d);
-        			fxHLUploadFile.setText("Ссылка для скачивания");
+        			fxHLUploadFile.setText("СКАЧАТЬ ФАЙЛ...");
         			fxHLUploadFile.setOnAction(new EventHandler<ActionEvent>() 
         			{
    					 

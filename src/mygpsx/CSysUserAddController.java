@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -42,6 +43,62 @@ public class CSysUserAddController implements Initializable{
 	private PasswordField fxTxtPassToo;
 	@FXML
 	private Button fxBtnAddSysUser;
+	
+	// CheckBox`es
+	@FXML
+	private CheckBox fxChBoxIsAdminUser;
+	@FXML
+	private CheckBox fxChBoxIsDispUser;
+	@FXML
+	private CheckBox fxChBoxIsSampleUser;
+	private String m_stRules = "";
+	
+	
+	@FXML
+	private void OnChBoxIsAdminUser(ActionEvent event)
+	{
+		if(fxChBoxIsAdminUser.isSelected())
+		{
+			fxChBoxIsDispUser.setSelected(false);
+			fxChBoxIsSampleUser.setSelected(false);
+			m_stRules = "0";
+		}
+		else
+		{
+			
+		}
+		
+	}
+	@FXML
+	private void OnChBoxIsDispUser(ActionEvent event)
+	{
+		if(fxChBoxIsDispUser.isSelected())
+		{
+			fxChBoxIsAdminUser.setSelected(false);
+			fxChBoxIsSampleUser.setSelected(false);
+		}
+		else
+		{
+			m_stRules = "1";
+		}
+		
+	}
+	@FXML
+	private void OnChBoxIsSampleUser(ActionEvent event)
+	{
+		if(fxChBoxIsSampleUser.isSelected())
+		{
+			fxChBoxIsAdminUser.setSelected(false);
+			fxChBoxIsDispUser.setSelected(false);
+			m_stRules = "2";
+		}
+		else
+		{
+			
+		}
+		
+	}
+	
 	 // Добавляем приоритет!!!
     @FXML
     private void AddSysUser(ActionEvent event) 
@@ -63,12 +120,18 @@ public class CSysUserAddController implements Initializable{
     		UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
     		System.out.println("Successfully created new user: " + userRecord.getUid());
     		
+    		if(m_stRules.equals(""))
+    		{
+    			System.out.println("Выбирете одну из трех галочек-прав!!!");
+    			return;
+    		}
     		// Здесь добавим запись в my_sys_users_binding
     		CStructSysUser tempSysUser = new CStructSysUser(userRecord.getUid(),
     														userRecord.getEmail(), 
     														fxTxtPass.getText(),
     														CCONSTANTS_EVENTS_JOB.MYNONE,
-    														CCONSTANTS_EVENTS_JOB.MYNONE);
+    														CCONSTANTS_EVENTS_JOB.MYNONE,
+    														m_stRules);
     		
     		FirebaseDatabase.getInstance()
 			.getReference()
