@@ -42,6 +42,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -674,10 +675,14 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     // Получение размера файла!!!
     private String getFileSizeMegaBytes(File file) {
     	
-    	Long lRes = file.length() / (1024 * 1024);
-    	int iRes = lRes.intValue(); 
+    	double lRes = file.length() / (1024 * 1024);
+    	//DecimalFormat df = new DecimalFormat("#.####");
+    	//String.valueOf(df.format(lRes));
+    	//int iRes = lRes.intValue(); 
     			
-		return Integer.toString(iRes) + " Mb";
+		//return Integer.toString(iRes) + " Mb";
+    	//return String.valueOf(df.format(lRes)) + " Mb";
+    	return String.valueOf(lRes);
 	}
     @FXML
     private void btnLoadFileToMsg(ActionEvent event) 
@@ -693,23 +698,34 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         		
         		String stFileSize = getFileSizeMegaBytes(m_FileSelectedOne);
         		
-        		// Проверка файла на размер не более 15Mb!!!
-        		Alert alertSizeFile = new Alert(AlertType.CONFIRMATION);
-        		alertSizeFile.setTitle(CStrings.m_APP_NAME);
-        		alertSizeFile.setHeaderText(CStrings.m_APP_NAME_QUESTION_LOADING_FILE);
-        		//if(String.valueOf(obj)pastFileSize)
-        		alertSizeFile.setContentText("Размер файла = " + stFileSize);
-        		ButtonType buttonCloseInfoAlert = new ButtonType(CStrings.m_APP_NAME_CHOOSE_YES);
-        		//ButtonType buttonTypeNo = new ButtonType(CStrings.m_APP_NAME_CHOOSE_NO);
-        		alertSizeFile.getButtonTypes().setAll(buttonCloseInfoAlert);
-        		
-        		java.util.Optional<ButtonType> result = alertSizeFile.showAndWait();
-        		if (result.get() == buttonCloseInfoAlert)
+        		if(Double.parseDouble(stFileSize) > 15.0)// Проверка файла на размер не более 15Mb!!!
         		{
-        			//uploadImage(m_FileSelectedOne);
-        		} 
-        		
-        		
+        			Alert alertSizeFile = new Alert(AlertType.CONFIRMATION);
+            		alertSizeFile.setTitle(CStrings.m_APP_NAME);
+            		alertSizeFile.setHeaderText("КОСЯК!!!");
+            		//if(String.valueOf(obj)pastFileSize)
+            		alertSizeFile.setContentText("Размер файла больше 15.0 Мб. и равен " + stFileSize + " Мб. выбирите файл меньшего размера\n"
+            				+ "или разбейте его на части.");
+            		ButtonType buttonCloseInfoAlert = new ButtonType(CStrings.m_APP_NAME_CHOOSE_YES);
+            		//ButtonType buttonTypeNo = new ButtonType(CStrings.m_APP_NAME_CHOOSE_NO);
+            		alertSizeFile.getButtonTypes().setAll(buttonCloseInfoAlert);
+            		
+            		java.util.Optional<ButtonType> result = alertSizeFile.showAndWait();
+            		try
+            		{
+            			if (result.get() == buttonCloseInfoAlert)
+                		{
+                			return;
+                			//uploadImage(m_FileSelectedOne);
+                		} 
+            		}
+            		catch(Exception ex)
+            		{
+            			return;
+            		}
+            		
+        		}
+
         		Alert alert = new Alert(AlertType.CONFIRMATION);
         		alert.setTitle(CStrings.m_APP_NAME);
         		alert.setHeaderText(CStrings.m_APP_NAME_QUESTION_LOADING_FILE);
@@ -785,6 +801,38 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     private void SendingMsgOrFile(DatabaseReference mDatabaseTemp,CDateTime newCurrDate, String stMsgBody, String stMsgStatus,
     		 String stMsgTitle, Boolean bIsText)
     {
+    	// Сразу проверяем сообщение, что оно пустое, в том числе и пробелы - т.е.
+    	// надо из сообщения вычесть все пробелу в темповой стороке и если оно равно нулю, то сказать, что шарик ты балбес!!!
+    	String stTempForEmpty = stMsgBody.replaceAll("\\s+","");
+    	if(stTempForEmpty.length() <= 0)
+    	{
+    		Alert alertSizeFile = new Alert(AlertType.CONFIRMATION);
+    		alertSizeFile.setTitle(CStrings.m_APP_NAME);
+    		alertSizeFile.setHeaderText("КОСЯК!!!");
+    		//if(String.valueOf(obj)pastFileSize)
+    		alertSizeFile.setContentText("СООБЩЕНИЕ ПУСТОЕ - ШАРИК, ТЫ БОЛБЕС!!!!!!!!!!!!!");
+    		ButtonType buttonCloseInfoAlert = new ButtonType(CStrings.m_APP_NAME_CHOOSE_YES);
+    		//ButtonType buttonTypeNo = new ButtonType(CStrings.m_APP_NAME_CHOOSE_NO);
+    		alertSizeFile.getButtonTypes().setAll(buttonCloseInfoAlert);
+    		
+    		java.util.Optional<ButtonType> result = alertSizeFile.showAndWait();
+    		try
+    		{
+    			if (result.get() == buttonCloseInfoAlert)
+        		{
+        			return;
+        			//uploadImage(m_FileSelectedOne);
+        		} 
+    		}
+    		catch(Exception ex)
+    		{
+    			return;
+    		}
+    		System.out.println("Строка пустая - ШАРИК, ТЫ БОЛБЕС!!!!!!!!!!!!!");
+    		//taOutMsg.setText("Строка пустая - ШАРИК, ТЫ БОЛБЕС!!!!!!!!!!!!!");
+    		return;
+    	}
+    	
     	// Формируем идентификатор сообщения!!!
 		 m_stFINISH_ID_MSG = CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG +
 				 					CCONSTANTS_EVENTS_JOB.MY_SEPARATOR_MSG + newCurrDate.GetCurrLongTime();
