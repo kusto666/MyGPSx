@@ -671,6 +671,14 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     			alert.close();
     		}*/
      }
+    // Получение размера файла!!!
+    private String getFileSizeMegaBytes(File file) {
+    	
+    	Long lRes = file.length() / (1024 * 1024);
+    	int iRes = lRes.intValue(); 
+    			
+		return Integer.toString(iRes) + " Mb";
+	}
     @FXML
     private void btnLoadFileToMsg(ActionEvent event) 
     {
@@ -682,8 +690,45 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         {
         	try 
         	{
-            	//fxLbNameFileSelect.setText(m_FileSelectedOne.getName());
-            	uploadImage(m_FileSelectedOne);
+        		
+        		String stFileSize = getFileSizeMegaBytes(m_FileSelectedOne);
+        		
+        		// Проверка файла на размер не более 15Mb!!!
+        		Alert alertSizeFile = new Alert(AlertType.CONFIRMATION);
+        		alertSizeFile.setTitle(CStrings.m_APP_NAME);
+        		alertSizeFile.setHeaderText(CStrings.m_APP_NAME_QUESTION_LOADING_FILE);
+        		//if(String.valueOf(obj)pastFileSize)
+        		alertSizeFile.setContentText("Размер файла = " + stFileSize);
+        		ButtonType buttonCloseInfoAlert = new ButtonType(CStrings.m_APP_NAME_CHOOSE_YES);
+        		//ButtonType buttonTypeNo = new ButtonType(CStrings.m_APP_NAME_CHOOSE_NO);
+        		alertSizeFile.getButtonTypes().setAll(buttonCloseInfoAlert);
+        		
+        		java.util.Optional<ButtonType> result = alertSizeFile.showAndWait();
+        		if (result.get() == buttonCloseInfoAlert)
+        		{
+        			//uploadImage(m_FileSelectedOne);
+        		} 
+        		
+        		
+        		Alert alert = new Alert(AlertType.CONFIRMATION);
+        		alert.setTitle(CStrings.m_APP_NAME);
+        		alert.setHeaderText(CStrings.m_APP_NAME_QUESTION_LOADING_FILE);
+        		alert.setContentText(CStrings.m_APP_NAME_CHOOSE);
+        		ButtonType buttonTypeYes = new ButtonType(CStrings.m_APP_NAME_CHOOSE_YES);
+        		ButtonType buttonTypeNo = new ButtonType(CStrings.m_APP_NAME_CHOOSE_NO);
+        		
+        		alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+        		
+        		java.util.Optional<ButtonType> result2 = alert.showAndWait();
+        		if (result2.get() == buttonTypeYes)
+        		{
+        			uploadImage(m_FileSelectedOne);
+        		} 
+        		else
+        		{
+        			// Отмена загрузки файла!!!
+        		}
+            	
                 //openFile(file); - Эта фан нужна если мы хотим файл открыть для просмотра на компе программой просмотра!!!
 			} 
         	catch (Exception e)
@@ -817,13 +862,18 @@ public class CMainController implements Initializable, MapComponentInitializedLi
         		MyGoogleMap.addMarker( MyMarker );
                 markerMap.put(MyMarker, false);
 
+                
                 InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-                infoWindowOptions.content("<h4>Имя судна:</h4>" + 
+                
+                // Это упрощенное описание - только название!!!
+		          infoWindowOptions.content("<u style=\"color: blue;\"><h4>" + us.getMyNameShip() + "</h4></u>");
+		          // Это расширенное описание судна!!!
+               /* infoWindowOptions.content("<h4>Имя судна:</h4>" + 
 										"<u style=\"color: blue;\"><h4>" + us.getMyNameShip() + "</h4></u>" +
 										"<h4>Капитан:</h4>" + 
 										"<u style=\"color: blue;\"><h4>" + us.getMyDirectorShip() + "</h4></u>" +
 										"<h4>Описание судна:</h4>" + 
-										"<u style=\"color: blue;\"><h4>" + us.getMyShortDescriptionShip() + "</h4></u>");
+										"<u style=\"color: blue;\"><h4>" + us.getMyShortDescriptionShip() + "</h4></u>");*/
 
                 InfoWindow MyInfoWindow = new InfoWindow(infoWindowOptions);
                 
@@ -845,6 +895,12 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                         m_SELECTED_MARKER = us.getMyPhoneID();
                     }
                 });
+                
+                MyInfoWindow.open(MyGoogleMap, MyMarker);
+                markerMap.put(MyMarker, true);
+                m_bIsMuveMarker = true;
+                System.out.println("us.getMyPhoneID() == " + us.getMyPhoneID());
+                m_SELECTED_MARKER = us.getMyPhoneID();
                 
         		System.out.println("us.getMyPhoneID() == " + us.getMyPhoneID());
         	}
@@ -1020,11 +1076,11 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                 	m_LocationTempForCAddShipController = ll;
                 }
                 
-                if(m_bIsMuveMarker)
+                if(m_bIsMuveMarker)// Перемещение судов, пока заблокировал!!!!
                 {
                 	try 
                 	{
-                		Set set = markerMap.entrySet();
+/*                		Set set = markerMap.entrySet();
                         Iterator iterator = set.iterator();
                         //iterator.
                         while(iterator.hasNext()) 
@@ -1061,7 +1117,7 @@ public class CMainController implements Initializable, MapComponentInitializedLi
                         	   }
 
                            }
-                        }
+                        }*/
     				} 
                 	catch (Exception ex) 
                 	{

@@ -160,7 +160,7 @@ public class CListCellUserController implements Initializable{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CMAINCONSTANTS.m_PathFXEditShipFxml));
             CLPSMain.m_rootEditShip = (Parent)fxmlLoader.load();
             CLPSMain.m_stageEditShip = new Stage();
-            CLPSMain.m_stageEditShip.setTitle(CStrings.m_APP_NAME + "->–едактирование ship");
+            CLPSMain.m_stageEditShip.setTitle(CStrings.m_APP_NAME + "->–Редактирование ship");
             CLPSMain.m_stageEditShip.setScene(new Scene(CLPSMain.m_rootEditShip));  
             CLPSMain.m_stageEditShip.setResizable(false);
             CLPSMain.m_stageEditShip.setAlwaysOnTop(true); // ј так ¬џЅ»–ј“№  ќќ–ƒ»Ќј“џ ”ƒќЅЌ≈…!!!

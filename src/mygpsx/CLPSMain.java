@@ -838,12 +838,15 @@ public class CLPSMain extends Application
 				            		    		         
 			            		    		          
 			            		    		          InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-			            		    		          infoWindowOptions.content("<h4>Имя судна:</h4>" + 
+			            		    		          // Это упрощенное описание - только название!!!
+			            		    		          infoWindowOptions.content("<u style=\"color: blue;\"><h4>" + us.getMyNameShip() + "</h4></u>");
+			            		    		          // Это расширенное описание судна!!!
+			            		    		         /* infoWindowOptions.content("<h4>Имя судна:</h4>" + 
 			          										"<u style=\"color: blue;\"><h4>" + us.getMyNameShip() + "</h4></u>" +
 			          										"<h4>Капитан:</h4>" + 
 			          										"<u style=\"color: blue;\"><h4>" + us.getMyDirectorShip() + "</h4></u>" +
 			          										"<h4>Описание судна:</h4>" + 
-			          										"<u style=\"color: blue;\"><h4>" + us.getMyShortDescriptionShip() + "</h4></u>");
+			          										"<u style=\"color: blue;\"><h4>" + us.getMyShortDescriptionShip() + "</h4></u>");*/
 			            		    		          MyInfoWindow = new InfoWindow(infoWindowOptions);
 			            		    		          
 			            		    		          markerOptions = new MarkerOptions();
