@@ -96,7 +96,7 @@ public class CMAINCONSTANTS {
 	// Значения высоты ячейки списка шаблона и ширины контрола в этой ячейки
 	// по умолчанию!!!
 	public static String Height_cell_start = "25";
-	public static String Width_control_start = "200";
+	public static String Width_control_start = "200"; 
 	
 	
 	// Это все сущности-атрибуты!!!

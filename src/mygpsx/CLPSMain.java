@@ -28,8 +28,14 @@ import java.util.stream.IntStream;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.InvalidRemoteException;
+import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
+import org.eclipse.jgit.treewalk.TreeWalk;
 
 import com.google.api.Page;
 import com.google.api.client.http.HttpTransport;
@@ -606,10 +612,91 @@ public class CLPSMain extends Application
     	        + e.getMessage());
     	  }
     	}
+    
+    
+    
+    private static void listRepositoryContents(Repository repository) throws IOException {
+    	/*TreeWalk treeWalk = new TreeWalk(repository);
+    	treeWalk.addTree(tree);
+    	treeWalk.setRecursive(false);
+    	while (treeWalk.next()) {
+    	    if (treeWalk.isSubtree()) {
+    	        System.out.println("dir: " + treeWalk.getPathString());
+    	        treeWalk.enterSubtree();
+    	    } else {
+    	        System.out.println("file: " + treeWalk.getPathString());
+    	    }
+    	}*/
+    }
+    
+    
+    
     // Подключение к GitHub для проверки обновлений в репозитории!!!
     private boolean ConnGitHubUpdate()
     {
     	boolean bRet = true;
+    	Repository repository= null;
+    	FileRepositoryBuilder builder = new FileRepositoryBuilder();
+    	try {
+    		File localPath = null;
+    		localPath = File.createTempFile("TestGitRepository", ".txt", new File("D:/"));
+    		
+			repository = builder
+			        .setGitDir(localPath).readEnvironment()
+			        .findGitDir().build();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+    	repository.close();
+    	
+    	
+    	////////////////////////////////////////////////////////////////////////////////////////////////
+
+    	/*File localPath = null;
+		try 
+		{
+			localPath = File.createTempFile("TestGitRepository", ".txt", new File("D:/"));
+		}
+		catch (IOException e)
+		{
+			System.out.println("Cannot set directory!!!");
+			bRet = false;
+			e.printStackTrace();
+		}*/
+    	/*UsernamePasswordCredentialsProvider upc = new UsernamePasswordCredentialsProvider("kusto666", "761set31GitHbu");
+    	
+    	try 
+    	{
+			Git result = Git.cloneRepository()
+			         .setURI(CMAINCONSTANTS.GIT_MY_REMOTE_URL)
+			         .setDirectory(localPath)
+			         .setCredentialsProvider(upc)
+			         .call();
+		} 
+    	catch (InvalidRemoteException e) 
+    	{
+    		System.out.println("catch (InvalidRemoteException e)!!!");
+			e.printStackTrace();
+		} 
+    	catch (TransportException e) 
+    	{
+    		System.out.println("catch (TransportException e)!!!");
+			e.printStackTrace();
+		} 
+    	catch (GitAPIException e) 
+    	{
+    		System.out.println("catch (GitAPIException e)!!!");
+			e.printStackTrace();
+		}
+    	catch(Exception e)
+    	{
+    		System.out.println("catch (Exception e)!!!");
+    		e.printStackTrace();
+    	}*/
+    	 
+    	 //////////////////////////////////////////////////////////////////////////////////////////////////////////
     	/*FileRepositoryBuilder repositoryBuilder = new FileRepositoryBuilder();
     	try {
 			Repository repository = repositoryBuilder.setGitDir(new File("/path/to/repo/.git"))
@@ -621,6 +708,9 @@ public class CLPSMain extends Application
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+    	 
+    	 
+    	 //////////////////////////////////////////////////////////////////////////////////////////////
     	return bRet;
     }
     
