@@ -28,6 +28,9 @@ import java.util.stream.IntStream;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+
 import com.google.api.Page;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -392,6 +395,17 @@ public class CLPSMain extends Application
     	//LOGGER.info("Logger Name: "+LOGGER.getName());
         //LOGGER.warning("Can cause ArrayIndexOutOfBoundsException");
          
+        //////////////////////////////////////////////////////////////////////////////////
+        // Подключение к Github для проверки обновлений!!!
+        //////////////////////////////////////////////////////////////////////////////////         
+        if(ConnGitHubUpdate())
+        {
+        	System.out.println("ConnGitHubUpdate() - УСПЕШНОЕ ПОДКЛЮЧЕНИЯ к GitHub!!!");
+        }
+        else
+        {
+        	System.out.println("ConnGitHubUpdate() - ошибка подключения к GitHub!!!");
+        }
     	//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Изначально все шаблоны готовы к заполнению!!!
     	if(!InitFireBase())
     	{
@@ -592,6 +606,25 @@ public class CLPSMain extends Application
     	        + e.getMessage());
     	  }
     	}
+    // Подключение к GitHub для проверки обновлений в репозитории!!!
+    private boolean ConnGitHubUpdate()
+    {
+    	boolean bRet = true;
+    	/*FileRepositoryBuilder repositoryBuilder = new FileRepositoryBuilder();
+    	try {
+			Repository repository = repositoryBuilder.setGitDir(new File("/path/to/repo/.git"))
+			        .readEnvironment() // scan environment GIT_* variables
+			        .findGitDir() // scan up the file system tree
+			        .setMustExist(true)
+			        .build();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+    	return bRet;
+    }
+    
+    
     // Здесь инициализируем подключение к базе данных!!!
     @FXML
     private boolean InitFireBase()
