@@ -118,6 +118,8 @@ public class CMAINCONSTANTS {
 	
 	public static String FB_my_sys_users_binding = "my_sys_users_binding";
 	
+	// Путь к моему репозиторию!
 	public static final String GIT_MY_REMOTE_URL = "https://github.com/kusto666/MyGPSx.git"; 
+	
 
 }
