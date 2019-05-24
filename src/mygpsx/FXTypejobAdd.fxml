@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="76.0" prefWidth="314.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CTypejobAddController">
+   <children>
+      <Button fx:id="fxBtnDeleteTypejob" layoutX="220.0" layoutY="50.0" mnemonicParsing="false" onAction="#AddTypejob" text="Добавить тип" />
+      <TextField fx:id="fxTxtNumberTypejob" layoutY="2.0" prefHeight="25.0" prefWidth="100.0" promptText="Введите тип" />
+      <TextField fx:id="fxTxtNameTypejob" layoutX="109.0" layoutY="2.0" prefHeight="25.0" prefWidth="202.0" promptText="Введите название типа задачи" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="fxCellPane" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="fxLbTimeSending" layoutX="-6.0" layoutY="-3.0" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-border-color: black;" text="TimeSending" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="fxLbUniqueID" alignment="CENTER_RIGHT" layoutX="125.0" maxHeight="14.0" maxWidth="450.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="300.0" text="Label" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <TextArea fx:id="fxTxtAreaMsg" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" wrapText="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+      <Hyperlink fx:id="fxHLUploadFile" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #6699ff;" text="Hyperlink" textFill="#2c0a0a" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+</AnchorPane>

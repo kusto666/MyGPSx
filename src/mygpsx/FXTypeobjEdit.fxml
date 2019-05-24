@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="357.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CTypeobjEditController">
+   <children>
+      <Label layoutX="8.0" layoutY="6.0" text="Список типов объектов:" />
+      <ListView fx:id="fxListViewTypeobj" layoutX="8.0" layoutY="34.0" prefHeight="189.0" prefWidth="343.0" />
+      <Button fx:id="fxBtnAddTypeobj" layoutX="219.0" layoutY="2.0" mnemonicParsing="false" onAction="#FrameAddTypeobj" text="Добавить тип объекта" />
+   </children>
+</AnchorPane>

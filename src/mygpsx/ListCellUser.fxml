@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="fxCellPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="145.0" prefWidth="250.0" style="-fx-background-color: #86ef0b;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CListCellUserController">
+   <children>
+      <Label layoutX="-6.0" layoutY="-3.0" prefHeight="14.0" prefWidth="161.0" text="НАЗВАНИЕ СУДНА:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="lbMyNameShip" layoutX="-11.0" layoutY="20.0" prefHeight="15.0" prefWidth="180.0" text="Label" textAlignment="CENTER" textFill="#0a43ee" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <Label layoutX="-6.0" layoutY="27.0" text="КАПИТАН СУДНА(ФИО):" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
+      <Label fx:id="lbMyDirectorShip" layoutX="-11.0" layoutY="43.0" prefHeight="15.0" prefWidth="180.0" text="Label" textFill="#ed160c" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0" />
+      <Label fx:id="fxLbUniqueID" prefHeight="90.0" prefWidth="175.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#eventEditObject" text="Редактировать объект" />
+                  <MenuItem mnemonicParsing="false" onAction="#eventDeleteObject" text="Удалить объект" />
+              </items>
+            </ContextMenu>
+         </contextMenu></Label>
+      <Button fx:id="fxBtnViewJobs" layoutX="-5.0" layoutY="56.0" mnemonicParsing="false" onAction="#BtnViewJobs" text="Текущее задание" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <Label fx:id="fxLbBindingEmail" text="Label" textFill="BLUE" AnchorPane.topAnchor="80.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="fxCellPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mygpsx.CIntoTmplCtrl">
+   <children>
+      <AnchorPane fx:id="fxAPaneLabel" prefHeight="60.0" prefWidth="700.0" style="-fx-border-color: red;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="fxLbAPaneLabel" layoutX="7.0" layoutY="7.0" prefHeight="17.0" prefWidth="476.0" text="Label" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="fxAPaneTextField" prefHeight="60.0" prefWidth="200.0" style="-fx-border-color: red;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <TextField fx:id="fxTxtAPaneField" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="fxAPaneTextArea" prefHeight="60.0" prefWidth="200.0" style="-fx-border-color: red;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+         <children>
+            <TextArea fx:id="fxTxtAPaneArea" layoutX="12.0" layoutY="2.0" prefHeight="25.0" prefWidth="322.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="fxLbTypeControl" text="TypeControl" textFill="BLUE" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+      <Label fx:id="fxLb1" text="Уровень" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+      <Label fx:id="fxLbUniqueID" text="fxLbUniqueID" textFill="RED" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="fxAPaneControls" prefHeight="27.0" prefWidth="373.0" style="-fx-border-color: green;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="180.0">
+         <children>
+            <Label layoutX="-4.0" layoutY="38.0" text="В^" textFill="BLUE" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="0.0" />
+            <TextField fx:id="fxTxtHeight" alignment="CENTER" layoutX="17.0" layoutY="34.0" prefHeight="25.0" prefWidth="45.0" AnchorPane.rightAnchor="246.0" AnchorPane.topAnchor="0.0" />
+            <Label layoutX="67.0" layoutY="39.0" text="Ш&lt;&gt;" textFill="RED" AnchorPane.rightAnchor="207.0" AnchorPane.topAnchor="0.0" />
+            <TextField fx:id="fxTxtWidth" alignment="CENTER" layoutX="106.0" layoutY="34.0" prefHeight="25.0" prefWidth="45.0" AnchorPane.rightAnchor="151.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="fxBtnDeleteAttrjob" mnemonicParsing="false" onAction="#BtnDeleteAttrjob" prefHeight="25.0" prefWidth="64.0" text="Удалить" AnchorPane.rightAnchor="2.0" />
+            <Button fx:id="fxBtnRefreshAttrjob" mnemonicParsing="false" onAction="#BtnRefreshAttrjob" text="Обновить" AnchorPane.rightAnchor="76.0" />
+            <Button fx:id="fxBtnMoveUp" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" prefWidth="25.0" text="^" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="fxBtnMoveDown" mnemonicParsing="false" prefWidth="25.0" rotate="180.0" text="^" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
