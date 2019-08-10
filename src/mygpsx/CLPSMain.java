@@ -1,6 +1,6 @@
 package mygpsx;
 
-import java.util.*;
+import java.util.*; 
 import java.text.*;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -120,7 +120,7 @@ import javafx.util.Callback;
 public class CLPSMain extends Application  
 {
 	private static CLPSMain mInstance;
-	
+	private CMainController mMainController;
 	// Пока для тестов - надо реализовать!!!
 	private static final Logger LOGGER = Logger.getLogger(CLPSMain.class.getName());
 	
@@ -404,15 +404,16 @@ public class CLPSMain extends Application
         //////////////////////////////////////////////////////////////////////////////////
         // Подключение к Github для проверки обновлений!!!
         //////////////////////////////////////////////////////////////////////////////////         
-        if(ConnGitHubUpdate())
+        /*if(ConnGitHubUpdate())
         {
         	System.out.println("ConnGitHubUpdate() - УСПЕШНОЕ ПОДКЛЮЧЕНИЯ к GitHub!!!");
         }
         else
         {
         	System.out.println("ConnGitHubUpdate() - ошибка подключения к GitHub!!!");
-        }
+        }*/
     	//CCONSTANTS_EVENTS_JOB.TEMPLATE_FILLING_OR_EDIT = 1;// Изначально все шаблоны готовы к заполнению!!!
+        // CMainController.mapView = new GoogleMapView();
     	if(!InitFireBase())
     	{
     		System.out.println("InitFireBase() - ошибка инициализации!!!");
@@ -443,7 +444,8 @@ public class CLPSMain extends Application
             stage.setTitle(CStrings.m_APP_NAME);
             stage.setScene(scene);
 
-
+            //mMainController = new CMainController();
+            //mMainController.mapInitialized();
             stage.setOnCloseRequest(new EventHandler<WindowEvent>()
             {
                 @Override
@@ -594,8 +596,8 @@ public class CLPSMain extends Application
         LOGGER.finer("Finest example on LOGGER handler completed.");*/
     }
     public void FirebaseEventProxy() {
-    	InputStream serviceAccount = this.getClass().getResourceAsStream("/555.json");
-    	  String firebaseLocation = "https://crackling-torch-392.firebaseio.com";
+    	InputStream serviceAccount = this.getClass().getResourceAsStream("/my-gfc-russia-id-export.json");
+    	  String firebaseLocation = "https://my-gfc-russia-id.firebaseio.com";
     	  Map<String, Object> databaseAuthVariableOverride = new HashMap<String, Object>();
     	  // uid and provider will have to match what you have in your firebase security rules
     	  databaseAuthVariableOverride.put("uid", "gae-firebase-event-proxy");
@@ -722,7 +724,7 @@ public class CLPSMain extends Application
     	boolean bRet = true;
     	try 
     	{
-    		InputStream serviceAccount = this.getClass().getResourceAsStream("/555.json");
+    		InputStream serviceAccount = this.getClass().getResourceAsStream("/my-gfc-russia-id-export.json");
 			 
 			if(serviceAccount == null)
 			{
@@ -734,23 +736,27 @@ public class CLPSMain extends Application
 				    .setCredentials(GoogleCredentials.fromStream(serviceAccount))// Если что, то просто его раскамментить!!!
 				    .setDatabaseUrl("https://mygpsone-kusto1.firebaseio.com/")
 				    .build();*/
-			FirebaseOptions options = null;
-					String firebaseLocation = "https://mygpsone-kusto1.firebaseio.com/";
-			    	  Map<String, Object> databaseAuthVariableOverride = new HashMap<String, Object>();
-			    	  // uid and provider will have to match what you have in your firebase security rules
-			    	  databaseAuthVariableOverride.put("uid", "gae-firebase-event-proxy");
-			    	  databaseAuthVariableOverride.put("provider", "192.168.32.9");
-			    	  try {
-			    	    options = new FirebaseOptions.Builder()
-			    	    		 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-			    	        .setDatabaseUrl(firebaseLocation)
-			    	        .setDatabaseAuthVariableOverride(databaseAuthVariableOverride).build();
-			    	    //FirebaseApp.initializeApp(options);
-			    	  } catch (IOException e) {
-			    	    throw new RuntimeException(
-			    	        "Error reading firebase secrets from file: src/main/webapp/gae-firebase-secrets.json: "
-			    	        + e.getMessage());
-			    	  }
+			
+		  FirebaseOptions options = null;
+		  
+		  String firebaseLocation = "https://my-gfc-russia-id.firebaseio.com";
+    	  Map<String, Object> databaseAuthVariableOverride = new HashMap<String, Object>();
+    	  // uid and provider will have to match what you have in your firebase security rules
+    	  databaseAuthVariableOverride.put("uid", "gae-firebase-event-proxy");
+    	  databaseAuthVariableOverride.put("provider", "192.168.32.9");
+    	  try 
+    	  {
+    	    options = new FirebaseOptions.Builder()
+    	    		 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+    	    		 .setDatabaseUrl(firebaseLocation)
+    	    		 .setDatabaseAuthVariableOverride(databaseAuthVariableOverride).build();
+    	  } 
+    	  catch (IOException e)
+    	  {
+    	    throw new RuntimeException(
+    	        "Error reading firebase secrets from file: src/main/webapp/gae-firebase-secrets.json: "
+    	        + e.getMessage());
+    	  }
 			
 			/*Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.32.9", 3128));
 			HttpTransport httpTransport = new NetHttpTransport.Builder().setProxy(proxy).build();
@@ -796,11 +802,11 @@ public class CLPSMain extends Application
 				System.out.println("START FirebaseStorage>>>");
 				/*BigQuery bigquery = BigQueryOptions.newBuilder().setProjectId("mygpsone-kusto1")
 			            .setCredentials(
-			                    ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\555.json"))
+			                    ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\my-gfc-russia-id-export.json"))
 			            ).build().getService();
 				Datastore datastore = DatastoreOptions.newBuilder().setProjectId("mygpsone-kusto1")
 			            .setCredentials(
-			                    ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\555.json"))
+			                    ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\my-gfc-russia-id-export.json"))
 			            ).build().getService();
 				System.out.println("datastore.toString() == " + datastore.toString());*/
 				
@@ -815,14 +821,14 @@ public class CLPSMain extends Application
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				try 
 				{
-					MyGoogleStorage = StorageOptions.newBuilder().setProjectId("mygpsone-kusto1")
+					MyGoogleStorage = StorageOptions.newBuilder().setProjectId("my-gfc-russia-id")
 							.setCredentials(
-							/*ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\555.json"))*/
-							ServiceAccountCredentials.fromStream(new FileInputStream("src/555.json"))
+							/*ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\my-gfc-russia-id-export.json"))*/
+							ServiceAccountCredentials.fromStream(new FileInputStream("src/my-gfc-russia-id-export.json"))
 							).build().getService();
 					/*firebaseStorage = StorageOptions.newBuilder().setProjectId("mygpsone-kusto1")
 							.setCredentials(
-							ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\555.json"))
+							ServiceAccountCredentials.fromStream(new FileInputStream("c:\\my_projects\\eclipse_projects\\MyGPSx\\src\\my-gfc-russia-id-export.json"))
 							).build().getService();*/
 				} 
 				catch (Exception ex) 

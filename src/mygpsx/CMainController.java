@@ -5,13 +5,26 @@
  */
 package mygpsx;
 
+
 import com.google.cloud.storage.Bucket;
+import com.google.common.net.MediaType;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.internal.NonNull;
+import com.google.firebase.messaging.AndroidConfig;
+import com.google.firebase.messaging.AndroidNotification;
+import com.google.firebase.messaging.ApnsConfig;
+import com.google.firebase.messaging.Aps;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingException;
+import com.google.firebase.messaging.Message;
+import com.google.firebase.messaging.Notification;
+import com.google.firebase.messaging.WebpushConfig;
+import com.google.firebase.messaging.WebpushNotification;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -39,11 +52,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -57,6 +73,8 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.SingleSelectionModel;
+
+import org.json.JSONObject;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -108,6 +126,10 @@ import javafx.application.HostServices;
  */
 public class CMainController implements Initializable, MapComponentInitializedListener
 {
+	//////////////////////////////////////////////////////////////////////////////////
+	public final static String AUTH_KEY_FCM = "AAAAUcx8m7c:APA91bHd8Tn9lbANjjeu7kaYWWZdKeezDvhYNwN0XtDRqsj9r8qQFmZ1cItWASMvufITR3QrXAZtWUUw1AiMAqqC3V5JBcUbLfbpNfpSwBpKg64P_orTU0UrFqKZ-GmGoldzO6bJDRM0";
+	public final static String API_URL_FCM = "https://fcm.googleapis.com/fcm/send";
+	////////////////////////////////////////////////////////////////////////////////////
 	// Строка-ссылка на скачивание файла MediaLink
 	
 	@FXML
@@ -783,7 +805,11 @@ public class CMainController implements Initializable, MapComponentInitializedLi
     		 if(CCONSTANTS_EVENTS_JOB.MY_CURRENT_TEMP_USER_FOR_MSG != null)// Проверяем что выбранный пользователь для сообщения не NULL
     		 {
     			 // Формируем идентификатор сообщения!!!
-    			 SendingMsgOrFile(mDatabaseRefSendMsg, newCurrDate,taOutMsg.getText().toString(),"no_read",taOutMsg.getText().toString(), true);
+    			 //SendingMsgOrFile(mDatabaseRefSendMsg, newCurrDate,taOutMsg.getText().toString(),"no_read",taOutMsg.getText().toString(), true);
+    			 //SendPushMessage();
+    			 pushFCMNotification("dJl_h-GV8wI:APA91bFKVANqdQAuC2qKnyF7i2o_5NPJnuKKUlHxvTVQcKkWZACxr4t2lezIlbs1MfQShPdS-bPPrmViuaEKgscKC5qMjSN799MT7cVdgE8kce2O7naZCJM_iJof0RTHiB1HoAQA45U2");
+    			 
+    			 //System.out.println("FCM sendAutoNewsAlert: " + sendAutoNewsAlert("5555", "7777777777"));
     		 }
     		 else
     		 {
@@ -797,6 +823,146 @@ public class CMainController implements Initializable, MapComponentInitializedLi
              e.printStackTrace();
          }
     }
+/*    // Функция отправки PUSH-уведомления!!!
+    public void sendAll() throws FirebaseMessagingException {
+        String registrationToken = "YOUR_REGISTRATION_TOKEN";
+
+        // [START send_all]
+        // Create a list containing up to 100 messages.
+        List<Message> messages = Arrays.asList(
+            Message.builder()
+                .setNotification(new Notification("Price drop", "5% off all electronics"))
+                .setToken(registrationToken)
+                .build(),
+            // ...
+            Message.builder()
+                .setNotification(new Notification("Price drop", "2% off all books"))
+                .setTopic("readers-club")
+                .build()
+        );
+
+        BatchResponse response = FirebaseMessaging.getInstance().sendAll(messages);
+        // See the BatchResponse reference documentation
+        // for the contents of response.
+        System.out.println(response.getSuccessCount() + " messages were sent successfully");
+        // [END send_all]
+      }*/
+    
+
+private static final String ANDROID_NEWS_ICON_RESOURCE = "news_alert_icon";
+private static final int APNS_NEWS_BADGE_RESOURCE = 42;
+private static final String WEBPUSH_NEWS_ICON_URL = "https://auto.news.url/alert.png";
+    public String sendAutoNewsAlert(String title, String body) throws Exception 
+    {
+    	
+/*    	  Message message = Message.builder()
+    	      .setNotification(new Notification(title, body))
+    	      .setAndroidConfig(AndroidConfig.builder()
+    	          .setNotification(AndroidNotification.builder()
+    	              .setIcon(ANDROID_NEWS_ICON_RESOURCE)
+    	              .build())
+    	          .build())
+    	      .setApnsConfig(ApnsConfig.builder()
+    	          .setAps(Aps.builder()
+    	              .setBadge(APNS_NEWS_BADGE_RESOURCE)
+    	              .build())
+    	          .build())
+    	      .setWebpushConfig(WebpushConfig.builder()
+    	          .setNotification(new WebpushNotification(null, null, WEBPUSH_NEWS_ICON_URL))
+    	          .build())
+    	      .setTopic("auto-news")
+    	      .build();
+//    	  return FirebaseMessaging.getInstance().sendAsync(message).get();
+    	  return FirebaseMessaging.getInstance().send(message);*/
+    	
+/*    	Message message = Message.builder()
+    		    .setNotification(new Notification(
+    		        "$GOOG up 1.43% on the day",
+    		        "$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day."))
+    		    .setAndroidConfig(AndroidConfig.builder()
+    		        .setTtl(3600 * 1000)
+    		        .setNotification(AndroidNotification.builder()
+    		            .setIcon("stock_ticker_update")
+    		            .setColor("#f45342")
+    		            .build())
+    		        .build())
+    		    .setApnsConfig(ApnsConfig.builder()
+    		        .setAps(Aps.builder()
+    		            .setBadge(42)
+    		            .build())
+    		        .build())
+    		    .setTopic("industry-tech")
+    		    .build();*/
+    	
+
+
+    	
+    	
+    	return "555";
+    	}
+    private void SendPushMessage()
+    {
+    	
+    	String registrationToken = "dJl_h-GV8wI:APA91bFKVANqdQAuC2qKnyF7i2o_5NPJnuKKUlHxvTVQcKkWZACxr4t2lezIlbs1MfQShPdS-bPPrmViuaEKgscKC5qMjSN799MT7cVdgE8kce2O7naZCJM_iJof0RTHiB1HoAQA45U2";
+    	// See documentation on defining a message payload.
+    	Message message = Message.builder()
+    	    .putData("score", "850")
+    	    .putData("time", "2:45")
+    	    .setToken(registrationToken)
+    	    .build();
+    	
+    	// Send a message to the device corresponding to the provided
+    	// registration token.
+    	String response = null;
+		try {
+			response = FirebaseMessaging.getInstance().send(message);
+		} catch (FirebaseMessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	// Response is a message ID string.
+    	System.out.println("Successfully sent message: " + response);
+    }
+    public static void pushFCMNotification(String userDeviceIdKey) throws Exception{
+
+    	   String authKey = AUTH_KEY_FCM; // You FCM AUTH key
+    	   String FMCurl = API_URL_FCM; 
+
+    	   URL url = new URL(FMCurl);
+    	   HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+    	   conn.setUseCaches(false);
+    	   conn.setDoInput(true);
+    	   conn.setDoOutput(true);
+
+    	   conn.setRequestMethod("POST");
+    	   conn.setRequestProperty("Authorization","key="+authKey);
+    	   conn.setRequestProperty("Content-Type","application/json");
+
+    	   JSONObject json = new JSONObject();
+    	   json.put("to",userDeviceIdKey.trim());
+    	   JSONObject info = new JSONObject();
+    	   info.put("title", "Мое тестовое PUSH!"); // Notification title
+    	   info.put("body", "Привет! Я PUSH-notification!!!\nПривет! Я PUSH-notification!!!\nПривет! Я PUSH-notification!!!"); // Notification body
+    	  // info.put("img_url", "http://cernyyachtdesign.com/wp-content/uploads/png-test.png");
+    	   /*info.put("image", "http://cernyyachtdesign.com/wp-content/uploads/png-test.png");
+    	   info.put("avatar_url", "http://cernyyachtdesign.com/wp-content/uploads/png-test.png");
+    	   info.put("url", "http://cernyyachtdesign.com/wp-content/uploads/png-test.png");
+    	   info.put("image_url", "http://cernyyachtdesign.com/wp-content/uploads/png-test.png");
+    	   info.put("largeIcon", "http://cernyyachtdesign.com/wp-content/uploads/png-test.png");*/
+    	   
+    	   json.put("notification", info);
+    	   System.out.println(json.toString());
+
+    	   OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+    	   wr.write(json.toString());
+    	   wr.flush();
+    	   conn.getInputStream();
+    	   System.out.println("Типа отправил PUSH!!!!!!");
+    	}
+    
+    
+    
     // Функция отправки сообщения или ссылки на файл в сообщении!!!
     private void SendingMsgOrFile(DatabaseReference mDatabaseTemp,CDateTime newCurrDate, String stMsgBody, String stMsgStatus,
     		 String stMsgTitle, Boolean bIsText)
@@ -1067,12 +1233,17 @@ public class CMainController implements Initializable, MapComponentInitializedLi
  	                .streetViewControl(true)
  	                .zoomControl(false)
  	                .zoom(12);
- 	       System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapInitialized");
- 	       
+ 	       System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapInitialized - 1");
+ 	       System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - mapInitialized - 2");
  	       CCONSTANTS_EVENTS_JOB.LOAD_GOOGLEMAP_STEP++;// Первый этап инициализации пройден!!!
- 	       
+ 	      // mapView = new GoogleMapView();
+ 	       //mapView.addMapInializedListener(this);
  	       MyGoogleMap = mapView.createMap(mapOptions);
-       
+ 	      
+ 	       if(MyGoogleMap != null)
+ 	       {
+ 	    	  System.out.println("MyGoogleMap != null"); 
+ 	       }
  	       mapReady(markerMap);
  	       
  	       // Если оба этапа инициализации карты прошли:
@@ -1091,7 +1262,8 @@ public class CMainController implements Initializable, MapComponentInitializedLi
 		} 
     	catch (Exception ex)
     	{
-    		ex.getMessage();
+    		ex.printStackTrace();
+    		System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG - ERROR!!!");
 		}
     }
    
